@@ -47,7 +47,8 @@
 #overload
 translation_unit ::=
 #ignore("KOOC")
-=> insert this.block;
+#implicitCopy
+ => insert this.block;
  => {
    // gestion d'un contexte parent lorsque CNorm est embedded
      insert this.block.pctx;
@@ -62,11 +63,8 @@ translation_unit ::=
      }
      ref this.gl_pctx = this.block;
    //}
-   }
-#implicitCopy
-[
- declaration(this.block)
-]*
+ }
+[declaration(this.block)]*
 #continue
 #empty
 ;
