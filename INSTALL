@@ -1,0 +1,15 @@
+<TO USE KOOC>
+
+1) YOU HAVE TO SET KOOC_PATH IN ENVIRONNEMENT VARIABLE
+
+FOR EXAMPLE :
+> setenv KOOC_PATH `pwd`
+
+2) LAUNCH ./bin/kooc WITH YOUR C FILE
+
+FOR EXAMPLE :
+> ./bin/kooc hello.c
+
+3) HF
+
+</TO USE KOOC>
