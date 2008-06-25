@@ -7,6 +7,11 @@ local	sRoot;
 local	treeFile;
 local	sOutput;
 
+if (existFile(_ARGS[0]) == false)
+{
+  traceLine("Can't find file " + _ARGS[0]);
+  exit(42);
+}
 sExtension = rightString(_ARGS[0], 3);
 sRoot = getWorkingPath();
 treeFile = sRoot + replaceString(sExtension, ".ktree", _ARGS[0]);
