@@ -24,3 +24,6 @@ traceLine("[KOOC] Done.");
 traceLine("==== BEGIN " + sOutput + " ====");
 traceLine(loadFile(sOutput));
 traceLine("==== END " + sOutput + " ====");
+traceLine("==== BEGIN " + treeFile + " ====");
+traceLine(loadFile(treeFile));
+traceLine("==== END " + treeFile + " ====");

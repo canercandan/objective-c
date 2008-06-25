@@ -22,8 +22,8 @@
 
 #include "../cnorm_2.6/src/cnorm.cwp"
 #include "koocTree.inc.cws"
+#include "koocImport.cwp"
 //#include "koocPrettyPrinter.inc.cws"
-//#include "koocImport.inc.cws"
 //#include "koocModule.inc.cws"
 //#include "koocImplantation.inc.cws"
 //#include "koocClass.inc.cws"
@@ -33,24 +33,30 @@
 //				B E G I N - K O O C
 //----------------------------------------------------------------------------
 
+#implicitCopy
+
 #ignore["KOOC"] ::=
 [#explicitCopy
  ['#' ->[['\r']? '\n']]
  | ["//" ->[['\r']? '\n']]
  | ["/*" ->"*/"]
- | ' '
- | '\t'
- | '\n'
- | '\r'
-]+:skip =>{@@skip@@}
+ | ' ' | '\t' | '\n' | '\r' | '\f'
+]+:skip
+=> {@@skip@@}
 ;
 
 #overload
-translation_unit ::= #ignore("KOOC") #implicitCopy
+translation_unit ::=
+#ignore("KOOC")
 => treeInit();
-[declaration(this.block)]*
+[
+ [koocDeclaration(this.block)
+  |#explicitCopy declaration(this.block)]
+]*
 #continue #empty
 ;
+
+koocDeclaration(block : node) ::= import;
 
 //----------------------------------------------------------------------------
 //				E N D - K O O C

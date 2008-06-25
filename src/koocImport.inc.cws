@@ -1,0 +1,14 @@
+declare function importFile(file : value);
+declare function importModuleFromFile(module : value,
+				      file : value);
+
+function importFile(file : value)
+{
+  traceLine("importFile");
+}
+
+function importModuleFromFile(module : value,
+			      file : value)
+{
+  traceLine("importModuleFromFile");
+}
