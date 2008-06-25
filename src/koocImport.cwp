@@ -1,0 +1,18 @@
+#include "koocImport.inc.cws"
+
+import ::= #explicitCopy
+[importModuleFromFile|importFile]
+;
+
+importModuleFromFile ::=
+importPrefix #readIdentifier:module "from"
+#readCString:file
+=> importModuleFromFile(module, file);
+;
+
+importFile ::=
+importPrefix #readCString:file
+=> importFile(file);
+;
+
+importPrefix ::= "@import";
