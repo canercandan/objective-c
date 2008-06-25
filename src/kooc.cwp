@@ -1,6 +1,6 @@
 /*
-** "Kooc"
-** Version **
+** "Kooc - Kind Of Objective C"
+** Version 0.42 **
 **
 ** Authors:
 **	Caner Candan
@@ -53,7 +53,7 @@ translation_unit ::=
      insert this.block.pctx;
      // variable globale pour stocker le contexte de l'expression (ecraser a chaque expr)
      if (existVariable(this.gl_pctx))
-     {    
+     {
        ref this.block.pctx = this.gl_pctx;
      }
      else
