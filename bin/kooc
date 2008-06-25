@@ -5,7 +5,7 @@
 ## Login   <candan_c@epitech.net>
 ## 
 ## Started on  Wed Jun 25 13:41:36 2008 caner candan
-## Last update Wed Jun 25 15:18:52 2008 caner candan
+## Last update Wed Jun 25 15:26:37 2008 caner candan
 ##
 
 if [ $1 ]
@@ -13,12 +13,6 @@ then
     codeworker -nologo -stack 800000 -script \
 	${KOOC_PATH:?You have to set KOOC_PATH}/src/kooc.cws \
 	-args $*;
-    if [ $2 ]
-    then
-	echo "==== BEGIN $2 ====";
-	cat -e $2;
-	echo "==== END $2 ====";
-    fi
 else
     echo "I need Koala";
 fi

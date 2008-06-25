@@ -21,3 +21,6 @@ traceLine("[KOOC] Processing: [" + _ARGS[0]
 translate("./kooc.cwp", project, _ARGS[0], sOutput);
 saveProject(treeFile);
 traceLine("[KOOC] Done.");
+traceLine("==== BEGIN " + sOutput + "====");
+traceLine(loadFile(sOutput));
+traceLine("==== END " + sOutput + "====");
