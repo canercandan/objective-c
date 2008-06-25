@@ -9,7 +9,7 @@ local	sOutput;
 
 if (existFile(_ARGS[0]) == false)
 {
-  traceLine("Impossible to find file " + _ARGS[0]);
+  traceLine("Impossible to find file [" + _ARGS[0] + "]");
   exit(42);
 }
 sExtension = rightString(_ARGS[0], 3);
