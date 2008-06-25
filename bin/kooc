@@ -5,10 +5,10 @@
 ## Login   <candan_c@epitech.net>
 ## 
 ## Started on  Wed Jun 25 13:41:36 2008 caner candan
-## Last update Wed Jun 25 15:31:07 2008 caner candan
+## Last update Wed Jun 25 15:51:36 2008 majdi toumi
 ##
 
-if [ $1 ]
+if [ ${1##*.} = "kc" ]
 then
     codeworker -nologo -stack 800000 -script \
 	${KOOC_PATH:?You have to set KOOC_PATH}/src/kooc.cws \
