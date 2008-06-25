@@ -1,0 +1,23 @@
+/*
+** Generate Kooc
+*/
+
+local	sExtension;
+local	sRoot;
+local	treeFile;
+local	sOutput;
+
+sExtension = rightString(_ARGS[0], 3);
+if (sExtension != ".kc")
+  {
+    traceLine("I need KC file!");
+    exit -1;
+  }
+sRoot = getWorkingPath();
+treeFile = sRoot + replaceString(sExtension, ".ktree", _ARGS[0]);
+sOutput = sRoot + replaceString(sExtension, ".c", _ARGS[0]);
+traceLine("[KOOC] Processing: [" + _ARGS[0]
+	  + "] to [" + sOutput + "].");
+translate("./kooc.cwp", project, _ARGS[0], sOutput);
+saveProject(treeFile);
+traceLine("[KOOC] Done.");
