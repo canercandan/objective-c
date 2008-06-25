@@ -1,0 +1,11 @@
+declare function treeInit();
+
+function treeInit()
+{
+  insert this.block.pctx;
+  if (existVariable(this.gl_pctx))
+    ref this.block.pctx = this.gl_pctx;
+  else
+    insert this.gl_pctx;
+  ref this.gl_pctx = this.block;
+}
