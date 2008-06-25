@@ -45,15 +45,16 @@
 ;
 
 #overload
-translation_unit ::= #ignore("KOOC")
+translation_unit ::=
+#ignore("KOOC")
+=> insert this.block;
 #implicitCopy
 [
- declaration(this.block);	
-]
+ declaration(this.block);
+]*
+#continue
+#empty
 ;
-
-import ::= => local name;
-#explicitCopy
 
 //----------------------------------------------------------------------------
 //				E N D - K O O C
