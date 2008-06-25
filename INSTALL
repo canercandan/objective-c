@@ -10,10 +10,10 @@ FOR EXAMPLE:
 FOR EXAMPLE:
 > setenv KOOC_PATH `pwd`
 
-3) LAUNCH ./bin/kooc WITH YOUR C FILE
+3) LAUNCH ./bin/kooc WITH YOUR KC FILE
 
 FOR EXAMPLE:
-> ./bin/kooc hello.c
+> ./bin/kooc hello.kc
 
 4) HF
 
