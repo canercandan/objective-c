@@ -21,6 +21,7 @@
 */
 
 #include "../cnorm_2.6/src/cnorm.cwp"
+#include "koocTree.inc.cws"
 //#include "koocPrettyPrinter.inc.cws"
 //#include "koocImport.inc.cws"
 //#include "koocModule.inc.cws"
@@ -45,28 +46,10 @@
 ;
 
 #overload
-translation_unit ::=
-#ignore("KOOC")
-#implicitCopy
- => insert this.block;
- => {
-   // gestion d'un contexte parent lorsque CNorm est embedded
-     insert this.block.pctx;
-     // variable globale pour stocker le contexte de l'expression (ecraser a chaque expr)
-     if (existVariable(this.gl_pctx))
-     {
-       ref this.block.pctx = this.gl_pctx;
-     }
-     else
-     {
-       insert this.gl_pctx;
-     }
-     ref this.gl_pctx = this.block;
-   //}
- }
+translation_unit ::= #ignore("KOOC") #implicitCopy
+=> treeInit();
 [declaration(this.block)]*
-#continue
-#empty
+#continue #empty
 ;
 
 //----------------------------------------------------------------------------
