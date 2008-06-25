@@ -1,0 +1,60 @@
+/*
+** "Kooc"
+** Version **
+**
+** Authors:
+**	Caner Candan
+**	Florent Hochwelker
+**	Majdi Toumi
+**	Morgan Armand
+** Contributors:
+**	Cedric Lemaire
+**	David Giron
+**	David Amsallem
+**	Lionel Auroux
+** Features:
+** - prettyPrinter ???
+** - import ???
+** - module ???
+** - implemantation ???
+** - class ???
+*/
+
+#include "../cnorm_2.6/cnorm.cwp"
+#include "koocPrettyPrinter.inc.cws"
+#include "koocImport.inc.cws"
+//#include "koocModule.inc.cws"
+//#include "koocImplantation.inc.cws"
+//#include "koocClass.inc.cws"
+//...
+
+//----------------------------------------------------------------------------
+//				B E G I N - K O O C
+//----------------------------------------------------------------------------
+
+#ignore["KOOC"] ::=
+[#explicitCopy
+ ['#' ->[['\r']? '\n']]
+ | ["//" ->[['\r']? '\n']]
+ | ["/*" ->"*/"]
+ | ' '
+ | '\t'
+ | '\n'
+ | '\r'
+]+:skip =>{@@skip@@}
+;
+
+#overload
+translation_unit ::= #ignore("KOOC")
+#implicitCopy
+[
+ declaration(this.block);	
+]
+;
+
+import ::= => local name;
+#explicitCopy
+
+//----------------------------------------------------------------------------
+//				E N D - K O O C
+//----------------------------------------------------------------------------
