@@ -1,4 +1,8 @@
 declare function treeInit();
+declare function treeKooc();
+declare function treeInsertModule(key : value,
+				  proprity : value,
+				  header : value);
 
 function treeInit()
 {
@@ -8,4 +12,24 @@ function treeInit()
   else
     insert this.gl_pctx;
   ref this.gl_pctx = this.block;
+  treeKooc();
+}
+
+function treeKooc()
+{
+  insert this.kooc;
+  insert this.kooc.modules;
+  insert this.kooc.headers;
+  insert this.kooc.class;
+}
+
+function treeInsertModule(key : value,
+			  proprity : value,
+			  header : value)
+{
+  local	sPath = "this.kooc.modules";
+
+  insert #evaluateVariable(sPath + '[' + key + ']');
+  insert #evaluateVariable(sPath + '[' + key + "].proprity");
+  insert #evaluateVariable(sPath + '[' + key + "].header");
 }

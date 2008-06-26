@@ -4,11 +4,17 @@ declare function importModuleFromFile(module : value,
 
 function importFile(file : value)
 {
-  traceLine("importFile");
+  local	sPath = "this.kooc.headers";
+
+  if (!existVariable(#evaluateVariable(sPath + '[' + file + ']')))
+    insert #evaluateVariable(sPath + '[' + file + ']');
+  if (existFile(file))
+    parseAsBNF("./koocModule.cwp", this, file);
+  else
+    traceLine(file + " not found to include");
 }
 
 function importModuleFromFile(module : value,
 			      file : value)
 {
-  traceLine("importModuleFromFile");
 }
