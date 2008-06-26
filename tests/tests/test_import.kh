@@ -1,3 +1,13 @@
+/*
+** test_import.kh for test_import in /u/epitech_2010s/armand_m/cu/rendu/kooc/KOOC/tests/tests
+** 
+** Made by morgan armand
+** Login   <armand_m@epitech.net>
+** 
+** Started on  Thu Jun 26 17:22:27 2008 morgan armand
+** Last update Thu Jun 26 17:22:28 2008 morgan armand
+*/
+
 #define MAXBUF	4200
 
 typedef struct	test_s

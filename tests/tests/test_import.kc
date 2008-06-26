@@ -1,3 +1,13 @@
+/*
+** test_import.kc for test_import in /u/epitech_2010s/armand_m/cu/rendu/kooc/KOOC/tests/tests
+** 
+** Made by morgan armand
+** Login   <armand_m@epitech.net>
+** 
+** Started on  Thu Jun 26 17:22:34 2008 morgan armand
+** Last update Thu Jun 26 17:22:35 2008 morgan armand
+*/
+
 @import"test_import.kh"
 @import"test_import.kh" /* faite attention au commentaire inutile */
 @import"test_import.kh" // oui je sais c en C++ mais comme GCC le prend :)
