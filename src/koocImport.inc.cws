@@ -1,20 +1,42 @@
 declare function importFile(file : value);
 declare function importModuleFromFile(module : value,
 				      file : value);
+declare function importHeader(file : value);
+declare function importError(file : value);
 
 function importFile(file : value)
 {
-  local	sPath = "this.kooc.headers";
-
-  if (!existVariable(#evaluateVariable(sPath + '[' + file + ']')))
-    insert #evaluateVariable(sPath + '[' + file + ']');
   if (existFile(file))
-    parseAsBNF("./koocModule.cwp", this, file);
+    {
+      importHeader(file);
+      parseAsBNF("./koocModule.cwp", this, file);
+    }
   else
-    traceLine(file + " not found to include");
+    importError(file);
 }
 
 function importModuleFromFile(module : value,
 			      file : value)
 {
+  if (existFile(file))
+    {
+      importHeader(file);
+      insert this.kooc.import_module = module;
+      parseAsBNF("./koocModule.cwp", this, file);
+      removeVariable(this.kooc.import_module);
+    }
+  else
+    importError(file);
+}
+
+function importHeader(file : value)
+{
+  if (!existVariable(this.kooc.headers[file]))
+    insert this.kooc.headers[file];
+}
+
+function importError(file : value)
+{
+  traceLine(file + " not found to include");
+  exit(-1);
 }

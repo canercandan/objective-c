@@ -7,7 +7,8 @@ import ::= #explicitCopy
 importModuleFromFile ::=
 importPrefix #readIdentifier:module "from"
 #readCString:file
-=> importModuleFromFile(module, file);
+=> importModuleFromFile(module,
+			this.kooc.path_import + file);
 ;
 
 importFile ::=
