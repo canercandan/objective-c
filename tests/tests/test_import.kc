@@ -1,0 +1,20 @@
+@import"test_import.kh"
+@import"test_import.kh" /* faite attention au commentaire inutile */
+@import"test_import.kh" // oui je sais c en C++ mais comme GCC le prend :)
+
+int		main(int ac, char **av)
+{
+  test_t	*test;
+  char		my_buf[MAXBUF];
+  char		fmt[13];// pourquoi 13!!peut pas avoir plus 10 milliard
+
+  test = test_new("KOOC rulez\n");
+  test_print(test);
+  free(test);
+  printf("Tape un truc (c-D pour finir):");
+  sprintf(fmt, "%%%ds", MAXBUF);
+  scanf(fmt, my_buf);
+  test = test_new(my_buf);
+  test_print(test);
+  free(test);
+}

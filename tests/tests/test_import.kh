@@ -1,0 +1,24 @@
+#define MAXBUF	4200
+
+typedef struct	test_s
+{
+  int		size;
+  char		st[MAXBUF];
+}		test_t;
+
+static inline test_t	*test_new(char*str)
+{
+  test_t		*test;
+
+  if (!str)
+    return (0);
+  test = calloc(1, sizeof (test_t));
+  test->size = strlen(str) > MAXBUF ? MAXBUF : strlen(str);
+  memcpy(test->st, str, test->size);
+  return (test);
+}
+
+static inline void	test_print(test_t*test)
+{
+  printf("%s", test->st);
+}
