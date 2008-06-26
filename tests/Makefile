@@ -5,7 +5,7 @@
 ## Login   <armand_m@epitech.net>
 ## 
 ## Started on  Thu Jun 26 16:39:06 2008 morgan armand
-## Last update Thu Jun 26 16:56:21 2008 morgan armand
+## Last update Thu Jun 26 17:03:10 2008 morgan armand
 ##
 
 SRC	= $(wildcard tests/*.kc)
@@ -14,9 +14,9 @@ TESTED	= ${SRC:.kc=.i}
 .SUFFIXES : .kc .i
 
 .kc.i:
-	@../bin/kooc $< > $<.log && echo $< "[\033[33mSUCCESS\033[0m]" || echo $< "[FAILED]"
+	@../bin/kooc $< > $<.log && echo -e $< "\t[\033[32mSUCCESS\033[0m]" || echo -e $< "\t[\033[31mFAILED\033[0m]"
 
 all:	${TESTED}
-	@echo "Ok!"
+
 clean:
 #@rm -f *~ tests/*.i tests/*.ktree tests/*~ tests/*.c.log tests/*.kout
