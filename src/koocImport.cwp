@@ -12,7 +12,7 @@ importPrefix #readIdentifier:module "from"
 
 importFile ::=
 importPrefix #readCString:file
-=> importFile(file);
+=> importFile(this.kooc.path_import + file);
 ;
 
 importPrefix ::= "@import";

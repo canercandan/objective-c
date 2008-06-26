@@ -1,5 +1,6 @@
 declare function treeInit();
 declare function treeKooc();
+declare function treePathImport(path : value);
 declare function treeInsertModule(key : value,
 				  proprity : value,
 				  header : value);
@@ -12,7 +13,6 @@ function treeInit()
   else
     insert this.gl_pctx;
   ref this.gl_pctx = this.block;
-  treeKooc();
 }
 
 function treeKooc()
@@ -21,6 +21,11 @@ function treeKooc()
   insert this.kooc.modules;
   insert this.kooc.headers;
   insert this.kooc.class;
+}
+
+function treePathImport(path : value)
+{
+  insert this.kooc.path_import = path;
 }
 
 function treeInsertModule(key : value,

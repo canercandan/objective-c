@@ -21,7 +21,6 @@
 */
 
 #include "../cnorm_2.6/src/cnorm.cwp"
-#include "koocTree.inc.cws"
 #include "koocImport.cwp"
 #include "koocModule.cwp"
 #include "koocImplantation.cwp"
@@ -47,7 +46,6 @@
 #overload
 translation_unit ::=
 #ignore("KOOC")
-=> treeInit();
 [
  [koocDeclaration(this.block)
   |#explicitCopy declaration(this.block)]

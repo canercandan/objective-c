@@ -2,10 +2,15 @@
 ** Kind Of Objective C ->> Generate Kooc
 */
 
+#include "koocTree.inc.cws"
+
 local	sExtension;
 local	sRoot;
 local	treeFile;
 local	sOutput;
+local	sPath;
+local	pos;
+local	size;
 
 if (existFile(_ARGS[0]) == false)
 {
@@ -18,6 +23,15 @@ treeFile = sRoot + replaceString(sExtension, ".ktree", _ARGS[0]);
 sOutput = sRoot + replaceString(sExtension, ".c", _ARGS[0]);
 traceLine("[KOOC] Processing: [" + _ARGS[0]
 	  + "] to [" + sOutput + "].");
+treeInit();
+treeKooc();
+size = lengthString(_ARGS[0]);
+pos = $size - findLastString(_ARGS[0], '/')$;
+pos = $pos - 1$;
+if ($pos != size$)
+  treePathImport(rsubString(_ARGS[0], pos));
+ else
+   treePathImport("./");
 translate("./kooc.cwp", project, _ARGS[0], sOutput);
 saveProject(treeFile);
 traceLine("[KOOC] Done.");
