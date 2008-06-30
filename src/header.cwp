@@ -1,0 +1,9 @@
+#include "../cnorm_2.6/src/cnormDeclarations.cwp"
+
+#implicitCopy
+
+unisssst ::=
+=>traceObject(this, 9);
+[declaration(this.block)|#readUptoIgnore]*
+#continue #empty
+;
