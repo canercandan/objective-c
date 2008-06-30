@@ -13,7 +13,20 @@ importPrefix #readIdentifier:module "from"
 
 importFile ::=
 importPrefix #readCString:file
-=> importFile(this.kooc.path_import + file);
+=> {
+local path = this.kooc.path_import + file;
+if (!existVariable(this.kooc.headers[path]))
+ {
+  local name;
+  name = replaceString('.', '_', path);
+  name = replaceString('/', '_', name);
+%>#ifndef __@name@__
+# include "@path@"
+
+@importFile(path)@
+#endif /* !__@name@__ */<%
+ }
+}
 ;
 
 importPrefix ::= "@import";

@@ -34,13 +34,11 @@
 #implicitCopy
 
 #ignore["KOOC"] ::=
-[#explicitCopy
- ['#' ->[['\r']? '\n']]
+[['#' ->[['\r']? '\n']]
  | ["//" ->[['\r']? '\n']]
  | ["/*" ->"*/"]
  | ' ' | '\t' | '\n' | '\r' | '\f'
-]+:skip
-=> {@@skip@@}
+]+
 ;
 
 #overload
@@ -48,7 +46,7 @@ translation_unit ::=
 #ignore("KOOC")
 [
  [koocDeclaration(this.block)
-  |#explicitCopy declaration(this.block)]
+  |declaration(this.block)]
 ]*
 #continue #empty
 ;

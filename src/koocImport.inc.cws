@@ -9,7 +9,8 @@ function importFile(file : value)
   if (existFile(file))
     {
       importHeader(file);
-      parseAsBNF("./koocModule.cwp", this, file);
+      translate("./header.cwp", this, file,
+		replaceString(".kh", ".h", file));
     }
   else
     importError(file);
@@ -22,7 +23,8 @@ function importModuleFromFile(module : value,
     {
       importHeader(file);
       insert this.kooc.import_module = module;
-      parseAsBNF("./koocModule.cwp", this, file);
+      translate("./header.cwp", this, file,
+		replaceString(".kh", ".h", file));
       removeVariable(this.kooc.import_module);
     }
   else
