@@ -1,0 +1,15 @@
+declare function createBlock(name : value);
+
+function	createBlock(name : value)
+{
+  local		modules;
+
+  modules = this.kooc.modules;
+  foreach info in modules
+  {
+    if (key(info) == name)
+      return (info.block);
+  }
+  traceLine("Implementation: error - module " + name + "doesn't exist");
+  return (-1);
+}

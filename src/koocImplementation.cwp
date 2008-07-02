@@ -1,0 +1,19 @@
+#include "koocImplementation.inc.cws"
+
+implementation
+	::= #implicitCopy [ addImplementation ]
+;
+
+addImplementation
+	::= implementationPrefix => traceLine("Find implementation");
+	    #readIdentifier:name => createBlock(name);
+	    '{' -> '}' '}'
+;
+
+content
+	::= => traceLine("Content\n");
+;
+
+implementationPrefix
+	::= "@implementation"
+;
