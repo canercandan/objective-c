@@ -9,7 +9,7 @@ parserHeader ::=
 
 <%}
 #explicitCopy
-["@module" => traceLine("found");
+[module => traceLine("found");
 | #readUptoIgnore:skip => {@@skip@@}]*
 #continue #empty
 => {%>
