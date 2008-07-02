@@ -5,10 +5,14 @@
 ** Login   <armand_m@epitech.net>
 ** 
 ** Started on  Thu Jun 26 17:22:27 2008 morgan armand
-** Last update Thu Jun 26 17:22:28 2008 morgan armand
+   Last update Wed Jul  2 14:52:32 2008 caner candan
 */
 
 #define MAXBUF	4200
+
+@module
+{
+};
 
 typedef struct	test_s
 {

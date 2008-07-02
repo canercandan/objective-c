@@ -9,10 +9,8 @@ function importFile(file : value)
   if (existFile(file))
     {
       importHeader(file);
-      traceLine("importFile");
       translate("./header.cwp", this, file,
 		replaceString(".kh", ".h", file));
-      traceLine("importFile end");
     }
   else
     importError(file);

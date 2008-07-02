@@ -1,7 +1,3 @@
 #include "koocModule.inc.cws"
 
-module ::=
-[#explicitCopy "@module"
-=> traceLine("module found");
-|#readUptoIgnore]*
-;
+module ::= "@module";

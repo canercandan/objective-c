@@ -1,14 +1,20 @@
-#include "koocModule.cwp"
+//#include "koocModule.cwp"
 
 #implicitCopy
 
 parserHeader ::=
-=> traceLine("header");
-=> local name;
-#explicitCopy => {%>#ifndef __@name@__
-# define __@name@__<%}
-#implicitCopy
-[module|#readUptoIgnore]*
+=> local name = "NAME";
+=> {%>#ifndef __@name@__
+# define __@name@__
+
+<%}
+#explicitCopy
+["@module" => traceLine("found");
+| #readUptoIgnore:skip => {@@skip@@}]*
 #continue #empty
-#explicitCopy => {%>#endif /* !__@name@__ */<%}
+=> {%>
+#endif /* !__@name@__ */
+<%}
 ;
+
+module ::= "@module";
