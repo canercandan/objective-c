@@ -25,7 +25,6 @@
 #include "koocModule.cwp"
 #include "koocImplantation.cwp"
 #include "koocClass.cwp"
-//#include "koocPrettyPrinter.inc.cws"
 
 //----------------------------------------------------------------------------
 //				B E G I N - K O O C
