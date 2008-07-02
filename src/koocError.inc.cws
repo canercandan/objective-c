@@ -1,4 +1,4 @@
-function	existBlock(name : value)
+function	existModule(name : value)
 {
   local		modules;
 
