@@ -23,7 +23,7 @@
 #include "../cnorm_2.6/src/cnorm.cwp"
 #include "koocImport.cwp"
 #include "koocModule.cwp"
-#include "koocImplantation.cwp"
+#include "koocImplementation.cwp"
 #include "koocClass.cwp"
 
 //----------------------------------------------------------------------------
@@ -50,7 +50,7 @@ translation_unit ::=
 #continue #empty
 ;
 
-koocDeclaration(block : node) ::= import;
+koocDeclaration(block : node) ::= [ import | implementation ];
 
 //----------------------------------------------------------------------------
 //				E N D - K O O C
