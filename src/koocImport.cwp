@@ -12,7 +12,11 @@ importPrefix #readIdentifier:module "from"
 ;
 
 importFile ::=
-importPrefix #readCString:file
+importPrefix
+#continue
+#try #readCString:file
+#catch(sError) => traceLine("Error: " + sError);
+=> traceLine("wwwww");
 => {
 local path = this.kooc.path_import + file;
 if (!existVariable(this.kooc.headers[path]))
