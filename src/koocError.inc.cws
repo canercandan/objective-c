@@ -1,0 +1,13 @@
+function	existBlock(name : value)
+{
+  local		modules;
+
+  modules = this.kooc.modules;
+  foreach info in modules
+  {
+    if (key(info) == name)
+      return (1);
+  }
+  error("error - module " + name + "doesn't exist");
+  return (0);
+}
