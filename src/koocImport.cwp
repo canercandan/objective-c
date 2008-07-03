@@ -8,9 +8,9 @@ importPrefix #readIdentifier:module "from"
 ;
 
 importFile ::=
-#try
+//#try
 importPrefix #continue #readCString:file
-#catch(sError)
+//#catch(sError)
 [checkFile(file, "")
  | => errorImport(sError);]
 ;

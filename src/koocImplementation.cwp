@@ -1,15 +1,13 @@
+
 implementation
 	::= #implicitCopy [ addImplementation ]
 ;
 
 addImplementation
-	::= implementationPrefix => traceLine("Find implementation");
-	    #readIdentifier:name => existModule(name);
-	    '{' -> '}' '}'
-;
-
-content
-	::= => traceLine("Content\n");
+	::= implementationPrefix #readIdentifier:name
+	    => existModule(name);
+	    => insert #evaluateVariable("this.kooc.block." + name);
+	    '{' [ declaration(this.block.kooc.name) ]* '}'
 ;
 
 implementationPrefix
