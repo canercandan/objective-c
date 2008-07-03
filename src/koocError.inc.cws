@@ -32,7 +32,7 @@ function	existModule(name : value)
     if (key(info) == name)
       return (1);
   }
-  traceLine("error - module " + name + "doesn't exist.");
+  traceLine("error - module " + name + " doesn't exist.");
   exit(-1);
 }
 
@@ -62,7 +62,7 @@ function	existVar(module : value, name : value, type : value)
   }
   if (ret != 0)
      return (ret);
-  traceLine("error - variable " + name + "doesn't exist in " + module + " module.");
+  traceLine("error - variable " + name + " doesn't exist in " + module + " module.");
   exit(-1);
 }
 
@@ -95,7 +95,7 @@ function	existFunc(module : value, name : value, type : value, nb_arg : node)
      nb_arg = countNbArgInFunc(ret);
      return (ret);
   }
-  traceLine("error - function " + name + "doesn't exist in " + module + " module.");
+  traceLine("error - function " + name + " doesn't exist in " + module + " module.");
   exit(-1);
 }
 
@@ -133,6 +133,6 @@ function	countNbArgInFunc(theNode : node)
 // 	}
 //       }
 //   }
-//   traceLine("error - param " + name_param + "doesn't exist in " + module + " module.");
+//   traceLine("error - param " + name_param + " doesn't exist in " + module + " module.");
 //   exit(-1);
 // }

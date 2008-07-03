@@ -1,7 +1,12 @@
 // OU ... les regles existantes  ?? ...
 
-appel_KOOC
-	   ::= 
+#overload primary_expression(expr : node) ::=
+#super::primary_expression(expr)
+| appel_KOOC
+;
+
+
+appel_KOOC ::= 
 	   => local module_name = "";
 	   => local func_name = "";
 	   => local type_name = "";
