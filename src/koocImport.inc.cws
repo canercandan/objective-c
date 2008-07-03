@@ -34,7 +34,10 @@ function importModuleFromFile(module : value,
 function importHeader(file : value)
 {
   if (!existVariable(this.kooc.headers[file]))
-    insert this.kooc.headers[file];
+    {
+      {%>#include "@file@"<%}
+      insert this.kooc.headers[file];
+    }
 }
 
 function importError(file : value)
