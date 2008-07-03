@@ -10,7 +10,9 @@ importPrefix #readIdentifier:module "from"
 ;
 
 importFile ::=
+#try
 importPrefix #continue #readCString:file
+#catch(sError)
 => local path = this.kooc.path_import + file;
 #parsedFile(path)
 translation_unit
@@ -31,6 +33,8 @@ translation_unit
 // traceLine("error file not found");
 //  }
 // }
+|
+=> error("syntax error in @import");
 ;
 
 importPrefix ::= "@import";

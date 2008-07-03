@@ -52,7 +52,7 @@
 #continue #empty
 ;
 
-koocDeclaration(block : node) ::= [ import | implementation ];
+koocDeclaration(block : node) ::= [ import | module | implementation ];
 
 // GRAMMAR INCLUDE
 #include "koocImport.cwp"
