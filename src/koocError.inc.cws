@@ -1,9 +1,10 @@
 declare function	errorIncludeFile(path : value);
-declare function	errorImport();
+declare function	errorImport(message : value);
 declare function	existModule(name : value);
 declare function	existVar(module : value, name : value);
 declare function	existFunc(module : value, name : value);
-declare function	existVarInFunc(module : value, name_func : value, name_param : value, place : value);
+declare function	existVarInFunc(module : value, name_func : value,
+				       name_param : value, place : value);
 
 function	errorIncludeFile(path : value)
 {
@@ -14,9 +15,9 @@ function	errorIncludeFile(path : value)
     }
 }
 
-function	errorImport()
+function	errorImport(message : value)
 {
-  traceLine("syntax error in @import");
+  traceLine("syntax error in @import: " + message);
   exit(-1);
 }
 
@@ -71,7 +72,6 @@ function	existFunc(module : value, name : value)
       }
   }
   traceLine("error - function " + name + "doesn't exist in " + module + " module.");
-  exit(-1);
 }
 
 function	existVarInFunc(module : value, name_func : value, name_param : value, place : value)

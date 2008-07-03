@@ -5,19 +5,24 @@ import ::= #explicitCopy
 importModuleFromFile ::=
 importPrefix #readIdentifier:module "from"
 #readCString:file
-=> importModuleFromFile(module,
-			this.kooc.path_import + file);
 ;
 
 importFile ::=
 #try
 importPrefix #continue #readCString:file
 #catch(sError)
-=> local path = this.kooc.path_import + file;
-=> errorIncludeFile(path);
-#parsedFile(path)
-translation_unit
-|=> errorImport();
+[
+ => local path = this.kooc.path_import + file;
+ => local pathH = replaceString(".kh", ".h", path);
+ => errorIncludeFile(path);
+ => deleteFile(pathH);
+ #parsedFile(path)
+ [koocDeclaration(this.block)
+  | declaration(this.block):res
+    => appendFile(pathH, res + '\n');]*
+ |
+ => errorImport(sError);
+]
 ;
 
 importPrefix ::= "@import";
