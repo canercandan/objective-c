@@ -1,6 +1,3 @@
-//#include "koocImplementation.inc.cws"
-#include "koocError.inc.cws"
-
 implementation
 	::= #implicitCopy [ addImplementation ]
 ;

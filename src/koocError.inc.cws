@@ -1,3 +1,7 @@
+declare function	existModule(name : value);
+declare function	errorIncludeFile(path : value);
+declare function	errorImport();
+
 function	existModule(name : value)
 {
   local		modules;
@@ -10,4 +14,19 @@ function	existModule(name : value)
   }
   error("error - module " + name + "doesn't exist");
   return (0);
+}
+
+function	errorIncludeFile(path : value)
+{
+  if (!path.existFile())
+    {
+      traceLine("#include \"" + path + "\" wasn't found");
+      exit(-1);
+    }
+}
+
+function	errorImport()
+{
+  traceLine("syntax error in @import");
+  exit(-1);
 }

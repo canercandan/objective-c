@@ -14,27 +14,10 @@ importFile ::=
 importPrefix #continue #readCString:file
 #catch(sError)
 => local path = this.kooc.path_import + file;
+=> errorIncludeFile(path);
 #parsedFile(path)
 translation_unit
-// => {
-// if (file.existFile())
-//    {
-// local path = this.kooc.path_import + file;
-// if (!existVariable(this.kooc.headers[path]))
-//  {
-//   local name;
-//   name = replaceString('.', '_', file);
-//   name = replaceString('/', '_', name);
-// %>#include "@file@"
-// //@importFile(path)@
-// <%
-// }
-// else
-// traceLine("error file not found");
-//  }
-// }
-|
-=> error("syntax error in @import");
+|=> errorImport();
 ;
 
 importPrefix ::= "@import";

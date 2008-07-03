@@ -33,6 +33,7 @@
 #include "koocImplementation.inc.cws"
 #include "koocImport.inc.cws"
 #include "koocModule.inc.cws"
+#include "koocError.inc.cws"
 // !SCRIPT INCLUDE
 
 #implicitCopy
