@@ -11,25 +11,26 @@ importFile ::=
 #try
 importPrefix #continue #readCString:file
 #catch(sError)
-[
- => local path = this.kooc.path_import + file;
- => local pathH = replaceString(".kh", ".h", path);
- #check(!this.kooc.headers[pathH])
-[
- => local nameH = replaceString('.', '_', replaceString('/', '_', file));
- => errorIncludeFile(path);
- => deleteFile(pathH);
- => appendFile(pathH, "#ifndef __" + nameH + "__\n# define __" + nameH + "__\n\n");
- => importHeader(pathH);
- #parsedFile(path)
- [koocDeclaration(this.block)
-  | declaration(this.block):res
-    => appendFile(pathH, res + '\n');]*
- => appendFile(pathH, "\n#endif !__" + nameH + "__\n");
-]
- |
- => errorImport(sError);
-]
+[[checkFile(file) | => traceLine("Warning: " + file + " already included");]
+ | => errorImport(sError);]
+;
+
+checkFile(file : value) ::=
+=> local path = this.kooc.path_import + file;
+=> local pathH = replaceString(".kh", ".h", path);
+#check(path.existFile())
+#check(!this.kooc.headers.findElement(pathH))
+=> local nameH = replaceString('.', '_', replaceString('/', '_', file));
+=> deleteFile(pathH);
+=> appendFile(pathH, "#ifndef __" + nameH + "__\n# define __" + nameH + "__\n\n");
+=> {%>#include "@file@"
+<%}
+=> insert this.kooc.headers[pathH];
+#parsedFile(path)
+[koocDeclaration(this.block)
+ | declaration(this.block):res
+   => appendFile(pathH, res + '\n');]*
+=> appendFile(pathH, "\n#endif !__" + nameH + "__\n");
 ;
 
 importPrefix ::= "@import";
