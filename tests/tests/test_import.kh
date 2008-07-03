@@ -5,12 +5,12 @@
 ** Login   <armand_m@epitech.net>
 ** 
 ** Started on  Thu Jun 26 17:22:27 2008 morgan armand
-   Last update Thu Jul  3 13:56:31 2008 caner candan
+** Last update Thu Jul  3 18:40:41 2008 morgan armand
 */
 
 #define MAXBUF	4200
 
-@module
+@module		Test
 {
 	int	a;
 	int	b;
