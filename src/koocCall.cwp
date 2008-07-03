@@ -5,18 +5,21 @@
 | appel_KOOC
 ;
 
-
 appel_KOOC ::= 
 	   => local module_name = "";
 	   => local func_name = "";
 	   => local type_name = "";
 	   => local nb_arg = "";
-	   #explicitCopy ["@!(" #readUptoIgnore:type_name ")"]?
+	   #explicitCopy [cast:type_name]?
 	   '['
 	   kooc_identifiant_module(module_name)
-	   [[kooc_identifiant_fonction(module_name, func_name, type_name, nb_arg) kooc_list_parametre(module_name, func_name, nb_arg)]
-	   | kooc_identifiant_variable(module_name, type_name)]
+	   [kooc_identifiant_variable(module_name, type_name)
+	   | [kooc_identifiant_fonction(module_name, func_name, type_name, nb_arg)
+	   kooc_list_parametre(module_name, func_name, nb_arg)]]
 	   ']'
+;
+
+cast : value ::= "@!("->(:cast)')'
 ;
 
 kooc_identifiant_module(name : node)
@@ -27,26 +30,26 @@ kooc_identifiant_module(name : node)
 kooc_identifiant_variable(module_name : value, type : value)
 	::= '.' kooc_identifier:val
 	=> local variable = existVar(module_name, val, type);
-	=> { %>@variable.name@<% }
+	=> { %>@val.mangle@<% }
 ;
 
 kooc_identifiant_fonction(module_name : value, func_name : node, type : value, nb_arg : node)
 	::= kooc_identifier:func_name
 	=> local func = existFunc(module_name, func_name, type, nb_arg);
-	=> { %>@func.name@(<% }
+	=> { %>@func.mangle@(<% }
 ;
 
 kooc_list_parametre(module : value, func : value, nb_arg : value)
 	::=
 	=> local i = 0;
 	[
+	':' kooc_param:val
 	=> { 
 	     if (i > 0)
 	     {
 	     	%>, <%
 	     }
 	   }
-	':' kooc_param:val
 	=> i = i + 1;
 	]*
 	=> { if (nb_arg > i)
@@ -66,8 +69,8 @@ kooc_list_parametre(module : value, func : value, nb_arg : value)
 kooc_identifier ::= #readIdentifier
 ;
 
-kooc_param ::= #readIdentifier:val
-	       | ['"'  #readUptoIgnore  '"']:val
-	       | ['\'' #readChar '\'']:val
-	       => { %>@val@<% }
+kooc_param ::= #readIdentifier
+	       | '"' #readCChar '"'
+	       | ['\'' #readChar '\'']
+	       | #readNumeric
 ;

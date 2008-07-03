@@ -5,12 +5,13 @@
 ** Login   <armand_m@epitech.net>
 ** 
 ** Started on  Thu Jun 26 17:23:43 2008 morgan armand
-   Last update Thu Jul  3 18:54:25 2008 florent hochwelker
+   Last update Thu Jul  3 20:40:45 2008 florent hochwelker
 */
 
 @import "test_module.kh"
 
 int	main()
 {
-  printf("%d\n", [Test.a]);
+  printf("%d\n", @!(int)[Test.a]);
+  [Test cool :2];
 }
