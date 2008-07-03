@@ -14,16 +14,19 @@ importPrefix #continue #readCString:file
 [
  => local path = this.kooc.path_import + file;
  => local pathH = replaceString(".kh", ".h", path);
+ #check(!this.kooc.headers[pathH])
+[
  => local nameH = replaceString('.', '_', replaceString('/', '_', file));
  => errorIncludeFile(path);
  => deleteFile(pathH);
- => importHeader(replaceString(".kh", ".h", file));
  => appendFile(pathH, "#ifndef __" + nameH + "__\n# define __" + nameH + "__\n\n");
+ => importHeader(pathH);
  #parsedFile(path)
  [koocDeclaration(this.block)
   | declaration(this.block):res
     => appendFile(pathH, res + '\n');]*
  => appendFile(pathH, "\n#endif !__" + nameH + "__\n");
+]
  |
  => errorImport(sError);
 ]
