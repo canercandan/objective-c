@@ -2,9 +2,10 @@ module ::=
 #explicitCopy
 "@module" #continue #readIdentifier:sModule
 '{'
-	=> insert this.kooc.modules[sModule];
-
-	[koocDeclaration(this.kooc.modules[sModule])
-	| declaration(this.kooc.modules[sModule])]*
+  => insert this.kooc.modules[sModule];
+  [
+    declaration(this.kooc.modules[sModule])
+    => mangle(sModule);
+  ]*
 '}'
 ;

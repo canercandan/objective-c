@@ -37,6 +37,7 @@
 #include "koocModule.inc.cws"
 #include "koocCall.inc.cws"
 #include "koocError.inc.cws"
+#include "koocMangle.inc.cws"
 // !SCRIPT INCLUDE
 
 #implicitCopy
