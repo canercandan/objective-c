@@ -32,7 +32,6 @@ checkFile(file : value) ::=
  | declaration(this.block):res
    => appendFile(pathH, res + '\n');]*
 => appendFile(pathH, "\n#endif !__" + nameH + "__\n");
-//| => traceLine("Warning: " + file + " has already included");
 ]
 | => errorIncludeFile(this.kooc.path_import + file);
 ;
