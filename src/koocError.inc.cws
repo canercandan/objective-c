@@ -41,7 +41,7 @@ function	existModule(name : value)
 
 function	existVar(module : value, name : value, type : value)
 {
-  local		ret = 0;
+  local		mangle = 0;
 
   foreach info in this.kooc.modules
   {
@@ -49,22 +49,20 @@ function	existVar(module : value, name : value, type : value)
       {
 	foreach val in info
 	{
-		if (val.name == name && ret == 0 && type == "")
-		{
-		   ref ret = val;
-		}
-		else if (val.name == name && ret != 0 && type == "")
+		if (val.name == name && mangle == 0 && type == "")
+		   mangle = val.mangle;
+		else if (val.name == name && mangle != 0 && type == "")
 		{
 		  traceLine("error - variable " + name + " have multiple type in " + module + ", please use @!() to specifie the type.");
 		  exit(-1);
 		}
 		else if (val.name == name && val.ctype.identifier == type)
-		  ref ret = val;
+		  mangle = val.mangle;
 	}
       }
   }
-  if (ret != 0)
-     return (ret);
+  if (mangle != 0)
+     return (mangle);
   traceLine("error - variable " + name + " doesn't exist in " + module + " module.");
   exit(-1);
 }
@@ -81,7 +79,7 @@ function	existFunc(module : value, name : value, type : value, nb_arg : node)
 	{
 		if (val.name == name && ret == 0 && type == "")
 		   ref ret = val;
-		else if (val.name && ret != 0 && type = "")
+		else if (val.name == name && ret != 0 && type = "")
 		{
 		  traceLine("error - function " + name + " have multiple type in " + module + ", please use @!() to specifie the type.");
 		  exit(-1);
@@ -105,7 +103,6 @@ function	countNbArgInFunc(theNode : node)
   local	i = 0;
   foreach val in theNode
   { i = i + 1; }
-  traceObject(theNode, 1);
   return (i);
 }
 
