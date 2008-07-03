@@ -55,7 +55,6 @@
 koocDeclaration(block : node) ::= [ import | implementation ];
 
 // GRAMMAR INCLUDE
-#include "koocDeclaration.cwp"
 #include "koocImport.cwp"
 #include "koocModule.cwp"
 #include "koocImplementation.cwp"
