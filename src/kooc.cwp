@@ -30,7 +30,7 @@
 
 // SCRIPT INCLUDE
 #include "koocClass.inc.cws"
-#include "koocImplantation.inc.cws"
+#include "koocImplementation.inc.cws"
 #include "koocImport.inc.cws"
 #include "koocModule.inc.cws"
 // !SCRIPT INCLUDE
@@ -58,7 +58,7 @@ koocDeclaration(block : node) ::= [ import | implementation ];
 #include "koocDeclaration.cwp"
 #include "koocImport.cwp"
 #include "koocModule.cwp"
-#include "koocImplantation.cwp"
+#include "koocImplementation.cwp"
 #include "koocClass.cwp"
 // !GRAMMAR INCLUDE
 
