@@ -1,9 +1,24 @@
-declare function	existModule(name : value);
 declare function	errorIncludeFile(path : value);
 declare function	errorImport();
+declare function	existModule(name : value);
 declare function	existVar(module : value, name : value);
 declare function	existFunc(module : value, name : value);
 declare function	existVarInFunc(module : value, name_func : value, name_param : value, place : value);
+
+function	errorIncludeFile(path : value)
+{
+  if (!path.existFile())
+    {
+      traceLine("#include \"" + path + "\" wasn't found");
+      exit(-1);
+    }
+}
+
+function	errorImport()
+{
+  traceLine("syntax error in @import");
+  exit(-1);
+}
 
 function	existModule(name : value)
 {
@@ -35,7 +50,7 @@ function	existVar(module : value, name : value)
 	}
       }
   }
-  traceLine("error - variable " + name + "doesn't exist in " + module " module.);
+  traceLine("error - variable " + name + "doesn't exist in " + module + " module.");
   exit(-1);
 }
 
@@ -55,7 +70,7 @@ function	existFunc(module : value, name : value)
 	}
       }
   }
-  traceLine("error - function " + name + "doesn't exist in " + module " module.);
+  traceLine("error - function " + name + "doesn't exist in " + module + " module.");
   exit(-1);
 }
 
@@ -71,11 +86,11 @@ function	existVarInFunc(module : value, name_func : value, name_param : value, p
       {
 	foreach val in info
 	{
-		if (key(val) == name)
+		if (key(val) == name_func)
 		   {
 			foreach param in val
 			{
-				if (key(param) == value && i == place)
+				if (key(param) == name_param && i == place)
 				{
 					return (1);
 				}
@@ -85,21 +100,6 @@ function	existVarInFunc(module : value, name_func : value, name_param : value, p
 	}
       }
   }
-  traceLine("error - param " + name + "doesn't exist in " + module " module.);
-  exit(-1);
-}
-
-function	errorIncludeFile(path : value)
-{
-  if (!path.existFile())
-    {
-      traceLine("#include \"" + path + "\" wasn't found");
-      exit(-1);
-    }
-}
-
-function	errorImport()
-{
-  traceLine("syntax error in @import");
+  traceLine("error - param " + name_param + "doesn't exist in " + module + " module.");
   exit(-1);
 }
