@@ -33,6 +33,7 @@
 #include "koocImplementation.inc.cws"
 #include "koocImport.inc.cws"
 #include "koocModule.inc.cws"
+#include "koocCall.inc.cws"
 #include "koocError.inc.cws"
 // !SCRIPT INCLUDE
 
@@ -53,13 +54,14 @@
 #continue #empty
 ;
 
-koocDeclaration(block : node) ::= [ import | module | implementation ];
+koocDeclaration(block : node) ::= [ import | module | implementation | appel_KOOC];
 
 // GRAMMAR INCLUDE
 #include "koocImport.cwp"
 #include "koocModule.cwp"
 #include "koocImplementation.cwp"
 #include "koocClass.cwp"
+#include "koocCall.cwp"
 // !GRAMMAR INCLUDE
 
 //----------------------------------------------------------------------------

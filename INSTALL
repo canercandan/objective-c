@@ -19,3 +19,9 @@ FOR EXAMPLE:
 4) HF
 
 </TO USE KOOC>
+
+--
+ou alors tu copie colle sa:
+--
+setenv PATH $PATH':'`pwd`/bin
+setenv KOOC_PATH `pwd`
