@@ -1,1 +1,10 @@
-module ::= "@module" '{' [koocDeclaration(this.block) | declaration(this.block)]* '}';
+module ::=
+#explicitCopy
+"@module" #continue #readIdentifier:sModule
+'{'
+	=> insert this.kooc.modules[sModule];
+
+	[koocDeclaration(this.kooc.modules[sModule])
+	| declaration(this.kooc.modules[sModule])]*
+'}'
+;
