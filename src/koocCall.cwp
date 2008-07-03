@@ -5,10 +5,11 @@ appel_KOOC
 	   => local module_name = "";
 	   => local func_name = "";
 	   => local type_name = "";
+	   => local nb_arg = "";
 	   #explicitCopy ["@!(" #readUptoIgnore:type_name ")"]?
 	   '['
 	   kooc_identifiant_module(module_name)
-	   [[kooc_identifiant_fonction(module_name, func_name, type_name) kooc_list_parametre(module_name, func_name)]
+	   [[kooc_identifiant_fonction(module_name, func_name, type_name, nb_arg) kooc_list_parametre(module_name, func_name, nb_arg)]
 	   | kooc_identifiant_variable(module_name, type_name)]
 	   ']'
 ;
@@ -24,13 +25,13 @@ kooc_identifiant_variable(module_name : value, type : value)
 	=> { %>@variable.name@<% }
 ;
 
-kooc_identifiant_fonction(module_name : value, func_name : node, type : value)
+kooc_identifiant_fonction(module_name : value, func_name : node, type : value, nb_arg : node)
 	::= kooc_identifier:func_name
-	=> local func = existFunc(module_name, func_name, type);
+	=> local func = existFunc(module_name, func_name, type, nb_arg);
 	=> { %>@func.name@(<% }
 ;
 
-kooc_list_parametre(module : value, func : value)
+kooc_list_parametre(module : value, func : value, nb_arg : value)
 	::=
 	=> local i = 0;
 	[
@@ -41,9 +42,19 @@ kooc_list_parametre(module : value, func : value)
 	     }
 	   }
 	':' kooc_param:val
-	=> existVarInFunc(module, func, val, i);
 	=> i = i + 1;
 	]*
+	=> { if (nb_arg > i)
+	     {
+		traceLine("error - function " + func + " not enouch param in argument");
+		exit(-1);
+	     }
+	     if (nb_arg < i)
+	     {
+		traceLine("error - function " + func + " too many param in argument");
+		exit(-1);
+	     }
+	   }
 	=> { %>)<% }
 ;
 

@@ -2,9 +2,10 @@ declare function	errorIncludeFile(path : value);
 declare function	errorImport(message : value);
 declare function	existModule(name : value);
 declare function	existVar(module : value, name : value, type : value);
-declare function	existFunc(module : value, name : value, type : value);
-declare function	existVarInFunc(module : value, name_func : value,
-				       name_param : value, place : value);
+declare function	existFunc(module : value, name : value, type : value, nb_arg : node);
+declare function	countNbArgInFunc(theNode : node);
+// declare function	existVarInFunc(module : value, name_func : value,
+// 				       name_param : value, place : value);
 
 function	errorIncludeFile(path : value)
 {
@@ -65,7 +66,7 @@ function	existVar(module : value, name : value, type : value)
   exit(-1);
 }
 
-function	existFunc(module : value, name : value, type : value)
+function	existFunc(module : value, name : value, type : value, nb_arg : node)
 {
   local		modules;
   local		ret = 0;
@@ -84,43 +85,54 @@ function	existFunc(module : value, name : value, type : value)
 		  traceLine("error - function " + name + " have multiple type in " + module + ", please use @!() to specifie the type.");
 		  exit(-1);
 		}
-		else if (val.type == type)
+		else if (key(val) == name && val.type == type)
 		  ref ret = val;
 	}
       }
   }
   if (ret != 0)
+  {
+     nb_arg = countNbArgInFunc(ret);
      return (ret);
+  }
   traceLine("error - function " + name + "doesn't exist in " + module + " module.");
   exit(-1);
 }
 
-function	existVarInFunc(module : value, name_func : value, name_param : value, place : value)
+function	countNbArgInFunc(theNode : node)
 {
-  local		modules;
-  local		i = 0;
-
-  modules = this.kooc.modules;
-  foreach info in modules
-  {
-    if (key(info) == module)
-      {
-	foreach val in info
-	{
-		if (key(val) == name_func)
-		   {
-			foreach param in val
-			{
-				if (key(param) == name_param && i == place)
-				{
-					return (param);
-				}
-				i = i + 1;
-			}
-		   }
-	}
-      }
-  }
-  traceLine("error - param " + name_param + "doesn't exist in " + module + " module.");
-  exit(-1);
+  local	i = 0;
+  foreach val in theNode
+  { i = i + 1; }
+  return (i);
 }
+
+// function	existVarInFunc(module : value, name_func : value, name_param : value, place : value)
+// {
+//   local		modules;
+//   local		i = 0;
+
+//   modules = this.kooc.modules;
+//   foreach info in modules
+//   {
+//     if (key(info) == module)
+//       {
+// 	foreach val in info
+// 	{
+// 		if (key(val) == name_func)
+// 		   {
+// 			foreach param in val
+// 			{
+// 				if (key(param) == name_param && i == place)
+// 				{
+// 					return (param);
+// 				}
+// 				i = i + 1;
+// 			}
+// 		   }
+// 	}
+//       }
+//   }
+//   traceLine("error - param " + name_param + "doesn't exist in " + module + " module.");
+//   exit(-1);
+// }
