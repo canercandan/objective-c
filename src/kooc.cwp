@@ -20,15 +20,20 @@
 ** - class ???
 */
 
-#include "../cnorm_2.6/src/cnorm.cwp"
-#include "koocImport.cwp"
-#include "koocModule.cwp"
-#include "koocImplementation.cwp"
-#include "koocClass.cwp"
-
 //----------------------------------------------------------------------------
 //				B E G I N - K O O C
 //----------------------------------------------------------------------------
+
+// CNORM INCLUDE
+#include "../cnorm_2.6/src/cnorm.cwp"
+// !CNORM INCLUDE
+
+// SCRIPT INCLUDE
+#include "koocClass.inc.cws"
+#include "koocImplantation.inc.cws"
+#include "koocImport.inc.cws"
+#include "koocModule.inc.cws"
+// !SCRIPT INCLUDE
 
 #implicitCopy
 
@@ -40,17 +45,22 @@
 ]+
 ;
 
-#overload
-translation_unit ::=
+#overload translation_unit ::=
 #ignore("KOOC")
-[
- [koocDeclaration(this.block)
-  |declaration(this.block)]
-]*
+[koocDeclaration(this.block)
+ | declaration(this.block)]*
 #continue #empty
 ;
 
 koocDeclaration(block : node) ::= [ import | implementation ];
+
+// GRAMMAR INCLUDE
+#include "koocDeclaration.cwp"
+#include "koocImport.cwp"
+#include "koocModule.cwp"
+#include "koocImplantation.cwp"
+#include "koocClass.cwp"
+// !GRAMMAR INCLUDE
 
 //----------------------------------------------------------------------------
 //				E N D - K O O C

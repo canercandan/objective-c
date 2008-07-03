@@ -1,5 +1,3 @@
-//#include "koocModule.cwp"
-
 #implicitCopy
 
 parserHeader ::=
@@ -9,12 +7,9 @@ parserHeader ::=
 
 <%}
 #explicitCopy
-[module => traceLine("found");
-| #readUptoIgnore:skip => {@@skip@@}]*
-#continue #empty
+[koocDeclaration(this.block)]*
+#continue
 => {%>
 #endif /* !__@name@__ */
 <%}
 ;
-
-module ::= "@module";

@@ -1,5 +1,3 @@
-#include "koocImport.inc.cws"
-
 import ::= #explicitCopy
 [importModuleFromFile|importFile]
 ;
@@ -12,22 +10,27 @@ importPrefix #readIdentifier:module "from"
 ;
 
 importFile ::=
-importPrefix
-#continue
-#try #readCString:file
-#catch(sError) => traceLine("Error: " + sError);
-=> traceLine("wwwww");
-=> {
-local path = this.kooc.path_import + file;
-if (!existVariable(this.kooc.headers[path]))
- {
-  local name;
-  name = replaceString('.', '_', file);
-  name = replaceString('/', '_', name);
-%>#include "@file@"
-@importFile(path)@<%
- }
-}
+importPrefix #continue #readCString:file
+=> local path = this.kooc.path_import + file;
+#parsedFile(path)
+translation_unit
+// => {
+// if (file.existFile())
+//    {
+// local path = this.kooc.path_import + file;
+// if (!existVariable(this.kooc.headers[path]))
+//  {
+//   local name;
+//   name = replaceString('.', '_', file);
+//   name = replaceString('/', '_', name);
+// %>#include "@file@"
+// //@importFile(path)@
+// <%
+// }
+// else
+// traceLine("error file not found");
+//  }
+// }
 ;
 
 importPrefix ::= "@import";

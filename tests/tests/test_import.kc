@@ -5,10 +5,9 @@
 ** Login   <armand_m@epitech.net>
 ** 
 ** Started on  Thu Jun 26 17:22:34 2008 morgan armand
-   Last update Wed Jul  2 15:21:19 2008 caner candan
+   Last update Wed Jul  2 15:38:36 2008 caner candan
 */
 
-@import ""
 @import"test_import.kh"
 @import"test_import.kh" /* faite attention au commentaire inutile */
 @import"test_import.kh" // oui je sais c en C++ mais comme GCC le prend :)
