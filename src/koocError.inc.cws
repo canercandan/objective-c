@@ -27,6 +27,11 @@ function	existModule(name : value)
   local		modules;
 
   modules = this.kooc.modules;
+  if (!existVariable(this.kooc.modules))
+     {
+       traceLine("this.kooc.modules not found");
+       exit(-1);
+     }
   foreach info in modules
   {
     if (key(info) == name)
