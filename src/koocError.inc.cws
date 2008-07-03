@@ -1,6 +1,9 @@
 declare function	existModule(name : value);
 declare function	errorIncludeFile(path : value);
 declare function	errorImport();
+declare function	existVar(module : value, name : value);
+declare function	existFunc(module : value, name : value);
+declare function	existVarInFunc(module : value, name_func : value, name_param : value, place : value);
 
 function	existModule(name : value)
 {
@@ -12,8 +15,78 @@ function	existModule(name : value)
     if (key(info) == name)
       return (1);
   }
-  error("error - module " + name + "doesn't exist");
-  return (0);
+  traceLine("error - module " + name + "doesn't exist.");
+  exit(-1);
+}
+
+function	existVar(module : value, name : value)
+{
+  local		modules;
+
+  modules = this.kooc.modules;
+  foreach info in modules
+  {
+    if (key(info) == module)
+      {
+	foreach val in info
+	{
+		if (key(val) == name)
+		   return (1);
+	}
+      }
+  }
+  traceLine("error - variable " + name + "doesn't exist in " + module " module.);
+  exit(-1);
+}
+
+function	existFunc(module : value, name : value)
+{
+  local		modules;
+
+  modules = this.kooc.modules;
+  foreach info in modules
+  {
+    if (key(info) == module)
+      {
+	foreach val in info
+	{
+		if (key(val) == name)
+		   return (1);
+	}
+      }
+  }
+  traceLine("error - function " + name + "doesn't exist in " + module " module.);
+  exit(-1);
+}
+
+function	existVarInFunc(module : value, name_func : value, name_param : value, place : value)
+{
+  local		modules;
+  local		i = 0;
+
+  modules = this.kooc.modules;
+  foreach info in modules
+  {
+    if (key(info) == module)
+      {
+	foreach val in info
+	{
+		if (key(val) == name)
+		   {
+			foreach param in val
+			{
+				if (key(param) == value && i == place)
+				{
+					return (1);
+				}
+				i = i + 1;
+			}
+		   }
+	}
+      }
+  }
+  traceLine("error - param " + name + "doesn't exist in " + module " module.);
+  exit(-1);
 }
 
 function	errorIncludeFile(path : value)
