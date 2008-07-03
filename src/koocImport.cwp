@@ -24,8 +24,7 @@ checkFile(file : value) ::=
 => local nameH = replaceString('.', '_', replaceString('/', '_', file));
 => deleteFile(pathH);
 => appendFile(pathH, "#ifndef __" + nameH + "__\n# define __" + nameH + "__\n\n");
-=> {%>#include "@file@"
-<%}
+=> {%>#include "@file@"@"\n\n"@<%}
 => insert this.kooc.headers[pathH];
 #parsedFile(path)
 [koocDeclaration(this.block)
