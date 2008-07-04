@@ -7,6 +7,11 @@ module(sModule : node) ::=
 	  declaration(this.kooc.modules[sModule])
 	  => mangle(sModule);
 	]*
-	=> prettyPrinter(this.kooc.modules[sModule]);
+	=> local out = prettyPrinter(this.kooc.modules[sModule]);
+	=> {%>extern "C"
+{
+@out@}
+
+<%}
 '}'
 ;
