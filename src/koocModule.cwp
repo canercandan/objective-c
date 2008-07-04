@@ -1,17 +1,24 @@
 module(sModule : node) ::=
 #explicitCopy
-"@module" #continue #readIdentifier:sModule
+//#try
+"@module"
+#continue #readIdentifier:sModule
 '{'
 	=> insert this.kooc.modules[sModule];
+	=> insert this.kooc.modules[sModule].block;
 	[
-	  declaration(this.kooc.modules[sModule])
+	  declaration(this.kooc.modules[sModule].block)
 	  => mangle(sModule);
 	]*
-	=> local out = prettyPrinter(this.kooc.modules[sModule]);
-	=> {%>extern "C"
-{
-@out@}
-
-<%}
+	=> local modH = sModule + ".h";
+	=> local modC = sModule + ".c";
+	=> insert this.kooc.modules[sModule].nameH = modH;
+	=> insert this.kooc.modules[sModule].nameC = modC;
+	=> generate("mod.h.cwt", this.kooc.modules[sModule], modH);
+	=> generate("mod.c.cwt", this.kooc.modules[sModule], modC);
 '}'
+//#catch(sError)
+//|
+//=> errorModule();
 ;
+

@@ -31,7 +31,9 @@
 // !CNORM INCLUDE
 
 // SCRIPT INCLUDE
-#include "prettyPrinter/prettyPrinter.inc.cws" // WTF WITH EXTENSION ???
+//#include "prettyPrinter/prettyPrinter.inc.cws" // WTF WITH EXTENSION ???
+#include "prettyPrinter.h.inc.cws"
+#include "prettyPrinter.c.inc.cws"
 #include "koocClass.inc.cws"
 #include "koocImplementation.inc.cws"
 #include "koocImport.inc.cws"

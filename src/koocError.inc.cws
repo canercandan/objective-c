@@ -22,6 +22,13 @@ function	errorImport(message : value)
   exit(-1);
 }
 
+function	errorModule()
+{
+  traceLine(getInputFilename() + ":" + countInputLines() + ": "
+    + "error: expected identifier after @module");
+  exit(-1);
+}
+
 function	existModule(name : value)
 {
   if (!existVariable(this.kooc.modules))

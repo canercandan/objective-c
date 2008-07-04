@@ -3,7 +3,7 @@
 function	mangle(theMod : value)
 {
   local name = "_ZN" + lengthString(theMod) + theMod;
-  localref theNode = this.kooc.modules[theMod]#back;
+  localref theNode = this.kooc.modules[theMod].block#back;
 
   name += lengthString(theNode.name) + theNode.name;
   name += "E";
