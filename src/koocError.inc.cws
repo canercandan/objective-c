@@ -39,7 +39,6 @@ function	existModule(name : value)
        traceLine("this.kooc.modules not found");
        exit(-1);
      }
-//  traceObject(this.kooc, 9);
   foreach info in this.kooc.modules
   {
     if (key(info) == name)
@@ -61,6 +60,8 @@ function	existVar(module : value, name : value, type : value)
 	{
 		if (val.type == "__VARIABLE__")
 		{
+		traceLine("val.oname = " + val.oname + ", name = " + name);
+		traceLine("val.ctype.identifier = " + val.ctype.identifier + ", type = " + type);
 			if (val.oname == name && mangle == 0 && type == "")
 			   mangle = val.name;
 			else if (val.oname == name && mangle != 0 && type == "")
