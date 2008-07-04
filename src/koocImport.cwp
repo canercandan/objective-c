@@ -10,7 +10,6 @@ import ::= #explicitCopy
 ;
 
 checkFile(file : value, module : value) ::=
-=> traceLine("module: " + module);
 => local pathKh = this.kooc.path_import + file;
 => local pathH = replaceString(".kh", ".h", pathKh);
 #check(pathKh.existFile())
@@ -20,7 +19,7 @@ checkFile(file : value, module : value) ::=
 => local nameH = replaceString('.', '_', replaceString('/', '_', replaceString(".kh", ".h", toUpperString(file))));
 => deleteFile(pathH);
 => appendFile(pathH, "#ifndef __" + nameH + "__\n# define __" + nameH + "__\n\n");
-[#check(module != "") | => {%>#include "@replaceString(".kh", ".h", file)@"@"\n\n"@<%}]
+[#check(module == "") => {%>#include "@replaceString(".kh", ".h", file)@"@"\n\n"@<%}]
 => insert this.kooc.headers[pathH];
 => insert this.kooc.headers[pathH].kooc;
 => insert this.kooc.headers[pathH].block;
@@ -45,7 +44,7 @@ checkModule(module : value, kc : value) ::=
  => local name = "";
  #parsedString(kc) module(name) => traceLine("kc: " + kc);
  => traceLine("name: " + name);
- #check(name != module) [=> removeVariable(this.kooc.modules[name]);]
+ [#check(name != module) => removeVariable(this.kooc.modules[name]);]
 ]
 | => traceLine("checkModule error");]
 ;

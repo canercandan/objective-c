@@ -1,0 +1,310 @@
+declare function r00t();
+declare function loopBlock(block : node);
+declare function loopArgument(block : node);
+declare function endPoint(block : node);
+declare function clearString(val : value);
+declare function blockType<T>(block : node);
+
+function r00t()
+{
+  return (loopBlock(this.block));
+}
+
+function loopBlock(block : node)
+{
+  local sInfo = "";
+
+  foreach var in block
+    sInfo += blockType<var.type>(var);
+  return (sInfo);
+}
+
+function loopArgument(block : node)
+{
+  local sInfo = "";
+
+  foreach var in block
+  {
+    sInfo += blockType<var.type>(var);
+    if (!last(var))
+      sInfo += ", ";
+  }
+  return (sInfo);
+}
+
+function endPoint(block : node)
+{
+  if (existVariable(block.etype))
+    if (block.etype == "expression")
+      return (";\n");
+  return ("");
+}
+
+function clearString(val : value)
+{
+  val = replaceString('\a', "\\a", val);
+  val = replaceString('\b', "\\b", val);
+  val = replaceString('\f', "\\f", val);
+  val = replaceString('\n', "\\n", val);
+  val = replaceString('\r', "\\r", val);
+  val = replaceString('\t', "\\t", val);
+  val = replaceString('\v', "\\v", val);
+  return (val);
+}
+
+function blockType<T>(block : node)
+{
+  //traceLine("block: [" + T + "] unknown");
+}
+
+function blockType<"__FUNCTION__">(block : node)
+{
+  local sInfo;
+
+  sInfo = getFunction(block)
+    + "\n{\n" + loopBlock(block.block) + "}\n\n";
+  return (sInfo);
+}
+
+function blockType<"variable_for">(block : node)
+{
+  local sInfo = "";
+
+  if (existVariable(block.init.type))
+    {
+      if (block#parent#front.name == block.name)
+	sInfo += getVariable(block);
+      else
+	sInfo += getVariableTypeLess(block);
+      sInfo += " = "
+	+ blockType<block.init.type>(block.init);
+    }
+  else
+    sInfo += getVariableTypeLess(block);
+  if (block#parent#back.name != block.name)
+    sInfo += ", ";
+  return (sInfo);
+}
+
+function blockType<"variable_normal">(block : node)
+{
+  local sInfo;
+
+  sInfo = getVariable(block);
+  if (existVariable(block.init.type))
+    sInfo += " = "
+      + blockType<block.init.type>(block.init);
+  return (sInfo + ";\n");
+}
+
+function blockType<"__VARIABLE__">(block : node)
+{
+  if (existVariable(block#parent#parent.type) &&
+      block#parent#parent.type == "for")
+    return (blockType<"variable_for">(block));
+  else
+    return (blockType<"variable_normal">(block));
+}
+
+function blockType<"return">(block : node)
+{
+  local sInfo;
+
+  sInfo = "return";
+  if (existVariable(block.block))
+    sInfo += ' ' + blockType<block.block.type>(block.block);
+  sInfo += ";\n";
+  return (sInfo);
+}
+
+function blockType<"priority_expression">(block : node)
+{
+  local sInfo;
+
+  sInfo = '(' + blockType<block.expr.type>(block.expr) + ')';
+  return (sInfo);
+}
+
+function blockType<"primary_expression">(block : node)
+{
+  return (clearString(block.value));
+}
+
+function blockType<"constant_expression">(block : node)
+{
+  return (blockType<"primary_expression">(block));
+}
+
+function blockType<"if">(block : node)
+{
+  local sInfo;
+
+  sInfo = "if ("
+    + blockType<block.condition.type>(block.condition)
+    + ")";
+  if (existVariable(block.then.otype))
+    sInfo += "\n{\n" + blockType<block.then.otype>(block.then) + "}\n";
+  else
+    sInfo += ';';
+  if (existVariable(block.else))
+    sInfo += "else\n{\n" + loopBlock(block.else) + "}\n";
+  return (sInfo);
+}
+
+function blockType<"equality_expression">(block : node)
+{
+  local sInfo = "";
+
+  if (existVariable(block.left.type))
+    sInfo += blockType<block.left.type>(block.left) + ' ';
+  if (existVariable(block.operator))
+    sInfo += block.operator;
+  if (existVariable(block.right.type))
+    sInfo += ' ' + blockType<block.right.type>(block.right);
+  return (sInfo);
+}
+
+function blockType<"relational_expression">(block : node)
+{
+  return (blockType<"equality_expression">(block));
+}
+
+function blockType<"logical_and_expression">(block : node)
+{
+  return (blockType<"equality_expression">(block));
+}
+
+function blockType<"logical_or_expression">(block : node)
+{
+  return (blockType<"equality_expression">(block));
+}
+
+function blockType<"then">(block : node)
+{
+  return (loopBlock(block.block));
+}
+
+function blockType<"additive_expression">(block : node)
+{
+  return (blockType<"equality_expression">(block));
+}
+
+function blockType<"multiplicative_expression">(block : node)
+{
+  return (blockType<"equality_expression">(block));
+}
+
+function blockType<"coma_expression">(block : node)
+{
+  return (blockType<"equality_expression">(block));
+}
+
+function blockType<"postfix_expression">(block : node)
+{
+  return (blockType<"equality_expression">(block));
+}
+
+function blockType<"unary_expression">(block : node)
+{
+  local sInfo = "";
+
+  if (existVariable(block.operator))
+    sInfo += block.operator;
+  if (existVariable(block.left))
+    sInfo += ' ' + blockType<block.left.type>(block.left);
+  if (existVariable(block.right))
+    sInfo += ' ' + blockType<block.right.type>(block.right);
+  return (sInfo);
+}
+
+function blockType<"prefix_expression">(block : node)
+{
+  return (blockType<"unary_expression">(block));
+}
+
+function blockType<"call_expression">(block : node)
+{
+  local sInfo;
+
+  sInfo = blockType<block.left.type>(block.left)
+    + '(';
+  if (existVariable(block.list))
+    sInfo += loopArgument(block.list);
+  sInfo += ')' + endPoint(block);
+  return (sInfo);
+}
+
+function blockType<"assignement_expression">(block : node)
+{
+  return (blockType<"additive_expression">(block)
+	  +  endPoint(block));
+}
+
+function blockType<"while">(block : node)
+{
+  local sInfo;
+
+  sInfo = "while ("
+    + blockType<block.condition.type>(block.condition)
+    + ")\n{\n"
+    + blockType<"stmt">(block.stmt)
+    + "}\n";
+  return (sInfo);
+}
+
+function blockType<"stmt">(block : node)
+{
+  return (loopBlock(block.block));
+}
+
+function blockType<"for">(block : node)
+{
+  local sInfo;
+
+  sInfo = "for ("
+    + blockType<"init">(block.init) + "; "
+    + blockType<block.condition.type>(block.condition) + "; "
+    + blockType<block.increment.type>(block.increment)
+    + ")\n{\n"
+    + blockType<"stmt">(block.stmt)
+    + "}\n";
+  return (sInfo);
+}
+
+function blockType<"init">(block : node)
+{
+  return (loopBlock(block));
+}
+
+function blockType<"switch">(block : node)
+{
+  return ("switch ("
+	  + blockType<block.condition.type>(block.condition)
+	  + ")\n{\n"
+	  + loopBlock(block.block)
+	  + "}\n");
+}
+
+function blockType<"case">(block : node)
+{
+  return ("case " + blockType<block.case.type>(block.case) + ":\n"
+	  + loopBlock(block.block));
+}
+
+function blockType<"default">(block : node)
+{
+  return ("default:\n" + loopBlock(block.block));
+}
+
+function blockType<"break">(block : node)
+{
+  return ("break;\n");
+}
+
+function blockType<"conditional_expression">(block : node)
+{
+  return (blockType<block.condition.type>(block.condition)
+	  + ' ' + block.operator + ' '
+	  + blockType<block.then.type>(block.then)
+	  + " : " + blockType<block.else.type>(block.else));
+}

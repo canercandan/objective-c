@@ -1,0 +1,24 @@
+#!/bin/sh
+## prettyPrinter.sh for prettyPrinter in /home/candan_c/rendu/cpp/kooc/ex5
+## 
+## Made by caner candan
+## Login   <candan_c@epitech.net>
+## 
+## Started on  Sun Jun 22 19:47:48 2008 caner candan
+## Last update Tue Jun 24 21:17:37 2008 caner candan
+##
+
+if [ $1 ]
+then
+    codeworker -nologo -script prettyPrinter.cws -args $1;
+    if [ $2 ]
+    then
+	echo \
+"------------------------------------------
+$2
+------------------------------------------" && \
+    cat -e $2;
+    fi
+else
+    echo "I need a Koala!";
+fi
