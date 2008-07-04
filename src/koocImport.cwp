@@ -16,6 +16,7 @@ checkFile(file : value, module : value) ::=
 #check(pathKh.existFile())
 [
 #check(!this.kooc.headers.findElement(pathH))
+[
 => local nameH = replaceString('.', '_', replaceString('/', '_', replaceString(".kh", ".h", toUpperString(file))));
 => deleteFile(pathH);
 => appendFile(pathH, "#ifndef __" + nameH + "__\n# define __" + nameH + "__\n\n");
@@ -32,6 +33,7 @@ checkFile(file : value, module : value) ::=
    => appendFile(pathH, c + '\n');
 ]*
 => appendFile(pathH, "\n#endif /* !__" + nameH + "__ */\n");
+]
 ]
 | => errorIncludeFile(this.kooc.path_import + file);
 ;
