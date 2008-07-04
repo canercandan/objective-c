@@ -49,15 +49,18 @@ function	existVar(module : value, name : value, type : value)
       {
 	foreach val in info
 	{
-		if (val.oname == name && mangle == 0 && type == "")
-		   mangle = val.name;
-		else if (val.oname == name && mangle != 0 && type == "")
+		if (val.type == "__VARIABLE__")
 		{
-		  traceLine("error - variable " + name + " have multiple type in " + module + ", please use @!() to specifie the type.");
-		  exit(-1);
+			if (val.oname == name && mangle == 0 && type == "")
+			   mangle = val.name;
+			else if (val.oname == name && mangle != 0 && type == "")
+			{
+				traceLine("error - variable " + name + " have multiple type in " + module + ", please use @!() to specifie the type.");
+		  		exit(-1);
+			}
+			else if (val.oname == name && val.ctype.identifier == type)
+		  	     mangle = val.name;
 		}
-		else if (val.oname == name && val.ctype.identifier == type)
-		  mangle = val.name;
 	}
       }
   }
@@ -77,6 +80,8 @@ function	existFunc(module : value, name : value, type : value, nb_arg : node)
       {
 	foreach val in info
 	{
+		if (val.type == "__PROTOTYPE__")
+		{
 		if (val.oname == name && ret == 0 && type == "")
 		   ref ret = val;
 		else if (val.oname == name && ret != 0 && type = "")
@@ -86,6 +91,7 @@ function	existFunc(module : value, name : value, type : value, nb_arg : node)
 		}
 		else if (val.oname == name && val.ctype.identifier == type)
 		  ref ret = val;
+		}
 	}
       }
   }
