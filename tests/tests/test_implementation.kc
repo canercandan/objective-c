@@ -5,12 +5,33 @@
 ** Login   <toumi_m@epitech.net>
 ** 
 ** Started on  Fri Jul  4 15:49:09 2008 User Toumi_m
-** Last update Fri Jul  4 15:50:03 2008 User Toumi_m
+** Last update Fri Jul  4 17:11:42 2008 User Toumi_m
 */
 
 @import "test_implementation.kh"
 
-@implementation		myTest
+@implementation	myTest
 {
+  int		function(int argc, char **argv)
+  {
+    printf("FUNCTION INT: argc = %d, argv[0] = %s\n", argc, argv[0]);
+    return (42);
+  }
 
+  float		function(int argc, char **argv)
+  {
+    printf("FUNCTION FLOAT: argc = %d, argv[0] = %s\n", argc, argv[0]);
+    return (4.2);
+  }
+
+  char		*function(int argc, char **argv)
+  {
+    printf("FUNCTION CHAR: argc = %d, argv[0] = %s\n", argc, argv[0]);
+    return ("42");
+  }
+
+  void		function()
+  {
+    printf("FUNCTION VOID:\n");
+  }
 }
