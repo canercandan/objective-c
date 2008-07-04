@@ -5,7 +5,7 @@
 ** Login   <armand_m@epitech.net>
 ** 
 ** Started on  Thu Jun 26 17:22:20 2008 morgan armand
-** Last update Fri Jul  4 14:14:17 2008 morgan armand
+   Last update Fri Jul  4 15:15:40 2008 florent hochwelker
 */
 
 @module		Test
@@ -13,7 +13,7 @@
   int		a = 42;
   char		a = 42;
   int		b;
-  /*   void;		cool(int j); */
+  void		cool(int j);
 
   /*   void		f1(int a, int b); */
   /*   void		f2(char*, int); */
