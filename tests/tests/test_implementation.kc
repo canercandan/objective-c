@@ -1,0 +1,16 @@
+/*
+** test_implementation.kc for  in /home/toumi_m/kooc/tests/tests
+** 
+** Made by User Toumi_m
+** Login   <toumi_m@epitech.net>
+** 
+** Started on  Fri Jul  4 15:49:09 2008 User Toumi_m
+** Last update Fri Jul  4 15:50:03 2008 User Toumi_m
+*/
+
+@import "test_implementation.kh"
+
+@implementation		myTest
+{
+
+}
