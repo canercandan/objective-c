@@ -12,7 +12,7 @@
 #include "testCType.inc.cwt"
 #include "testOType.inc.cwt"
 
-function	prettyPrinter(theNode : node;)
+function	prettyPrinter(theNode : node)
 {
 	return parseBlock(theNode);
 }
