@@ -23,7 +23,7 @@ replaceString('.', '_',
    toUpperString(file))));
 => deleteFile(pathH);
 => appendFile(pathH, "#ifndef __" + nameH + "__\n# define __" + nameH + "__\n\n");
-=> {%>#include "@file@"@"\n\n"@<%}
+[#check(module != "") | => {%>#include "@replaceString(".kh", ".h", file)@"@"\n\n"@<%}]
 => insert this.kooc.headers[pathH];
 => insert this.kooc.headers[pathH].kooc;
 => insert this.kooc.headers[pathH].block;
@@ -41,15 +41,14 @@ replaceString('.', '_',
 ;
 
 checkModule(module : value) ::=
-=> local fnd = 0;
 koocDeclaration(this.block):kc
-#check(module.empty()) => traceLine("import normal");
-| [
+[#check(module != "")
+[
  => traceLine("check module: " + module);
  => local name = "";
  #parsedString(kc) module(name) => traceLine("kc: " + kc);
  => traceLine("name: " + name);
- #check(name != module) => removeVariable(this.kooc.modules[name]);
-//  | => fnd = 1;
+ #check(name != module) [=> removeVariable(this.kooc.modules[name]);]
 ]
+| => traceLine("error");]
 ;
