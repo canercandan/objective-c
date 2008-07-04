@@ -1,3 +1,5 @@
+// Temp mangling
+
 function	mangle(theMod : value)
 {
   local name = "_ZN" + lengthString(theMod) + theMod;
@@ -5,6 +7,24 @@ function	mangle(theMod : value)
 
   name += lengthString(theNode.name) + theNode.name;
   name += "E";
+
+  // type
+  if (theNode.ctype.type == "__PRIMARY__")
+    name += theNode.ctype.identifier.charAt(0);
+  else
+    name += lengthString(theNode.ctype.identifier)
+      + theNode.ctype.identifier;
+
+  // args
+  if (existVariable(theNode.list))
+    {
+      foreach item in theNode.list
+	if (item.ctype.type == "__PRIMARY__")
+	  name += item.ctype.identifier.charAt(0);
+	else
+	  name += lengthString(item.ctype.identifier)
+	    + item.ctype.identifier;
+    }
 
   insert theNode.oname = theNode.name;
   insert theNode.name = name;
