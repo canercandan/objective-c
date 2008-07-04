@@ -1,41 +1,55 @@
 import ::= #explicitCopy
-[importModuleFromFile|importFile]
-;
-
-importModuleFromFile ::=
-importPrefix #readIdentifier:module "from"
-#readCString:file
-;
-
-importFile ::=
-//#try
-importPrefix #continue #readCString:file
-//#catch(sError)
-[checkFile(file, "")
+=> local module = "";
+#try
+"@import"
+#continue [#readIdentifier:module "from"]?
+#continue #readCString:file
+#catch(sError)
+[checkFile(file, module)
  | => errorImport(sError);]
 ;
 
 checkFile(file : value, module : value) ::=
-=> local path = this.kooc.path_import + file;
-=> local pathH = replaceString(".kh", ".h", path);
-#check(path.existFile())
+=> traceLine("module: " + module);
+=> local pathKh = this.kooc.path_import + file;
+=> local pathH = replaceString(".kh", ".h", pathKh);
+#check(pathKh.existFile())
 [
 #check(!this.kooc.headers.findElement(pathH))
 => local nameH =
 replaceString('.', '_',
  replaceString('/', '_',
-  replaceString(".kh", ".h", file)));
+  replaceString(".kh", ".h",
+   toUpperString(file))));
 => deleteFile(pathH);
 => appendFile(pathH, "#ifndef __" + nameH + "__\n# define __" + nameH + "__\n\n");
 => {%>#include "@file@"@"\n\n"@<%}
 => insert this.kooc.headers[pathH];
-#parsedFile(path)
-[koocDeclaration(this.block)
- | declaration(this.block):res
-   => appendFile(pathH, res + '\n');]*
+=> insert this.kooc.headers[pathH].kooc;
+=> insert this.kooc.headers[pathH].block;
+=> insert this.kooc.headers[pathH].gl_pctx;
+=> ref this.kooc.headers[pathH].gl_pctx =
+   this.kooc.headers[pathH].block;
+#parsedFile(pathKh)
+[checkModule(module)
+ | declaration(this.block):c
+   => appendFile(pathH, c + '\n');
+]*
 => appendFile(pathH, "\n#endif !__" + nameH + "__\n");
 ]
 | => errorIncludeFile(this.kooc.path_import + file);
 ;
 
-importPrefix ::= "@import";
+checkModule(module : value) ::=
+=> local fnd = 0;
+koocDeclaration(this.block):kc
+#check(module.empty()) => traceLine("import normal");
+| [
+ => traceLine("check module: " + module);
+ => local name = "";
+ #parsedString(kc) module(name) => traceLine("kc: " + kc);
+ => traceLine("name: " + name);
+ #check(name != module) => removeVariable(this.kooc.modules[name]);
+//  | => fnd = 1;
+]
+;

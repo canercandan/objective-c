@@ -57,7 +57,9 @@
 #continue #empty
 ;
 
-koocDeclaration(block : node) ::= [ import | module | implementation | appel_KOOC ];
+koocDeclaration(block : node) ::=
+=> local name;
+[ import | module(name) | implementation | appel_KOOC];
 
 // GRAMMAR INCLUDE
 #include "koocImport.cwp"
