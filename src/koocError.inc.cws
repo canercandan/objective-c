@@ -57,7 +57,7 @@ function	existVar(module : value, name : value, type : value)
   {
     if (key(info) == module)
       {
-	foreach val in info
+	foreach val in info.block.variables
 	{
 		if (val.type == "__VARIABLE__")
 		{
@@ -88,7 +88,7 @@ function	existFunc(module : value, name : value, type : value, nb_arg : node)
   {
     if (key(info) == module)
       {
-	foreach val in info
+	foreach val in info.block.prototypes
 	{
 		if (val.type == "__PROTOTYPE__")
 		{
