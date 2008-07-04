@@ -4,7 +4,7 @@ implementation
 ;
 
 addImplementation
-	::= implementationPrefix #readIdentifier:name
+	::= "@implementation" #readIdentifier:name
 //	    => existModule(name);
 	    => traceLine("New Implementation = " + name);
 	    '{'
@@ -12,12 +12,8 @@ addImplementation
 		[
 	      	 declaration(this.block.kooc.name):line
 //		 => local out = prettyPrinter(this.block.kooc.name);
-	      	 => traceLine("declaration: " + line);
+//	      	 => traceLine("declaration: " + line);
 //	      	 => traceLine("pretty: " + out);
 	    	]*
 	    '}'
-;
-
-implementationPrefix
-	::= "@implementation"
 ;
