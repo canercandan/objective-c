@@ -1,13 +1,21 @@
 
 implementation
-	::= #implicitCopy [ addImplementation ]
+	::= #explicitCopy [ addImplementation ]
 ;
 
 addImplementation
 	::= implementationPrefix #readIdentifier:name
 	    => existModule(name);
-	    => insert #evaluateVariable("this.kooc.block." + name);
-	    '{' [ declaration(this.block.kooc.name) ]* '}'
+	    => traceLine("New Implementation = " + name);
+	    '{'
+	      	 => traceLine("OK");
+		[
+	      	 declaration(this.block.kooc.name):line
+//		 => local out = prettyPrinter(this.block.kooc.name);
+	      	 => traceLine("declaration: " + line);
+	      	 => traceLine("pretty: " + out);
+	    	]*
+	    '}'
 ;
 
 implementationPrefix
