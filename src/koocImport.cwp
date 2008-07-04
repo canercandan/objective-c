@@ -35,7 +35,7 @@ replaceString('.', '_',
  | declaration(this.block):c
    => appendFile(pathH, c + '\n');
 ]*
-=> appendFile(pathH, "\n#endif !__" + nameH + "__\n");
+=> appendFile(pathH, "\n#endif /* !__" + nameH + "__ */\n");
 ]
 | => errorIncludeFile(this.kooc.path_import + file);
 ;
