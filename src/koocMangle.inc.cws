@@ -30,7 +30,10 @@ function	mangle(theMod : value)
   insert theNode.name = name;
 
   if (theNode.type == "__VARIABLE__")
-    setall this.kooc.modules[theMod].block.variables[theNode.name] =
+  {
+    ref this.kooc.modules[theMod].block.variables[theNode.name] =
       this.kooc.modules[theMod].block.variables[theNode.oname];
 
+    removeElement(this.kooc.modules[theMod].block.variables, theNode.oname);
+  }
 }

@@ -9,7 +9,6 @@ module(sModule : node) ::=
 	[
 	  declaration(this.kooc.modules[sModule].block)
 	  => mangle(sModule);
-	=> traceObject(this.kooc.modules, 5);
 	]*
 	=> local modH = "km_" + sModule.toLowerString() + ".h";
 	=> local modC = "km_" + sModule.toLowerString() + ".c";
