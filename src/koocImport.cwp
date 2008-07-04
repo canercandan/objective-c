@@ -16,11 +16,7 @@ checkFile(file : value, module : value) ::=
 #check(pathKh.existFile())
 [
 #check(!this.kooc.headers.findElement(pathH))
-=> local nameH =
-replaceString('.', '_',
- replaceString('/', '_',
-  replaceString(".kh", ".h",
-   toUpperString(file))));
+=> local nameH = replaceString('.', '_', replaceString('/', '_', replaceString(".kh", ".h", toUpperString(file))));
 => deleteFile(pathH);
 => appendFile(pathH, "#ifndef __" + nameH + "__\n# define __" + nameH + "__\n\n");
 [#check(module != "") | => {%>#include "@replaceString(".kh", ".h", file)@"@"\n\n"@<%}]
@@ -31,7 +27,7 @@ replaceString('.', '_',
 => ref this.kooc.headers[pathH].gl_pctx =
    this.kooc.headers[pathH].block;
 #parsedFile(pathKh)
-[checkModule(module)
+[koocDeclaration(this.block):kc checkModule(module, kc)
  | declaration(this.block):c
    => appendFile(pathH, c + '\n');
 ]*
@@ -40,8 +36,7 @@ replaceString('.', '_',
 | => errorIncludeFile(this.kooc.path_import + file);
 ;
 
-checkModule(module : value) ::=
-koocDeclaration(this.block):kc
+checkModule(module : value, kc : value) ::=
 [#check(module != "")
 [
  => traceLine("check module: " + module);
@@ -50,5 +45,5 @@ koocDeclaration(this.block):kc
  => traceLine("name: " + name);
  #check(name != module) [=> removeVariable(this.kooc.modules[name]);]
 ]
-| => traceLine("error");]
+| => traceLine("checkModule error");]
 ;
