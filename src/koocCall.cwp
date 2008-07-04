@@ -37,7 +37,7 @@ kooc_identifiant_variable(module_name : value, type : value)
 kooc_identifiant_fonction(module_name : value, func_name : node, type : value, nb_arg : node)
 	::= kooc_identifier:func_name
 	=> local func = existFunc(module_name, func_name, type, nb_arg);
-	=> { %>@func.name@(<% }
+	=> { %>@func@(<% }
 ;
 
 kooc_list_parametre(module : value, func : value, nb_arg : value)
@@ -51,6 +51,7 @@ kooc_list_parametre(module : value, func : value, nb_arg : value)
 	     	%>, <%
 	     }
 	   }
+	=> { %>@val@<% }
 	=> i = i + 1;
 	]*
 	=> { if (nb_arg > i)
