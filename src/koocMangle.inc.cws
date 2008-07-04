@@ -28,4 +28,9 @@ function	mangle(theMod : value)
 
   insert theNode.oname = theNode.name;
   insert theNode.name = name;
+
+  if (theNode.type == "__VARIABLE__")
+    setall this.kooc.modules[theMod].block.variables[theNode.name] =
+      this.kooc.modules[theMod].block.variables[theNode.oname];
+
 }
