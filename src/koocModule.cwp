@@ -4,9 +4,9 @@ module(sModule : node) ::=
 '{'
 	=> insert this.kooc.modules[sModule];
 	[
-//koocDeclaration(this.kooc.modules[sModule]) |
-	declaration(this.kooc.modules[sModule])
-	   => mangle(sModule);
+	  declaration(this.kooc.modules[sModule])
+	  => mangle(sModule);
 	]*
+	=> prettyPrinter(this.kooc.modules[sModule]);
 '}'
 ;

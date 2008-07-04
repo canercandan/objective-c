@@ -6,5 +6,6 @@ function	mangle(theMod : value)
   name += lengthString(theNode.name) + theNode.name;
   name += "E";
 
-  insert theNode.mangle = name;
+  insert theNode.oname = theNode.name;
+  insert theNode.name = name;
 }
