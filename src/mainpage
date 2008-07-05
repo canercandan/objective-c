@@ -4,6 +4,11 @@
  * Kooc is a kind of objective C.@n
  * It's a project created by the Epitech's students
  * (@ref develop).
+ * @par Notre devise
+ * Jamais nous ne remettrons en cause ou altererons
+ * un comportement d'une structure du langage C.@n
+ * Nous rajouterons seulement de nouvelles structures
+ * pour traiter de nouveaux concepts. HF
  *
  * @section use_sec To use KOOC
  * @subsection step1 Step 1: Cnorm
