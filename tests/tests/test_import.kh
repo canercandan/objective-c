@@ -5,10 +5,12 @@
 ** Login   <armand_m@epitech.net>
 ** 
 ** Started on  Thu Jun 26 17:22:27 2008 morgan armand
-** Last update Thu Jul  3 20:43:56 2008 caner candan
+** Last update Sat Jul  5 19:16:49 2008 caner candan
 */
 
 #define MAXBUF	4200
+
+/*cooc*/
 
 @module		Test
 {
@@ -27,6 +29,8 @@ typedef struct	test_s
   int		size;
   char		st[MAXBUF];
 }		test_t;
+
+/*cooc*/
 
 static inline test_t	*test_new(char*str)
 {

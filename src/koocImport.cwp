@@ -53,10 +53,12 @@ checkFile(file : value, module : value) ::=
   this.kooc.headers[pathH].block;
 #parsedFile(pathKh)
   [
-   koocDeclaration(this.block):kc checkModule(module, kc)
-   | [declaration(this.block) | #readUptoIgnore]:c
-   => appendFile(pathH, c + '\n');
-   ]*
+   [
+    declaration(this.block):c => appendFile(pathH, c + '\n');
+    | koocDeclaration(this.block):kc checkModule(module, kc)
+    ]+
+   #continue #empty
+   ]
   => appendFile(pathH, "\n#endif /* !__" + nameH + "__ */\n");
   ]
  ]

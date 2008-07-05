@@ -1,5 +1,5 @@
 /**
- * @file koocImplementation
+ * @file koocImplementation.inc.cws
  * @brief koocImplementation functions
  * @note soon
  * @todo signaler error lorsqu'une fonction definis dans @imnplementation
