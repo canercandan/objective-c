@@ -20,6 +20,7 @@ declare function getArgumentEnum(ctype : node);
 declare function getEnum(Enum : node);
 declare function getFunction(function : node);
 declare function getVariable(variable : node);
+declare function getVariableTypeLess(variable : node);
 declare function getExternVariable(variable : node);
 declare function getDefineHeader();
 
@@ -45,7 +46,9 @@ function getSimpleType(theNode : node)
 
 /**
  * @fn getPointer(theNode : node)
- * @brief 
+ * @brief get the pointer if the variable is a pointer
+ * @param theNode the node
+ * @return the pointer (*)
  */
 function getPointer(theNode : node)
 {
@@ -62,6 +65,12 @@ function getPointer(theNode : node)
   return (sInfo);
 }
 
+/**
+ * @fn getBits(theNode : node)
+ * @brief get number of bits if exist
+ * @param theNode the node
+ * @return the number of bits
+ */
 function getBits(theNode : node)
 {
   local sInfo;
@@ -71,6 +80,12 @@ function getBits(theNode : node)
   return (sInfo);
 }
 
+/**
+ * @fn getArrayInfo(theNode : node)
+ * @brief get number between [ and ] to a array's variable
+ * @param theNode the node
+ * @return the number
+ */
 function getArrayInfo(theNode : node)
 {
   local sInfo = "";
@@ -80,6 +95,12 @@ function getArrayInfo(theNode : node)
   return (sInfo);
 }
 
+/**
+ * @fn getCommentSuffix(theNode : node)
+ * @brief get the suffix's comment
+ * @param theNode the node
+ * @return the suffix's comment
+ */
 function getCommentSuffix(theNode : node)
 {
   local sInfo = "";
@@ -90,6 +111,14 @@ function getCommentSuffix(theNode : node)
   return (sInfo);
 }
 
+/**
+ * @fn oneArgument(theNode : node, type : value = 1)
+ * @brief if type is equal to 1 then the function return an argument
+ * of function else the function only return the name of argument
+ * @param theNode the node
+ * @param type type with default value = 1
+ * @return e.g. brief
+ */
 function oneArgument(theNode : node, type : value = 1)
 {
   local sInfo;
@@ -107,16 +136,34 @@ function oneArgument(theNode : node, type : value = 1)
   return (sInfo);
 }
 
+/**
+ * @fn getVariable(variable : node)
+ * @brief get variable with the function oneArgument()
+ * @param variable a variable
+ * @return the result of oneArgument()
+ */
 function getVariable(variable : node)
 {
   return (oneArgument(variable));
 }
 
+/**
+ * @fn getVariableTypeLess(variable : node)
+ * @brief get variable without type with the function oneArgument()
+ * @param variable a variable
+ * @return the result of oneArgument()
+ */
 function getVariableTypeLess(variable : node)
 {
   return (oneArgument(variable, 0));
 }
 
+/**
+ * @fn getExternVariable(variable : node)
+ * @brief get extern variable if the variable exist
+ * @param variable a variable
+ * @return extern variable
+ */
 function getExternVariable(variable : node)
 {
   local sInfo = "";
@@ -127,6 +174,12 @@ function getExternVariable(variable : node)
   return (sInfo);
 }
 
+/**
+ * @fn getArgument(ctype : node)
+ * @brief get arguments of the function
+ * @param ctype ctype argument
+ * @return the arguments
+ */
 function getArgument(ctype : node)
 {
   local sInfo = "";
@@ -140,6 +193,12 @@ function getArgument(ctype : node)
   return (sInfo);
 }
 
+/**
+ * @fn getArgumentStructOrUnion(ctype : node)
+ * @brief get arguments of the struct or union
+ * @param ctype ctype argument
+ * @return the arguments
+ */
 function getArgumentStructOrUnion(ctype : node)
 {
   local sInfo = "";
@@ -160,6 +219,12 @@ function getArgumentStructOrUnion(ctype : node)
   return (sInfo);
 }
 
+/**
+ * @fn getStructOrUnion(conterner : node)
+ * @brief get a struct or a union
+ * @param conterner conterner is a block of struct or union
+ * @return the struct or union
+ */
 function getStructOrUnion(conterner : node)
 {
   local sInfo;
@@ -175,6 +240,12 @@ function getStructOrUnion(conterner : node)
   return (sInfo);
 }
 
+/**
+ * @fn getArgumentEnum(ctype : node)
+ * @brief get argument of the enum
+ * @param ctype 
+ * @return 
+ */
 function getArgumentEnum(ctype : node)
 {
   local sInfo = "";
