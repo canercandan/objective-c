@@ -100,8 +100,6 @@ function	existVar(module : value, name : value, type : value)
 		mangle = val.name;
 	      else if (val.oname == name && mangle != 0 && type == "")
 		{
-		  traceLine("val.oname = " + val.oname + ", name = " + name);
-		  traceLine("val.ctype.identifier = " + val.ctype.identifier + ", type = " + type);
 		  if (val.oname == name && mangle == 0 && type == "")
 		    mangle = val.name;
 		  else if (val.oname == name && mangle != 0 && type == "")
