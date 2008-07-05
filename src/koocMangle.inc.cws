@@ -45,10 +45,17 @@ function	mangle(theMod : value)
   insert theNode.name = name;
 
   if (theNode.type == "__VARIABLE__")
-  {
-    ref this.kooc.modules[theMod].block.variables[theNode.name] =
-      this.kooc.modules[theMod].block.variables[theNode.oname];
+    {
+      ref this.kooc.modules[theMod].block.variables[theNode.name] =
+	this.kooc.modules[theMod].block.variables[theNode.oname];
 
-    removeElement(this.kooc.modules[theMod].block.variables, theNode.oname);
-  }
+      removeElement(this.kooc.modules[theMod].block.variables, theNode.oname);
+    }
+  if (theNode.type == "__PROTOTYPE__")
+    {
+      ref this.kooc.modules[theMod].block.prototypes[theNode.name] =
+	this.kooc.modules[theMod].block.prototypes[theNode.oname];
+
+      removeElement(this.kooc.modules[theMod].block.prototypes, theNode.oname);
+    }
 }
