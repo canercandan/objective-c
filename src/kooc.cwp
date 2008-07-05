@@ -67,7 +67,8 @@
  */
 koocDeclaration(block : node) ::=
   => local name;
-[ import | module(name) | implementation | appel_KOOC]
+[ koocImport | koocModule(name) | koocImplementation |
+  koocClass | koocCall]
 ;
 /**
  * @endcond

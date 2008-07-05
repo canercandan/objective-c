@@ -13,7 +13,7 @@
  * @cond
  */
 
-import ::= #explicitCopy
+koocImport ::= #explicitCopy
   => local module = "";
 #try
 "@import"

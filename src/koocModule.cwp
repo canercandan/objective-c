@@ -11,7 +11,7 @@
  * @cond
  */
 
-module(sModule : node) ::=
+koocModule(sModule : node) ::=
 #explicitCopy
 //#try
 "@module"

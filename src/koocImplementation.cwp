@@ -11,7 +11,7 @@
  * @cond
  */
 
-implementation
+koocImplementation
 	::= #explicitCopy [ addImplementation ]
 ;
 

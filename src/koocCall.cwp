@@ -14,10 +14,10 @@
 
 #overload primary_expression(expr : node) ::=
 #super::primary_expression(expr)
-| appel_KOOC
+| koocCall
 ;
 
-appel_KOOC ::= 
+koocCall ::=
 	   => local module_name = "";
 	   => local func_name = "";
 	   => local type_name = "";
