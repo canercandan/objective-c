@@ -1,3 +1,12 @@
+/**
+ * @file prettyPrinter.c.inc.cws
+ * @brief PrettyPrinter to print the kooc to c
+ * @note
+ * @ref develop
+ * @ref contrib
+ * @ref tools
+ */
+
 declare function r00t();
 declare function loopBlock(block : node);
 declare function loopArgument(block : node);
@@ -5,11 +14,22 @@ declare function endPoint(block : node);
 declare function clearString(val : value);
 declare function blockType<T>(block : node);
 
+/**
+ * @fn r00t()
+ * @brief main function
+ * @return loopBlock function
+ */
 function r00t()
 {
   return (loopBlock(this.block));
 }
 
+/**
+ * @fn loopBlock(block : node)
+ * @brief this function loop in a tree's block
+ * @return sInfo which is the result of
+ * concatenation of blockType function's return
+ */
 function loopBlock(block : node)
 {
   local sInfo = "";
@@ -19,6 +39,12 @@ function loopBlock(block : node)
   return (sInfo);
 }
 
+/**
+ * @fn loopArgument(block : node)
+ * @brief like loopBlock but to function's arguments
+ * @param block tree's block
+ * @return e.g. loopBlock
+ */
 function loopArgument(block : node)
 {
   local sInfo = "";
@@ -32,6 +58,13 @@ function loopArgument(block : node)
   return (sInfo);
 }
 
+/**
+ * @fn endPoint(block : node)
+ * @brief if the block is an expression, this
+ * function return a break (;)
+ * @param block tree's block
+ * @return a break (;)
+ */
 function endPoint(block : node)
 {
   if (existVariable(block.etype))
@@ -40,6 +73,13 @@ function endPoint(block : node)
   return ("");
 }
 
+/**
+ * @fn clearString(val : value)
+ * @brief clear the blackslash notation in
+ * val's string
+ * @param val string
+ * @return val
+ */
 function clearString(val : value)
 {
   val = replaceString('\a', "\\a", val);
@@ -52,11 +92,23 @@ function clearString(val : value)
   return (val);
 }
 
+/**
+ * @fn blockType<T>(block : node)
+ * @brief It's the specialisation of lot of type
+ * of block in the tree
+ * @param block tree's block
+ */
 function blockType<T>(block : node)
 {
   //traceLine("block: [" + T + "] unknown");
 }
 
+/**
+ * @fn blockType<"__FUNCTION__">(block : node)
+ * @brief nothing
+ * @param block tree's block
+ * @return sInfo noting
+ */
 function blockType<"__FUNCTION__">(block : node)
 {
   local sInfo;
@@ -66,6 +118,12 @@ function blockType<"__FUNCTION__">(block : node)
   return (sInfo);
 }
 
+/**
+ * @fn blockType<"variable_for">(block : node)
+ * @brief nothing
+ * @param block tree's block
+ * @return sInfo noting
+ */
 function blockType<"variable_for">(block : node)
 {
   local sInfo = "";
@@ -86,6 +144,12 @@ function blockType<"variable_for">(block : node)
   return (sInfo);
 }
 
+/**
+ * @fn blockType<"variable_normal">(block : node)
+ * @brief nothing
+ * @param block tree's block
+ * @return sInfo noting
+ */
 function blockType<"variable_normal">(block : node)
 {
   local sInfo;
@@ -97,6 +161,12 @@ function blockType<"variable_normal">(block : node)
   return (sInfo + ";\n");
 }
 
+/**
+ * @fn blockType<"__VARIABLE__">(block : node)
+ * @brief nothing
+ * @param block tree's block
+ * @return sInfo noting
+ */
 function blockType<"__VARIABLE__">(block : node)
 {
   if (existVariable(block#parent#parent.type) &&
@@ -106,6 +176,12 @@ function blockType<"__VARIABLE__">(block : node)
     return (blockType<"variable_normal">(block));
 }
 
+/**
+ * @fn blockType<"return">(block : node)
+ * @brief nothing
+ * @param block tree's block
+ * @return sInfo noting
+ */
 function blockType<"return">(block : node)
 {
   local sInfo;
@@ -117,6 +193,12 @@ function blockType<"return">(block : node)
   return (sInfo);
 }
 
+/**
+ * @fn blockType<"priority_expression">(block : node)
+ * @brief nothing
+ * @param block tree's block
+ * @return sInfo noting
+ */
 function blockType<"priority_expression">(block : node)
 {
   local sInfo;
@@ -125,16 +207,34 @@ function blockType<"priority_expression">(block : node)
   return (sInfo);
 }
 
+/**
+ * @fn blockType<"primary_expression">(block : node)
+ * @brief nothing
+ * @param block tree's block
+ * @return sInfo noting
+ */
 function blockType<"primary_expression">(block : node)
 {
   return (clearString(block.value));
 }
 
+/**
+ * @fn blockType<"constant_expression">(block : node)
+ * @brief nothing
+ * @param block tree's block
+ * @return sInfo noting
+ */
 function blockType<"constant_expression">(block : node)
 {
   return (blockType<"primary_expression">(block));
 }
 
+/**
+ * @fn blockType<"if">(block : node)
+ * @brief nothing
+ * @param block tree's block
+ * @return sInfo noting
+ */
 function blockType<"if">(block : node)
 {
   local sInfo;
@@ -151,6 +251,12 @@ function blockType<"if">(block : node)
   return (sInfo);
 }
 
+/**
+ * @fn blockType<"equality_expression">(block : node)
+ * @brief nothing
+ * @param block tree's block
+ * @return sInfo noting
+ */
 function blockType<"equality_expression">(block : node)
 {
   local sInfo = "";
@@ -164,46 +270,100 @@ function blockType<"equality_expression">(block : node)
   return (sInfo);
 }
 
+/**
+ * @fn blockType<"relational_expression">(block : node)
+ * @brief nothing
+ * @param block tree's block
+ * @return sInfo noting
+ */
 function blockType<"relational_expression">(block : node)
 {
   return (blockType<"equality_expression">(block));
 }
 
+/**
+ * @fn blockType<"logical_and_expression">(block : node)
+ * @brief nothing
+ * @param block tree's block
+ * @return sInfo noting
+ */
 function blockType<"logical_and_expression">(block : node)
 {
   return (blockType<"equality_expression">(block));
 }
 
+/**
+ * @fn blockType<"logical_or_expression">(block : node)
+ * @brief nothing
+ * @param block tree's block
+ * @return sInfo noting
+ */
 function blockType<"logical_or_expression">(block : node)
 {
   return (blockType<"equality_expression">(block));
 }
 
+/**
+ * @fn blockType<"then">(block : node)
+ * @brief nothing
+ * @param block tree's block
+ * @return sInfo noting
+ */
 function blockType<"then">(block : node)
 {
   return (loopBlock(block.block));
 }
 
+/**
+ * @fn blockType<"additive_expression">(block : node)
+ * @brief nothing
+ * @param block tree's block
+ * @return sInfo noting
+ */
 function blockType<"additive_expression">(block : node)
 {
   return (blockType<"equality_expression">(block));
 }
 
+/**
+ * @fn blockType<"multiplicative_expression">(block : node)
+ * @brief nothing
+ * @param block tree's block
+ * @return sInfo noting
+ */
 function blockType<"multiplicative_expression">(block : node)
 {
   return (blockType<"equality_expression">(block));
 }
 
+/**
+ * @fn blockType<"coma_expression">(block : node)
+ * @brief nothing
+ * @param block tree's block
+ * @return sInfo noting
+ */
 function blockType<"coma_expression">(block : node)
 {
   return (blockType<"equality_expression">(block));
 }
 
+/**
+ * @fn blockType<"postfix_expression">(block : node)
+ * @brief nothing
+ * @param block tree's block
+ * @return sInfo noting
+ */
 function blockType<"postfix_expression">(block : node)
 {
   return (blockType<"equality_expression">(block));
 }
 
+/**
+ * @fn blockType<"unary_expression">(block : node)
+ * @brief nothing
+ * @param block tree's block
+ * @return sInfo noting
+ */
 function blockType<"unary_expression">(block : node)
 {
   local sInfo = "";
@@ -217,11 +377,23 @@ function blockType<"unary_expression">(block : node)
   return (sInfo);
 }
 
+/**
+ * @fn blockType<"prefix_expression">(block : node)
+ * @brief nothing
+ * @param block tree's block
+ * @return sInfo noting
+ */
 function blockType<"prefix_expression">(block : node)
 {
   return (blockType<"unary_expression">(block));
 }
 
+/**
+ * @fn blockType<"call_expression">(block : node)
+ * @brief nothing
+ * @param block tree's block
+ * @return sInfo noting
+ */
 function blockType<"call_expression">(block : node)
 {
   local sInfo;
@@ -234,12 +406,24 @@ function blockType<"call_expression">(block : node)
   return (sInfo);
 }
 
+/**
+ * @fn blockType<"assignement_expression">(block : node)
+ * @brief nothing
+ * @param block tree's block
+ * @return sInfo noting
+ */
 function blockType<"assignement_expression">(block : node)
 {
   return (blockType<"additive_expression">(block)
 	  +  endPoint(block));
 }
 
+/**
+ * @fn blockType<"while">(block : node)
+ * @brief nothing
+ * @param block tree's block
+ * @return sInfo noting
+ */
 function blockType<"while">(block : node)
 {
   local sInfo;
@@ -252,11 +436,23 @@ function blockType<"while">(block : node)
   return (sInfo);
 }
 
+/**
+ * @fn blockType<"stmt">(block : node)
+ * @brief nothing
+ * @param block tree's block
+ * @return sInfo noting
+ */
 function blockType<"stmt">(block : node)
 {
   return (loopBlock(block.block));
 }
 
+/**
+ * @fn blockType<"for">(block : node)
+ * @brief nothing
+ * @param block tree's block
+ * @return sInfo noting
+ */
 function blockType<"for">(block : node)
 {
   local sInfo;
@@ -271,11 +467,23 @@ function blockType<"for">(block : node)
   return (sInfo);
 }
 
+/**
+ * @fn blockType<"init">(block : node)
+ * @brief nothing
+ * @param block tree's block
+ * @return sInfo noting
+ */
 function blockType<"init">(block : node)
 {
   return (loopBlock(block));
 }
 
+/**
+ * @fn blockType<"switch">(block : node)
+ * @brief nothing
+ * @param block tree's block
+ * @return sInfo noting
+ */
 function blockType<"switch">(block : node)
 {
   return ("switch ("
@@ -285,22 +493,46 @@ function blockType<"switch">(block : node)
 	  + "}\n");
 }
 
+/**
+ * @fn blockType<"case">(block : node)
+ * @brief nothing
+ * @param block tree's block
+ * @return sInfo noting
+ */
 function blockType<"case">(block : node)
 {
   return ("case " + blockType<block.case.type>(block.case) + ":\n"
 	  + loopBlock(block.block));
 }
 
+/**
+ * @fn blockType<"default">(block : node)
+ * @brief nothing
+ * @param block tree's block
+ * @return sInfo noting
+ */
 function blockType<"default">(block : node)
 {
   return ("default:\n" + loopBlock(block.block));
 }
 
+/**
+ * @fn blockType<"break">(block : node)
+ * @brief nothing
+ * @param block tree's block
+ * @return sInfo noting
+ */
 function blockType<"break">(block : node)
 {
   return ("break;\n");
 }
 
+/**
+ * @fn blockType<"conditional_expression">(block : node)
+ * @brief nothing
+ * @param block tree's block
+ * @return sInfo noting
+ */
 function blockType<"conditional_expression">(block : node)
 {
   return (blockType<block.condition.type>(block.condition)

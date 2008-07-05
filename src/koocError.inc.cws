@@ -1,12 +1,29 @@
+/**
+ * @file koocError.inc.cws
+ * @brief koocError functions
+ * @note
+ * @ref develop
+ * @ref contrib
+ * @ref tools
+ * @todo mettre respectivement chaque function
+ * derror dans la section concernee.
+ */
+
 declare function	errorIncludeFile(path : value);
 declare function	errorImport(message : value);
+declare function	errorModule();
 declare function	existModule(name : value);
 declare function	existVar(module : value, name : value, type : value);
 declare function	existFunc(module : value, name : value, type : value, nb_arg : node);
 declare function	countNbArgInFunc(theNode : node);
-// declare function	existVarInFunc(module : value, name_func : value,
-// 				       name_param : value, place : value);
+/* declare function	existVarInFunc(module : value, name_func : value, */
+/*  				       name_param : value, place : value); */
 
+/**
+ * @fn errorIncludeFile(path : value)
+ * @brief check if the file included is great
+ * @param path chemin
+ */
 function	errorIncludeFile(path : value)
 {
   if (!path.existFile())
@@ -16,29 +33,44 @@ function	errorIncludeFile(path : value)
     }
 }
 
+/**
+ * @fn errorImport(message : value)
+ * @brief send the error message of import
+ * @param message the message sended by \#try/\#catch
+ */
 function	errorImport(message : value)
 {
   traceLine(getInputFilename() + ":" + countInputLines() + ": "
-    + "error: expected identifier after token @module");
+	    + "error: expected identifier after token @module");
   exit(-1);
   traceLine("syntax error in @import: " + message);
   exit(-1);
 }
 
+/**
+ * @fn errorModule()
+ * @brief send the error message of module
+ * @note exit -1
+ */
 function	errorModule()
 {
   traceLine(getInputFilename() + ":" + countInputLines() + ": "
-    + "error: expected identifier after token @module");
+	    + "error: expected identifier after token @module");
   exit(-1);
 }
 
+/**
+ * @fn existModule(name : value)
+ * @brief check if the module exist
+ * @param name module's name
+ */
 function	existModule(name : value)
 {
   if (!existVariable(this.kooc.modules))
-     {
-       traceLine("this.kooc.modules not found");
-       exit(-1);
-     }
+    {
+      traceLine("this.kooc.modules not found");
+      exit(-1);
+    }
   foreach info in this.kooc.modules
   {
     if (key(info) == name)
@@ -48,6 +80,13 @@ function	existModule(name : value)
   exit(-1);
 }
 
+/**
+ * @fn existVar(module : value, name : value, type : value)
+ * @brief check if the variable exist
+ * @param module module's name
+ * @param name variable's name
+ * @param type type's name
+ */
 function	existVar(module : value, name : value, type : value)
 {
   local		mangle = 0;
@@ -58,29 +97,45 @@ function	existVar(module : value, name : value, type : value)
       {
 	foreach val in info.block.variables
 	{
-		if (val.type == "__VARIABLE__")
+	  if (val.type == "__VARIABLE__")
+	    {
+	      if (val.oname == name && mangle == 0 && type == "")
+		mangle = val.name;
+	      else if (val.oname == name && mangle != 0 && type == "")
 		{
-		traceLine("val.oname = " + val.oname + ", name = " + name);
-		traceLine("val.ctype.identifier = " + val.ctype.identifier + ", type = " + type);
-			if (val.oname == name && mangle == 0 && type == "")
-			   mangle = val.name;
-			else if (val.oname == name && mangle != 0 && type == "")
-			{
-				traceLine("error - variable " + name + " have multiple type in " + module + ", please use @!() to specifie the type.");
-		  		exit(-1);
-			}
-			else if (val.oname == name && val.ctype.identifier == type)
-		  	     mangle = val.name;
+		  traceLine("val.oname = " + val.oname + ", name = " + name);
+		  traceLine("val.ctype.identifier = " + val.ctype.identifier + ", type = " + type);
+		  if (val.oname == name && mangle == 0 && type == "")
+		    mangle = val.name;
+		  else if (val.oname == name && mangle != 0 && type == "")
+		    {
+		      traceLine("error - variable " + name + " have multiple type in "
+				+ module + ", please use @!() to specifie the type.");
+		      exit(-1);
+		    }
+		  else if (val.oname == name && val.ctype.identifier == type)
+		    mangle = val.name;
 		}
+	      else if (val.oname == name && val.ctype.identifier == type)
+		mangle = val.name;
+	    }
 	}
       }
   }
   if (mangle != 0)
-     return (mangle);
+    return (mangle);
   traceLine("error - variable " + name + " doesn't exist in " + module + " module.");
   exit(-1);
 }
 
+/**
+ * @fn existFunc(module : value, name : value, type : value, nb_arg : node)
+ * @brief check if the function exist
+ * @param module module's name
+ * @param name function's name
+ * @param type type's name
+ * @param nb_arg the number of argument
+ */
 function	existFunc(module : value, name : value, type : value, nb_arg : node)
 {
   local		ret = 0;
@@ -91,30 +146,37 @@ function	existFunc(module : value, name : value, type : value, nb_arg : node)
       {
 	foreach val in info.block.prototypes
 	{
-		if (val.type == "__PROTOTYPE__")
+	  if (val.type == "__PROTOTYPE__")
+	    {
+	      if (val.oname == name && ret == 0 && type == "")
+		ref ret = val;
+	      else if (val.oname == name && ret != 0 && type = "")
 		{
-		if (val.oname == name && ret == 0 && type == "")
-		   ref ret = val;
-		else if (val.oname == name && ret != 0 && type = "")
-		{
-		  traceLine("error - function " + name + " have multiple type in " + module + ", please use @!() to specifie the type.");
+		  traceLine("error - function " + name
+			    + " have multiple type in " + module
+			    + ", please use @!() to specifie the type.");
 		  exit(-1);
 		}
-		else if (val.oname == name && val.ctype.identifier == type)
-		  ref ret = val;
-		}
+	      else if (val.oname == name && val.ctype.identifier == type)
+		ref ret = val;
+	    }
 	}
       }
   }
   if (ret != 0)
-  {
-     nb_arg = countNbArgInFunc(ret.list);
-     return (ret.name);
-  }
+    {
+      nb_arg = countNbArgInFunc(ret.list);
+      return (ret.name);
+    }
   traceLine("error - function " + name + " doesn't exist in " + module + " module.");
   exit(-1);
 }
 
+/**
+ * @fn countNbArgInFunc(theNode : node)
+ * @brief count number of argument in function
+ * @param theNode node in the tree
+ */
 function	countNbArgInFunc(theNode : node)
 {
   local	i = 0;

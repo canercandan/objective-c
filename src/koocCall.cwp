@@ -1,4 +1,16 @@
-// OU ... les regles existantes  ?? ...
+/**
+ * @file koocCall.cwp
+ * @brief [ ... ] Kooc Expression file
+ * @note
+ * @ref develop
+ * @ref contrib
+ * @ref tools
+ * @bug OU ... les regles existantes  ?? ...
+ */
+
+/**
+ * @cond
+ */
 
 #overload primary_expression(expr : node) ::=
 #super::primary_expression(expr)
@@ -76,3 +88,7 @@ kooc_param ::= #readIdentifier
 	       | ['\'' #readChar '\'']
 	       | #readNumeric
 ;
+
+/**
+ * @endcond
+ */

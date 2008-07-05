@@ -1,47 +1,33 @@
-/*
-** "Kooc - Kind Of Objective C"
-** Version 0.42 **
-**
-** Authors:
-**	Caner Candan
-**	Florent Hochwelker
-**	Majdi Toumi
-**	Morgan Armand
-** Contributors:
-**	Cedric Lemaire
-**	David Giron
-**	David Amsallem
-**	Lionel Auroux
-** Features:
-** - prettyPrinter ???
-** - import ???
-** - module ???
-** - implemantation ???
-** - class ???
-*/
+/**
+ * @file kooc.cwp
+ * @brief Kooc Grammar file
+ * @note
+ * @ref develop
+ * @ref contrib
+ * @ref tools
+ * @todo prettyPrinter ???
+ * @todo import ???
+ * @todo module ???
+ * @todo implemantation ???
+ * @todo class ???
+ * @todo coucou
+ */
 
-//----------------------------------------------------------------------------
-//				B E G I N - K O O C
-//----------------------------------------------------------------------------
+/**
+ * @cond
+ */
 
-
-
-// CNORM INCLUDE
 #include "../cnorm_2.6/src/cnorm.cwp"
-// !CNORM INCLUDE
 
-// SCRIPT INCLUDE
 //#include "prettyPrinter/prettyPrinter.inc.cws" // WTF WITH EXTENSION ???
 #include "prettyPrinter.h.inc.cws"
 #include "prettyPrinter.c.inc.cws"
 #include "koocClass.inc.cws"
 #include "koocImplementation.inc.cws"
-#include "koocImport.inc.cws"
 #include "koocModule.inc.cws"
 #include "koocCall.inc.cws"
 #include "koocError.inc.cws"
 #include "koocMangle.inc.cws"
-// !SCRIPT INCLUDE
 
 #implicitCopy
 
@@ -50,7 +36,7 @@
  | ["//" ->[['\r']? '\n']]
  | ["/*" ->"*/"]
  | ' ' | '\t' | '\n' | '\r' | '\f'
-]+
+ ]+
 ;
 
 #overload translation_unit ::=
@@ -61,17 +47,16 @@
 ;
 
 koocDeclaration(block : node) ::=
-=> local name;
-[ import | module(name) | implementation | appel_KOOC];
+  => local name;
+[ import | module(name) | implementation | appel_KOOC]
+;
 
-// GRAMMAR INCLUDE
 #include "koocImport.cwp"
 #include "koocModule.cwp"
 #include "koocImplementation.cwp"
 #include "koocClass.cwp"
 #include "koocCall.cwp"
-// !GRAMMAR INCLUDE
 
-//----------------------------------------------------------------------------
-//				E N D - K O O C
-//----------------------------------------------------------------------------
+/**
+ * @endcond
+ */

@@ -1,3 +1,12 @@
+/**
+ * @file prettyPrinter.h.inc.cws
+ * @brief PrettyPrinter to print the kooc to header
+ * @note
+ * @ref develop
+ * @ref contrib
+ * @ref tools
+ */
+
 declare function getSimpleType(theNode : node);
 declare function getPointer(theNode : node);
 declare function getBits(theNode : node);
@@ -14,6 +23,12 @@ declare function getVariable(variable : node);
 declare function getExternVariable(variable : node);
 declare function getDefineHeader();
 
+/**
+ * @fn getSimpleType(theNode : node)
+ * @brief get a simple type from the node
+ * @param theNode the node
+ * @return the simple type
+ */
 function getSimpleType(theNode : node)
 {
   local sInfo = "";
@@ -28,6 +43,10 @@ function getSimpleType(theNode : node)
   return (sInfo + theNode.ctype.identifier);
 }
 
+/**
+ * @fn getPointer(theNode : node)
+ * @brief 
+ */
 function getPointer(theNode : node)
 {
   local sInfo = "";

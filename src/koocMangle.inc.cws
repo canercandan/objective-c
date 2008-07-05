@@ -1,5 +1,20 @@
-// Temp mangling
+/**
+ * @file koocMangle.inc.cws
+ * @brief Kooc Mangle file
+ * @note
+ * @ref develop
+ * @ref contrib
+ * @ref tools
+ * @bug Temp mangling
+ */
 
+declare function	mangle(theMod : value);
+
+/**
+ * @fn mangle(theMod : value)
+ * @brief mangle variable
+ * @param theMod variable's name
+ */
 function	mangle(theMod : value)
 {
   local name = "_ZN" + lengthString(theMod) + theMod;

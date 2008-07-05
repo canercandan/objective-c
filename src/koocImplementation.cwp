@@ -1,3 +1,15 @@
+/**
+ * @file koocImplementation.cwp
+ * @brief \@implementation file
+ * @note
+ * @ref develop
+ * @ref contrib
+ * @ref tools
+ */
+
+/**
+ * @cond
+ */
 
 implementation
 	::= #explicitCopy [ addImplementation ]
@@ -17,3 +29,7 @@ addImplementation
 	    	]*
 	    '}'
 ;
+
+/**
+ * @endcond
+ */

@@ -1,50 +1,76 @@
+/**
+ * @file koocImport.cwp
+ * @brief \@import grammar
+ * @note
+ * @ref develop
+ * @ref contrib
+ * @ref tools
+ */
+
+/**
+ * @cond
+ */
+
 import ::= #explicitCopy
-=> local module = "";
+  => local module = "";
 #try
 "@import"
 #continue [#readIdentifier:module "from"]?
 #continue #readCString:file
 #catch(sError)
-[checkFile(file, module)
- | => errorImport(sError);]
+[
+ checkFile(file, module)
+ | => errorImport(sError);
+ ]
 ;
 
 checkFile(file : value, module : value) ::=
-=> local pathKh = this.kooc.path_import + file;
+  => local pathKh = this.kooc.path_import + file;
 => local pathH = replaceString(".kh", ".h", pathKh);
 #check(pathKh.existFile())
 [
 #check(!this.kooc.headers.findElement(pathH))
-[
-=> local nameH = replaceString('.', '_', replaceString('/', '_', replaceString(".kh", ".h", toUpperString(file))));
-=> deleteFile(pathH);
-=> appendFile(pathH, "#ifndef __" + nameH + "__\n# define __" + nameH + "__\n\n");
-[#check(module == "") => {%>#include "@replaceString(".kh", ".h", file)@"@"\n\n"@<%}]
-=> insert this.kooc.headers[pathH];
-=> insert this.kooc.headers[pathH].kooc;
-=> insert this.kooc.headers[pathH].block;
-=> insert this.kooc.headers[pathH].gl_pctx;
-=> ref this.kooc.headers[pathH].gl_pctx =
-   this.kooc.headers[pathH].block;
+ [
+  => local nameH = replaceString('.', '_', replaceString('/', '_', replaceString(".kh", ".h", toUpperString(file))));
+  => deleteFile(pathH);
+  => appendFile(pathH, "#ifndef __" + nameH + "__\n# define __" + nameH + "__\n\n");
+  [
+#check(module == "") => {%>#include "@replaceString(".kh", ".h", file)@"@"\n\n"@<%}
+   ]
+  => insert this.kooc.headers[pathH];
+  => insert this.kooc.headers[pathH].kooc;
+  => insert this.kooc.headers[pathH].block;
+  => insert this.kooc.headers[pathH].gl_pctx;
+  => ref this.kooc.headers[pathH].gl_pctx =
+  this.kooc.headers[pathH].block;
 #parsedFile(pathKh)
-[koocDeclaration(this.block):kc checkModule(module, kc)
- | declaration(this.block):c
+  [
+   koocDeclaration(this.block):kc checkModule(module, kc)
+   | declaration(this.block):c
    => appendFile(pathH, c + '\n');
-]*
-=> appendFile(pathH, "\n#endif /* !__" + nameH + "__ */\n");
-]
-]
+   ]*
+  => appendFile(pathH, "\n#endif /* !__" + nameH + "__ */\n");
+  ]
+ ]
 | => errorIncludeFile(this.kooc.path_import + file);
 ;
 
 checkModule(module : value, kc : value) ::=
-[#check(module != "")
-[
- => traceLine("check module: " + module);
- => local name = "";
- #parsedString(kc) module(name) => traceLine("kc: " + kc);
- => traceLine("name: " + name);
- [#check(name != module) => removeVariable(this.kooc.modules[name]);]
-]
-| => traceLine("checkModule error");]
-;
+  [
+#check(module != "")
+   [
+    => traceLine("check module: " + module);
+    => local name = "";
+#parsedString(kc) module(name) => traceLine("kc: " + kc);
+    => traceLine("name: " + name);
+    [
+#check(name != module) => removeVariable(this.kooc.modules[name]);
+     ]
+    ]
+   | => traceLine("checkModule error");
+   ]
+  ;
+
+/**
+ * @endcond
+ */

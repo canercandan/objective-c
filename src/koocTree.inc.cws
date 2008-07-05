@@ -1,10 +1,20 @@
+/**
+ * @file koocTree.inc.cws
+ * @brief koocTree functions
+ * @version 0.42
+ * @author Caner Candan
+ */
+
 declare function treeInit();
 declare function treeKooc();
 declare function treePathImport(path : value);
 declare function treeInsertModule(key : value,
 				  proprity : value,
 				  header : value);
-
+/**
+ * @fn treeInit()
+ * @brief init tree
+ */
 function treeInit()
 {
   insert this.block.pctx;
@@ -15,6 +25,10 @@ function treeInit()
   ref this.gl_pctx = this.block;
 }
 
+/**
+ * @fn treeKooc()
+ * @brief init tree kooc
+ */
 function treeKooc()
 {
   insert this.kooc;
@@ -23,11 +37,25 @@ function treeKooc()
   insert this.kooc.class;
 }
 
+/**
+ * @fn treePathImport(path : value)
+ * @brief insert import's path in tree
+ * @param path It's the path
+ */
 function treePathImport(path : value)
 {
   insert this.kooc.path_import = path;
 }
 
+/**
+ * @fn treeInsertModule(key : value,
+ *			proprity : value,
+ *			header : value)
+ * @brief insert a module in tree
+ * @param key module's name
+ * @param prority useless!
+ * @param header useless!
+ */
 function treeInsertModule(key : value,
 			  proprity : value,
 			  header : value)
