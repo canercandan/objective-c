@@ -5,17 +5,21 @@
  * @ref develop
  * @ref contrib
  * @ref tools
- * @todo prettyPrinter ???
- * @todo import ???
- * @todo module ???
- * @todo implemantation ???
- * @todo class ???
- * @todo coucou
+ *
+ * @par ImplicitCopy
+ *
+ * @par #ignore["KOOC"]
+ * ignore backslash notation and comment of language
+ *
+ * @par translation_unit
+ * it's the root rule (overload of Cnorm)
+ *
+ * @par koocDeclaration(block : node)
+ * it's a rule which parse a import, module, implementation
+ * or kooc expression
  */
 
 #include "../cnorm_2.6/src/cnorm.cwp"
-
-//#include "prettyPrinter/prettyPrinter.inc.cws" // WTF WITH EXTENSION ???
 #include "prettyPrinter.h.inc.cws"
 #include "prettyPrinter.c.inc.cws"
 #include "koocClass.inc.cws"
@@ -26,9 +30,6 @@
 #include "koocMangle.inc.cws"
 
 /**
- * @par ImplicitCopy
- * @par \#\ignore["KOOC"]
- * ignore backslash notation and comment of language
  * @cond
  */
 #implicitCopy
@@ -40,31 +41,14 @@
  | ' ' | '\t' | '\n' | '\r' | '\f'
  ]+
 ;
-/**
- * @endcond
- */
 
-/**
- * @par overload of translation_unit
- * it's the root rule
- * @cond
- */
 #overload translation_unit ::=
 #ignore("KOOC")
 [koocDeclaration(this.block)
  | declaration(this.block)]*
 #continue #empty
 ;
-/**
- * @endcond
- */
 
-/**
- * @par koocDeclaration(block : node)
- * it's rule which parse a import, module, implementation
- * or kooc expression
- * @cond
- */
 koocDeclaration(block : node) ::=
   => local name;
 [ koocImport | koocModule(name) | koocImplementation |

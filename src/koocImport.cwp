@@ -5,6 +5,16 @@
  * @ref develop
  * @ref contrib
  * @ref tools
+ *
+ * @par koocImport
+ * rule \@import
+ *
+ * @par checkFile(file : value, module : value)
+ * check if the file exist
+ *
+ * @par checkModule(module : value, kc : value)
+ * check if the module exist
+ *
  * @bug les defines ne sont pas copier du .kh au .h
  * il faut accepter les #... lors de explicitCopy
  */
@@ -12,7 +22,6 @@
 /**
  * @cond
  */
-
 koocImport ::= #explicitCopy
   => local module = "";
 #try
@@ -72,7 +81,6 @@ checkModule(module : value, kc : value) ::=
    | => traceLine("checkModule error");
    ]
   ;
-
 /**
  * @endcond
  */
