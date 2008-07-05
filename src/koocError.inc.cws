@@ -1,10 +1,7 @@
 /**
  * @file koocError.inc.cws
  * @brief koocError functions
- * @note
- * @ref develop
- * @ref contrib
- * @ref tools
+ * @note @ref develop @ref contrib @ref tools
  * @todo mettre respectivement chaque function
  * derror dans la section concernee.
  */

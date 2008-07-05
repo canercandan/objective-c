@@ -1,10 +1,7 @@
 /**
  * @file prettyPrinter.c.inc.cws
  * @brief PrettyPrinter to print the kooc to c
- * @note
- * @ref develop
- * @ref contrib
- * @ref tools
+ * @note @ref develop @ref contrib @ref tools
  */
 
 declare function r00t();

@@ -1,10 +1,7 @@
 /**
  * @file koocMangle.inc.cws
  * @brief Kooc Mangle file
- * @note
- * @ref develop
- * @ref contrib
- * @ref tools
+ * @note @ref develop @ref contrib @ref tools
  * @bug Temp mangling
  */
 

@@ -1,10 +1,7 @@
 /**
  * @file kooc.cwp
  * @brief Kooc Grammar file
- * @note
- * @ref develop
- * @ref contrib
- * @ref tools
+ * @note @ref develop @ref contrib @ref tools
  *
  * @par ImplicitCopy
  *

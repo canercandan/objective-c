@@ -1,3 +1,9 @@
+/**
+ * @file mod.h.cwt
+ * @brief used by prettyPrinter
+ * @note @ref develop @ref contrib @ref tools
+ */
+
 #ifndef __@getDefineHeader()@__
 #define __@getDefineHeader()@__
 

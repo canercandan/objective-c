@@ -1,94 +1,117 @@
 /**
  * @file koocCall.cwp
  * @brief [ ... ] Kooc Expression file
- * @note
- * @ref develop
- * @ref contrib
- * @ref tools
+ * @note @ref develop @ref contrib @ref tools
+ *
+ * @par primary_expression(expr : node)
+ * rule (overload of Cnorm)
+ *
+ * @par koocCall
+ * nothing
+ *
+ * @par cast : value
+ * nothing
+ *
+ * @par kooc_identifiant_module(name : node)
+ * nothing
+ *
+ * @par kooc_identifiant_variable(module_name : value, type : value)
+ * nothing
+ *
+ * @par kooc_identifiant_fonction(module_name : value, func_name : node, type : value, nb_arg : node)
+ * nothing
+ *
+ * @par kooc_list_parametre(module : value, func : value, nb_arg : value)
+ * nothing
+ *
+ * @par kooc_identifier
+ * nothing
+ * 
+ * @par kooc_param
+ * nothing
+ *
  * @bug OU ... les regles existantes  ?? ...
  */
 
 /**
  * @cond
  */
-
 #overload primary_expression(expr : node) ::=
 #super::primary_expression(expr)
 | koocCall
 ;
 
 koocCall ::=
-	   => local module_name = "";
-	   => local func_name = "";
-	   => local type_name = "";
-	   => local nb_arg = "";
-	   #explicitCopy [cast:type_name]?
-	   '['
-	   kooc_identifiant_module(module_name)
-	   [kooc_identifiant_variable(module_name, type_name)
-	   | [kooc_identifiant_fonction(module_name, func_name, type_name, nb_arg)
-	   kooc_list_parametre(module_name, func_name, nb_arg)]]
-	   ']'
+  => local module_name = "";
+=> local func_name = "";
+=> local type_name = "";
+=> local nb_arg = "";
+#explicitCopy [cast:type_name]?
+'['
+kooc_identifiant_module(module_name)
+[kooc_identifiant_variable(module_name, type_name)
+ | [kooc_identifiant_fonction(module_name, func_name, type_name, nb_arg)
+    kooc_list_parametre(module_name, func_name, nb_arg)]]
+']'
 ;
 
 cast : value ::= "@!("->(:cast)')'
-;
+	     ;
 
 kooc_identifiant_module(name : node)
-	::= kooc_identifier:name
-	=> existModule(name);
+	   ::= kooc_identifier:name
+	     => existModule(name);
 ;
 
 kooc_identifiant_variable(module_name : value, type : value)
-	::= '.' kooc_identifier:val
-	=> local variable;
-	=> variable = existVar(module_name, val, type);
-	=> { %>@variable@<% }
+	   ::= '.' kooc_identifier:val
+	     => local variable;
+	   => variable = existVar(module_name, val, type);
+	   => { %>@variable@<% }
 ;
 
 kooc_identifiant_fonction(module_name : value, func_name : node, type : value, nb_arg : node)
-	::= kooc_identifier:func_name
-	=> local func = existFunc(module_name, func_name, type, nb_arg);
-	=> { %>@func@(<% }
+::= kooc_identifier:func_name
+  => local func = existFunc(module_name, func_name, type, nb_arg);
+=> { %>@func@(<% }
 ;
 
 kooc_list_parametre(module : value, func : value, nb_arg : value)
-	::=
-	=> local i = 0;
-	[
-	':' kooc_param:val
-	=> { 
-	     if (i > 0)
-	     {
-	     	%>, <%
-	     }
-	   }
-	=> { %>@val@<% }
-	=> i = i + 1;
-	]*
-	=> { if (nb_arg > i)
-	     {
-		traceLine("error - function " + func + " not enouch param in argument");
-		exit(-1);
-	     }
-	     if (nb_arg < i)
-	     {
-		traceLine("error - function " + func + " too many param in argument");
-		exit(-1);
-	     }
-	   }
-	=> { %>)<% }
+     ::=
+     => local i = 0;
+     [
+      ':' kooc_param:val
+      => { 
+	if (i > 0)
+	  {
+	    %>, <%
+	  }
+      }
+      => { %>@val@<% }
+      => i = i + 1;
+      ]*
+     => { if (nb_arg > i)
+	 {
+	   traceLine("error - function " + func + " not enouch param in argument");
+	   exit(-1);
+	 }
+	  if (nb_arg < i)
+	    {
+	      traceLine("error - function " + func + " too many param in argument");
+	      exit(-1);
+	    }
+     }
+     => { %>)<% }
 ;
 
 kooc_identifier ::= #readIdentifier
-;
+  ;
 
 kooc_param ::= #readIdentifier
-	       | '"' #readCChar '"'
-	       | ['\'' #readChar '\'']
-	       | #readNumeric
-;
-
+  | '"' #readCChar '"'
+  | ['\'' #readChar '\'']
+  | #readNumeric
+  ;
 /**
  * @endcond
  */

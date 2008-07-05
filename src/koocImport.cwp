@@ -1,10 +1,7 @@
 /**
  * @file koocImport.cwp
  * @brief \@import grammar
- * @note
- * @ref develop
- * @ref contrib
- * @ref tools
+ * @note @ref develop @ref contrib @ref tools
  *
  * @par koocImport
  * rule \@import

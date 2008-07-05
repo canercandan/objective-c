@@ -1,10 +1,7 @@
 /**
  * @file kooc.cws
  * @brief Kooc generator file
- * @note
- * @ref develop
- * @ref contrib
- * @ref tools
+ * @note @ref develop @ref contrib @ref tools
  */
 
 #include "koocTree.inc.cws"

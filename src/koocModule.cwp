@@ -1,16 +1,15 @@
 /**
  * @file koocModule.cwp
  * @brief \@module grammar
- * @note
- * @ref develop
- * @ref contrib
- * @ref tools
+ * @note @ref develop @ref contrib @ref tools
+ *
+ * @par koocModule(sModule : node)
+ * rule \@module
  */
 
 /**
  * @cond
  */
-
 koocModule(sModule : node) ::=
 #explicitCopy
 //#try
@@ -35,7 +34,6 @@ koocModule(sModule : node) ::=
 '}'
 //#catch(sError) => traceLine(sModule); | => traceLine(sError);
 ;
-
 /**
  * @endcond
  */

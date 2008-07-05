@@ -1,10 +1,7 @@
 /**
  * @file koocImplementation.cwp
  * @brief \@implementation file
- * @note
- * @ref develop
- * @ref contrib
- * @ref tools
+ * @note @ref develop @ref contrib @ref tools
  */
 
 /**
