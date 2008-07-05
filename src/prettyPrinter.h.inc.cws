@@ -243,7 +243,7 @@ function getStructOrUnion(conterner : node)
 /**
  * @fn getArgumentEnum(ctype : node)
  * @brief get argument of the enum
- * @param ctype 
+ * @param ctype ctype of enum
  * @return 
  */
 function getArgumentEnum(ctype : node)
@@ -260,6 +260,12 @@ function getArgumentEnum(ctype : node)
   return (sInfo);
 }
 
+/**
+ * @fn getEnum(Enum : node)
+ * @brief get an enum
+ * @param Enum enum's node
+ * @return an enum
+ */
 function getEnum(Enum : node)
 {
   local sInfo;
@@ -272,6 +278,12 @@ function getEnum(Enum : node)
   return (sInfo);
 }
 
+/**
+ * @fn getFunction(function : node)
+ * @brief get a function
+ * @param function function's node
+ * @return a function
+ */
 function getFunction(function : node)
 {
   local sInfo;
@@ -288,6 +300,11 @@ function getFunction(function : node)
   return (sInfo);
 }
 
+/**
+ * @fn getDefineHeader()
+ * @brief get header's name of header protection
+ * @return the name
+ */
 function getDefineHeader()
 {
   local sInfo;

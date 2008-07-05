@@ -13,10 +13,6 @@
  * @todo coucou
  */
 
-/**
- * @cond
- */
-
 #include "../cnorm_2.6/src/cnorm.cwp"
 
 //#include "prettyPrinter/prettyPrinter.inc.cws" // WTF WITH EXTENSION ???
@@ -29,6 +25,12 @@
 #include "koocError.inc.cws"
 #include "koocMangle.inc.cws"
 
+/**
+ * @par ImplicitCopy
+ * @par \#\ignore["KOOC"]
+ * ignore backslash notation and comment of language
+ * @cond
+ */
 #implicitCopy
 
 #ignore["KOOC"] ::=
@@ -38,25 +40,41 @@
  | ' ' | '\t' | '\n' | '\r' | '\f'
  ]+
 ;
+/**
+ * @endcond
+ */
 
+/**
+ * @par overload of translation_unit
+ * it's the root rule
+ * @cond
+ */
 #overload translation_unit ::=
 #ignore("KOOC")
 [koocDeclaration(this.block)
  | declaration(this.block)]*
 #continue #empty
 ;
+/**
+ * @endcond
+ */
 
+/**
+ * @par koocDeclaration(block : node)
+ * it's rule which parse a import, module, implementation
+ * or kooc expression
+ * @cond
+ */
 koocDeclaration(block : node) ::=
   => local name;
 [ import | module(name) | implementation | appel_KOOC]
 ;
+/**
+ * @endcond
+ */
 
 #include "koocImport.cwp"
 #include "koocModule.cwp"
 #include "koocImplementation.cwp"
 #include "koocClass.cwp"
 #include "koocCall.cwp"
-
-/**
- * @endcond
- */

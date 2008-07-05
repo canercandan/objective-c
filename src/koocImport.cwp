@@ -5,6 +5,8 @@
  * @ref develop
  * @ref contrib
  * @ref tools
+ * @bug les defines ne sont pas copier du .kh au .h
+ * il faut accepter les #... lors de explicitCopy
  */
 
 /**
