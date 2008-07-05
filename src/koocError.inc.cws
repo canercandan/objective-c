@@ -68,6 +68,7 @@ function	existModule(name : value)
       traceLine("this.kooc.modules not found");
       exit(-1);
     }
+
   foreach info in this.kooc.modules
   {
     if (key(info) == name)
@@ -176,7 +177,7 @@ function	countNbArgInFunc(theNode : node)
 {
   local	i = 0;
   foreach val in theNode
-  { i = i + 1; }
+  { i = $i + 1$; }
   return (i);
 }
 

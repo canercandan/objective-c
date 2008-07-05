@@ -17,13 +17,13 @@
  */
 
 #include "../cnorm_2.6/src/cnorm.cwp"
+#include "koocError.inc.cws"
 #include "prettyPrinter.h.inc.cws"
 #include "prettyPrinter.c.inc.cws"
 #include "koocClass.inc.cws"
 #include "koocImplementation.inc.cws"
 #include "koocModule.inc.cws"
 #include "koocCall.inc.cws"
-#include "koocError.inc.cws"
 #include "koocMangle.inc.cws"
 
 /**

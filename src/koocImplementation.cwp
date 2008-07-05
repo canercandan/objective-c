@@ -1,7 +1,10 @@
 /**
  * @file koocImplementation.cwp
  * @brief \@implementation file
- * @note @ref develop @ref contrib @ref tools
+ * @note
+ * @ref develop
+ * @ref contrib
+ * @ref tools
  */
 
 /**
@@ -13,17 +16,18 @@ koocImplementation
 ;
 
 addImplementation
-	::= "@implementation" #readIdentifier:name
-//	    => existModule(name);
-	    => traceLine("New Implementation = " + name);
+	::= => local contents = "";
+	    "@implementation" #continue #readIdentifier:sName
+	    => existModule(sName);
 	    '{'
-	      	 => traceLine("OK");
-		[
-	      	 declaration(this.block.kooc.name):line
-//		 => local out = prettyPrinter(this.block.kooc.name);
-//	      	 => traceLine("declaration: " + line);
-//	      	 => traceLine("pretty: " + out);
-	    	]*
+		 => insert this.kooc.implementations[sName];
+		 => insert this.kooc.implementations[sName].block;
+		 [
+	      	   declaration(this.kooc.implementations[sName].block):line
+ 		   => contents += "\n" + line + "\n";
+	    	 ]*
+		 => check_implementation(sName);
+		 => appendFile(this.kooc.path_import + this.kooc.modules[sName].nameC, contents);
 	    '}'
 ;
 
