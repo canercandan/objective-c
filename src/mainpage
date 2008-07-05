@@ -1,0 +1,51 @@
+/**
+ * @mainpage Kind Of Objective C
+ * @section intro_sec Introduction
+ * Kooc is a kind of objective C.@n
+ * It's a project created by the Epitech's students
+ * (@ref develop).
+ *
+ * @section use_sec To use KOOC
+ * @subsection step1 Step 1: Cnorm
+ * Decompress Cnorm's files in the root directory
+ * of Kooc.
+ * @par Example
+ * @code
+ * tar xf cnorm_x.x.tar
+ * @endcode
+ *
+ * @subsection step2 Step 2: Environnement variable
+ * You have to set KOOC_PATH and PATH in
+ * environnement variable.
+ * @par Example
+ * @code
+ * #!/bin/sh
+ * export PATH=$PATH':'`pwd`"/bin"
+ * export KOOC_PATH=`pwd`
+ * @endcode
+ * 
+ * @subsection step3 Step 3: Launch excutable
+ * Now you can launch kooc with your kc file
+ * @par Example
+ * @code
+ * kooc hello.kc
+ * @endcode
+ *
+ * @section develop Developpers
+ * @author Caner Candan
+ * @author Florent Hochwelker
+ * @author Majdi Toumi
+ * @author Morgan Armand
+ *
+ * @section contrib Contributors
+ * @author Cedric Lemaire
+ * @author David Giron
+ * @author David Amsallem
+ * @author Lionel Auroux
+ *
+ * @section tools Tools
+ * @par CodeWorker
+ * www.codeworker.org
+ * @par Cnorm
+ * www.epitech.net
+ */
