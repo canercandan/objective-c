@@ -54,7 +54,7 @@ checkFile(file : value, module : value) ::=
 #parsedFile(pathKh)
   [
    koocDeclaration(this.block):kc checkModule(module, kc)
-   | declaration(this.block):c
+   | [declaration(this.block) | #readUptoIgnore]:c
    => appendFile(pathH, c + '\n');
    ]*
   => appendFile(pathH, "\n#endif /* !__" + nameH + "__ */\n");
