@@ -5,13 +5,13 @@
 ** Login   <armand_m@epitech.net>
 ** 
 ** Started on  Fri Jul  4 19:20:29 2008 morgan armand
-** Last update Sat Jul  5 16:54:54 2008 morgan armand
+** Last update Sat Jul  5 16:57:12 2008 morgan armand
 */
 
 @import "test_mod.kh"
 
 int	main()
 {
-  [Cpu.eax] = 42;
+  @!(int)[Cpu.eax] = 42;
   [Cpu.ebx] = 21;
 }
