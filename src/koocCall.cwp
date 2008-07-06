@@ -45,7 +45,7 @@ koocCall ::=
   => local module_name = "";
 => local func_name = "";
 => local type_name = "";
-=> local nb_arg = "";
+=> local nb_arg = 0;
 #explicitCopy [cast:type_name]?
 '['
 kooc_identifiant_module(module_name)
@@ -67,7 +67,6 @@ kooc_identifiant_variable(module_name : value, type : value)
 	   ::= '.' kooc_identifier:val
 	     => local variable;
 	   => variable = existVar(module_name, val, type);
-	   => traceLine("Majdi l'appelle a une variable/fonction dans un implementation fonctionne mais n'est pas printe ex:" + variable);
 	   => { %>@variable@<% }
 ;
 
@@ -89,16 +88,16 @@ kooc_list_parametre(module : value, func : value, nb_arg : value)
 	  }
       }
       => { %>@val@<% }
-      => i = i + 1;
+      => i = $i + 1$;
       ]*
      => { if (nb_arg > i)
 	 {
-	   traceLine("error - function " + func + " not enouch param in argument");
+	   traceLine("error - function " + func + " not enouch param in argument (need " + nb_arg + " arg,  you give " + i + " arg)");
 	   exit(-1);
 	 }
 	  if (nb_arg < i)
 	    {
-	      traceLine("error - function " + func + " too many param in argument");
+	      traceLine("error - function " + func + " too many param in argument (need " + nb_arg + " arg,  you give " + i + " arg)");
 	      exit(-1);
 	    }
      }
