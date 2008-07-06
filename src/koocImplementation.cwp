@@ -19,17 +19,17 @@
  */
 
 koocImplementation
-	::= #explicitCopy "@implementation" #continue #readIdentifier:sName
-	    [ addImplementation(sName) ]
+	::= #explicitCopy [ addImplementation ]
 ;
 
-addImplementation(sName : value)
-	::= => existModule(sName);
+addImplementation
+	::= "@implementation" #continue #readIdentifier:sName
+	    => existModule(sName);
 	    '{'
 		 => insert this.kooc.implementations[sName];
 		 => insert this.kooc.implementations[sName].block;
 		 [
-	      	   declaration(this.kooc.implementations[sName].block):line
+	      	   declaration(this.kooc.implementations[sName].block)
 		   => mangleImplementation(sName);
 	    	 ]*
 		 => check_implementation(sName);
