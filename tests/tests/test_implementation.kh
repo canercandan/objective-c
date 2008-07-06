@@ -5,7 +5,7 @@
 ** Login   <toumi_m@epitech.net>
 ** 
 ** Started on  Fri Jul  4 15:46:24 2008 User Toumi_m
-** Last update Fri Jul  4 17:11:05 2008 User Toumi_m
+** Last update Sun Jul  6 13:24:44 2008 User Toumi_m
 */
 
 @module		myTest
@@ -23,21 +23,4 @@
 	  void		*data;
 	  struct s_list	*next;
 	}		t_list;
-}
-
-static inline test_t	*test_new(char*str)
-{
-  test_t		*test;
-
-  if (!str)
-    return (0);
-  test = calloc(1, sizeof (test_t));
-  test->size = strlen(str) > MAXBUF ? MAXBUF : strlen(str);
-  memcpy(test->st, str, test->size);
-  return (test);
-}
-
-static inline void	test_print(test_t*test)
-{
-  printf("%s", test->st);
 }
