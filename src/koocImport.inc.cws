@@ -7,6 +7,10 @@
 declare function	koocImportPathKh(file : value);
 declare function	koocImportPathH(file : value);
 declare function	koocImportNameH(file : value);
+declare function	koocImportIfndef(file : value);
+declare function	koocImportIfndef(file : value);
+declare function	koocImportEndif(file : value);
+declare function	koocImportInclude(file : value);
 
 /**
  * @fn koocImportPathKh(file : value)
@@ -43,6 +47,11 @@ function	koocImportNameH(file : value)
 				      toUpperString(koocImportPathH(file)))));
 }
 
+/**
+ * @fn koocImportIfndef(file : value)
+ * @brief print ifndef to the header'file
+ * @param file filename
+ */
 function	koocImportIfndef(file : value)
 {
   local		pathH = koocImportPathH(file);
@@ -53,6 +62,11 @@ function	koocImportIfndef(file : value)
 	     + "__\n# define __" + nameH + "__\n\n");
 }
 
+/**
+ * @fn koocImportEndif(file : value)
+ * @brief print endif to the header'file
+ * @param file filename
+ */
 function	koocImportEndif(file : value)
 {
   appendFile(koocImportPathH(file),
@@ -60,6 +74,11 @@ function	koocImportEndif(file : value)
 	     + "__ */\n");
 }
 
+/**
+ * @fn koocImportInclude(file : value)
+ * @brief print include to the header'file
+ * @param file filename
+ */
 function	koocImportInclude(file : value)
 {
   local		pathH = koocImportPathH(file);
