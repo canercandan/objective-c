@@ -216,6 +216,18 @@ function blockType<"primary_expression">(block : node)
 }
 
 /**
+ * @fn blockType<"index_expression">(block : node)
+ * @brief nothing
+ * @param block tree's block
+ * @return sInfo nothing
+ */
+function blockType<"index_expression">(block : node)
+{
+  return (blockType<block.left.type>(block.left)
+	  + '[' + loopBlock(block.right) + ']');
+}
+
+/**
  * @fn blockType<"constant_expression">(block : node)
  * @brief nothing
  * @param block tree's block

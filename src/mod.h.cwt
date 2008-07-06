@@ -1,4 +1,9 @@
-/*
+<%
+/**
+ * \file mod.h.cwt
+ * \brief template file to generate header'file
+ */
+%>/*
 ** KOOC - Kind of Objective C for **@this.nameH@**
 ** { dream team 42. } -> Tek3s Strasbourg
 */
