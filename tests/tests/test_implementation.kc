@@ -5,7 +5,7 @@
 ** Login   <toumi_m@epitech.net>
 ** 
 ** Started on  Fri Jul  4 15:49:09 2008 User Toumi_m
-** Last update Fri Jul  4 17:11:42 2008 User Toumi_m
+   Last update Sun Jul  6 14:51:52 2008 florent hochwelker
 */
 
 @import "test_implementation.kh"
@@ -32,6 +32,6 @@
 
   void		function()
   {
-    printf("FUNCTION VOID:\n");
+    printf("FUNCTION VOID: %d %d\n", [myTest.a], 42);
   }
 }

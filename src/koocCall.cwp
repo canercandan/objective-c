@@ -67,6 +67,7 @@ kooc_identifiant_variable(module_name : value, type : value)
 	   ::= '.' kooc_identifier:val
 	     => local variable;
 	   => variable = existVar(module_name, val, type);
+	   => traceLine("Majdi l'appelle a une variable/fonction dans un implementation fonctionne mais n'est pas printe ex:" + variable);
 	   => { %>@variable@<% }
 ;
 
