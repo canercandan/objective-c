@@ -5,6 +5,9 @@
 @import "test_import.kh" /* faite attention au commentaire inutile */
 @import "test_import.kh" // oui je sais c en C++ mais comme GCC le prend :)
 
+
+#define TEST leet
+
 int		main(int ac, char **av)
 {
   test_t	*test;

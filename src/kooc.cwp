@@ -51,7 +51,7 @@
 koocDeclaration(block : node) ::=
   => local name;
 [ koocImport | koocModule(name) | koocImplementation |
-  koocClass | koocCall ]
+  koocClass | koocCall(block) ]
 ;
 /**
  * @endcond
