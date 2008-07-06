@@ -42,24 +42,17 @@ checkFile(file : value, module : value) ::=
   => local nameH = replaceString('.', '_', replaceString('/', '_', replaceString(".kh", ".h", toUpperString(file))));
   => deleteFile(pathH);
   => appendFile(pathH, "#ifndef __" + nameH + "__\n# define __" + nameH + "__\n\n");
-  [
-#check(module == "") => {%>#include "@replaceString(".kh", ".h", file)@"@"\n\n"@<%}
-   ]
-  => insert this.kooc.headers[pathH];
-  => insert this.kooc.headers[pathH].kooc;
-  => insert this.kooc.headers[pathH].block;
-  => insert this.kooc.headers[pathH].gl_pctx;
-  => ref this.kooc.headers[pathH].gl_pctx =
-  this.kooc.headers[pathH].block;
 #parsedFile(pathKh)
   [
    [
-    declaration(this.block):c => appendFile(pathH, c + '\n');
-    | koocDeclaration(this.block):kc checkModule(module, kc)
+    koocDeclaration(this.block):kc checkModule(module, kc)
+    | declaration(this.block):c => appendFile(pathH, c + '\n');
     ]+
    #continue #empty
    ]
   => appendFile(pathH, "\n#endif /* !__" + nameH + "__ */\n");
+  [#check(module == "") => {%>#include "@replaceString(".kh", ".h", file)@"@"\n\n"@<%}]
+  => insert this.kooc.headers[pathH];
   ]
  ]
 | => errorIncludeFile(this.kooc.path_import + file);
