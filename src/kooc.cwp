@@ -20,6 +20,7 @@
 #include "koocError.inc.cws"
 #include "prettyPrinter.h.inc.cws"
 #include "prettyPrinter.c.inc.cws"
+#include "koocImport.inc.cws"
 #include "koocClass.inc.cws"
 #include "koocImplementation.inc.cws"
 #include "koocModule.inc.cws"
