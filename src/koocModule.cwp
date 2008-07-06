@@ -19,7 +19,7 @@ koocModule(sModule : node) ::=
   => insert this.kooc.modules[sModule];
   => insert this.kooc.modules[sModule].block;
   [
-    declaration(this.kooc.modules[sModule].block)
+    declaration(this.kooc.modules[sModule].block):line
     => mangle(sModule);
   ]*
   => local modH = "km_" + sModule.toLowerString() + ".h";

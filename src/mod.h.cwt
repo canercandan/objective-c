@@ -1,9 +1,15 @@
+/*
+** KOOC - Kind of Objective C for **@this.nameH@**
+** { dream team 42. } -> Tek3s Strasbourg
+*/
+
 #ifndef __@getDefineHeader()@__
 #define __@getDefineHeader()@__
 
 <%
 if (existVariable(this.block.prototypes))
   {
+    %>/* prototypes definitions: */@"\n"@<%
     foreach var in this.block.prototypes
       if (!existVariable(var.ctype.infoType["static"]))
 	{%>@getFunction(var)@;@"\n"@<%}
@@ -12,24 +18,28 @@ if (existVariable(this.block.prototypes))
 
 if (existVariable(this.block.structs))
   {
+    %>/* structures definitions: */@"\n"@<%
     foreach var in this.block.structs
     {%>@getStructOrUnion(var)@@"\n"@<%}
   }
 
 if (existVariable(this.block.enums))
   {
+    %>/* enums declarations: */@"\n"@<%
     foreach var in this.block.enums
     {%>@getEnum(var)@@"\n"@<%}
   }
 
 if (existVariable(this.block.unions))
   {
+    %>/* unions declarations: */@"\n"@<%
     foreach var in this.block.unions
     {%>@getStructOrUnion(var)@@"\n"@<%}
   }
 
 if (existVariable(this.block.types))
   {
+    %>/* types declarations: */@"\n"@<%
     foreach var in this.block.types
     {
       if (var.ctype.specifier == "enum")
@@ -49,6 +59,7 @@ if (existVariable(this.block.types))
 
 if (existVariable(this.block.variables))
   {
+    %>/* variables declarations: */@"\n"@<%
     foreach var in this.block.variables
       if (!existVariable(var.ctype.infoType["static"]))
 	{%>@getExternVariable(var)@@"\n"@<%}
@@ -57,6 +68,7 @@ if (existVariable(this.block.variables))
 
 if (existVariable(this.block.functions))
   {
+    %>/* functions declarations: */@"\n"@<%
     foreach var in this.block.functions
       if (!existVariable(var.ctype.infoType["static"]))
 	{%>@getFunction(var)@;@"\n"@<%}

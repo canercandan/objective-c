@@ -1,10 +1,17 @@
 /**
  * @file koocImplementation.cwp
- * @brief \@implementation file
- * @note
- * @ref develop
- * @ref contrib
- * @ref tools
+ * @brief @implementation grammar file
+ * @note @ref develop @ref contrib @ref tools
+ *
+ * @par ExplicitCopy
+ *
+ * @par #koocImplementation
+ * rule @implementation
+ *
+ * @par #addImplementation
+ * add an implementation if a module whit the same name exist
+ *
+ * @bug generateString what the fuck Cedric!!!
  */
 
 /**
@@ -12,22 +19,27 @@
  */
 
 koocImplementation
-	::= #explicitCopy [ addImplementation ]
+	::= #explicitCopy "@implementation" #continue #readIdentifier:sName
+	    [ addImplementation(sName) ]
 ;
 
-addImplementation
-	::= => local contents = "";
-	    "@implementation" #continue #readIdentifier:sName
-	    => existModule(sName);
+addImplementation(sName : value)
+	::= => existModule(sName);
 	    '{'
 		 => insert this.kooc.implementations[sName];
 		 => insert this.kooc.implementations[sName].block;
 		 [
 	      	   declaration(this.kooc.implementations[sName].block):line
- 		   => contents += "\n" + line + "\n";
+		   => mangleImplementation(sName);
 	    	 ]*
 		 => check_implementation(sName);
-		 => appendFile(this.kooc.path_import + this.kooc.modules[sName].nameC, contents);
+		 => local filename = this.kooc.path_import + this.kooc.modules[sName].nameC;
+		 => local sOutput = loadFile(filename);
+		 => generate("mod.c.cwt", this.kooc.implementations[sName], filename);
+		 => sOutput += loadFile(filename);
+		 => saveToFile(filename, sOutput);
+//		 => generateString("mod.c.cwt", this.kooc.implementations[sName], sOutput);
+//		 => appendFile(this.kooc.path_import + this.kooc.modules[sName].nameC, sOutput);
 	    '}'
 ;
 

@@ -8,7 +8,7 @@
  */
 
 declare function	check_implementation(name : value);
-declare function	check_prototypes(var1 : node, var2 : node, name : value);
+declare function	check_prototypes(var1 : node, var2 : node);
 declare function	check_arguments(fun1 : node, fun2 : node);
 
 // Fonctions non finis: normal que vous comprenez pas tout...
@@ -16,10 +16,9 @@ declare function	check_arguments(fun1 : node, fun2 : node);
 
 /**
  * @fn check_implementation(name : value)
- * @brief check si les fonctions implementater ont bien ete defini 
+ * @brief check si les fonctions implementater ont bien ete defini
  * dans le module concerne
  * @param name (value): nom de l'implementation
- * @return soon
  */
 function	check_implementation(name : value)
 {
@@ -33,22 +32,22 @@ function	check_implementation(name : value)
 	find = false;
 	foreach itemImp in this.kooc.implementations[name].block
 	{
-	  if (itemMod.oname == itemImp.name)
+	  if ((itemMod.name == itemImp.name) &&
+	      (check_prototypes(itemMod, itemImp) == true))
 	    {
-	      prototype = check_prototypes(itemMod, itemImp, itemMod.oname);
-	      find = (prototype == "" ? false : true);
-	      if (find == true)
-		break;
+	      find = true;
+	      break;
 	    }
 	}
 	if (find == false)
 	  {
-	    traceLine("error: [" + itemMod.oname + "]'s declaration is missing");
+	    prototype = itemMod.sign + " " + itemMod.identifier;
+	    prototype += " " + itemMod.name + "(...)";
+	    traceLine("error: [" + prototype + "]'s declaration is missing");
 	    exit(-1);
 	  }
       }
   }
-  return (prototype);
 }
 
 /**
@@ -57,31 +56,18 @@ function	check_implementation(name : value)
  * @param var1 (node): noeud du 1er prototype
  * @param var2 (node): noeud du 2nd prototype
  * @param name (value): nom manglee de la fonction
- * @return soon
+ * @return true si ok, false sinon :p
  */
-function	check_prototypes(var1 : node, var2 : node, name : value)
+function	check_prototypes(var1 : node, var2 : node)
 {
-  local		prototype = "";
   local		args = "";
 
-  if (var2.ctype.identifier == var1.ctype.identifier)
-    prototype += var1.ctype.identifier;
-
-  if ((prototype != "") && (var2.ctype.sign == var1.ctype.sign))
-    prototype += " " + var1.ctype.sign;
+  if ((var2.ctype.identifier == var1.ctype.identifier)
+      && (var2.ctype.sign == var1.ctype.sign)
+      && (check_arguments(var1.list, var2.list) == true))
+    return (true);
   else
-    prototype = "";
-
-  if (prototype != "")
-    prototype += " " + name;
-
-  args = check_arguments(var1.list, var2.list);
-  if ((prototype != "" ) && (args != ""))
-    prototype += "( " + args + " )\n";
-  else
-    prototype = "";
-
-  return (prototype);
+    return (false);
 }
 
 /**
@@ -89,7 +75,7 @@ function	check_prototypes(var1 : node, var2 : node, name : value)
  * @brief verifie si les arguments de 2 prototypes de fonctions sont egals
  * @param fun1 (node): noeud du 1er prototype
  * @param fun2 (node): noeud du 2nd prototype
- * @return soon
+ * @return true si ok, false sinon :p
  */
 function	check_arguments(fun1 : node, fun2 : node)
 {
@@ -97,7 +83,8 @@ function	check_arguments(fun1 : node, fun2 : node)
   local		argsFun2 = "";
 
   if (countNbArgInFunc(fun1) != countNbArgInFunc(fun2))
-    return ("");
+    return (false);
+
   foreach info in fun1
     argsFun1 += "[" + info.ctype.identifier + info.ctype.sign + "]";
 
@@ -105,7 +92,7 @@ function	check_arguments(fun1 : node, fun2 : node)
     argsFun2 += "[" + info.ctype.identifier + info.ctype.sign + "]";
 
   if (argsFun1 == argsFun2)
-    return ("42");
+    return (true);
   else
-    return ("");
+    return (false);
 }

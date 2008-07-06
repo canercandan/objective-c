@@ -2,6 +2,7 @@
  * @file koocMangle.inc.cws
  * @brief Kooc Mangle file
  * @note @ref develop @ref contrib @ref tools
+ * @todo fonction mangle generique (i do it soon !!!)
  * @bug Temp mangling
  */
 
@@ -59,3 +60,45 @@ function	mangle(theMod : value)
       removeElement(this.kooc.modules[theMod].block.prototypes, theNode.oname);
     }
 }
+
+function	mangleImplementation(theMod : value)
+{
+  local name = "_ZN" + lengthString(theMod) + theMod;
+  localref theNode = this.kooc.implementations[theMod].block#back;
+
+  if (existVariable(theNode.ctype.infoType["static"]))
+    return;
+
+  name += lengthString(theNode.name) + theNode.name;
+  name += "E";
+
+  // type
+  if (theNode.ctype.type == "__PRIMARY__")
+    name += theNode.ctype.identifier.charAt(0);
+  else
+    name += lengthString(theNode.ctype.identifier)
+      + theNode.ctype.identifier;
+
+  // args
+  if (existVariable(theNode.list))
+    {
+      foreach item in theNode.list
+	if (item.ctype.type == "__PRIMARY__")
+	  name += item.ctype.identifier.charAt(0);
+	else
+	  name += lengthString(item.ctype.identifier)
+	    + item.ctype.identifier;
+    }
+
+  insert theNode.oname = theNode.name;
+  insert theNode.name = name;
+
+  if (theNode.type == "__FUNCTION__")
+    {
+      ref this.kooc.implementations[theMod].block.functions[theNode.name] =
+	this.kooc.implementations[theMod].block.functions[theNode.oname];
+
+      removeElement(this.kooc.implementations[theMod].block.functions, theNode.oname);
+    }
+}
+
