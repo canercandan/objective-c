@@ -1,0 +1,69 @@
+/**
+ * @file koocImport.inc.cws
+ * @brief koocImport'functions
+ * @note @ref develop @ref contrib @ref tools
+ */
+
+declare function	koocImportPathKh(file : value);
+declare function	koocImportPathH(file : value);
+declare function	koocImportNameH(file : value);
+
+/**
+ * @fn koocImportPathKh(file : value)
+ * @brief get path file .kh
+ * @param file filename
+ * @return path file .kh
+ */
+function	koocImportPathKh(file : value)
+{
+  return (this.kooc.path_import + file);
+}
+
+/**
+ * @fn koocImportPathH(file : value)
+ * @brief get path file .h
+ * @param file filename
+ * @return path file .h
+ */
+function	koocImportPathH(file : value)
+{
+  return (replaceString(".kh", ".h", koocImportPathKh(file)));
+}
+
+/**
+ * @fn koocImportNameH(file : value)
+ * @brief get name file .h to print the header protection
+ * @param file filename
+ * @return name file .h
+ */
+function	koocImportNameH(file : value)
+{
+  return (replaceString('.', '_',
+			replaceString('/', '_',
+				      toUpperString(koocImportPathH(file)))));
+}
+
+function	koocImportIfndef(file : value)
+{
+  local		pathH = koocImportPathH(file);
+  local		nameH = koocImportNameH(file);
+
+  deleteFile(pathH);
+  appendFile(pathH, "#ifndef __" + nameH
+	     + "__\n# define __" + nameH + "__\n\n");
+}
+
+function	koocImportEndif(file : value)
+{
+  appendFile(koocImportPathH(file),
+	     "\n#endif /* !__" + koocImportNameH(file)
+	     + "__ */\n");
+}
+
+function	koocImportInclude(file : value)
+{
+  local		pathH = koocImportPathH(file);
+
+  {%>#include "@pathH@"@"\n\n"@<%}
+  insert this.kooc.headers[pathH];
+}
