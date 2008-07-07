@@ -24,6 +24,7 @@
 #include "koocMangle.inc.cws"
 #include "koocModule.inc.cws"
 #include "koocCall.inc.cws"
+#include "koocPackage.cwp"
 
 /**
  * @cond
@@ -51,7 +52,7 @@
 koocDeclaration(block : node, package_name : node) ::=
   => local name;
 [ koocImport | koocModule(name, package_name) | koocImplementation |
-  koocClass | koocCall(block) ]
+  koocClass | koocCall(block) | koocPackage(package_name) ]
 ;
 /**
  * @endcond
