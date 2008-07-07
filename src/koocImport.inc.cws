@@ -62,6 +62,7 @@ function	koocImportIfndef(file : value)
 	     + "__\n# define __" + nameH + "__\n\n");
   insert this.kooc.headers[pathH];
   insert this.kooc.headers[pathH].block;
+  treeInit(this.kooc.headers[pathH]);
 }
 
 /**

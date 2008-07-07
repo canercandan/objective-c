@@ -76,7 +76,7 @@ function	testFile(file : value)
  */
 function	initTree(file : value)
 {
-  treeInit();
+  treeInit(this);
   treeKooc();
   treePathToTree(file);
   treePathImport(file);

@@ -4,7 +4,7 @@
  * @note @ref develop @ref contrib @ref tools
  */
 
-declare function	treeInit();
+declare function	treeInit(block : node);
 declare function	treeKooc();
 declare function	treePathImport(file : value);
 declare function	treePathToTree(file : value);
@@ -13,14 +13,14 @@ declare function	treePathToTree(file : value);
  * @fn treeInit()
  * @brief init tree
  */
-function	treeInit()
+function	treeInit(block : node)
 {
-  insert this.block.pctx;
-  if (existVariable(this.gl_pctx))
-    ref this.block.pctx = this.gl_pctx;
+  insert block.block.pctx;
+  if (existVariable(block.gl_pctx))
+    ref block.block.pctx = block.gl_pctx;
   else
-    insert this.gl_pctx;
-  ref this.gl_pctx = this.block;
+    insert block.gl_pctx;
+  ref block.gl_pctx = block.block;
 }
 
 /**
