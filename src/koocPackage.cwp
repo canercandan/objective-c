@@ -1,0 +1,16 @@
+/**
+* @file koocPackage.cwp
+* @brief Implementation of @package
+* @note @ref develop @ref contrib @ref tools
+*
+* @par koocPackage(package_name : node)
+* rule \@import
+*/
+
+koocPackage(package_name : node) ::=
+#explicitCopy
+"@package"
+=> local list;
+#continue #readIdentifier:package_name
+=> insert #evaluateVariable("this.kooc.modules" + package_name);
+;
