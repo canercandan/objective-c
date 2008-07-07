@@ -22,10 +22,13 @@ function	koocMangle(theMod : value)
   if (existVariable(theNode.ctype.infoType["static"]))
     return;
 
-  this.kooc.modules[theMod].package.cutString('.', pkgs);
+  if (this.kooc.modules[theMod].package != "")
+  {
+    cutString(this.kooc.modules[theMod].package, '.', pkgs);
 
-  foreach pkg in pkgs
-    name += lengthString(pkg) + pkg;
+    foreach pkg in pkgs
+      name += lengthString(pkg) + pkg;
+  }
 
   name += lengthString(theMod) + theMod;
   name += lengthString(theNode.name) + theNode.name;
