@@ -44,10 +44,10 @@ checkFile(file : value, module : value) ::=
   [
   => local package_name = "";
    [koocDeclaration(this.kooc.headers[pathH].block, package_name):kc checkModule(module, kc)
-    | declaration(this.kooc.headers[pathH].block):c
-    ]+
-#continue #empty
-   => ref this.gl_pctx = this.kooc.headers[pathH].block;
+    | declaration(this.kooc.headers[pathH].block)
+    ]*
+/* #continue #empty */
+   => treeCopyInfos(this.kooc.headers[pathH].block);
    => prettyPrintExistFile(pathH, this.kooc.headers[pathH]);
    ]
   => koocImportEndif(file);

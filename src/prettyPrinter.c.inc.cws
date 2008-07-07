@@ -101,7 +101,7 @@ function	clearString(val : value)
  */
 function	blockType<T>(block : node)
 {
-  traceLine("block: [" + T + "] unknown");
+  //traceLine("block: [" + T + "] unknown");
 }
 
 /**

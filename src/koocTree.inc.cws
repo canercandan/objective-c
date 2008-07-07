@@ -8,10 +8,14 @@ declare function	treeInit(block : node);
 declare function	treeKooc();
 declare function	treePathImport(file : value);
 declare function	treePathToTree(file : value);
+declare function	treeCopyInfos(block : node);
+declare function	treeCopyInfosInArray(dst : node,
+					     src : node);
 
 /**
- * @fn treeInit()
+ * @fn treeInit(block : node)
  * @brief init tree
+ * @param block tree's block
  */
 function	treeInit(block : node)
 {
@@ -65,4 +69,33 @@ function	treePathToTree(file : value)
   insert this.pathKc = file;
   insert this.pathTree = sRoot + replaceString(sExtension, ".ktree", file);
   insert this.pathC = sRoot + replaceString(sExtension, ".c", file);
+}
+
+/**
+ * @fn treeCopyInfos(block : node)
+ * @brief copy typedef, struct, enum, function [, ...]* in Cnorm
+ * @param block tree's block
+ */
+function	treeCopyInfos(block : node)
+{
+  treeCopyInfosInArray(this.block.structs, block.structs);
+  treeCopyInfosInArray(this.block.enums, block.enums);
+  treeCopyInfosInArray(this.block.unions, block.unions);
+  treeCopyInfosInArray(this.block.types, block.types);
+  treeCopyInfosInArray(this.block.variables, block.variables);
+  treeCopyInfosInArray(this.block.functions, block.functions);
+}
+
+/**
+ * @fn treeCopyInfosInArray(dst : node, src : node)
+ * @brief copy infos form source to destination
+ * @param dst destination tree's block
+ * @param src source tree's block
+ */
+function	treeCopyInfosInArray(dst : node, src : node)
+{
+  if (!existVariable(dst))
+    insert dst;
+  foreach var in src
+    ref dst[key(var)] = var;
 }
