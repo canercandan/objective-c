@@ -1,4 +1,4 @@
-@import		"package.kh"
+@import		"test_package.kh"
 
 @package	level1
 
