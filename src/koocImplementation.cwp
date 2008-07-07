@@ -11,7 +11,8 @@
  * @par #addImplementation
  * add an implementation if a module whit the same name exist
  *
- * @bug generateString what the fuck Cedric!!!
+ * @bug generateString what the fuck Cedric!!! fixed by the
+ * function prettyPrintExistFile
  */
 
 /**

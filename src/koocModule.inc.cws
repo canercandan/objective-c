@@ -4,3 +4,34 @@
  * @note @ref develop @ref contrib @ref tools
  */
 
+declare function	koocModuleInit(sModule : value);
+declare function	koocModuleContent(sModule : value);
+
+/**
+ * @fn function	koocModuleInit(sModule : value)
+ * @brief init the tree'information to insert module
+ * @param sModule module's name
+ */
+function	koocModuleInit(sModule : value)
+{
+  insert this.kooc.modules[sModule];
+  insert this.kooc.modules[sModule].block;
+}
+
+/**
+ * @fn koocModuleContent(sModule : value)
+ * @brief fill the tree and generate C code and header
+ * @param sModule module's name
+ */
+function	koocModuleContent(sModule : value)
+{
+  local		modH = "km_" + sModule.toLowerString() + ".h";
+  local		modC = "km_" + sModule.toLowerString() + ".c";
+
+  insert this.kooc.modules[sModule].nameH = modH;
+  insert this.kooc.modules[sModule].nameC = modC;
+  generate("mod.h.cwt", this.kooc.modules[sModule], this.kooc.path_import + modH);
+  generate("mod.c.cwt", this.kooc.modules[sModule], this.kooc.path_import + modC);
+  {%>#include "@modH@"@"\n"@<%}
+}
+

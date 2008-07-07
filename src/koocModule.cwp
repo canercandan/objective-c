@@ -16,19 +16,11 @@ koocModule(sModule : node) ::=
 "@module"
 #continue #readIdentifier:sModule
 '{'
-  => insert this.kooc.modules[sModule];
-  => insert this.kooc.modules[sModule].block;
-  [
-    declaration(this.kooc.modules[sModule].block)
-    => mangle(sModule);
-  ]*
-  => local modH = "km_" + sModule.toLowerString() + ".h";
-  => local modC = "km_" + sModule.toLowerString() + ".c";
-  => insert this.kooc.modules[sModule].nameH = modH;
-  => insert this.kooc.modules[sModule].nameC = modC;
-  => generate("mod.h.cwt", this.kooc.modules[sModule], this.kooc.path_import + modH);
-  => generate("mod.c.cwt", this.kooc.modules[sModule], this.kooc.path_import + modC);
-  => {%>#include "@modH@"@"\n"@<%}
+  => koocModuleInit(sModule);
+[declaration(this.kooc.modules[sModule].block)
+ => mangle(sModule);
+ ]*
+=> koocModuleContent(sModule);
 '}'
 //#catch(sError) => traceLine(sModule); | => traceLine(sError);
 ;

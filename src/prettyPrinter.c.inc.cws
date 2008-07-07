@@ -2,7 +2,7 @@
  * @file prettyPrinter.c.inc.cws
  * @brief PrettyPrinter to print the kooc to c
  * @note @ref develop @ref contrib @ref tools
- * @buf URGENT: plantage de kooc si on met des type struct dans
+ * @bug URGENT: plantage de kooc si on met des types struct dans
  * prototype de fonction
  */
 

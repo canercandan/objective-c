@@ -83,7 +83,7 @@ function	koocImportEndif(file : value)
  */
 function	koocImportInclude(file : value)
 {
-  local		pathH = koocImportPathH(file);
+  local		pathH = replaceString(".kh", ".h", file);
 
   {%>#include "@pathH@"@"\n\n"@<%}
 }
