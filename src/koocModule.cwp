@@ -17,10 +17,11 @@ koocModule(sModule : node) ::=
 #continue #readIdentifier:sModule
 '{'
   => koocModuleInit(sModule);
-[declaration(this.kooc.modules[sModule].block)
- => mangle(sModule);
- ]*
-=> koocModuleContent(sModule);
+  [declaration(this.kooc.modules[sModule].block)
+  => koocModuleCheck(sModule);
+  => koocModuleMangle(sModule);
+  ]*
+  => koocModuleContent(sModule);
 '}'
 //#catch(sError) => traceLine(sModule); | => traceLine(sError);
 ;

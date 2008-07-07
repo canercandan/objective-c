@@ -6,14 +6,14 @@
  * @bug Temp mangling
  */
 
-declare function	mangle(theMod : value);
+declare function	koocMangle(theMod : value);
 
 /**
  * @fn mangle(theMod : value)
  * @brief mangle variable
  * @param theMod variable's name
  */
-function	mangle(theMod : value)
+function	koocMangle(theMod : value)
 {
   local name = "_ZN" + lengthString(theMod) + theMod;
   localref theNode = this.kooc.modules[theMod].block#back;
@@ -52,7 +52,7 @@ function	mangle(theMod : value)
 
       removeElement(this.kooc.modules[theMod].block.variables, theNode.oname);
     }
-  if (theNode.type == "__PROTOTYPE__")
+  else if (theNode.type == "__PROTOTYPE__")
     {
       ref this.kooc.modules[theMod].block.prototypes[theNode.name] =
 	this.kooc.modules[theMod].block.prototypes[theNode.oname];

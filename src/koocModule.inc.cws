@@ -19,6 +19,41 @@ function	koocModuleInit(sModule : value)
 }
 
 /**
+ * @fn function	koocModuleCheck(sModule : value)
+ * @brief check if the declaration is valid
+ * @param sModule module's name
+ */
+function	koocModuleCheck(sModule : value)
+{
+  localref theNode = this.kooc.modules[sModule].block#back;
+
+  if (theNode.type != "__VARIABLE__" &&
+      theNode.type != "__PROTOTYPE__" &&
+      theNode.type != "__TYPE__")
+    {
+      traceLine(getInputFilename() + ":" + countInputLines() + ": "
+                + "error: unexpected identifier");
+      exit(-1);
+    }
+}
+
+/**
+ * @fn function	koocModuleMangle(sModule : value)
+ * @brief call mangle only if we must mangle it
+ * @param sModule module's name
+ */
+function	koocModuleMangle(sModule : value)
+{
+  localref theNode = this.kooc.modules[sModule].block#back;
+
+  if (theNode.type == "__VARIABLE__" ||
+      theNode.type == "__PROTOTYPE__")
+    {
+      koocMangle(sModule);
+    }
+}
+
+/**
  * @fn koocModuleContent(sModule : value)
  * @brief fill the tree and generate C code and header
  * @param sModule module's name
