@@ -1,0 +1,55 @@
+@import		"package.kh"
+
+@package	level1
+
+@implementation	mod1
+{
+  void		print()
+  {
+    printf("level1.mod1\n");
+  }
+}
+
+@implementation	mod2
+{
+  void		print()
+  {
+    printf("level1.mod2\n");
+  }
+}
+
+@package	level1.level2
+
+@implementation	mod1
+{
+  void		print()
+  {
+    printf("level1.level2.mod1\n");
+  }
+}
+
+@implementation	mod2
+{
+  void		print()
+  {
+    printf("level1.level2.mod2\n");
+  }
+}
+
+@package	level1.level2.level3
+
+@implementation	mod1
+{
+  void		print()
+  {
+    printf("level1.level2.level3.mod1\n");
+  }
+}
+
+@implementation	mod2
+{
+  void		print()
+  {
+    printf("level1.level2.level3.mod2\n");
+  }
+}

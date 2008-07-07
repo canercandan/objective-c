@@ -1,0 +1,67 @@
+/*
+** test_class.kc for test_class in /u/epitech_2010s/armand_m/cu/rendu/kooc/KOOC/tests/tests
+** 
+** Made by morgan armand
+** Login   <armand_m@epitech.net>
+** 
+** Started on  Sat Jul  5 17:34:10 2008 morgan armand
+** Last update Sat Jul  5 17:36:30 2008 morgan armand
+*/
+
+@import	"test_class.kh"
+
+@implementation StackInt
+{
+  @member void	init(int size)
+    {
+      int		*buf;
+
+      [self.nbitem] = 0;
+      [self.size] = size;
+      buf = (int *) calloc(size, sizeof(int));
+      [self.data] = buf;
+    }
+
+  @member
+    {
+      int	nbitem()
+      {
+	int n;
+
+	n = [self.nbitem];
+	return (n);
+      }
+
+      void	push(int i)
+      {
+	int pos;
+	int *buf;
+
+	pos = [self.nbitem];
+	buf = [self.data];
+	buf[pos++] = i;
+	[self.nbitem] = pos;
+      }
+    }
+
+  int	pop(StackInt *self)
+  {
+    int	*buf;
+    int	pos;
+    int	r;
+
+    pos = [self.nbitem];
+    buf = [self.data];
+    r = buf[pos--];
+    [self.nbitem] = pos;
+    return (r);
+  }
+
+  void	clean(StackInt *this)
+  {
+    int	*buf;
+
+    buf = [this.data];
+    free(buf);
+  }
+}// fin @class

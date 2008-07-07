@@ -15,12 +15,19 @@ declare function	koocMangle(theMod : value);
  */
 function	koocMangle(theMod : value)
 {
-  local name = "_ZN" + lengthString(theMod) + theMod;
+  local pkgs = "";
+  local name = "_ZN";
   localref theNode = this.kooc.modules[theMod].block#back;
 
   if (existVariable(theNode.ctype.infoType["static"]))
     return;
 
+  this.kooc.modules[sModule].package.cutString('.', pkgs);
+
+  foreach pkg in pkgs
+    name += lengthString(pkg) + pkg;
+
+  name += lengthString(theMod) + theMod;
   name += lengthString(theNode.name) + theNode.name;
   name += "E";
 

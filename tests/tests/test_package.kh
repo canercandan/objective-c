@@ -1,0 +1,62 @@
+//
+// test_package.h for test_package in /u/epitech_2010s/armand_m/cu/rendu/kooc/KOOC/tests/tests
+// 
+// Made by morgan armand
+// Login   <armand_m@epitech.net>
+// 
+// Started on  Mon Jul  7 17:52:07 2008 morgan armand
+// Last update Mon Jul  7 17:54:26 2008 morgan armand
+//
+
+@package	level1
+
+@class		int1
+ {
+   @member
+   {
+     int	a;
+   }
+}
+
+
+@module		mod1
+{
+  void		print();
+}
+
+@module		mod2
+{
+  void		print();
+}
+
+@package	level1.level2
+
+@class		int1
+ {
+   @member
+   {
+     int	a;
+   }
+}
+
+@module		mod1
+{
+  void		print();
+}
+
+@module		mod2
+{
+  void		print();
+}
+
+@package	level1.level2.level3
+
+@module		mod1
+{
+  void		print();
+}
+
+@module		mod2
+{
+  void		print();
+}

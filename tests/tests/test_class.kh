@@ -1,0 +1,30 @@
+/*
+** test_class.kh for test_class in /u/epitech_2010s/armand_m/cu/rendu/kooc/KOOC/tests/tests
+** 
+** Made by morgan armand
+** Login   <armand_m@epitech.net>
+** 
+** Started on  Sat Jul  5 17:32:10 2008 morgan armand
+** Last update Sat Jul  5 17:33:27 2008 morgan armand
+*/
+
+@class StackInt
+{
+  @member
+    {
+      int	size;
+      int	nbitem;
+
+      void	init(int);
+      void	clean();
+      int	nbitem();
+    }
+
+  @member int	*data;
+  @member void	push(int);
+
+  int		pop(StackInt *); //pop fonction membre
+
+  /* pour compter le nombre de pile presente dans le systeme */
+  int		nbstack = 0;
+}

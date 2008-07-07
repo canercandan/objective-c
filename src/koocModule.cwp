@@ -10,13 +10,13 @@
 /**
  * @cond
  */
-koocModule(sModule : node, package_name : value) ::=
+koocModule(sModule : node, sPackage : value) ::=
 #explicitCopy
 //#try
 "@module"
 #continue #readIdentifier:sModule
 '{'
-  => koocModuleInit(sModule);
+  => koocModuleInit(sModule, sPackage);
   [declaration(this.kooc.modules[sModule].block)
   => koocModuleCheck(sModule);
   => koocModuleMangle(sModule);
