@@ -2,6 +2,8 @@
  * @file prettyPrinter.c.inc.cws
  * @brief PrettyPrinter to print the kooc to c
  * @note @ref develop @ref contrib @ref tools
+ * @buf URGENT: plantage de kooc si on met des type struct dans
+ * prototype de fonction
  */
 
 declare function	r00t();
@@ -99,7 +101,7 @@ function	clearString(val : value)
  */
 function	blockType<T>(block : node)
 {
-  traceLine("block: [" + T + "] unknown");
+  //traceLine("block: [" + T + "] unknown");
 }
 
 /**
@@ -278,6 +280,7 @@ function	blockType<"equality_expression">(block : node)
     sInfo += block.operator;
   if (existVariable(block.right.type))
     sInfo += ' ' + blockType<block.right.type>(block.right);
+  sInfo += endPoint(block);
   return (sInfo);
 }
 
@@ -425,8 +428,7 @@ function	blockType<"call_expression">(block : node)
  */
 function	blockType<"assignement_expression">(block : node)
 {
-  return (blockType<"additive_expression">(block)
-	  +  endPoint(block));
+  return (blockType<"additive_expression">(block));
 }
 
 /**
@@ -553,6 +555,28 @@ function	blockType<"conditional_expression">(block : node)
 }
 
 /**
+ * @fn blockType<"sizeof_expression">(block : node)
+ * @brief nothing
+ * @param block tree's block
+ * @return sInfo noting
+ */
+function	blockType<"sizeof_expression">(block : node)
+{
+  return (blockType<"unary_expression">(block));
+}
+
+/**
+ * @fn blockType<"deref_expression">(block : node)
+ * @brief nothing
+ * @param block tree's block
+ * @return sInfo noting
+ */
+function	blockType<"deref_expression">(block : node)
+{
+  return (blockType<"equality_expression">(block));
+}
+
+/**
  * @fn prettyPrintExistFile(file : value, block : node);
  * @brief use this function if you want prettyPrint a exist file
  * @param file filename
@@ -564,6 +588,9 @@ function	prettyPrintExistFile(file : value, block : node)
 
   if (this.pathC.existFile())
     sInfo = loadFile(file);
+  insert block.noheader = 0;
+  generate("./mod.h.cwt", block, file);
+  sInfo += loadFile(file);
   generate("./mod.c.cwt", block, file);
   sInfo += loadFile(file);
   saveToFile(file, sInfo);

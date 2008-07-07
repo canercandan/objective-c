@@ -1,3 +1,7 @@
+<%
+if (this.noheader != 0)
+  {
+%>
 /*
 ** KOOC - Kind of Objective C for **@this.nameH@**
 ** { dream team 42. } -> Tek3s Strasbourg
@@ -7,6 +11,8 @@
 #define __@getDefineHeader()@__
 
 <%
+  }
+
 if (existVariable(this.block.prototypes))
   {
     %>/* prototypes definitions: */@"\n"@<%
@@ -75,5 +81,10 @@ if (existVariable(this.block.functions))
     {%>@"\n"@<%}
   }
 
+if (this.noheader != 0)
+  {
 %>
 #endif /* !__@getDefineHeader()@__ */
+<%
+  }
+%>
