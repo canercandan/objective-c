@@ -63,6 +63,7 @@ function	errorModule()
  */
 function	existModule(name : value)
 {
+//	traceObject(this.kooc,9);
   if (!existVariable(this.kooc.modules))
     {
       traceLine("this.kooc.modules not found");

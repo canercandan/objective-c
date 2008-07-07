@@ -10,7 +10,7 @@
 /**
  * @cond
  */
-koocModule(sModule : node) ::=
+koocModule(sModule : node, package_name : value) ::=
 #explicitCopy
 //#try
 "@module"
