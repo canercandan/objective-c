@@ -1,9 +1,10 @@
 /**
  * @file koocImplementation.inc.cws
  * @brief koocImplementation functions
- * @note soon
- * @todo signaler error lorsqu'une fonction definis dans @imnplementation
- * n'est pas defini dans @module
+ * @note @ref develop @ref contrib @ref tools
+ * @todo signaler error lorsqu'une fonction
+ * definis dans \@imnplementation
+ * n'est pas defini dans \@module
  * @todo mangling des definitions de fonctions.
  */
 
@@ -84,13 +85,10 @@ function	check_arguments(fun1 : node, fun2 : node)
 
   if (countNbArgInFunc(fun1) != countNbArgInFunc(fun2))
     return (false);
-
   foreach info in fun1
     argsFun1 += "[" + info.ctype.identifier + info.ctype.sign + "]";
-
   foreach info in fun2
     argsFun2 += "[" + info.ctype.identifier + info.ctype.sign + "]";
-
   if (argsFun1 == argsFun2)
     return (true);
   else

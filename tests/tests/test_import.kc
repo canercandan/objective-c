@@ -1,4 +1,4 @@
-//@import VVV from "test_import.kh"
+ //@import VVV from "test_import.kh"
 //@import Test from "test_import.kh"
 //@import Test from "test_import.kh"
 @import "test_import.kh"

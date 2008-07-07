@@ -4,17 +4,16 @@
  * @note @ref develop @ref contrib @ref tools
  */
 
-declare function treeInit();
-declare function treeKooc();
-declare function treePathImport(path : value);
-declare function treeInsertModule(key : value,
-				  proprity : value,
-				  header : value);
+declare function	treeInit();
+declare function	treeKooc();
+declare function	treePathImport(file : value);
+declare function	treePathToTree(file : value);
+
 /**
  * @fn treeInit()
  * @brief init tree
  */
-function treeInit()
+function	treeInit()
 {
   insert this.block.pctx;
   if (existVariable(this.gl_pctx))
@@ -28,7 +27,7 @@ function treeInit()
  * @fn treeKooc()
  * @brief init tree kooc
  */
-function treeKooc()
+function	treeKooc()
 {
   insert this.kooc;
   insert this.kooc.modules;
@@ -37,31 +36,33 @@ function treeKooc()
 }
 
 /**
- * @fn treePathImport(path : value)
+ * @fn treePathImport(file : value)
  * @brief insert import's path in tree
- * @param path It's the path
+ * @param file filename
  */
-function treePathImport(path : value)
+function	treePathImport(file : value)
 {
-  insert this.kooc.path_import = path;
+  local		size = lengthString(file);
+  local		pos = $size - findLastString(file, '/')$;
+
+  pos = $pos - 1$;
+  if ($pos != size$)
+    insert this.kooc.path_import = rsubString(file, pos);
+  else
+    insert this.kooc.path_import = "./";
 }
 
 /**
- * @fn treeInsertModule(key : value,
- *			proprity : value,
- *			header : value)
- * @brief insert a module in tree
- * @param key module's name
- * @param prority useless!
- * @param header useless!
+ * @fn treePathToTree(file : value)
+ * @brief put path to tree
+ * @param file filename
  */
-function treeInsertModule(key : value,
-			  proprity : value,
-			  header : value)
+function	treePathToTree(file : value)
 {
-  local	sPath = "this.kooc.modules";
+  local		sRoot = getWorkingPath();
+  local		sExtension = rightString(file, 3);
 
-  insert #evaluateVariable(sPath + '[' + key + ']');
-  insert #evaluateVariable(sPath + '[' + key + "].proprity");
-  insert #evaluateVariable(sPath + '[' + key + "].header");
+  insert this.pathKc = file;
+  insert this.pathTree = sRoot + replaceString(sExtension, ".ktree", file);
+  insert this.pathC = sRoot + replaceString(sExtension, ".c", file);
 }

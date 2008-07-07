@@ -60,6 +60,8 @@ function	koocImportIfndef(file : value)
   deleteFile(pathH);
   appendFile(pathH, "#ifndef __" + nameH
 	     + "__\n# define __" + nameH + "__\n\n");
+  insert this.kooc.headers[pathH];
+  insert this.kooc.headers[pathH].block;
 }
 
 /**
@@ -84,5 +86,4 @@ function	koocImportInclude(file : value)
   local		pathH = koocImportPathH(file);
 
   {%>#include "@pathH@"@"\n\n"@<%}
-  insert this.kooc.headers[pathH];
 }

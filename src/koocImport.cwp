@@ -13,7 +13,8 @@
  * check if the module exist
  *
  * @bug les defines ne sont pas copier du .kh au .h
- * il faut accepter les #... lors de explicitCopy
+ * il faut accepter les #... lors de explicitCopy@n
+ * Repare : mais stocke dans le .c au lieu du .h
  */
 
 /**
@@ -41,10 +42,13 @@ checkFile(file : value, module : value) ::=
  [=> koocImportIfndef(file);
 #parsedFile(pathKh)
   [
-   [koocDeclaration(this.block):kc checkModule(module, kc)
-    | declaration(this.block):c => appendFile(pathH, c + '\n');
+   [koocDeclaration(this.kooc.headers[pathH].block):kc checkModule(module, kc)
+    | declaration(this.kooc.headers[pathH].block):c
+    //=> appendFile(pathH, c + '\n');
     ]+
 #continue #empty
+   => prettyPrintExistFile(pathH,
+			   this.kooc.headers[pathH]);
    ]
   => koocImportEndif(file);
   [#check(module == "") => koocImportInclude(file);]

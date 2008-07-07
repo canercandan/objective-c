@@ -17,32 +17,28 @@
 /**
  * @cond
  */
-
 koocImplementation
-	::= #explicitCopy [ addImplementation ]
+::= #explicitCopy [ addImplementation ]
 ;
 
 addImplementation
-	::= "@implementation" #continue #readIdentifier:sName
-	    => existModule(sName);
-	    '{'
-		 => insert this.kooc.implementations[sName];
-		 => insert this.kooc.implementations[sName].block;
-		 [
-	      	   declaration(this.kooc.implementations[sName].block)
-		   => mangleImplementation(sName);
-	    	 ]*
-		 => check_implementation(sName);
-		 => local filename = this.kooc.path_import + this.kooc.modules[sName].nameC;
-		 => local sOutput = loadFile(filename);
-		 => generate("mod.c.cwt", this.kooc.implementations[sName], filename);
-		 => sOutput += loadFile(filename);
-		 => saveToFile(filename, sOutput);
-//		 => generateString("mod.c.cwt", this.kooc.implementations[sName], sOutput);
-//		 => appendFile(this.kooc.path_import + this.kooc.modules[sName].nameC, sOutput);
-	    '}'
+::= "@implementation"
+#continue #readIdentifier:sName
+  => existModule(sName);
+'{'
+=> insert this.kooc.implementations[sName];
+=> insert this.kooc.implementations[sName].block;
+[
+ declaration(this.kooc.implementations[sName].block)
+ => mangleImplementation(sName);
+ ]*
+=> check_implementation(sName);
+=> prettyPrintExistFile(this.kooc.path_import + this.kooc.modules[sName].nameC,
+			this.kooc.implementations[sName]);
+// => generateString("mod.c.cwt", this.kooc.implementations[sName], sOutput);
+// => appendFile(this.kooc.path_import + this.kooc.modules[sName].nameC, sOutput);
+'}'
 ;
-
 /**
  * @endcond
  */

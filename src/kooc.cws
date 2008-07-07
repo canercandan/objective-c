@@ -5,53 +5,79 @@
  */
 
 #include "koocTree.inc.cws"
+#include "prettyPrinter.h.inc.cws"
+#include "prettyPrinter.c.inc.cws"
 
-declare function	mainFunc();
+declare function	mainFunc(file : value);
+declare function	testFile(file : value);
+declare function	initTree(file : value);
+declare function	loopFile();
 
-mainFunc();
+loopFile();
 
 /**
- * @fn mainFunc()
- * @brief It's the main function of kooc
- * @todo A decouper !
+ * @fn loopFile()
+ * @brief get all files from ARGS
  */
-function	mainFunc()
+function	loopFile()
 {
-  local		sExtension;
-  local		sRoot;
-  local		treeFile;
-  local		sOutput;
-  local		sPath;
-  local		pos;
-  local		size;
+  local		i = 0;
 
-  if (existFile(_ARGS[0]) == false)
+  while (_ARGS[$i$] != "")
     {
-      traceLine("Impossible to find file [" + _ARGS[0] + "]");
+      testFile(_ARGS[$i$]);
+      initTree(_ARGS[$i$]);
+      mainFunc(_ARGS[$i$]);
+      removeAllElements(project.block);
+      removeAllElements(project.kooc);
+      removeVariable(project.gl_pctx);
+      i = $i + 1$;
+    }
+  exit(0);
+}
+
+/**
+ * @fn mainFunc(file : value)
+ * @brief It's the main function of kooc
+ * @param file filename
+ * @todo A decouper !@n
+ * c'est fait !!!
+ */
+function	mainFunc(file : value)
+{
+  traceLine("[KOOC] Processing: [" + project.pathKc
+	    + "] to [" + project.pathC + "].");
+  translate("./kooc.cwp", project,
+	    project.pathKc, project.pathC);
+  saveProject(project.pathTree);
+  traceLine("[KOOC] Done.");
+  prettyPrintExistFile(project.pathC, project);
+}
+
+/**
+ * @fn testFile(file : value)
+ * @brief test if the file in argument exist else exit
+ * @param file filename
+ * @return exit 42 if error
+ */
+function	testFile(file : value)
+{
+  if (existFile(file) == false)
+    {
+      traceLine("Impossible to find file [" + file + "]");
       exit(42);
     }
-  sExtension = rightString(_ARGS[0], 3);
-  sRoot = getWorkingPath();
-  treeFile = sRoot + replaceString(sExtension, ".ktree", _ARGS[0]);
-  sOutput = sRoot + replaceString(sExtension, ".c", _ARGS[0]);
-  traceLine("[KOOC] Processing: [" + _ARGS[0]
-	    + "] to [" + sOutput + "].");
+}
+
+/**
+ * @fn initTree(file : value)
+ * @brief init the tree'functions
+ * @param file filename
+ */
+function	initTree(file : value)
+{
   treeInit();
   treeKooc();
-  size = lengthString(_ARGS[0]);
-  pos = $size - findLastString(_ARGS[0], '/')$;
-  pos = $pos - 1$;
-  if ($pos != size$)
-    treePathImport(rsubString(_ARGS[0], pos));
-  else
-    treePathImport("./");
-  translate("./kooc.cwp", project, _ARGS[0], sOutput);
-  saveProject(treeFile);
-  traceLine("[KOOC] Done.");
-  /* traceLine("==== BEGIN " + sOutput + " ===="); */
-  /* traceLine(loadFile(sOutput)); */
-  /* traceLine("==== END " + sOutput + " ===="); */
-  /* traceLine("==== BEGIN " + treeFile + " ===="); */
-  /* traceLine(loadFile(treeFile)); */
-  /* traceLine("==== END " + treeFile + " ===="); */
+  treePathToTree(file);
+  treePathImport(file);
 }
