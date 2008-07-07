@@ -50,8 +50,8 @@ koocCall(expr : node) ::=
 '['
 kooc_identifiant_module(module_name)
 [kooc_identifiant_variable(expr, module_name, type_name)
- | [kooc_identifiant_fonction(module_name, func_name, type_name, nb_arg)
-    kooc_list_parametre(module_name, func_name, nb_arg)]]
+ | [kooc_identifiant_fonction(expr, module_name, func_name, type_name, nb_arg)
+    kooc_list_parametre(expr, module_name, func_name, nb_arg)]]
 ']'
 ;
 
@@ -67,31 +67,32 @@ kooc_identifiant_variable(expr : node, module_name : value, type : value)
 	   ::= '.' kooc_identifier:val
 	     => local variable;
 	   => variable = existVar(module_name, val, type);
-//	   => { %>@variable@<% }
 	   => insert expr.value = variable;
 	   => insert expr.operator = "id";
 	   => insert expr.otype = "terminal";
-	   => traceObject(expr, 1);
 ;
 
-kooc_identifiant_fonction(module_name : value, func_name : node, type : value, nb_arg : node)
+kooc_identifiant_fonction(expr : node, module_name : value, func_name : node, type : value, nb_arg : node)
 ::= kooc_identifier:func_name
   => local func = existFunc(module_name, func_name, type, nb_arg);
-=> { %>@func@(<% }
+//=> { %>@func@(<% }
+=> insert expr.left;
+=> insert expr.left.type = "primary_expression";
+=> insert expr.left.value = func;
+=> insert expr.left.operator = "id";
+=> insert expr.left.otype = "terminal";
+=> insert expr.left.etype = "expression";
+=> insert expr.type = "call_expression";
+=> insert expr.otype = "call";
+=> insert expr.operator = "()";
+=> insert expr.list;
 ;
 
-kooc_list_parametre(module : value, func : value, nb_arg : value)
+kooc_list_parametre(expr : node, module : value, func : value, nb_arg : value)
      ::=
      => local i = 0;
      [
-      ':' kooc_param:val
-      => { 
-	if (i > 0)
-	  {
-	    %>, <%
-	  }
-      }
-      => { %>@val@<% }
+      ':' kooc_param(expr):val
       => i = $i + 1$;
       ]*
      => { if (nb_arg > i)
@@ -105,17 +106,42 @@ kooc_list_parametre(module : value, func : value, nb_arg : value)
 	      exit(-1);
 	    }
      }
-     => { %>)<% }
 ;
 
 kooc_identifier ::= #readIdentifier
-  ;
+;
 
-kooc_param ::= #readIdentifier
-  | '"' #readCChar '"'
-  | ['\'' #readChar '\'']
-  | #readNumeric
-  ;
+kooc_param(expr : node) ::= 
+		  	    => pushItem expr.list;
+   [
+   #readIdentifier:val | #readNumeric:val
+   => insert expr.list#back.value = val;
+   => insert expr.list#back.operator = "id";
+   => insert expr.list#back.otype = "terminal";
+   ]
+  | [
+      [
+      #readCString:val
+      => insert expr.list#back.value = '"' + val + '"';
+      => insert expr.list#back.ctype;
+      => insert expr.list#back.ctype.identifier = "char";
+      => insert expr.list#back.infotype;
+      => insert expr.list#back.infotype["const"] = "typeQualifier";
+      => insert expr.list#back.pointer;
+      => insert expr.list#back.pointer["0"];
+      => insert expr.list#back.pointer["0"].level = "*";
+      ]
+    | [
+      #readCChar:val
+      => insert expr.list#back.value = "'" + val + "'";
+      => insert expr.list#back.ctype;
+      => insert expr.list#back.ctype.identifier = "char";
+      ]
+    => insert expr.list#back.otype = "terminal";
+    => insert expr.list#back.operator = "literal";
+    ]
+  => insert expr.list#back.type = "primary_expression";
+;
 /**
  * @endcond
  */
