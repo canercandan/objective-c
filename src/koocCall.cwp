@@ -110,8 +110,9 @@ kooc_list_parametre(expr : node, module : value, func : value, nb_arg : value)
 kooc_identifier ::= #readIdentifier
 ;
 
-kooc_param(expr : node) ::= 
-		  	    => pushItem expr.list;
+kooc_param(expr : node) ::=
+  => pushItem expr.list;
+  => insert expr.list#back.type = "primary_expression";
    [
    #readIdentifier:val | #readNumeric:val
    => insert expr.list#back.value = val;
@@ -139,7 +140,6 @@ kooc_param(expr : node) ::=
     => insert expr.list#back.otype = "terminal";
     => insert expr.list#back.operator = "literal";
     ]
-  => insert expr.list#back.type = "primary_expression";
 ;
 /**
  * @endcond
