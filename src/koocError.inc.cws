@@ -74,10 +74,12 @@ function	existModule(name : value)
 //  foreach val in list
 //  {
 //    current += '.' + val;
+//      traceObject(this.kooc.modules, 4);
     foreach info in this.kooc.modules
     {
       if (key(info) == name && info.package == this.kooc.stack.package)
         return (1);
+	traceLine("info.package = " + info.package + ", this.kooc.stack.package = " + this.kooc.stack.package);
     }
 //  }
   traceLine("error - module " + name + " doesn't exist.");

@@ -10,7 +10,7 @@
 koocPackage ::=
 #explicitCopy
 "@package"
-//=> local list;
 #continue #readIdentifier:this.kooc.stack.package
-//=> insert #evaluateVariable("this.kooc.modules." + this.kooc.stack.package);
+	  [ '.' #readIdentifier:val => this.kooc.stack.package += "." + val;]*
+=> insert #evaluateVariable("this.kooc.modules." + this.kooc.stack.package);
 ;
