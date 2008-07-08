@@ -7,10 +7,10 @@
 * rule \@import
 */
 
-koocPackage(package_name : node) ::=
+koocPackage ::=
 #explicitCopy
 "@package"
 => local list;
-#continue #readIdentifier:package_name
-=> insert #evaluateVariable("this.kooc.modules" + package_name);
+#continue #readIdentifier:this.kooc.stack.package
+=> insert #evaluateVariable("this.kooc.modules." + this.kooc.stack.package);
 ;

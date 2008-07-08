@@ -38,6 +38,7 @@ function	treeKooc()
   insert this.kooc.headers;
   insert this.kooc.class;
   insert this.kooc.stack;
+  insert this.kooc.stack.package = "";
 }
 
 /**

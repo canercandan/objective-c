@@ -63,18 +63,25 @@ function	errorModule()
  */
 function	existModule(name : value)
 {
-//	traceObject(this.kooc,9);
   if (!existVariable(this.kooc.modules))
     {
       traceLine("this.kooc.modules not found");
       exit(-1);
     }
-
-  foreach info in this.kooc.modules
-  {
-    if (key(info) == name)
-      return (1);
-  }
+  local list;
+  local current = "modules";
+  traceObject(this.kooc, 3);
+  traceLine("Package = " + this.kooc.stack.package);
+  cutString(name, '.', list);
+//  foreach val in list
+//  {
+//    current += '.' + val;
+    foreach info in this.kooc.modules
+    {
+      if (key(info) == name)
+        return (1);
+    }
+//  }
   traceLine("error - module " + name + " doesn't exist.");
   exit(-1);
 }

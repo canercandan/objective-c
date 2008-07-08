@@ -43,7 +43,7 @@ checkFile(file : value, module : value) ::=
 #parsedFile(pathKh)
   [
   => local package_name = "";
-   [koocDeclaration(this.kooc.headers[pathH].block, package_name):kc checkModule(module, kc)
+   [koocDeclaration(this.kooc.headers[pathH].block):kc checkModule(module, kc)
     | declaration(this.kooc.headers[pathH].block)
     ]*
 /* #continue #empty */

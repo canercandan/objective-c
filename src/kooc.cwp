@@ -42,17 +42,16 @@
 
 #overload translation_unit ::=
 #ignore("KOOC")
-=> local package_name = "";
-[koocDeclaration(this.block, package_name)
+[koocDeclaration(this.block)
  | declaration(this.block)]*
 #continue
 #empty
 ;
 
-koocDeclaration(block : node, package_name : node) ::=
+koocDeclaration(block : node) ::=
   => local name;
-[ koocImport | koocModule(name, package_name) | koocImplementation |
-  koocClass | koocCall(block) | koocPackage(package_name) ]
+[ koocImport | koocModule(name) | koocImplementation |
+  koocClass | koocCall(block) | koocPackage ]
 ;
 /**
  * @endcond

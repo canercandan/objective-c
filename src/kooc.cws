@@ -40,8 +40,6 @@ function	loopFile()
  * @fn mainFunc(file : value)
  * @brief It's the main function of kooc
  * @param file filename
- * @todo A decouper !@n
- * c'est fait !!!
  */
 function	mainFunc(file : value)
 {

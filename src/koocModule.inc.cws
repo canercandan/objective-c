@@ -4,7 +4,7 @@
  * @note @ref develop @ref contrib @ref tools
  */
 
-declare function	koocModuleInit(sModule : value, sPackage : value);
+declare function	koocModuleInit(sModule : value);
 declare function	koocModuleContent(sModule : value);
 
 /**
@@ -12,11 +12,12 @@ declare function	koocModuleContent(sModule : value);
  * @brief init the tree'information to insert module
  * @param sModule module's name
  */
-function	koocModuleInit(sModule : value, sPackage : value)
+function	koocModuleInit(sModule : value)
 {
   insert this.kooc.modules[sModule];
+  traceLine("Neu " + sModule + " insertion OK");
   insert this.kooc.modules[sModule].block;
-  insert this.kooc.modules[sModule].package = sPackage;
+  insert this.kooc.modules[sModule].package = this.kooc.stack.package;
 }
 
 /**

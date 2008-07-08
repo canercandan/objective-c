@@ -5,18 +5,18 @@
 // Login   <armand_m@epitech.net>
 // 
 // Started on  Mon Jul  7 17:52:07 2008 morgan armand
-// Last update Mon Jul  7 17:54:26 2008 morgan armand
+   Last update Mon Jul  7 18:56:36 2008 florent hochwelker
 //
 
 @package	level1
 
-@class		int1
- {
-   @member
-   {
-     int	a;
-   }
-}
+// @class		int1
+//  {
+//    @member
+//    {
+//      int	a;
+//    }
+// }
 
 
 @module		mod1
@@ -31,13 +31,13 @@
 
 @package	level1.level2
 
-@class		int1
- {
-   @member
-   {
-     int	a;
-   }
-}
+// @class		int1
+//  {
+//    @member
+//    {
+//      int	a;
+//    }
+// }
 
 @module		mod1
 {
