@@ -7,6 +7,9 @@
  */
 
 declare function	koocMangle(theMod : value);
+declare function	koocMangleImplementation(theMod : value);
+declare function	koocMangleType(theNode : node, name : node);
+declare function	koocMangleArgs(theNode : node, name : node);
 
 /**
  * @fn mangle(theMod : value)
@@ -15,81 +18,71 @@ declare function	koocMangle(theMod : value);
  */
 function	koocMangle(theMod : value)
 {
-  local pkgs = "";
-  local name = "_ZN";
-  localref theNode = this.kooc.modules[theMod].block#back;
+  local		pkgs = "";
+  local		name = "_ZN";
+  localref	theNode = this.kooc.modules[theMod].block#back;
 
   if (existVariable(theNode.ctype.infoType["static"]))
     return;
-
   if (this.kooc.modules[theMod].package != "")
-  {
-    cutString(this.kooc.modules[theMod].package, '.', pkgs);
-
-    foreach pkg in pkgs
-      name += lengthString(pkg) + pkg;
-  }
-
+    {
+      cutString(this.kooc.modules[theMod].package, '.', pkgs);
+      foreach pkg in pkgs
+	name += lengthString(pkg) + pkg;
+    }
   name += lengthString(theMod) + theMod;
   name += lengthString(theNode.name) + theNode.name;
   name += "E";
-
-  // type
-  if (theNode.ctype.type == "__PRIMARY__")
-    name += theNode.ctype.identifier.charAt(0);
-  else
-    name += lengthString(theNode.ctype.identifier)
-      + theNode.ctype.identifier;
-
-  // args
-  if (existVariable(theNode.list))
-    {
-      foreach item in theNode.list
-	if (item.ctype.type == "__PRIMARY__")
-	  name += item.ctype.identifier.charAt(0);
-	else
-	  name += lengthString(item.ctype.identifier)
-	    + item.ctype.identifier;
-    }
-
+  koocMangleType(theNode, name);
+  koocMangleArgs(theNode, name);
   insert theNode.oname = theNode.name;
   insert theNode.name = name;
-
   if (theNode.type == "__VARIABLE__")
     {
       ref this.kooc.modules[theMod].block.variables[theNode.name] =
 	this.kooc.modules[theMod].block.variables[theNode.oname];
-
       removeElement(this.kooc.modules[theMod].block.variables, theNode.oname);
     }
   else if (theNode.type == "__PROTOTYPE__")
     {
       ref this.kooc.modules[theMod].block.prototypes[theNode.name] =
 	this.kooc.modules[theMod].block.prototypes[theNode.oname];
-
       removeElement(this.kooc.modules[theMod].block.prototypes, theNode.oname);
     }
 }
 
-function	mangleImplementation(theMod : value)
+function	koocMangleImplementation(theMod : value)
 {
-  local name = "_ZN" + lengthString(theMod) + theMod;
-  localref theNode = this.kooc.implementations[theMod].block#back;
+  local		name = "_ZN" + lengthString(theMod) + theMod;
+  localref	theNode = this.kooc.implementations[theMod].block#back;
 
   if (existVariable(theNode.ctype.infoType["static"]))
     return;
-
   name += lengthString(theNode.name) + theNode.name;
   name += "E";
+  koocMangleType(theNode, name);
+  koocMangleArgs(theNode, name);
+  insert theNode.oname = theNode.name;
+  insert theNode.name = name;
+  if (theNode.type == "__FUNCTION__")
+    {
+      ref this.kooc.implementations[theMod].block.functions[theNode.name] =
+	this.kooc.implementations[theMod].block.functions[theNode.oname];
+      removeElement(this.kooc.implementations[theMod].block.functions, theNode.oname);
+    }
+}
 
-  // type
+function	koocMangleType(theNode : node, name : node)
+{
   if (theNode.ctype.type == "__PRIMARY__")
     name += theNode.ctype.identifier.charAt(0);
   else
     name += lengthString(theNode.ctype.identifier)
       + theNode.ctype.identifier;
+}
 
-  // args
+function	koocMangleArgs(theNode : node, name : node)
+{
   if (existVariable(theNode.list))
     {
       foreach item in theNode.list
@@ -99,16 +92,4 @@ function	mangleImplementation(theMod : value)
 	  name += lengthString(item.ctype.identifier)
 	    + item.ctype.identifier;
     }
-
-  insert theNode.oname = theNode.name;
-  insert theNode.name = name;
-
-  if (theNode.type == "__FUNCTION__")
-    {
-      ref this.kooc.implementations[theMod].block.functions[theNode.name] =
-	this.kooc.implementations[theMod].block.functions[theNode.oname];
-
-      removeElement(this.kooc.implementations[theMod].block.functions, theNode.oname);
-    }
 }
-

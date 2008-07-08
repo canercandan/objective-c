@@ -31,7 +31,7 @@ addImplementation
 => insert this.kooc.implementations[sName].block;
 [
  declaration(this.kooc.implementations[sName].block)
- => mangleImplementation(sName);
+ => koocMangleImplementation(sName);
  ]*
 => check_implementation(sName);
 => prettyPrintExistFile(this.kooc.path_import + this.kooc.modules[sName].nameC,
