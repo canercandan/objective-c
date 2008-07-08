@@ -70,15 +70,13 @@ function	existModule(name : value)
     }
   local list;
   local current = "modules";
-  traceObject(this.kooc, 3);
-  traceLine("Package = " + this.kooc.stack.package);
   cutString(name, '.', list);
 //  foreach val in list
 //  {
 //    current += '.' + val;
     foreach info in this.kooc.modules
     {
-      if (key(info) == name)
+      if (key(info) == name && info.package == this.kooc.stack.package)
         return (1);
     }
 //  }
