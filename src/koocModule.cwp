@@ -12,9 +12,11 @@
  */
 koocModule(sModule : node, sPackage : value) ::=
 #explicitCopy
-//#try
-"@module"
-#continue #readIdentifier:sModule
+"@module" => traceLine("@module read");
+#continue
+[
+#try
+#readIdentifier:sModule
 '{'
   => koocModuleInit(sModule, sPackage);
   [declaration(this.kooc.modules[sModule].block)
@@ -23,7 +25,10 @@ koocModule(sModule : node, sPackage : value) ::=
   ]*
   => koocModuleContent(sModule);
 '}'
-//#catch(sError) => traceLine(sModule); | => traceLine(sError);
+#catch (sError)
+|
+=> errorModule();
+]
 ;
 /**
  * @endcond
