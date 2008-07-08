@@ -12,7 +12,7 @@
  */
 koocModule(sModule : node, sPackage : value) ::=
 #explicitCopy
-"@module" => traceLine("@module read");
+"@module"
 #continue
 [
 #try
