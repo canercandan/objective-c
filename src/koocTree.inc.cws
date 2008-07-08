@@ -37,6 +37,7 @@ function	treeKooc()
   insert this.kooc.modules;
   insert this.kooc.headers;
   insert this.kooc.class;
+  insert this.kooc.stack;
 }
 
 /**
