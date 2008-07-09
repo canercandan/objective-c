@@ -34,6 +34,9 @@ addImplementation
  => koocMangleImplementation(sName);
  ]*
 => check_implementation(sName);
+=> { if (this.kooc.stack.package != "")
+       sName = this.kooc.stack.package + '.' + sName;
+   }
 => prettyPrintExistFile(this.kooc.path_import + this.kooc.modules[sName].nameC,
 			this.kooc.implementations[sName]);
 // => generateString("mod.c.cwt", this.kooc.implementations[sName], sOutput);

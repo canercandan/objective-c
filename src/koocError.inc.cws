@@ -68,20 +68,13 @@ function	existModule(name : value)
       traceLine("this.kooc.modules not found");
       exit(-1);
     }
-  local list;
-  local current = "modules";
-  cutString(name, '.', list);
-//  foreach val in list
-//  {
-//    current += '.' + val;
-//      traceObject(this.kooc.modules, 4);
-    foreach info in this.kooc.modules
-    {
-      if (key(info) == name && info.package == this.kooc.stack.package)
-        return (1);
-	traceLine("info.package = " + info.package + ", this.kooc.stack.package = " + this.kooc.stack.package);
-    }
-//  }
+  if (this.kooc.stack.package != "")
+    name = this.kooc.stack.package + "." + name;
+  foreach info in this.kooc.modules
+  {
+    if (key(info) == name && info.package == this.kooc.stack.package)
+      return (1);
+  }
   traceLine("error - module " + name + " doesn't exist.");
   exit(-1);
 }
@@ -97,6 +90,8 @@ function	existVar(module : value, name : value, type : value)
 {
   local		mangle = 0;
 
+  if (this.kooc.stack.package != "")
+    module = this.kooc.stack.package + "." + module;
   foreach info in this.kooc.modules
   {
     if (key(info) == module)
@@ -144,6 +139,8 @@ function	existFunc(module : value, name : value, type : value, nb_arg : node)
 {
   local		ret = 0;
 
+  if (this.kooc.stack.package != "")
+    module = this.kooc.stack.package + "." + module;
   foreach info in this.kooc.modules
   {
     if (key(info) == module)
@@ -193,7 +190,7 @@ function	countNbArgInFunc(theNode : node)
 // {
 //   local		modules;
 //   local		i = 0;
-
+//
 //   modules = this.kooc.modules;
 //   foreach info in modules
 //   {

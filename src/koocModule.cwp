@@ -15,9 +15,12 @@ koocModule(sModule : node) ::=
 "@module"
 #continue
 [
-#try
+//#try
 #readIdentifier:sModule
 '{'
+  => { if (this.kooc.stack.package != "")
+      sModule = this.kooc.stack.package + "." +  sModule;
+  }
   => koocModuleInit(sModule);
   [declaration(this.kooc.modules[sModule].block)
   => koocModuleCheck(sModule);
@@ -25,10 +28,10 @@ koocModule(sModule : node) ::=
   ]*
   => koocModuleContent(sModule);
 '}'
-#catch (sError)
+/*#catch (sError)
 |
 => errorModule();
-]
+*/]
 ;
 /**
  * @endcond

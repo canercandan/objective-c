@@ -58,13 +58,13 @@ cast : value ::= "@!("->(:cast)')'
 	     ;
 
 kooc_identifiant_module(name : node)
-	   ::= kooc_identifier:name
+	   ::= kooc_identifier:name// ['.' kooc_identifier]*]:name
 	     => existModule(name);
 ;
 
 kooc_identifiant_variable(expr : node, module_name : value, type : value)
 	   ::= '.' kooc_identifier:val
-	     => local variable;
+	   => local variable;
 	   => variable = existVar(module_name, val, type);
 	   => insert expr.value = variable;
 	   => insert expr.operator = "id";

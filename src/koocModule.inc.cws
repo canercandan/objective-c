@@ -14,12 +14,9 @@ declare function	koocModuleContent(sModule : value);
  */
 function	koocModuleInit(sModule : value)
 {
-  local package = this.kooc.stack.package;
-  if (package != "")
-     package = '.' + package;
-  insert #evaluateVariable("this.kooc.modules" + package  +  "[sModule]");
-  insert #evaluateVariable("this.kooc.modules" + package + "[sModule].block");
-  insert #evaluateVariable("this.kooc.modules" + package + "[sModule].package") = this.kooc.stack.package;
+  insert this.kooc.modules[sModule];
+  insert this.kooc.modules[sModule].block;
+  insert this.kooc.modules[sModule].package = this.kooc.stack.package;
 }
 
 /**
@@ -29,11 +26,7 @@ function	koocModuleInit(sModule : value)
  */
 function	koocModuleCheck(sModule : value)
 {
-  local package = this.kooc.stack.package;
-  if (package != "")
-     package = '.' + package;
-
-  localref theNode = #evaluateVariable("this.kooc.modules" + package + "[sModule].block#back");
+  localref theNode = this.kooc.modules[sModule].block#back;
 
   if (theNode.type != "__VARIABLE__" &&
       theNode.type != "__PROTOTYPE__" &&
@@ -52,11 +45,7 @@ function	koocModuleCheck(sModule : value)
  */
 function	koocModuleMangle(sModule : value)
 {
-  local package = this.kooc.stack.package;
-  if (package != "")
-     package = '.' + package;
-
-  localref theNode = #evaluateVariable("this.kooc.modules" + package + "[sModule].block#back");
+  localref theNode = this.kooc.modules[sModule].block#back;
 
   if (theNode.type == "__VARIABLE__" ||
       theNode.type == "__PROTOTYPE__")
@@ -72,17 +61,12 @@ function	koocModuleMangle(sModule : value)
  */
 function	koocModuleContent(sModule : value)
 {
-  local package = this.kooc.stack.package;
-  if (package != "")
-     package = '.' + package;
-
   local		modH = "km_" + sModule.toLowerString() + ".h";
   local		modC = "km_" + sModule.toLowerString() + ".c";
 
-  insert #evaluateVariable("this.kooc.modules" + package  + "[sModule].nameH") = modH;
-  insert #evaluateVariable("this.kooc.modules" + package  + "[sModule].nameC") = modC;
-  generate("mod.h.cwt", #evaluateVariable("this.kooc.modules" + package + "[sModule]"), this.kooc.path_import + modH);
-  generate("mod.c.cwt", #evaluateVariable("this.kooc.modules" + package + "[sModule]"), this.kooc.path_import + modC);
+  insert this.kooc.modules[sModule].nameH = modH;
+  insert this.kooc.modules[sModule].nameC = modC;
+  generate("mod.h.cwt", this.kooc.modules[sModule], this.kooc.path_import + modH);
+  generate("mod.c.cwt", this.kooc.modules[sModule], this.kooc.path_import + modC);
   {%>#include "@modH@"@"\n"@<%}
 }
-
