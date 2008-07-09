@@ -1,0 +1,25 @@
+/**
+ * @file koocMember.cwp
+ * @brief \@member grammar
+ * @note @ref develop @ref contrib @ref tools
+ *
+ * @par koocMember
+ * rule \@member
+ */
+
+/**
+ * @cond
+ */
+
+koocMember(theNode : node) ::=
+#explicitCopy
+"@member"
+#continue
+[
+  ['{' [declaration(theNode.block) => traceLine("Parsed: " + theNode.block#back.name);]* '}']
+  | declaration(theNode.block) => traceLine("Parsed: " + theNode.block#back.name);]
+;
+
+/**
+ * @endcond
+ */
