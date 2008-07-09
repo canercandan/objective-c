@@ -24,19 +24,21 @@ function	koocMangle(theMod : value)
 
   if (existVariable(theNode.ctype.infoType["static"]))
     return;
-  if (this.kooc.modules[theMod].package != "")
-    {
-      cutString(this.kooc.modules[theMod].package, '.', pkgs);
-      foreach pkg in pkgs
-	name += lengthString(pkg) + pkg;
-    }
-  name += lengthString(theMod) + theMod;
+
+  cutString(theMod, '.', pkgs);
+
+  foreach pkg in pkgs
+    name += lengthString(pkg) + pkg;
+
   name += lengthString(theNode.name) + theNode.name;
   name += "E";
+
   koocMangleType(theNode, name);
   koocMangleArgs(theNode, name);
+
   insert theNode.oname = theNode.name;
   insert theNode.name = name;
+
   if (theNode.type == "__VARIABLE__")
     {
       ref this.kooc.modules[theMod].block.variables[theNode.name] =
@@ -53,17 +55,28 @@ function	koocMangle(theMod : value)
 
 function	koocMangleImplementation(theMod : value)
 {
-  local		name = "_ZN" + lengthString(theMod) + theMod;
+  local		pkgs = "";
+  local		name = "_ZN";
   localref	theNode = this.kooc.implementations[theMod].block#back;
 
   if (existVariable(theNode.ctype.infoType["static"]))
     return;
+
+  cutString(theMod, '.', pkgs);
+
+  foreach pkg in pkgs
+    name += lengthString(pkg) + pkg;
+
+//  name += lengthString(theMod) + theMod;
   name += lengthString(theNode.name) + theNode.name;
   name += "E";
+
   koocMangleType(theNode, name);
   koocMangleArgs(theNode, name);
+
   insert theNode.oname = theNode.name;
   insert theNode.name = name;
+
   if (theNode.type == "__FUNCTION__")
     {
       ref this.kooc.implementations[theMod].block.functions[theNode.name] =

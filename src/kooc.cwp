@@ -19,12 +19,13 @@
 #include "../cnorm_2.6/src/cnorm.cwp"
 #include "koocError.inc.cws"
 #include "koocImport.inc.cws"
+//#include "koocMember.inc.cws"
 #include "koocClass.inc.cws"
 #include "koocImplementation.inc.cws"
 #include "koocMangle.inc.cws"
 #include "koocModule.inc.cws"
 #include "koocCall.inc.cws"
-#include "koocPackage.cwp"
+
 
 /**
  * @cond
@@ -60,5 +61,7 @@ koocDeclaration(block : node) ::=
 #include "koocImport.cwp"
 #include "koocModule.cwp"
 #include "koocImplementation.cwp"
+#include "koocMember.cwp"
 #include "koocClass.cwp"
 #include "koocCall.cwp"
+#include "koocPackage.cwp"

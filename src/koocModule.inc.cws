@@ -16,7 +16,6 @@ function	koocModuleInit(sModule : value)
 {
   insert this.kooc.modules[sModule];
   insert this.kooc.modules[sModule].block;
-  insert this.kooc.modules[sModule].package = this.kooc.stack.package;
 }
 
 /**

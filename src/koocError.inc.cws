@@ -72,7 +72,7 @@ function	existModule(name : value)
     name = this.kooc.stack.package + "." + name;
   foreach info in this.kooc.modules
   {
-    if (key(info) == name && info.package == this.kooc.stack.package)
+    if (key(info) == name)
       return (1);
   }
   traceLine("error - module " + name + " doesn't exist.");
