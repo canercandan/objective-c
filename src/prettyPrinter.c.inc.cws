@@ -586,7 +586,7 @@ function	prettyPrintExistFile(file : value, block : node)
 {
   local		sInfo = "";
 
-  if (this.pathC.existFile())
+  if (this.kooc.stack["pathC"].existFile())
     sInfo = loadFile(file);
   insert block.noheader = 0;
   generate("./mod.h.cwt", block, file);

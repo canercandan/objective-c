@@ -42,19 +42,19 @@ checkFile(file : value, module : value) ::=
  [=> koocImportIfndef(file);
 #parsedFile(pathKh)
   [
-  => local package_name = "";
+   => local package_name = "";
    [koocDeclaration(this.kooc.headers[pathH].block):kc checkModule(module, kc)
     | declaration(this.kooc.headers[pathH].block)
     ]*
-/* #continue #empty */
-   => treeCopyInfos(this.kooc.headers[pathH].block);
+#continue #empty
+   //=> treeCopyInfos(this.kooc.headers[pathH].block);
    => prettyPrintExistFile(pathH, this.kooc.headers[pathH]);
    ]
   => koocImportEndif(file);
   [#check(module == "") => koocImportInclude(file);]
   ]
  ]
-| => errorIncludeFile(this.kooc.path_import + file);
+| => errorIncludeFile(this.kooc.stack["path_import"] + file);
 ;
 
 checkModule(module : value, kc : value) ::=

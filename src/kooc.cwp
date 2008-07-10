@@ -67,7 +67,7 @@ koocDeclaration(block : node) ::=
 #include "koocImport.cwp"
 #include "koocModule.cwp"
 #include "koocImplementation.cwp"
-#include "koocMember.cwp"
+//#include "koocMember.cwp"
 #include "koocClass.cwp"
 #include "koocCall.cwp"
 #include "koocPackage.cwp"

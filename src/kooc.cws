@@ -43,13 +43,15 @@ function	loopFile()
  */
 function	mainFunc(file : value)
 {
-  traceLine("[KOOC] Processing: [" + project.pathKc
-	    + "] to [" + project.pathC + "].");
+  traceLine("[KOOC] Processing: [" + project.kooc.stack["pathKc"]
+	    + "] to [" + project.kooc.stack["pathC"] + "].");
   translate("./kooc.cwp", project,
-	    project.pathKc, project.pathC);
-  saveProject(project.pathTree);
+	    project.kooc.stack["pathKc"],
+	    project.kooc.stack["pathC"]);
+  saveProject(project.kooc.stack["pathTree"]);
+  traceLine("[KOOC] PrettyPrinter...");
+  prettyPrintExistFile(project.kooc.stack["pathC"], project);
   traceLine("[KOOC] Done.");
-  prettyPrintExistFile(project.pathC, project);
 }
 
 /**
@@ -74,7 +76,7 @@ function	testFile(file : value)
  */
 function	initTree(file : value)
 {
-  treeInit(this);
+  treeInit();
   treeKooc();
   treePathToTree(file);
   treePathImport(file);

@@ -1,0 +1,44 @@
+<%
+local	sStruct = "";
+local	sHeader = "";
+%>/*
+** KOOC - Kind of Objective C for **@this.nameH@**
+** { dream team 42. } -> Tek3s Strasbourg
+*/
+
+#include <stdlib.h>
+#include <stdio.h>
+#include "@sStruct@.meta.h"
+
+@sStruct@	*@sStruct@_alloc()
+{
+  @sStruct@	*new;
+
+  if (!(new = (@sStruct@*)calloc(1, sizeof(@sStruct@))))
+    {
+      fprintf(stderr, "not enough memory\n");
+      exit(-1);
+    }
+  return (new);
+}
+
+<%
+foreach var in this.init
+{
+%>
+  @sStruct@	*@sStruct@_new(@var.list@)
+    {
+      @sStruct@	*new;
+      
+      new = @sStruct@_alloc();
+      new = @sStruct@_init(new, @var.list@);
+      return (new);
+    }
+<%
+}
+%>
+  
+void	@sStruct@_delete(@sStruct@ *self)
+{
+  free(self);
+}

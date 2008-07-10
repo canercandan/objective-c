@@ -65,7 +65,9 @@ function	koocModuleContent(sModule : value)
 
   insert this.kooc.modules[sModule].nameH = modH;
   insert this.kooc.modules[sModule].nameC = modC;
-  generate("mod.h.cwt", this.kooc.modules[sModule], this.kooc.path_import + modH);
-  generate("mod.c.cwt", this.kooc.modules[sModule], this.kooc.path_import + modC);
+  generate("mod.h.cwt", this.kooc.modules[sModule],
+	   this.kooc.stack["path_import"] + modH);
+  generate("mod.c.cwt", this.kooc.modules[sModule],
+	   this.kooc.stack["path_import"] + modC);
   {%>#include "@modH@"@"\n"@<%}
 }

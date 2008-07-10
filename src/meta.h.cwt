@@ -1,0 +1,23 @@
+<%
+local	sStruct = "";
+local	sHeader = "";
+%>/*
+** KOOC - Kind of Objective C for **@this.nameH@**
+** { dream team 42. } -> Tek3s Strasbourg
+*/
+
+#ifndef __@toUpperString(sStruct)@_META_H__
+# define __@toUpperString(sStruct)@_META_H__
+
+@sStruct@	*@sStruct@_alloc();
+<%
+foreach var in this.init
+{
+%>
+  @sStruct@	*@sStruct@_new(@var.list@);
+<%
+}
+%>
+void	@sStruct@_delete(@sStruct@ *self);
+
+#endif /* !__@toUpperString(sStruct)@_META_H__ */
