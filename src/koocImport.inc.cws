@@ -56,7 +56,6 @@ function	koocImportIfndef(file : value)
 {
   local		pathH = koocImportPathH(file);
   local		nameH = koocImportNameH(file);
-  local		tree = 
 
   deleteFile(pathH);
   appendFile(pathH, "#ifndef __" + nameH
