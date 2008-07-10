@@ -19,29 +19,35 @@
  * @cond
  */
 koocImplementation
-::= #explicitCopy [ addImplementation ]
+	::= #explicitCopy [ addImplementation ]
 ;
 
-addImplementation
-::= "@implementation"
+addImplementation ::= "@implementation"
 #continue #readIdentifier:sName
-  => existModule(sName);
-'{'
-=> insert this.kooc.implementations[sName];
-=> insert this.kooc.implementations[sName].block;
-[
- declaration(this.kooc.implementations[sName].block)
- => koocMangleImplementation(sName);
- ]*
-=> check_implementation(sName);
-=> { if (this.kooc.stack["package"] != "")
-       sName = this.kooc.stack["package"] + '.' + sName;
-   }
-=> prettyPrintExistFile(this.kooc.stack["path_import"] + this.kooc.modules[sName].nameC,
-			this.kooc.implementations[sName]);
-// => generateString("mod.c.cwt", this.kooc.implementations[sName], sOutput);
-// => appendFile(this.kooc.stack["path_import"] + this.kooc.modules[sName].nameC, sOutput);
-'}'
+  => if (!existModule(sName) && !existClass(sName))
+    { traceLine("Module or Class " + sName + "doesn't exist"); exit(-1); }
+  '{'
+  => if (this.kooc.stack["package"] != "")
+      { sName = this.kooc.stack["package"] + '.' + sName; }
+  => insert this.kooc.implementations[sName];
+  => insert this.kooc.implementations[sName].block;
+  [
+    declaration(this.kooc.implementations[sName].block)
+    => koocMangleImplementation(sName);
+  ]*
+  => check_implementation(sName);
+
+  => prettyPrintExistFile(this.kooc.stack["path_import"] + this.kooc.modules[sName].nameC, this.kooc.implementations[sName]);
+
+//  => if (existModule(sName))
+//    { prettyPrintExistFile(this.kooc.stack["path_import"] + this.kooc.modules[sName].nameC, this.kooc.implementations[sName]); }
+
+//  => if (existClass(sName))
+//    { prettyPrintExistFile(this.kooc.stack["path_import"] + this.kooc.class[sName].nameC, this.kooc.implementations[sName]); }
+
+// generateString("mod.c.cwt", this.kooc.implementations[sName], sOutput);
+// appendFile(this.kooc.stack["path_import"] + this.kooc.modules[sName].nameC, sOutput);
+   '}'
 ;
 /**
  * @endcond

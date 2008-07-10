@@ -26,6 +26,12 @@ function	check_implementation(name : value)
   local		prototype;
   local		find;
 
+  if (!existVariable(this.kooc.modules[name].block))
+    exit(-1);
+
+  if (!existVariable(this.kooc.implementations[name].block))
+    exit(-1);
+
   foreach itemMod in this.kooc.modules[name].block
   {
     if (itemMod.type = "__PROTOTYPE__")
@@ -44,7 +50,7 @@ function	check_implementation(name : value)
 	  {
 	    prototype = itemMod.sign + " " + itemMod.identifier;
 	    prototype += " " + itemMod.name + "(...)";
-	    traceLine("error: [" + prototype + "]'s declaration is missing");
+	    traceLine("error: [ " + prototype + " ]'s declaration is missing");
 	    exit(-1);
 	  }
       }
