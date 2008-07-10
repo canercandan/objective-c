@@ -51,7 +51,7 @@
 #empty
 ]
 |
-=> {traceLine("error: " + sError); traceObject(this, 2);}
+=> {traceLine("error: " + sError); traceObject(this, 2); exit(-1);}
 ;
 
 koocDeclaration(block : node) ::=
