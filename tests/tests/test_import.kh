@@ -6,7 +6,7 @@
 ** 
 ** Started on  Thu Jun 26 17:22:27 2008 morgan armand
 <<<<<<< .mine
-** Last update Thu Jul 10 14:58:50 2008 caner candan
+** Last update Thu Jul 10 15:24:46 2008 morgan armand
 =======
 ** Last update Thu Jul 10 11:17:19 2008 morgan armand
 >>>>>>> .r168
@@ -36,8 +36,8 @@ typedef struct	test_s
 
 /*cooc*/
 
-static inline test_t	*test_new(char*str)
-//static inline void	*test_new(char*str)
+//static inline test_t	*test_new(char*str)
+static inline void	*test_new(char*str)
 {
   test_t		*test;
 
