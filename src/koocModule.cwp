@@ -18,10 +18,8 @@ koocModule(sModule : node) ::=
 //#try
 #readIdentifier:sModule
 '{'
-  =>
-  {
-    if (this.kooc.stack.package != "")
-      sModule = this.kooc.stack.package + "." +  sModule;
+  => { if (this.kooc.stack["package"] != "")
+      sModule = this.kooc.stack["package"] + "." +  sModule;
   }
   => koocModuleInit(sModule);
   [declaration(this.kooc.modules[sModule].block)

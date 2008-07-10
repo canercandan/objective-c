@@ -68,20 +68,38 @@ function	existModule(name : value)
       traceLine("this.kooc.modules not found");
       exit(-1);
     }
-  if (this.kooc.stack.package != "")
-    name = this.kooc.stack.package + "." + name;
+  if (this.kooc.stack["package"] != "")
+    name = this.kooc.stack["package"] + "." + name;
   foreach info in this.kooc.modules
   {
     if (key(info) == name)
       return (1);
   }
+//  traceLine("error - module " + name + " doesn't exist.");
+  exit(0);
+}
+
+/**
+ * @fn existCall(name : value)
+ * @brief check if the class exist
+ * @param name module's name
+ */
+function	existClass(name : value)
+{
+  if (!existVariable(this.kooc.classes))
+    {
+      traceLine("this.kooc.classes not found");
+      exit(-1);
+    }
+  if (this.kooc.stack["package"] != "")
+    name = this.kooc.stack["package"] + "." + name;
   foreach info in this.kooc.classes
   {
     if (key(info) == name)
       return (1);
   }
-  traceLine("error - module " + name + " doesn't exist.");
-  exit(-1);
+//  traceLine("error - module " + name + " doesn't exist.");
+  return (0);
 }
 
 /**
@@ -95,8 +113,8 @@ function	existVar(module : value, name : value, type : value)
 {
   local		mangle = 0;
 
-  if (this.kooc.stack.package != "")
-    module = this.kooc.stack.package + "." + module;
+  if (this.kooc.stack["package"] != "")
+    module = this.kooc.stack["package"] + "." + module;
   foreach info in this.kooc.modules
   {
     if (key(info) == module)
@@ -144,8 +162,8 @@ function	existFunc(module : value, name : value, type : value, nb_arg : node)
 {
   local		ret = 0;
 
-  if (this.kooc.stack.package != "")
-    module = this.kooc.stack.package + "." + module;
+  if (this.kooc.stack["package"] != "")
+    module = this.kooc.stack["package"] + "." + module;
   foreach info in this.kooc.modules
   {
     if (key(info) == module)

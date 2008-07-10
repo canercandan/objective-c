@@ -59,7 +59,12 @@ cast : value ::= "@!("->(:cast)')'
 
 kooc_identifiant_module(name : node)
 	   ::= kooc_identifier:name// ['.' kooc_identifier]*]:name
-	     => existModule(name);
+	     => { if (!existModule(name))
+	     	  {
+		    traceLine("error - module " + name + " doesn't exist.");
+	            exit(-1);
+		  }
+	     	}
 ;
 
 kooc_identifiant_variable(expr : node, module_name : value, type : value)
