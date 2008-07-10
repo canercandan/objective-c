@@ -9,6 +9,7 @@
 declare function	errorIncludeFile(path : value);
 declare function	errorImport(message : value);
 declare function	errorModule();
+declare function	existClass(name : value);
 declare function	existModule(name : value);
 declare function	existVar(module : value, name : value, type : value);
 declare function	existFunc(module : value, name : value, type : value, nb_arg : node);
