@@ -27,10 +27,10 @@ function	check_implementation(name : value)
   local		find;
 
   if (!existVariable(this.kooc.modules[name].block))
-    exit(-1);
+    { traceLine("Variable " + this.kooc.modules[name].block + " doesn't exist"); exit(-1); }
 
   if (!existVariable(this.kooc.implementations[name].block))
-    exit(-1);
+    { traceLine("Variable " + this.kooc.implementations[name].block + " doesn't exist"); exit(-1); }
 
   foreach itemMod in this.kooc.modules[name].block
   {

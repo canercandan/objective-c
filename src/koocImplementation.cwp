@@ -36,14 +36,8 @@ addImplementation ::= "@implementation"
     => koocMangleImplementation(sName);
   ]*
   => check_implementation(sName);
-
-  => prettyPrintExistFile(this.kooc.stack["path_import"] + this.kooc.modules[sName].nameC, this.kooc.implementations[sName]);
-
-//  => if (existModule(sName))
-//    { prettyPrintExistFile(this.kooc.stack["path_import"] + this.kooc.modules[sName].nameC, this.kooc.implementations[sName]); }
-
-//  => if (existClass(sName))
-//    { prettyPrintExistFile(this.kooc.stack["path_import"] + this.kooc.class[sName].nameC, this.kooc.implementations[sName]); }
+  => if (existModule(sName) == 1)
+     { prettyPrintExistFile(this.kooc.stack["path_import"] + this.kooc.modules[sName].nameC, this.kooc.implementations[sName]); }
 
 // generateString("mod.c.cwt", this.kooc.implementations[sName], sOutput);
 // appendFile(this.kooc.stack["path_import"] + this.kooc.modules[sName].nameC, sOutput);
