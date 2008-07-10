@@ -19,7 +19,6 @@
 #include "../cnorm_2.6/src/cnorm.cwp"
 #include "koocError.inc.cws"
 #include "koocImport.inc.cws"
-//#include "koocMember.inc.cws"
 #include "koocClass.inc.cws"
 #include "koocImplementation.inc.cws"
 #include "koocMangle.inc.cws"
@@ -52,7 +51,7 @@
 #empty
 ]
 |
-=> {traceLine("error: " + sError); traceObject(this, 21);}
+=> {traceLine("error: " + sError); traceObject(this, 2);}
 ;
 
 koocDeclaration(block : node) ::=
@@ -67,7 +66,7 @@ koocDeclaration(block : node) ::=
 #include "koocImport.cwp"
 #include "koocModule.cwp"
 #include "koocImplementation.cwp"
-//#include "koocMember.cwp"
+#include "koocMember.cwp"
 #include "koocClass.cwp"
 #include "koocCall.cwp"
 #include "koocPackage.cwp"
