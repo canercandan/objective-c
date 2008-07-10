@@ -73,7 +73,7 @@ function	koocImportIfndef(file : value)
 /*     this.kooc.headers[pathH].block.pctx = this.gl_pctx; */
 /*   else */
 /*     insert this.gl_pctx; */
-  traceObject(this, 3);
+  //traceObject(this, 3);
   ref this.gl_pctx = this.kooc.headers[pathH].block;
 }
 
