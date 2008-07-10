@@ -1,17 +1,3 @@
-/*
-** test_import.kh for test_import in /u/epitech_2010s/armand_m/cu/rendu/kooc/KOOC/tests/tests
-** 
-** Made by morgan armand
-** Login   <armand_m@epitech.net>
-** 
-** Started on  Thu Jun 26 17:22:27 2008 morgan armand
-<<<<<<< .mine
-** Last update Thu Jul 10 15:24:46 2008 morgan armand
-=======
-** Last update Thu Jul 10 11:17:19 2008 morgan armand
->>>>>>> .r168
-*/
-
 #define MAXBUF	4200
 
 /*cooc*/
