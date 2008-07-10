@@ -16,8 +16,8 @@ koocMember(theNode : node) ::=
 "@member"
 #continue
 [
-  ['{' [declaration(theNode.block) => traceLine("Parsed: " + theNode.block#back.name);]* '}']
-  | declaration(theNode.block) => traceLine("Parsed: " + theNode.block#back.name);]
+  ['{' [declaration(theNode) => traceLine("Parsed: " + theNode#back.name);]* '}']
+  | declaration(theNode) => traceLine("Parsed: " + theNode#back.name);]
 ;
 
 /**

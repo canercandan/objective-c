@@ -5,7 +5,7 @@
 ** Login   <toumi_m@epitech.net>
 ** 
 ** Started on  Fri Jul  4 15:49:09 2008 User Toumi_m
-   Last update Mon Jul  7 14:57:17 2008 florent hochwelker
+** Last update Wed Jul  9 22:32:46 2008 morgan armand
 */
 
 @import "test_implementation.kh"
@@ -32,7 +32,7 @@
 
   void		function()
   {
-    lol = 666;
+    int lol = 666;
     printf("FUNCTION VOID: %d %d\n", [myTest.a], 'X', lol);
     @!(int)[myTest function :'Q' :"salut"];
   }

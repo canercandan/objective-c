@@ -43,10 +43,16 @@
 
 #overload translation_unit ::=
 #ignore("KOOC")
+#try
 [koocDeclaration(this.block)
  | declaration(this.block)]*
+#catch (sError)
+[
 #continue
 #empty
+]
+|
+=> {traceLine("error: " + sError); traceObject(this, 21);}
 ;
 
 koocDeclaration(block : node) ::=

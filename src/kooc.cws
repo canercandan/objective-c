@@ -62,7 +62,7 @@ function	testFile(file : value)
 {
   if (existFile(file) == false)
     {
-      traceLine("Impossible to find file [" + file + "]");
+      traceLine("Unable to find file [" + file + "]");
       exit(42);
     }
 }

@@ -5,7 +5,7 @@
 ** Login   <armand_m@epitech.net>
 ** 
 ** Started on  Thu Jun 26 17:22:27 2008 morgan armand
-** Last update Mon Jul  7 18:05:48 2008 caner candan
+** Last update Thu Jul 10 11:17:19 2008 morgan armand
 */
 
 #define MAXBUF	4200
@@ -32,8 +32,8 @@ typedef struct	test_s
 
 /*cooc*/
 
-//static inline test_t	*test_new(char*str)
-static inline void	*test_new(char*str)
+static inline test_t	*test_new(char*str)
+//static inline void	*test_new(char*str)
 {
   test_t		*test;
 

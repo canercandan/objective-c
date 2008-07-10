@@ -27,13 +27,22 @@ koocClass ::=
   => pushItem this.kooc.classes[sClass].block;
   => insert this.kooc.classes[sClass].block#back.name = sClass;
   => insert this.kooc.classes[sClass].block#back.type = "__TYPE__";
-  => setall this.kooc.classes[sClass].block#back.ctype = ctype;
   => insert this.kooc.classes[sClass].block#back.etype = "declaration";
   => if (!existVariable(this.kooc.classes[sClass].block.types))
      {insert this.kooc.classes[sClass].block.types;}
   => pushItem this.kooc.classes[sClass].block.types;
   => ref this.kooc.classes[sClass].block.types#back = this.kooc.classes[sClass].block#back;
-  [koocMember(this.kooc.classes[sClass].block) |
-   declaration(this.kooc.classes[sClass].block)]*
+  [koocMember(ctype.list)
+   | declaration(this.kooc.classes[sClass].block) =>
+   {
+     localref theNode = this.kooc.classes[sClass].block#back;
+
+     if (!existVariable(theNode.ctype.infoType))
+       insert theNode.ctype.infoType;
+
+     insert theNode.ctype.infoType["static"] = "storageClassSpecifier";
+   }
+   ]*
+  => setall this.kooc.classes[sClass].block#back.ctype = ctype;
 '}'
 ;

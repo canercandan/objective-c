@@ -75,6 +75,11 @@ function	existModule(name : value)
     if (key(info) == name)
       return (1);
   }
+  foreach info in this.kooc.classes
+  {
+    if (key(info) == name)
+      return (1);
+  }
   traceLine("error - module " + name + " doesn't exist.");
   exit(-1);
 }
