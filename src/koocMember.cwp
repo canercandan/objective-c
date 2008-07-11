@@ -16,8 +16,29 @@ koocMember(theNode : node) ::=
 "@member"
 #continue
 [
-  ['{' [declaration(theNode) => traceLine("Parsed: " + theNode#back.name);]* '}']
-  | declaration(theNode) => traceLine("Parsed: " + theNode#back.name);]
+  [ '{' [ koocMemberDeclaration(theNode) ]* '}']
+  |  koocMemberDeclaration(theNode) ]
+;
+
+koocMemberDeclaration(theNode : node) ::=
+#explicitCopy
+=> local theDecl;
+struct_declaration(theDecl)
+=>
+{
+  pushItem theNode.list;
+  setall theNode.list#back = theDecl;
+}
+| declaration(this.block)
+=>
+{
+  localref theNode = this.block#back;
+
+  if (!existVariable(theNode.ctype.infoType))
+    insert theNode.ctype.infoType;
+
+  insert theNode.ctype.infoType["static"] = "storageClassSpecifier";
+}
 ;
 
 /**
