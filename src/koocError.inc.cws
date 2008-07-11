@@ -41,7 +41,6 @@ function	errorImport(message : value)
 {
   traceLine(getInputFilename() + ":" + countInputLines() + ": "
 	    + "error: expected identifier after token @module");
-  exit(-1);
   traceLine("syntax error in @import: " + message);
   exit(-1);
 }

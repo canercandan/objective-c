@@ -30,7 +30,7 @@ koocModule(sModule : node) ::=
   => koocModuleMangle(sModule);
   ]*
 //=> koocModuleContent(sModule);
-#generatedFile(this.kooc.stack["pathH"])
+=> traceLine(this.kooc.stack["pathH"]);
 => {%>#include "@this.kooc.modules[sModule].nameH@"@"\n"@<%}
 #generatedFile(this.kooc.stack["path_import"] + this.kooc.modules[sModule].nameH)
 => {@@prettyPrinterToH(this.kooc.stack["path_import"]
@@ -38,12 +38,12 @@ koocModule(sModule : node) ::=
 #generatedFile(this.kooc.stack["path_import"] + this.kooc.modules[sModule].nameC)
 => {@@prettyPrinterToC(this.kooc.stack["path_import"]
 		       + this.kooc.modules[sModule].nameC)@@}
-=> traceLine(this.kooc.stack["pathH"]);
 '}'
 /*#catch (sError)
 |
 => errorModule();
 */]
+=> traceLine("file: " + loadFile(this.kooc.stack["pathH"]));
 ;
 /**
  * @endcond
