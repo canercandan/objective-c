@@ -55,13 +55,9 @@ cast : value ::= "@!("->(:cast)')'
 kooc_identifiant_module(expr : node, module_name : node, type_name : value)
 	   ::= [kooc_identifier ['.' kooc_identifier]*]:name
 	       [ !!']' // C'est une variable qui est demande
-		=>      traceLine("La je consomme le nom du module ok ?= " + name);
 	       => { local val = "";
 	       	    module_name = midString(name, 0, findLastString(name, '.'));
-	       	    traceLine("Identifier = " + name);
-	       	    traceLine("Variable detected: module name = " + module_name);
 		    val = subString(name, $findLastString(name, '.') + 1$);
-	       	    traceLine("variable name = " + val);
 		    if (!existModule(module_name))
 	       	       {
 			 traceLine("error - module " + name + " doesn't exist.");
@@ -89,7 +85,6 @@ kooc_identifiant_module(expr : node, module_name : node, type_name : value)
 
 kooc_identifiant_fonction(expr : node, module_name : value, func_name : node, type : value, nb_arg : node)
 ::= kooc_identifier:func_name
-	=>     traceLine("dans function: func = " + func_name);
   => local func = existFunc(module_name, func_name, type, nb_arg);
 //=> { %>@func@(<% }
 => insert expr.left;

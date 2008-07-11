@@ -243,6 +243,6 @@ function	countNbArgInFunc(theNode : node)
 function	errorDebug(sError : value)
 {
   traceLine("error: " + sError);
-  traceObject(this, 4);
+//  traceObject(this, 4);
   exit(-1);
 }
