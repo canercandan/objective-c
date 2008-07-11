@@ -16,6 +16,7 @@ declare function	existFunc(module : value, name : value, type : value, nb_arg : 
 declare function	countNbArgInFunc(theNode : node);
 /* declare function	existVarInFunc(module : value, name_func : value, */
 /*  				       name_param : value, place : value); */
+declare function	errorDebug(sError : value);
 
 /**
  * @fn errorIncludeFile(path : value)
@@ -239,3 +240,10 @@ function	countNbArgInFunc(theNode : node)
 //   traceLine("error - param " + name_param + " doesn't exist in " + module + " module.");
 //   exit(-1);
 // }
+
+function	errorDebug(sError : value)
+{
+  traceLine("error: " + sError);
+  traceObject(this, 2);
+  exit(-1);
+}

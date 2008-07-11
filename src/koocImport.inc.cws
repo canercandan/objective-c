@@ -73,7 +73,7 @@ function	koocImportIfndef(file : value)
 /*   else */
 /*     insert this.gl_pctx; */
   //traceObject(this, 3);
-  ref this.gl_pctx = this.kooc.headers[pathH].block;
+  //ref this.gl_pctx = this.kooc.headers[pathH].block;
 }
 
 /**
@@ -86,7 +86,7 @@ function	koocImportEndif(file : value)
   appendFile(koocImportPathH(file),
 	     "\n#endif /* !__" + koocImportNameH(file)
 	     + "__ */\n");
-  ref this.gl_pctx = this.block;
+  //ref this.gl_pctx = this.block;
 }
 
 /**

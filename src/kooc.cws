@@ -48,7 +48,7 @@ function	mainFunc(file : value)
 	    project.kooc.stack["pathC"]);
   saveProject(project.kooc.stack["pathTree"]);
   traceLine("[KOOC] PrettyPrinter...");
-  prettyPrintExistFile(project.kooc.stack["pathC"], project);
+  //prettyPrintExistFile(project.kooc.stack["pathC"], project);
   traceLine("[KOOC] Done.");
 }
 

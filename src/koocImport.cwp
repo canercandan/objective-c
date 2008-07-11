@@ -31,26 +31,37 @@ koocImport ::= #explicitCopy
  checkFile(file, module)
  | => errorImport(sError);
  ]
+#generatedFile(this.kooc.stack["pathC"])
 ;
 
 checkFile(file : value, module : value) ::=
   => local pathKh = koocImportPathKh(file);
 => local pathH = koocImportPathH(file);
+=> insert this.kooc.stack["pathH"] = pathH;
 #check(pathKh.existFile())
 [
 #check(!this.kooc.headers.findElement(pathH))
- [=> koocImportIfndef(file);
+ [
+  //=> koocImportIfndef(file);
+#generatedFile(pathH)
+[
 #parsedFile(pathKh)
   [
    => local package_name = "";
    [koocDeclaration(this.kooc.headers[pathH].block):kc checkModule(module, kc)
-    | declaration(this.kooc.headers[pathH].block)
+    | declaration(this.block)
+    => treeInsertFileOut(this.kooc.stack["pathH"]);
     ]*
 #continue #empty
    //=> treeCopyInfos(this.kooc.headers[pathH].block);
-   => prettyPrintExistFile(pathH, this.kooc.headers[pathH]);
+   //=> prettyPrintExistFile(pathH, this.kooc.headers[pathH]);
+   => {%>#ifndef ____@"\n"@<%}
+   => {@@r00t()@@}
+   => {%>#endif ____@"\n"@<%}
    ]
-  => koocImportEndif(file);
+ ]
+=> indentFile(pathH, "C++");
+//=> koocImportEndif(file);
   [#check(module == "") => koocImportInclude(file);]
   ]
  ]

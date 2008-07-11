@@ -44,14 +44,16 @@
 #ignore("KOOC")
 #try
 [koocDeclaration(this.block)
- | declaration(this.block)]*
+ | declaration(this.block)
+ => treeInsertFileOut(this.kooc.stack["pathC"]);
+ ]*
 #catch (sError)
 [
 #continue
 #empty
 ]
 |
-=> {traceLine("error: " + sError); traceObject(this, 2); exit(-1);}
+=> errorDebug(sError);
 ;
 
 koocDeclaration(block : node) ::=

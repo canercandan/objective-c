@@ -100,3 +100,8 @@ function	treeCopyInfosInArray(dst : node, src : node)
   foreach var in src
     ref dst[key(var)] = var;
 }
+
+function	treeInsertFileOut(file : value)
+{
+  insert this.block#back.__FILE__ = file;
+}

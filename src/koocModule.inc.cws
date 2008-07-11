@@ -14,8 +14,13 @@ declare function	koocModuleContent(sModule : value);
  */
 function	koocModuleInit(sModule : value)
 {
+  local		modH = "km_" + replaceString('.', '_', sModule.toLowerString()) + ".h";
+  local		modC = "km_" + replaceString('.', '_', sModule.toLowerString()) + ".c";
+
   insert this.kooc.modules[sModule];
   insert this.kooc.modules[sModule].block;
+  insert this.kooc.modules[sModule].nameH = modH;
+  insert this.kooc.modules[sModule].nameC = modC;
 }
 
 /**
@@ -25,7 +30,8 @@ function	koocModuleInit(sModule : value)
  */
 function	koocModuleCheck(sModule : value)
 {
-  localref theNode = this.kooc.modules[sModule].block#back;
+  //localref theNode = this.kooc.modules[sModule].block#back;
+  localref theNode = this.block#back;
 
   if (theNode.type != "__VARIABLE__" &&
       theNode.type != "__PROTOTYPE__" &&
@@ -44,7 +50,8 @@ function	koocModuleCheck(sModule : value)
  */
 function	koocModuleMangle(sModule : value)
 {
-  localref theNode = this.kooc.modules[sModule].block#back;
+  //localref theNode = this.kooc.modules[sModule].block#back;
+  localref theNode = this.block#back;
 
   if (theNode.type == "__VARIABLE__" ||
       theNode.type == "__PROTOTYPE__")
@@ -60,14 +67,11 @@ function	koocModuleMangle(sModule : value)
  */
 function	koocModuleContent(sModule : value)
 {
-  local		modH = "km_" + replaceString('.', '_', sModule.toLowerString()) + ".h";
-  local		modC = "km_" + replaceString('.', '_', sModule.toLowerString()) + ".c";
-
-  insert this.kooc.modules[sModule].nameH = modH;
-  insert this.kooc.modules[sModule].nameC = modC;
   generate("mod.h.cwt", this.kooc.modules[sModule],
-	   this.kooc.stack["path_import"] + modH);
+	   this.kooc.stack["path_import"]
+	   + this.kooc.modules[sModule].nameH);
   generate("mod.c.cwt", this.kooc.modules[sModule],
-	   this.kooc.stack["path_import"] + modC);
-  {%>#include "@modH@"@"\n"@<%}
+	   this.kooc.stack["path_import"]
+	   + this.kooc.modules[sModule].nameC);
+  {%>#include "@this.kooc.modules[sModule].nameH@"@"\n"@<%}
 }

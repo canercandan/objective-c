@@ -32,7 +32,10 @@ addImplementation ::= "@implementation"
   => insert this.kooc.implementations[sName];
   => insert this.kooc.implementations[sName].block;
   [
-    declaration(this.kooc.implementations[sName].block)
+   //declaration(this.kooc.implementations[sName].block)
+    declaration(this.block)
+/*     => treeInsertFileOut(this.kooc.stack["path_import"] */
+/* 			 +  */
     => koocMangleImplementation(sName);
   ]*
   => check_implementation(sName);

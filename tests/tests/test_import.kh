@@ -22,8 +22,8 @@ typedef struct	test_s
 
 /*cooc*/
 
-//static inline test_t	*test_new(char*str)
-static inline void	*test_new(char*str)
+static inline test_t	*test_new(char*str)
+//static inline void	*test_new(char*str)
 {
   test_t		*test;
 

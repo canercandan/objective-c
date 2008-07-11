@@ -8,11 +8,14 @@
 
 #define TEST leet
 
+typedef int	Entier;
+
 int		main(int ac, char **av)
 {
   test_t	*test;
   char		my_buf[MAXBUF];
   char		fmt[13];// pourquoi 13!!peut pas avoir plus 10 milliard
+  Entier	a;
   
   test = test_new("KOOC rulez\n");
   

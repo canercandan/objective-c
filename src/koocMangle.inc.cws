@@ -20,7 +20,8 @@ function	koocMangle(theMod : value)
 {
   local		pkgs = "";
   local		name = "_ZN";
-  localref	theNode = this.kooc.modules[theMod].block#back;
+  //localref	theNode = this.kooc.modules[theMod].block#back;
+  localref	theNode = this.block#back;
 
   if (existVariable(theNode.ctype.infoType["static"]))
     return;
@@ -41,15 +42,22 @@ function	koocMangle(theMod : value)
 
   if (theNode.type == "__VARIABLE__")
     {
-      ref this.kooc.modules[theMod].block.variables[theNode.name] =
-	this.kooc.modules[theMod].block.variables[theNode.oname];
-      removeElement(this.kooc.modules[theMod].block.variables, theNode.oname);
+/*       ref this.kooc.modules[theMod].block.variables[theNode.name] = */
+/* 	this.kooc.modules[theMod].block.variables[theNode.oname]; */
+/*       removeElement(this.kooc.modules[theMod].block.variables, theNode.oname); */
+      ref this.block.variables[theNode.name] =
+	this.block.variables[theNode.oname];
+      removeElement(this.block.variables, theNode.oname);
+
     }
   else if (theNode.type == "__PROTOTYPE__")
     {
-      ref this.kooc.modules[theMod].block.prototypes[theNode.name] =
-	this.kooc.modules[theMod].block.prototypes[theNode.oname];
-      removeElement(this.kooc.modules[theMod].block.prototypes, theNode.oname);
+/*       ref this.kooc.modules[theMod].block.prototypes[theNode.name] = */
+/* 	this.kooc.modules[theMod].block.prototypes[theNode.oname]; */
+/*       removeElement(this.kooc.modules[theMod].block.prototypes, theNode.oname); */
+      ref this.block.prototypes[theNode.name] =
+	this.block.prototypes[theNode.oname];
+      removeElement(this.block.prototypes, theNode.oname);
     }
 }
 
@@ -57,7 +65,8 @@ function	koocMangleImplementation(theMod : value)
 {
   local		pkgs = "";
   local		name = "_ZN";
-  localref	theNode = this.kooc.implementations[theMod].block#back;
+/*   localref	theNode = this.kooc.implementations[theMod].block#back; */
+  localref	theNode = this.block#back;
 
   if (existVariable(theNode.ctype.infoType["static"]))
     return;
@@ -79,9 +88,12 @@ function	koocMangleImplementation(theMod : value)
 
   if (theNode.type == "__FUNCTION__")
     {
-      ref this.kooc.implementations[theMod].block.functions[theNode.name] =
-	this.kooc.implementations[theMod].block.functions[theNode.oname];
-      removeElement(this.kooc.implementations[theMod].block.functions, theNode.oname);
+/*       ref this.kooc.implementations[theMod].block.functions[theNode.name] = */
+/* 	this.kooc.implementations[theMod].block.functions[theNode.oname]; */
+/*       removeElement(this.kooc.implementations[theMod].block.functions, theNode.oname); */
+      ref this.block.functions[theNode.name] =
+	this.block.functions[theNode.oname];
+      removeElement(this.block.functions, theNode.oname);
     }
 }
 

@@ -22,7 +22,10 @@ koocModule(sModule : node) ::=
       sModule = this.kooc.stack["package"] + "." +  sModule;
   }
   => koocModuleInit(sModule);
-  [declaration(this.kooc.modules[sModule].block)
+// [declaration(this.kooc.modules[sModule].block)
+  [declaration(this.block)
+   => treeInsertFileOut(this.kooc.stack["path_import"]
+			+ this.kooc.modules[sModule].nameC);
   => koocModuleCheck(sModule);
   => koocModuleMangle(sModule);
   ]*
