@@ -6,8 +6,8 @@ declare function testOType<T>(theNode : node);
 
 #include "parse.inc.cws"
 #include "get.inc.cws"
-#include "testType.cws"
-#include "testEType.cws"
+#include "testType.inc.cws"
+#include "testEType.inc.cws"
 #include "testCType.inc.cws"
 #include "testOType.inc.cws"
 

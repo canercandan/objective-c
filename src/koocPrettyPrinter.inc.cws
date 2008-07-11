@@ -1,0 +1,44 @@
+/**
+ * @file koocPrettyPrinter.inc.cws
+ * @brief PrettyPrinter to print the kooc to c
+ * @note @ref develop @ref contrib @ref tools
+ * @bug URGENT: plantage de kooc si on met des types struct dans
+ * prototype de fonction
+ */
+
+declare function	prettyPrinterToC(file : value = "");
+declare function	prettyPrinterToH(file : value = "");
+
+//declare function parseBlock(theNode : node, file " value);
+declare function testType<T>(theNode : node);
+declare function testCType<T>(theNode : node);
+declare function testOType<T>(theNode : node);
+declare function testEType<T>(theNode : node);
+
+#include "prettyPrinter/parse.inc.cws"
+#include "prettyPrinter/get.inc.cws"
+#include "prettyPrinter/testType.inc.cws"
+#include "prettyPrinter/testCType.inc.cws"
+#include "prettyPrinter/testEType.inc.cws"
+#include "prettyPrinter/testOType.inc.cws"
+
+
+/**
+ * @fn prettyPrinterToC()
+ * @brief main function
+ * @return code generated from the tree
+ */
+function	prettyPrinterToC(file : value = "")
+{
+  return parseBlock(this.block, file);
+}
+
+/**
+ * @fn prettyPrinterToH()
+ * @brief main function
+ * @return code generated from the tree
+ */
+function	prettyPrinterToH(file : value = "")
+{
+//  return parseBlock(this.block, file);
+}

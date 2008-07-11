@@ -12,7 +12,7 @@ function parseInit(theNode : node)
   return sResult;
 }
 
-function parseBlock(theNode : node)
+function parseBlock(theNode : node, file : value = "")
 {
   local sResult = "";
   local isBlock = 0;
@@ -21,14 +21,17 @@ function parseBlock(theNode : node)
     {
       foreach var in theNode.block
       {
-	if (existVariable(var.etype))
-	  sResult += testEType<var.etype>(var) + ";\n";
-	else if (existVariable(var.otype))
-	  sResult += testOType<var.otype>(var);
-	else if (existVariable(var.init))
+	if (file == "" || file == var.__FILE__)
 	  {
-	    sResult += parseInit(var);
-	    if !last(var) sResult += ", ";
+	    if (existVariable(var.etype))
+	      sResult += testEType<var.etype>(var) + ";\n";
+	    else if (existVariable(var.otype))
+	      sResult += testOType<var.otype>(var);
+	    else if (existVariable(var.init))
+	      {
+		sResult += parseInit(var);
+		if !last(var) sResult += ", ";
+	      }
 	  }
       }
       isBlock = 1;
@@ -37,14 +40,17 @@ function parseBlock(theNode : node)
     {
       foreach var in theNode
       {
-	if (existVariable(var.etype))
-	  sResult += testEType<var.etype>(var) + ";\n";
-	else if (existVariable(var.otype))
-	  sResult += testOType<var.otype>(var) ;
-	else if (existVariable(var.init))
+	if (file == "" || file == var.__FILE__)
 	  {
-	    sResult += parseInit(var);
-	    if !last(var) sResult += ", ";
+	    if (existVariable(var.etype))
+	      sResult += testEType<var.etype>(var) + ";\n";
+	    else if (existVariable(var.otype))
+	      sResult += testOType<var.otype>(var) ;
+	    else if (existVariable(var.init))
+	      {
+		sResult += parseInit(var);
+		if !last(var) sResult += ", ";
+	      }
 	  }
       }
     }
