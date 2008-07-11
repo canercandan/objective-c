@@ -5,8 +5,6 @@
  */
 
 #include "koocTree.inc.cws"
-#include "prettyPrinter.h.inc.cws"
-#include "prettyPrinter.c.inc.cws"
 
 declare function	mainFunc(file : value);
 declare function	testFile(file : value);
