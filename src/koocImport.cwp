@@ -49,7 +49,7 @@ checkFile(file : value, module : value) ::=
   [
    => koocImportIfndef(file);
    => local package_name = "";
-   [koocDeclaration(this.kooc.headers[pathH].block):kc checkModule(module, kc)
+   [koocDeclaration(this.block):kc checkModule(module, kc)
     | declaration(this.block)
     => treeInsertFileOut(this.kooc.stack["pathH"]);
     ]*

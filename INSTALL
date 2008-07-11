@@ -25,3 +25,4 @@ ou alors tu copie colle sa:
 --
 setenv PATH $PATH':'`pwd`/bin
 setenv KOOC_PATH `pwd`
+
