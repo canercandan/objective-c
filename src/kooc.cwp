@@ -51,7 +51,9 @@
 [
 #continue
 #empty
-]
+ => {@@prettyPrinterToH(this.kooc.stack["pathC"])@@}
+ => {@@prettyPrinterToC(this.kooc.stack["pathC"])@@}
+ ]
 |
 => errorDebug(sError);
 ;

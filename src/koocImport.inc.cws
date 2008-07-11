@@ -44,7 +44,7 @@ function	koocImportNameH(file : value)
 {
   return (replaceString('.', '_',
 			replaceString('/', '_',
-				      toUpperString(koocImportPathH(file)))));
+				      toUpperString(file))));
 }
 
 /**
@@ -57,23 +57,9 @@ function	koocImportIfndef(file : value)
   local		pathH = koocImportPathH(file);
   local		nameH = koocImportNameH(file);
 
-  deleteFile(pathH);
-  appendFile(pathH, "#ifndef __" + nameH
-	     + "__\n# define __" + nameH + "__\n\n");
+  {%>#ifndef __@nameH@__@"\n"@# define __@nameH@__@"\n\n"@<%}
   insert this.kooc.headers[pathH];
   insert this.kooc.headers[pathH].block;
-/*   insert this.kooc.headers[pathH].block[0]; */
-/*   insert this.kooc.headers[pathH].block[0].block; */
-/*   insert this.kooc.headers[pathH].block[0].type = "primary_expression"; */
-/*   ref this.gl_pctx = this.kooc.headers[pathH].block#back.block; */
-/*   ref this.gl_pctx = this.kooc.headers[pathH].block; */
-/*   insert this.kooc.headers[pathH].block.pctx; */
-/*   if (existVariable(this.gl_pctx)) */
-/*     this.kooc.headers[pathH].block.pctx = this.gl_pctx; */
-/*   else */
-/*     insert this.gl_pctx; */
-  //traceObject(this, 3);
-  //ref this.gl_pctx = this.kooc.headers[pathH].block;
 }
 
 /**
@@ -83,10 +69,7 @@ function	koocImportIfndef(file : value)
  */
 function	koocImportEndif(file : value)
 {
-  appendFile(koocImportPathH(file),
-	     "\n#endif /* !__" + koocImportNameH(file)
-	     + "__ */\n");
-  //ref this.gl_pctx = this.block;
+  {%>#endif /* !__@koocImportNameH(file)@__ */@"\n"@<%}
 }
 
 /**

@@ -49,6 +49,7 @@ function	mainFunc(file : value)
   saveProject(project.kooc.stack["pathTree"]);
   traceLine("[KOOC] PrettyPrinter...");
   //prettyPrintExistFile(project.kooc.stack["pathC"], project);
+  indentFile(project.kooc.stack["pathC"], "C++");
   traceLine("[KOOC] Done.");
 }
 

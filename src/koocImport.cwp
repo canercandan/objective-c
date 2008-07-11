@@ -44,25 +44,20 @@ checkFile(file : value, module : value) ::=
 [
 #check(!this.kooc.headers.findElement(pathH))
  [
-  //=> koocImportIfndef(file);
 #generatedFile(pathH)
-[
 #parsedFile(pathKh)
   [
-   => {%>#ifndef ____@"\n"@<%}
+   => koocImportIfndef(file);
    => local package_name = "";
    [koocDeclaration(this.kooc.headers[pathH].block):kc checkModule(module, kc)
     | declaration(this.block)
     => treeInsertFileOut(this.kooc.stack["pathH"]);
     ]*
 #continue #empty
-   //=> treeCopyInfos(this.kooc.headers[pathH].block);
-   //=> prettyPrintExistFile(pathH, this.kooc.headers[pathH]);
-   => {@@prettyPrinterToC(pathH)@@}
-   => {%>#endif ____@"\n"@<%}
    ]
- ]
-//=> koocImportEndif(file);
+   => {@@prettyPrinterToH(pathH)@@}
+   => {@@prettyPrinterToC(pathH)@@}
+   => koocImportEndif(file);
   ]
  ]
 | => errorIncludeFile(this.kooc.stack["path_import"] + file);

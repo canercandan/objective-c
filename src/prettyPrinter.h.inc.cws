@@ -4,22 +4,102 @@
  * @note @ref develop @ref contrib @ref tools
  */
 
-declare function getSimpleType(theNode : node);
-declare function getPointer(theNode : node);
-declare function getBits(theNode : node);
-declare function getArrayInfo(theNode : node);
-declare function getCommentSuffix(theNode : node);
-declare function oneArgument(theNode : node, type : value = 1);
-declare function getArgument(ctype : node);
-declare function getArgumentStructOrUnion(ctype : node);
-declare function getStructOrUnion(conterner : node);
-declare function getArgumentEnum(ctype : node);
-declare function getEnum(Enum : node);
-declare function getFunction(function : node);
-declare function getVariable(variable : node);
-declare function getVariableTypeLess(variable : node);
-declare function getExternVariable(variable : node);
-declare function getDefineHeader();
+declare function	prettyPrinterToH(file : value = "");
+declare function	getSimpleType(theNode : node);
+declare function	getPointer(theNode : node);
+declare function	getBits(theNode : node);
+declare function	getArrayInfo(theNode : node);
+declare function	getCommentSuffix(theNode : node);
+declare function	oneArgument(theNode : node, type : value = 1);
+declare function	getArgument(ctype : node);
+declare function	getArgumentStructOrUnion(ctype : node);
+declare function	getStructOrUnion(conterner : node);
+declare function	getArgumentEnum(ctype : node);
+declare function	getEnum(Enum : node);
+declare function	getFunction(function : node);
+declare function	getVariable(variable : node);
+declare function	getVariableTypeLess(variable : node);
+declare function	getExternVariable(variable : node);
+declare function	getDefineHeader();
+
+/**
+ * @fn prettyPrinterToH()
+ * @brief main function
+ */
+function	prettyPrinterToH(file : value = "")
+{
+  local		sInfo = "";
+
+  if (existVariable(this.block.prototypes))
+    {
+      sInfo += "/* prototypes definitions: */\n";
+      foreach var in this.block.prototypes
+	if (file == "" || file == var.__FILE__)
+	  if (!existVariable(var.ctype.infoType["static"]))
+	    sInfo += getFunction(var) + ";\n";
+      sInfo += "\n";
+    }
+  if (existVariable(this.block.structs))
+    {
+      sInfo += "/* structures definitions: */\n";
+      foreach var in this.block.structs
+	if (file == "" || file == var.__FILE__)
+	  sInfo += getStructOrUnion(var) + "\n";
+    }
+  if (existVariable(this.block.enums))
+    {
+      sInfo += "/* enums declarations: */\n";
+      foreach var in this.block.enums
+	if (file == "" || file == var.__FILE__)
+	  sInfo += getEnum(var) + "\n";
+    }
+  if (existVariable(this.block.unions))
+    {
+      sInfo += "/* unions declarations: */\n";
+      foreach var in this.block.unions
+	if (file == "" || file == var.__FILE__)
+	  sInfo += getStructOrUnion(var) + "\n";
+    }
+  if (existVariable(this.block.types))
+    {
+      sInfo += "/* types declarations: */\n";
+      foreach var in this.block.types
+	if (file == "" || file == var.__FILE__)
+	  {
+	    if (var.ctype.specifier == "enum")
+	      sInfo += getEnum(var);
+	    else if (var.ctype.specifier == "union" ||
+		     var.ctype.specifier == "struct")
+	      sInfo += getStructOrUnion(var);
+	    else if (var.ctype.type == "__PFUNCTION__")
+	      sInfo += getFunction(var);
+	    else if (var.ctype.type == "__PRIMARY__" ||
+		     var.ctype.type == "__COMPOSED__" ||
+		     var.ctype.type == "__TYPEOF__")
+	      sInfo += getVariable(var) + ";\n";
+	    sInfo += "\n";
+	  }
+    }
+  if (existVariable(this.block.variables))
+    {
+      sInfo += "/* variables declarations: */\n";
+      foreach var in this.block.variables
+	if (file == "" || file == var.__FILE__)
+	  if (!existVariable(var.ctype.infoType["static"]))
+	    sInfo += getExternVariable(var) + "\n";
+      sInfo += "\n";
+    }
+  if (existVariable(this.block.functions))
+    {
+      sInfo += "/* functions declarations: */\n";
+      foreach var in this.block.functions
+	if (file == "" || file == var.__FILE__)
+	  if (!existVariable(var.ctype.infoType["static"]))
+	    sInfo += getFunction(var) + ";\n";
+      sInfo += "\n";
+    }
+  return (sInfo);
+}
 
 /**
  * @fn getSimpleType(theNode : node)
