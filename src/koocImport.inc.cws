@@ -58,8 +58,6 @@ function	koocImportIfndef(file : value)
   local		nameH = koocImportNameH(file);
 
   {%>#ifndef __@nameH@__@"\n"@# define __@nameH@__@"\n\n"@<%}
-/*   insert this.kooc.headers[pathH]; */
-/*   insert this.kooc.headers[pathH].block; */
 }
 
 /**

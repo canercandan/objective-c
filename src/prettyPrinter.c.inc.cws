@@ -12,8 +12,6 @@ declare function	loopArgument(block : node);
 declare function	endPoint(block : node);
 declare function	clearString(val : value);
 declare function	blockType<T>(block : node);
-declare function	prettyPrintExistFile(file : value,
-					     block : node);
 
 /**
  * @fn prettyPrinterToC()
@@ -575,25 +573,4 @@ function	blockType<"sizeof_expression">(block : node)
 function	blockType<"deref_expression">(block : node)
 {
   return (blockType<"equality_expression">(block));
-}
-
-/**
- * @fn prettyPrintExistFile(file : value, block : node);
- * @brief use this function if you want prettyPrint a exist file
- * @param file filename
- * @param block tree'block source
- */
-function	prettyPrintExistFile(file : value, block : node)
-{
-  local		sInfo = "";
-
-  if (this.kooc.stack["pathC"].existFile())
-    sInfo = loadFile(file);
-  insert block.noheader = 0;
-  generate("./mod.h.cwt", block, file);
-  sInfo += loadFile(file);
-  generate("./mod.c.cwt", block, file);
-  sInfo += loadFile(file);
-  saveToFile(file, sInfo);
-  indentFile(file, "C++");
 }

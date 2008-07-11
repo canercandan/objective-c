@@ -66,11 +66,5 @@ function	koocModuleMangle(sModule : value)
  */
 function	koocModuleContent(sModule : value)
 {
-  generate("mod.h.cwt", this.kooc.modules[sModule],
-	   this.kooc.stack["path_import"]
-	   + this.kooc.modules[sModule].nameH);
-  generate("mod.c.cwt", this.kooc.modules[sModule],
-	   this.kooc.stack["path_import"]
-	   + this.kooc.modules[sModule].nameC);
   {%>#include "@this.kooc.modules[sModule].nameH@"@"\n"@<%}
 }

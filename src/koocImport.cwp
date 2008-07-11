@@ -31,34 +31,31 @@ koocImport ::= #explicitCopy
  checkFile(file, module)
  | => errorImport(sError);
  ]
-=> indentFile(this.kooc.stack["pathH"], "C++");
 [#check(module == "") => koocImportInclude(file);]
 #generatedFile(this.kooc.stack["pathC"])
 ;
 
 checkFile(file : value, module : value) ::=
   => local pathKh = koocImportPathKh(file);
-=> local pathH = koocImportPathH(file);
-=> insert this.kooc.stack["pathH"] = pathH;
+=> insert this.kooc.stack["pathH"] = koocImportPathH(file);
 #check(pathKh.existFile())
 [
-#check(!this.kooc.headers.findElement(pathH))
- [
-#generatedFile(pathH)
+ => deleteFile(this.kooc.stack["pathH"]);
+#generatedFile(this.kooc.stack["pathH"])
 #parsedFile(pathKh)
-  [
-   => koocImportIfndef(file);
-   => local package_name = "";
-   [koocDeclaration(this.block):kc checkModule(module, kc)
-    | declaration(this.block)
-    => treeInsertFileOut(this.kooc.stack["pathH"]);
-    ]*
+ [
+  => koocImportIfndef(file);
+  => local package_name = "";
+  [koocDeclaration(this.block):kc checkModule(module, kc)
+   | declaration(this.block)
+   => treeInsertFileOut(this.kooc.stack["pathH"]);
+   ]*
 #continue #empty
-   ]
-   => {@@prettyPrinterToH(pathH)@@}
-   => {@@prettyPrinterToC(pathH)@@}
-   => koocImportEndif(file);
+  => {@@prettyPrinterToH(this.kooc.stack["pathH"])@@}
+  => {@@prettyPrinterToC(this.kooc.stack["pathH"])@@}
+  => koocImportEndif(file);
   ]
+ => indentFile(this.kooc.stack["pathH"], "C++");
  ]
 | => errorIncludeFile(this.kooc.stack["path_import"] + file);
 ;
