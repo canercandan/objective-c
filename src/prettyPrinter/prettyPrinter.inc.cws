@@ -1,17 +1,15 @@
- declare function parseBlock(theNode : node);
- declare function testType<T>(theNode : node)
-;
- declare function testEType<T>(theNode : node);
- declare function testCType<T>(theNode : node);
- declare function testOType<T>(theNode : node);
+declare function parseBlock(theNode : node);
+declare function testType<T>(theNode : node);
+declare function testCType<T>(theNode : node);
+declare function testOType<T>(theNode : node);
 
 
-#include "parse.inc.cwt"
-#include "get.inc.cwt"
-#include "testType.cwt"
-#include "testEType.cwt"
-#include "testCType.inc.cwt"
-#include "testOType.inc.cwt"
+#include "parse.inc.cws"
+#include "get.inc.cws"
+#include "testType.cws"
+#include "testEType.cws"
+#include "testCType.inc.cws"
+#include "testOType.inc.cws"
 
 function	prettyPrinter(theNode : node)
 {

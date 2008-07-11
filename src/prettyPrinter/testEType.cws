@@ -1,0 +1,24 @@
+function testEType<T>(theNode : node)
+{
+  traceLine("EType inconnu va falloir le rajouter :) " + T);
+}
+
+function testEType<"declaration">(theNode : node)
+{
+  return testType<theNode.type>(theNode);
+}
+
+function testEType<"typename">(theNode : node)
+{
+  return testType<theNode.type>(theNode);
+}
+
+function testEType<"expression">(theNode : node)
+{
+  return testOType<theNode.otype>(theNode);
+}
+
+function testEType<"statement">(theNode : node)
+{
+  return testOType<theNode.otype>(theNode);
+}

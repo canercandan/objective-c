@@ -1,0 +1,9 @@
+function testCType<T>(theNode : node)
+{
+  return getSimpleType(theNode);
+}
+
+function testCType<"__COMPOSED__">(theNode : node)
+{
+  return getStruct(theNode);
+}
