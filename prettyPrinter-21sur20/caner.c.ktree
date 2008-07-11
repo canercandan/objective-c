@@ -1,0 +1,102 @@
+<project>
+	<block>
+		<__ARRAY_ENTRY __KEY="0">
+			<__LINE__ __VALUE="1" />
+			<ctype>
+				<pctx __REFERENCE="project.block" />
+				<type __VALUE="__PRIMARY__" />
+				<identifier __VALUE="int" />
+				<infoType __VALUE="1">
+					<__ARRAY_ENTRY __KEY="typedef" __VALUE="storageClassSpecifier" />
+				</infoType>
+				<sign __VALUE="signed" />
+			</ctype>
+			<type __VALUE="__TYPE__" />
+			<etype __VALUE="declaration" />
+			<name __VALUE="test_t" />
+		</__ARRAY_ENTRY>
+		<__ARRAY_ENTRY __KEY="1">
+			<__LINE__ __VALUE="3" />
+			<ctype>
+				<pctx __REFERENCE="project.block" />
+				<type __VALUE="__COMPOSED__" />
+				<identifier __VALUE="test_t" />
+				<pointer>
+					<__ARRAY_ENTRY __KEY="0">
+						<level __VALUE="*" />
+					</__ARRAY_ENTRY>
+				</pointer>
+			</ctype>
+			<type __VALUE="__FUNCTION__" />
+			<etype __VALUE="declaration" />
+			<name __VALUE="test_new" />
+			<list>
+				<__ARRAY_ENTRY __KEY="0">
+					<ctype>
+						<pctx __REFERENCE="project.block" />
+						<type __VALUE="__PRIMARY__" />
+						<identifier __VALUE="char" />
+						<sign __VALUE="signed" />
+						<pointer>
+							<__ARRAY_ENTRY __KEY="0">
+								<level __VALUE="*" />
+							</__ARRAY_ENTRY>
+						</pointer>
+					</ctype>
+					<type __VALUE="__VARIABLE__" />
+					<etype __VALUE="declaration" />
+					<name __VALUE="toto" />
+				</__ARRAY_ENTRY>
+			</list>
+			<otype __VALUE="rootblock" />
+			<block>
+				<__ARRAY_ENTRY __KEY="0">
+					<__LINE__ __VALUE="5" />
+					<ctype>
+						<pctx __REFERENCE="project.block[&quot;1&quot;].block" />
+						<type __VALUE="__PRIMARY__" />
+						<identifier __VALUE="int" />
+						<sign __VALUE="signed" />
+					</ctype>
+					<type __VALUE="__VARIABLE__" />
+					<etype __VALUE="declaration" />
+					<name __VALUE="lol" />
+				</__ARRAY_ENTRY>
+				<__ARRAY_ENTRY __KEY="1">
+					<left>
+						<type __VALUE="primary_expression" />
+						<value __VALUE="lol" />
+						<operator __VALUE="id" />
+						<otype __VALUE="terminal" />
+					</left>
+					<operator __VALUE="=" />
+					<right>
+						<type __VALUE="primary_expression" />
+						<value __VALUE="43" />
+						<ctype>
+							<identifier __VALUE="int" />
+						</ctype>
+						<operator __VALUE="literal" />
+						<otype __VALUE="terminal" />
+					</right>
+					<type __VALUE="assignement_expression" />
+					<otype __VALUE="binary" />
+					<etype __VALUE="expression" />
+					<__LINE__ __VALUE="7" />
+				</__ARRAY_ENTRY>
+				<pctx __REFERENCE="project.block" />
+				<variables>
+					<__ARRAY_ENTRY __KEY="lol" __REFERENCE="project.block[&quot;1&quot;].block[&quot;0&quot;]" />
+				</variables>
+			</block>
+		</__ARRAY_ENTRY>
+		<pctx />
+		<types>
+			<__ARRAY_ENTRY __KEY="test_t" __REFERENCE="project.block[&quot;0&quot;]" />
+		</types>
+		<functions>
+			<__ARRAY_ENTRY __KEY="test_new" __REFERENCE="project.block[&quot;1&quot;]" />
+		</functions>
+	</block>
+	<gl_pctx __REFERENCE="project.block[&quot;1&quot;].block" />
+</project>

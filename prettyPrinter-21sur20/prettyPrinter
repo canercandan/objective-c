@@ -1,0 +1,2 @@
+#!/bin/sh
+codeworker prettyPrinter.cws $1

@@ -1,0 +1,56 @@
+
+   function testType<T>(theNode : node)
+   {
+//	traceLine("Type inconnu :" + T);
+      	return getSimpleType(theNode);
+   }
+
+   function testType<"case">(theNode : node)
+   { 
+     return testOType<theNode.case.otype>(theNode.case);
+   }
+
+   function testType<"default">(theNode : node)
+   { 
+
+   }
+
+   function testType<"break">(theNode : node)
+   { 
+     return "";
+   }
+
+   function testType<"return">(theNode : node)
+   { 
+     return getLeftNOpe(theNode.block);
+   }
+
+   function testType<"__PFUNCTION__">(theNode : node)
+   {
+      return getFunc(theNode);
+   }
+
+   function testType<"__FUNCTION__">(theNode : node)
+   {
+      return getFunc(theNode);
+   }
+
+   function testType<"__TYPE__">(theNode : node)
+   {
+	return getSimpleType(theNode);
+   }
+
+   function testType<"__TYPEOF__">(theNode : node)
+   { 
+     return "typeof(" + getSimpleType(theNode) + ")";
+   }
+
+   function testType<"__PROTOTYPE__">(theNode : node)
+   {
+      return getFunc(theNode);
+   }
+
+   function testType<"__VARIABLE__">(theNode : node)
+   {
+	return getSimpleType(theNode);
+   }
