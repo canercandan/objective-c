@@ -31,6 +31,8 @@ koocImport ::= #explicitCopy
  checkFile(file, module)
  | => errorImport(sError);
  ]
+=> indentFile(this.kooc.stack["pathH"], "C++");
+[#check(module == "") => koocImportInclude(file);]
 #generatedFile(this.kooc.stack["pathC"])
 ;
 
@@ -47,6 +49,7 @@ checkFile(file : value, module : value) ::=
 [
 #parsedFile(pathKh)
   [
+   => {%>#ifndef ____@"\n"@<%}
    => local package_name = "";
    [koocDeclaration(this.kooc.headers[pathH].block):kc checkModule(module, kc)
     | declaration(this.block)
@@ -55,14 +58,11 @@ checkFile(file : value, module : value) ::=
 #continue #empty
    //=> treeCopyInfos(this.kooc.headers[pathH].block);
    //=> prettyPrintExistFile(pathH, this.kooc.headers[pathH]);
-   => {%>#ifndef ____@"\n"@<%}
-   => {@@r00t()@@}
+   => {@@prettyPrinterToC(pathH)@@}
    => {%>#endif ____@"\n"@<%}
    ]
  ]
-=> indentFile(pathH, "C++");
 //=> koocImportEndif(file);
-  [#check(module == "") => koocImportInclude(file);]
   ]
  ]
 | => errorIncludeFile(this.kooc.stack["path_import"] + file);

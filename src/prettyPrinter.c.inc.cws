@@ -6,8 +6,8 @@
  * prototype de fonction
  */
 
-declare function	r00t();
-declare function	loopBlock(block : node);
+declare function	prettyPrinterToC(file : value = "");
+declare function	loopBlock(block : node, file : value = "");
 declare function	loopArgument(block : node);
 declare function	endPoint(block : node);
 declare function	clearString(val : value);
@@ -16,13 +16,13 @@ declare function	prettyPrintExistFile(file : value,
 					     block : node);
 
 /**
- * @fn r00t()
+ * @fn prettyPrinterToC()
  * @brief main function
  * @return loopBlock function
  */
-function	r00t()
+function	prettyPrinterToC(file : value = "")
 {
-  return (loopBlock(this.block));
+  return (loopBlock(this.block, file));
 }
 
 /**
@@ -31,12 +31,13 @@ function	r00t()
  * @return sInfo which is the result of
  * concatenation of blockType function's return
  */
-function	loopBlock(block : node)
+function	loopBlock(block : node, file : value = "")
 {
   local		sInfo = "";
 
   foreach var in block
-    sInfo += blockType<var.type>(var);
+    if (file == "" || file == var.__FILE__)
+      sInfo += blockType<var.type>(var);
   return (sInfo);
 }
 
