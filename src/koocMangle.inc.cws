@@ -6,7 +6,7 @@
  * @bug Temp mangling
  */
 
-declare function	koocMangle(theMod : value);
+declare function	koocMangle(theMod : value, theNode : node);
 declare function	koocMangleImplementation(theMod : value);
 declare function	koocMangleType(theNode : node, name : node);
 declare function	koocMangleArgs(theNode : node, name : node);
@@ -16,12 +16,12 @@ declare function	koocMangleArgs(theNode : node, name : node);
  * @brief mangle variable
  * @param theMod variable's name
  */
-function	koocMangle(theMod : value)
+function	koocMangle(theMod : value, theNode : node)
 {
   local		pkgs = "";
   local		name = "_ZN";
   //localref	theNode = this.kooc.modules[theMod].block#back;
-  localref	theNode = this.block#back;
+  //localref	theNode = this.block#back;
 
   if (existVariable(theNode.ctype.infoType["static"]))
     return;
@@ -39,26 +39,6 @@ function	koocMangle(theMod : value)
 
   insert theNode.oname = theNode.name;
   insert theNode.name = name;
-
-  if (theNode.type == "__VARIABLE__")
-    {
-/*       ref this.kooc.modules[theMod].block.variables[theNode.name] = */
-/* 	this.kooc.modules[theMod].block.variables[theNode.oname]; */
-/*       removeElement(this.kooc.modules[theMod].block.variables, theNode.oname); */
-      ref this.block.variables[theNode.name] =
-	this.block.variables[theNode.oname];
-      removeElement(this.block.variables, theNode.oname);
-
-    }
-  else if (theNode.type == "__PROTOTYPE__")
-    {
-/*       ref this.kooc.modules[theMod].block.prototypes[theNode.name] = */
-/* 	this.kooc.modules[theMod].block.prototypes[theNode.oname]; */
-/*       removeElement(this.kooc.modules[theMod].block.prototypes, theNode.oname); */
-      ref this.block.prototypes[theNode.name] =
-	this.block.prototypes[theNode.oname];
-      removeElement(this.block.prototypes, theNode.oname);
-    }
 }
 
 function	koocMangleImplementation(theMod : value)
