@@ -37,6 +37,7 @@ koocModule(sModule : node) ::=
 #generatedFile(this.kooc.stack["path_import"] + this.kooc.modules[sModule].nameC)
 => {@@prettyPrinterToC(this.kooc.stack["path_import"]
 		       + this.kooc.modules[sModule].nameC)@@}
+#generatedFile(this.kooc.stack["pathH"])
 '}'
 /*#catch (sError)
 |
