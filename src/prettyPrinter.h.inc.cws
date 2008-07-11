@@ -203,13 +203,18 @@ function oneArgument(theNode : node, type : value = 1)
   if ($type == 1$)
     {
       sInfo = getSimpleType(theNode) + getPointer(theNode);
-      if (existVariable(theNode.name))
+      if (existVariable(theNode.mangle))
+	sInfo += ' ' + theNode.mangle;
+      else if (existVariable(theNode.name))
 	sInfo += ' ' + theNode.name;
       sInfo += getArrayInfo(theNode) + getBits(theNode)
 	+ getCommentSuffix(theNode);
     }
   else
-    sInfo = theNode.name;
+    if (existVariable(theNode.mangle))
+      sInfo += ' ' + theNode.mangle;
+    else
+      sInfo = theNode.name;
   return (sInfo);
 }
 
@@ -311,7 +316,9 @@ function getStructOrUnion(conterner : node)
     sInfo += "\n{\n"
       + getArgumentStructOrUnion(conterner.ctype)
       + '}';
-  if (existVariable(conterner.name))
+  if (existVariable(conterner.mangle))
+    sInfo += ' ' + conterner.mangle;
+  else if (existVariable(conterner.name))
     sInfo += getPointer(conterner) + conterner.name;
   sInfo += ";\n";
   return (sInfo);
@@ -349,7 +356,9 @@ function getEnum(Enum : node)
 
   sInfo = getSimpleType(Enum) + '\n'
     + "{\n" + getArgumentEnum(Enum.ctype) + '}';
-  if (existVariable(Enum.name))
+  if (existVariable(Enum.mangle))
+    sInfo += ' ' + Enum.mangle;
+  else if (existVariable(Enum.name))
     sInfo += Enum.name;
   sInfo += ";\n";
   return (sInfo);
@@ -367,9 +376,19 @@ function getFunction(function : node)
 
   sInfo = getSimpleType(function) + ' ';
   if (function.ctype.type == "__PFUNCTION__")
-    sInfo += "(*" + function.name + ')';
+    {
+      if (existVariable(function.mangle))
+	sInfo += "(*" + function.mangle + ')';
+      else
+	sInfo += "(*" + function.name + ')';
+    }
   else
-    sInfo += function.name;
+    {
+      if (existVariable(function.mangle))
+	sInfo += function.mangle;
+      else
+	sInfo += function.name;
+    }
   sInfo += '(' + getArgument(function);
   if (existVariable(function.list.ellipsis))
     sInfo += ", ...";
