@@ -30,7 +30,6 @@ koocModule(sModule : node) ::=
   => koocModuleMangle(sModule);
   ]*
 //=> koocModuleContent(sModule);
-=> traceLine(this.kooc.stack["pathH"]);
 => {%>#include "@this.kooc.modules[sModule].nameH@"@"\n"@<%}
 #generatedFile(this.kooc.stack["path_import"] + this.kooc.modules[sModule].nameH)
 => {@@prettyPrinterToH(this.kooc.stack["path_import"]
@@ -43,7 +42,6 @@ koocModule(sModule : node) ::=
 |
 => errorModule();
 */]
-=> traceLine("file: " + loadFile(this.kooc.stack["pathH"]));
 ;
 /**
  * @endcond
