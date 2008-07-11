@@ -22,8 +22,10 @@ koocModule(sModule : node) ::=
       sModule = this.kooc.stack["package"] + "." +  sModule;
   }
   => koocModuleInit(sModule);
-// [declaration(this.kooc.modules[sModule].block)
   [declaration(this.block)
+   => traceLine("Read declaration in " + sModule);
+   => pushItem this.kooc.modules[sModule];
+   => ref this.kooc.modules[sModule]#back = this.block#back;
    => treeInsertFileOut(this.kooc.stack["path_import"]
 			+ this.kooc.modules[sModule].nameC);
   => koocModuleCheck(sModule);

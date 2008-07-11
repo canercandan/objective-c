@@ -18,7 +18,6 @@ function	koocModuleInit(sModule : value)
   local		modC = "km_" + replaceString('.', '_', sModule.toLowerString()) + ".c";
 
   insert this.kooc.modules[sModule];
-  insert this.kooc.modules[sModule].block;
   insert this.kooc.modules[sModule].nameH = modH;
   insert this.kooc.modules[sModule].nameC = modC;
 }
