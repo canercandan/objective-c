@@ -25,7 +25,6 @@ typedef struct	test_s
 void		test();
 
 static inline test_t	*test_new(char*str)
-//static inline void	*test_new(char*str)
 {
   test_t		*test;
 
@@ -37,8 +36,7 @@ static inline test_t	*test_new(char*str)
   return (test);
 }
 
-//static inline void	test_print(test_t*test)
-static inline void	test_print(char*test)
+static inline void	test_print(test_t*test)
 {
   printf("%s", test->st);
 }
