@@ -52,7 +52,6 @@ checkFile(file : value, module : value) ::=
    => treeInsertFileOut(this.kooc.stack["pathH"]);
    ]*
 #continue #empty
-  => {@@prettyPrinterToH(this.kooc.stack["pathH"])@@}
   => {@@prettyPrinterToC(this.kooc.stack["pathH"])@@}
   => koocImportEndif(file);
   ]

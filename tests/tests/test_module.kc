@@ -1,5 +1,11 @@
 @import "test_module.kh"
 
+/* @module COOC */
+/* { */
+/*   int	cooc_a; */
+/*   int	cooc_b; */
+/* } */
+
 int	main()
 {
   int	b;

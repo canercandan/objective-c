@@ -17,8 +17,7 @@
  */
 
 #include "../cnorm_2.6/src/cnorm.cwp"
-//#include "prettyPrinter.h.inc.cws"
-//#include "prettyPrinter.c.inc.cws"
+#include "prettyPrinter.h.inc.cws"
 #include "koocPrettyPrinter.inc.cws"
 #include "koocError.inc.cws"
 #include "koocImport.inc.cws"
@@ -52,7 +51,6 @@
 #catch (sError)
 [
 #continue #empty
- => {@@prettyPrinterToH(this.kooc.stack["pathC"])@@}
  => {@@prettyPrinterToC(this.kooc.stack["pathC"])@@}
  ]
 |

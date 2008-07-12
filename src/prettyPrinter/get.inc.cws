@@ -1,4 +1,14 @@
-function getArrayInfo(theNode : node)
+declare function	getArrayInfo(theNode : node);
+declare function	getType(theNode : node);
+declare function	getLeftNOpe(theNode : node);
+declare function	getPFname(theNode : node);
+declare function	getPointer(theNode : node);
+declare function	getSimpleType(theNode : node);
+declare function	getExpre(theNode : node);
+declare function	getStruct(theNode : node);
+declare function	getFunc(theNode : node);
+
+function	getArrayInfo(theNode : node)
 {
   local sInfo = "";
   foreach info in theNode.ctype.array
@@ -6,29 +16,32 @@ function getArrayInfo(theNode : node)
   return sInfo;
 }
 
-function getType(theNode : node)
+function	getType(theNode : node)
 {
   return parseCType(theNode.ctype);
 }
 
-function getLeftNOpe(theNode : node)
+function	getLeftNOpe(theNode : node)
 {
   if (theNode.etype == "init")
     return parseBlock(theNode);
   return testOType<theNode.otype>(theNode);
 }
 
-function getPFname(theNode : node)
+function	getPFname(theNode : node)
 {
   local sResult = "(";
   foreach var in theNode
   {
-    sResult += "*" + var.function.name;
+    if (existVariable(var.function.mangle))
+      sResult += "*" + var.function.mangle;
+    else
+      sResult += "*" + var.function.name;
   }
   return sResult + ")";
 }
 
-function getPointer(theNode : node)
+function	getPointer(theNode : node)
 {
   local sPInfo = "";
   foreach info in theNode.pointer
@@ -39,7 +52,7 @@ function getPointer(theNode : node)
   return sPInfo;
 }
 
-function getSimpleType(theNode : node)
+function	getSimpleType(theNode : node)
 {
   local sInit = "";
   local sPFname = "";
@@ -48,32 +61,34 @@ function getSimpleType(theNode : node)
   local sName = "";
   local sPInfo = "";
 
-  if existVariable(theNode.designation)
-		    sDesignation =  "[" + theNode.designation.value + "]";
-  if existVariable(theNode.init)
-		    sInit += " = " + getLeftNOpe(theNode.init);
-
+  if (existVariable(theNode.designation))
+    sDesignation =  "[" + theNode.designation.value + "]";
+  if (existVariable(theNode.init))
+    sInit += " = " + getLeftNOpe(theNode.init);
   sPFname = getPointer(theNode.ctype);
-  if existVariable(theNode.pfname)
-		    sPFname += getPFname(theNode.pfname);
-  if existVariable(theNode.list)
-		    sList += "(" +  parseList(theNode.list) + ")";
+  if (existVariable(theNode.pfname))
+    sPFname += getPFname(theNode.pfname);
+  if (existVariable(theNode.list))
+    sList += "(" +  parseList(theNode.list) + ")";
   if (!existVariable(theNode.pfname))
-    sName = theNode.name;
-
-  return getType(theNode) + " " + sPInfo  + sPFname + " " +
-    sDesignation + sName +
-    getArrayInfo(theNode) + sList + sInit;
+    if (existVariable(theNode.mangle))
+      sName = theNode.mangle;
+    else
+      sName = theNode.name;
+  return (getType(theNode) + " " + sPInfo
+	  + sPFname + " " + sDesignation + sName
+	  + getArrayInfo(theNode) + sList + sInit);
 }
 
-function getExpre(theNode : node)
+function	getExpre(theNode : node)
 {
   return testType<theNode.otype>(theNode);
 }
 
-function getStruct(theNode : node)
+function	getStruct(theNode : node)
 {
   local	sValue = "";
+
   if (existVariable(theNode.ctype.list))
     {
       sValue = "{ ";
@@ -85,23 +100,24 @@ function getStruct(theNode : node)
       }
       sValue += "}";
     }
-  return getType(theNode) + " " +
-    sValue + " " +
-    theNode.name;
+  return (getType(theNode) + " " + sValue + " "
+	  + (existVariable(theNode.mangle)
+	     ? theNode.mangle
+	     : theNode.name));
 }
 
-function getFunc(theNode : node)
+function	getFunc(theNode : node)
 {
   local sValue = "";
   local sInner = "";
   local sName = "";
+
   sValue += parseList(theNode.list);
   if (theNode.type == "__FUNCTION__")
-    {
-      sInner = parseBlock(theNode);
-    }
-  return getType(theNode) + " " +
-    theNode.name +
-    "(" + sValue + ")" +
-    sInner;
+    sInner = parseBlock(theNode);
+  return (getType(theNode) + " "
+	  + (existVariable(theNode.mangle)
+	     ? theNode.mangle
+	     : theNode.name)
+	  + "(" + sValue + ")" + sInner);
 }

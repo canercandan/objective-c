@@ -23,8 +23,8 @@ function	koocMangle(theMod : value, theNode : node)
   //localref	theNode = this.kooc.modules[theMod].block#back;
   //localref	theNode = this.block#back;
 
-  if (existVariable(theNode.ctype.infoType["static"]))
-    return;
+/*   if (existVariable(theNode.ctype.infoType["static"])) */
+/*     return; */
 
   cutString(theMod, '.', pkgs);
 

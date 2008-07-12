@@ -1,4 +1,11 @@
-function parseInit(theNode : node)
+declare function	parseInit(theNode : node);
+declare function	parseBlock(theNode : node, file : value = "");
+declare function	parseListEnum(theNode : node);
+declare function	replaceChar(theNode : node);
+declare function	parseList(theNode : node);
+declare function	parseCType(theNode : node);
+
+function	parseInit(theNode : node)
 {
   local sResult = "";
   if (existVariable(theNode.designation))
@@ -12,7 +19,7 @@ function parseInit(theNode : node)
   return sResult;
 }
 
-function parseBlock(theNode : node, file : value = "")
+function	parseBlock(theNode : node, file : value = "")
 {
   local sResult = "";
   local isBlock = 0;
@@ -59,7 +66,7 @@ function parseBlock(theNode : node, file : value = "")
   return  sResult;
 }
 
-function parseListEnum(theNode : node)
+function	parseListEnum(theNode : node)
 {
   local sResult = "";
   foreach var in theNode
@@ -70,13 +77,13 @@ function parseListEnum(theNode : node)
   return sResult;
 }
 
-function replaceChar(theNode : node)
+function	replaceChar(theNode : node)
 {
   return replaceString("\n", "\\n", theNode);
 }
 
 
-function parseList(theNode : node)
+function	parseList(theNode : node)
 {
   local sValue = "";
   foreach var in theNode
@@ -98,7 +105,7 @@ function parseList(theNode : node)
   return (sValue);
 }
 
-function parseCType(theNode : node)
+function	parseCType(theNode : node)
 {
   local sInfo = "";
   local sEnd = "";
