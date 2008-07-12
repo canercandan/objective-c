@@ -1,5 +1,19 @@
-#!/bin/tcsh
-setxkbmap dvorak
-mv ~/.Xdefaults ~/.Xdefaults.old
-cat ~/.Xdefaults.old | sed -e "s/black/#ff1cae/g" -e "s/white/#ff34b3/g" > ~/.Xdefaults
-xrdb -load ~/.Xdefaults
+#!/bin/sh
+## kooc for kooc in /home/candan_c/rendu/kooc/bin
+## 
+## Made by caner candan
+## Login   <candan_c@epitech.net>
+## 
+## Started on  Wed Jun 25 13:41:36 2008 caner candan
+## Last update Thu Jul 10 17:56:19 2008 User Toumi_m
+##
+
+if [ ${1##*.} = "kc" -o  ${1##*.} = "kh" ]
+then
+    codeworker -nologo -stack 800000 -script \
+	${KOOC_PATH:?You have to set KOOC_PATH}/src/kooc.cws \
+	-args $*;
+else
+    echo "usage: kooc file.kc | file.kh";
+    echo "<< I need Koala >>";
+fi

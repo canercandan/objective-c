@@ -26,15 +26,18 @@ koocClass ::=
   => insert this.block#back.type = "__TYPE__";
   => insert this.block#back.etype = "declaration";
   => setall this.block#back.ctype = ctype;
-  [koocMember(this.block#back)
+  => insert this.block.types[sClass];
+  => ref this.block.types[sClass] = this.block#back;
+  => localref theNode = this.block#back;
+  [koocMember(theNode)
    | declaration(this.block) =>
    {
-     localref theNode = this.block#back;
+     localref theDecl = this.block#back;
 
-     if (!existVariable(theNode.ctype.infoType))
-       insert theNode.ctype.infoType;
+     if (!existVariable(theDecl.ctype.infoType))
+       insert theDecl.ctype.infoType;
 
-     insert theNode.ctype.infoType["static"] = "storageClassSpecifier";
+     insert theDecl.ctype.infoType["static"] = "storageClassSpecifier";
    }
    ]*
 '}'

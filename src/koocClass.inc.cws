@@ -4,3 +4,6 @@
  * @note @ref develop @ref contrib @ref tools
  */
 
+function	koocClassCreateCType(sClass : value)
+{
+}

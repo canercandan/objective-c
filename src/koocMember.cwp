@@ -26,8 +26,16 @@ koocMemberDeclaration(theNode : node) ::=
 struct_declaration(theDecl)
 =>
 {
-  pushItem theNode.list;
-  setall theNode.list#back = theDecl;
+  if (theDecl.type == "__VARIABLE__")
+  {
+    pushItem theNode.ctype.list;
+    setall theNode.ctype.list#back = theDecl;
+  }
+  else
+  {
+    pushItem this.block;
+    setall this.block#back = theDecl;
+  }
 }
 | declaration(this.block)
 =>
