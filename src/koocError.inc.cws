@@ -90,7 +90,7 @@ function	existClass(name : value)
   if (!existVariable(this.kooc.classes))
     {
       traceLine("this.kooc.classes not found");
-      exit(-1);
+      return(-1);
     }
   if (this.kooc.stack["package"] != "")
     name = this.kooc.stack["package"] + "." + name;

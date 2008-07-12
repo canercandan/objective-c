@@ -25,27 +25,36 @@ koocImplementation
 addImplementation ::= "@implementation"
 #continue #readIdentifier:sName
   => if (!existModule(sName) && !existClass(sName))
-    { traceLine("Module or Class " + sName + "doesn't exist"); exit(-1); }
+    { traceLine("Module or Class [" + sName + "] doesn't exist"); exit(-1); }
   '{'
   => if (this.kooc.stack["package"] != "")
       { sName = this.kooc.stack["package"] + '.' + sName; }
-  => insert this.kooc.implementations[sName];
-  => insert this.kooc.implementations[sName].block;
   [
-   //declaration(this.kooc.implementations[sName].block)
     declaration(this.block)
-/*     => treeInsertFileOut(this.kooc.stack["path_import"] */
-/* 			 +  */
-    => koocMangleImplementation(sName);
+    => pushItem this.kooc.implementations[sName];
+    => ref this.kooc.implementations[sName]#back = this.block#back;
+    => localref theNode = this.kooc.implementations[sName]#back;
+//    => treeInsertFileOut(this.kooc.stack["path_import"] + this.kooc.modules[sModule].nameC););
+    => koocMangle(sName, theNode);
   ]*
-  => check_implementation(sName);
+
+//  #generatedFile(this.kooc.stack["path_import"] + this.kooc.modules[sName].nameC);
   => if (existModule(sName) == 1)
      {
-       //prettyPrintExistFile(this.kooc.stack["path_import"] + this.kooc.modules[sName].nameC, this.kooc.implementations[sName]);
+	check_implementation(sName, this.kooc.modules);
+//	@@prettyPrinterToC(this.kooc.stack["path_import"]
+//			   + this.kooc.modules[sName].nameC)@@
      }
+/*
+  => if (existClass(sName) == 1)
+     {
+	check_implementation(sName, this.kooc.classes);
+	prettyPrintExistFile(this.kooc.stack["path_import"] + this.kooc.classes[sName],
+			this.kooc.implementations[sName]);
+     }
+*/
+//  #generatedFile(this.kooc.stack["pathC"]);
 
-// generateString("mod.c.cwt", this.kooc.implementations[sName], sOutput);
-// appendFile(this.kooc.stack["path_import"] + this.kooc.modules[sName].nameC, sOutput);
    '}'
 ;
 /**

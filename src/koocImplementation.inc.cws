@@ -8,7 +8,7 @@
  * @todo mangling des definitions de fonctions.
  */
 
-declare function	check_implementation(name : value);
+declare function	check_implementation(name : value, theNode : node);
 declare function	check_prototypes(var1 : node, var2 : node);
 declare function	check_arguments(fun1 : node, fun2 : node);
 
@@ -21,26 +21,20 @@ declare function	check_arguments(fun1 : node, fun2 : node);
  * dans le module concerne
  * @param name (value): nom de l'implementation
  */
-function	check_implementation(name : value)
+function	check_implementation(name : value, theNode : node)
 {
   local		prototype;
   local		find;
 
-  if (!existVariable(this.kooc.modules[name].block))
-    { traceLine("Variable " + this.kooc.modules[name].block + " doesn't exist"); exit(-1); }
-
-  if (!existVariable(this.kooc.implementations[name].block))
-    { traceLine("Variable " + this.kooc.implementations[name].block + " doesn't exist"); exit(-1); }
-
-  foreach itemMod in this.kooc.modules[name].block
+  foreach item in theNode[name].block
   {
-    if (itemMod.type = "__PROTOTYPE__")
+    if (item.type = "__PROTOTYPE__")
       {
 	find = false;
 	foreach itemImp in this.kooc.implementations[name].block
 	{
-	  if ((itemMod.name == itemImp.name) &&
-	      (check_prototypes(itemMod, itemImp) == true))
+	  if ((item.name == itemImp.name) &&
+	      (check_prototypes(item, itemImp) == true))
 	    {
 	      find = true;
 	      break;
@@ -48,8 +42,8 @@ function	check_implementation(name : value)
 	}
 	if (find == false)
 	  {
-	    prototype = itemMod.sign + " " + itemMod.identifier;
-	    prototype += " " + itemMod.name + "(...)";
+	    prototype = item.sign + " " + item.identifier;
+	    prototype += " " + item.name + "(...)";
 	    traceLine("error: [ " + prototype + " ]'s declaration is missing");
 	    exit(-1);
 	  }
