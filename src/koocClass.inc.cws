@@ -4,6 +4,23 @@
  * @note @ref develop @ref contrib @ref tools
  */
 
+declare function	koocClassInit(sClass : value);
+
+/**
+ * @fn function	koocClassInit(sClass : value)
+ * @brief init the tree'information to insert module
+ * @param sClass module's name
+ */
+function	koocClassInit(sClass : value)
+{
+  local		modH = "kc_" + replaceString('.', '_', sClass.toLowerString()) + ".h";
+  local		modC = "kc_" + replaceString('.', '_', sClass.toLowerString()) + ".c";
+
+  insert this.kooc.classes[sClass];
+  insert this.kooc.classes[sClass].nameH = modH;
+  insert this.kooc.classes[sClass].nameC = modC;
+}
+
 function	koocClassCreateCType(sClass : value)
 {
 }
