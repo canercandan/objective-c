@@ -53,8 +53,3 @@
     printf("level1.level2.level3.mod2\n");
   }
 }
-
-int main()
-{
-	[level1.mod1 print];
-}

@@ -54,6 +54,7 @@ checkFile(file : value, module : value) ::=
 #continue #empty
   => {@@prettyPrinterToC(this.kooc.stack["pathH"])@@}
   => koocImportEndif(file);
+  => this.kooc.stack["package"] = "";
   ]
  ]
 | => errorIncludeFile(this.kooc.stack["path_import"] + file);

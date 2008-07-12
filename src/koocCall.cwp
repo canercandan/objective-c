@@ -70,7 +70,7 @@ kooc_identifiant_module(expr : node, module_name : node, type_name : value)
 	   	    insert expr.otype = "terminal";
 		  }
 	       ] | // C'est un appel de fonction
-	       [ kooc_identifier:name
+	       [ [kooc_identifier ['.' kooc_identifier]*]:name
 	       	 => local func_name = "";
 	       	 => local nb_arg = 0;
 		 => {  if (!existModule(name))
@@ -80,7 +80,7 @@ kooc_identifiant_module(expr : node, module_name : node, type_name : value)
 		       }
 		     }
 	       kooc_identifiant_fonction(expr, name, func_name, type_name, nb_arg)
-    	       kooc_list_parametre(expr, module_name, func_name, nb_arg) ]
+    	       kooc_list_parametre(expr, module_name, func_name, nb_arg)]
 ;
 
 kooc_identifiant_fonction(expr : node, module_name : value, func_name : node, type : value, nb_arg : node)
