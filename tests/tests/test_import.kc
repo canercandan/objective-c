@@ -18,7 +18,8 @@ int		main(int ac, char **av)
   Entier	a;
   
   test = test_new("KOOC rulez\n");
-  
+  if (a)
+    return (0);
   test_print(test);
   free(test);
   printf("Tape un truc (c-D pour finir):");
