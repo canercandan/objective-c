@@ -5,6 +5,9 @@ declare function	replaceChar(theNode : node);
 declare function	parseList(theNode : node);
 declare function	parseCType(theNode : node);
 
+declare function	getPFname(theNode : node);
+declare function	getPointer(theNode : node);
+
 function	parseInit(theNode : node)
 {
   local sResult = "";
@@ -81,7 +84,6 @@ function	replaceChar(theNode : node)
 {
   return replaceString("\n", "\\n", theNode);
 }
-
 
 function	parseList(theNode : node)
 {

@@ -75,8 +75,7 @@ function	getSimpleType(theNode : node)
       sName = theNode.mangle;
     else
       sName = theNode.name;
-  return (getType(theNode) + " " + sPInfo
-	  + sPFname + " " + sDesignation + sName
+  return (getType(theNode) + sPFname  + " " + sDesignation + sName
 	  + getArrayInfo(theNode) + sList + sInit);
 }
 
@@ -115,9 +114,10 @@ function	getFunc(theNode : node)
   sValue += parseList(theNode.list);
   if (theNode.type == "__FUNCTION__")
     sInner = parseBlock(theNode);
-  return (getType(theNode) + " "
-	  + (existVariable(theNode.mangle)
-	     ? theNode.mangle
-	     : theNode.name)
-	  + "(" + sValue + ")" + sInner);
+  return (getSimpleType(theNode) + " "
+//	  + (existVariable(theNode.mangle)
+//	     ? theNode.mangle
+//	     : theNode.name)
+//	  + "(" + sValue + ")"
++ sInner);
 }

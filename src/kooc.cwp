@@ -47,6 +47,7 @@
  | declaration(this.block)
  => treeInsertFileOut(this.kooc.stack["pathC"]);
  ]*
+//=> traceObject(this.block, 20);
 #catch (sError)
 [
 #continue #empty
