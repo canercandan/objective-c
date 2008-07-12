@@ -1,0 +1,189 @@
+/**
+ * @file genHeader.inc.cws
+ * @brief PrettyPrinter to print the kooc to header
+ * @note @ref develop @ref contrib @ref tools
+ */
+
+declare function	getPrototype(prototype : node);
+declare function	getExternVariable(variable : node);
+declare function	getSimpleTypeH(theNode : node);
+declare function	oneArgument(theNode : node, type : value = 1);
+declare function	getArgument(ctype : node);
+declare function	getCommentSuffix(theNode : node);
+declare function	getPointerH(theNode : node);
+declare function	getArrayInfoH(theNode : node);
+declare function	getBits(theNode : node);
+
+/**
+ * @fn getExternVariable(variable : node)
+ * @brief get extern variable if the variable exist
+ * @param variable a variable
+ * @return extern variable
+ */
+function	getExternVariable(variable : node)
+{
+  local		sInfo = "";
+
+  if (!existVariable(variable.ctype.infoType["extern"]))
+    sInfo += "extern ";
+  sInfo += oneArgument(variable) + ';';
+  return (sInfo);
+}
+
+/**
+ * @fn getPrototype(prototype : node)
+ * @brief get a prototype
+ * @param prototype prototype's node
+ * @return a prototype
+ */
+function	getPrototype(prototype : node)
+{
+  local		sInfo;
+
+  sInfo = getSimpleTypeH(prototype) + ' ';
+  if (existVariable(prototype.mangle))
+    sInfo += "(*" + prototype.mangle + ')';
+  else
+    sInfo += "(*" + prototype.name + ')';
+  sInfo += '(' + getArgument(prototype);
+  if (existVariable(prototype.list.ellipsis))
+    sInfo += ", ...";
+  sInfo += ')' + getCommentSuffix(prototype);
+  return (sInfo);
+}
+
+/**
+ * @fn getSimpleTypeH(theNode : node)
+ * @brief get a simple type from the node
+ * @param theNode the node
+ * @return the simple type
+ */
+function	getSimpleTypeH(theNode : node)
+{
+  local sInfo = "";
+
+  if (existVariable(theNode.ctype.infoType))
+    foreach info in theNode.ctype.infoType
+      sInfo += key(info) + " ";
+  if (existVariable(theNode.ctype.specifier))
+    sInfo += theNode.ctype.specifier + " ";
+  if (existVariable(theNode.ctype.sign))
+    sInfo += theNode.ctype.sign + " ";
+  return (sInfo + theNode.ctype.identifier);
+}
+
+/**
+ * @fn oneArgument(theNode : node, type : value = 1)
+ * @brief if type is equal to 1 then the function return an argument
+ * of function else the function only return the name of argument
+ * @param theNode the node
+ * @param type type with default value = 1
+ * @return e.g. brief
+ */
+function	oneArgument(theNode : node, type : value = 1)
+{
+  local sInfo;
+
+  if ($type == 1$)
+    {
+      sInfo = getSimpleTypeH(theNode) + getPointerH(theNode);
+      if (existVariable(theNode.mangle))
+	sInfo += ' ' + theNode.mangle;
+      else if (existVariable(theNode.name))
+	sInfo += ' ' + theNode.name;
+      sInfo += getArrayInfoH(theNode) + getBits(theNode)
+	+ getCommentSuffix(theNode);
+    }
+  else
+    if (existVariable(theNode.mangle))
+      sInfo += ' ' + theNode.mangle;
+    else
+      sInfo = theNode.name;
+  return (sInfo);
+}
+
+/**
+ * @fn getArgument(ctype : node)
+ * @brief get arguments of the function
+ * @param ctype ctype argument
+ * @return the arguments
+ */
+function getArgument(ctype : node)
+{
+  local sInfo = "";
+
+  foreach info in ctype.list
+  {
+    if (!first(info))
+      sInfo += ", ";
+    sInfo += oneArgument(info);
+  }
+  return (sInfo);
+}
+
+/**
+ * @fn getCommentSuffix(theNode : node)
+ * @brief get the suffix's comment
+ * @param theNode the node
+ * @return the suffix's comment
+ */
+function getCommentSuffix(theNode : node)
+{
+  local sInfo = "";
+
+  if (existVariable(theNode.comment_suffix))
+    foreach info in theNode.comment_suffix
+      sInfo += ' ' + info;
+  return (sInfo);
+}
+
+/**
+ * @fn getPointerH(theNode : node)
+ * @brief get the pointer if the variable is a pointer
+ * @param theNode the node
+ * @return the pointer (*)
+ */
+function getPointerH(theNode : node)
+{
+  local sInfo = "";
+
+  if (existVariable(theNode.ctype.pointer))
+    foreach info in theNode.ctype.pointer
+    {
+      if (existVariable(info.level))
+	sInfo += info.level;
+      if (existVariable(info.qualifier))
+	sInfo += ' ' + info.qualifier;
+    }
+  return (sInfo);
+}
+
+/**
+ * @fn getArrayInfoH(theNode : node)
+ * @brief get number between [ and ] to a array's variable
+ * @param theNode the node
+ * @return the number
+ */
+function getArrayInfoH(theNode : node)
+{
+  local sInfo = "";
+
+  foreach info in theNode.ctype.array
+    sInfo += '[' + info + ']';
+  return (sInfo);
+}
+
+/**
+ * @fn getBits(theNode : node)
+ * @brief get number of bits if exist
+ * @param theNode the node
+ * @return the number of bits
+ */
+function getBits(theNode : node)
+{
+  local sInfo;
+
+  if (existVariable(theNode.bits))
+    sInfo = ':' + theNode.bits.value;
+  return (sInfo);
+}
