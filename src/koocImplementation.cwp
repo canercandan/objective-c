@@ -55,7 +55,7 @@ addImplementation ::= "@implementation"
 			   + this.kooc.classes[sName].nameC)@@			this.kooc.implementations[sName]);
      }
 */
-  #generatedFile(this.kooc.stack["pathC"])
+//  #generatedFile(this.kooc.stack["pathC"])
    '}'
 ;
 /**

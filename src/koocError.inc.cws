@@ -69,8 +69,8 @@ function	existModule(name : value)
       traceLine("this.kooc.modules not found");
       exit(-1);
     }
-  if (this.kooc.stack["package"] != "")
-    name = this.kooc.stack["package"] + "." + name;
+  //if (this.kooc.stack["package"] != "")
+  //  name = this.kooc.stack["package"] + "." + name;
   foreach info in this.kooc.modules
   {
     if (key(info) == name)
@@ -92,8 +92,8 @@ function	existClass(name : value)
       traceLine("this.kooc.classes not found");
       return(-1);
     }
-  if (this.kooc.stack["package"] != "")
-    name = this.kooc.stack["package"] + "." + name;
+//  if (this.kooc.stack["package"] != "")
+//   name = this.kooc.stack["package"] + "." + name;
   foreach info in this.kooc.classes
   {
     if (key(info) == name)
