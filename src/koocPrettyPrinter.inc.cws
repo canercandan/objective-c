@@ -11,6 +11,7 @@ declare function	testCType<T>(theNode : node);
 declare function	testOType<T>(theNode : node);
 declare function	testEType<T>(theNode : node);
 
+#include "prettyPrinter/genHeader.inc.cws"
 #include "prettyPrinter/parse.inc.cws"
 #include "prettyPrinter/get.inc.cws"
 #include "prettyPrinter/testType.inc.cws"
