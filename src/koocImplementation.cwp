@@ -34,27 +34,28 @@ addImplementation ::= "@implementation"
     => pushItem this.kooc.implementations[sName];
     => ref this.kooc.implementations[sName]#back = this.block#back;
     => localref theNode = this.kooc.implementations[sName]#back;
-//    => treeInsertFileOut(this.kooc.stack["path_import"] + this.kooc.modules[sModule].nameC););
+    => treeInsertFileOut(this.kooc.stack["path_import"] + this.kooc.modules[sName].nameC);
     => koocMangle(sName, theNode);
   ]*
 
-//  #generatedFile(this.kooc.stack["path_import"] + this.kooc.modules[sName].nameC);
+  #generatedFile(this.kooc.stack["path_import"] + this.kooc.modules[sName].nameC)
   => if (existModule(sName) == 1)
      {
 	check_implementation(sName, this.kooc.modules);
-//	@@prettyPrinterToC(this.kooc.stack["path_import"]
-//			   + this.kooc.modules[sName].nameC)@@
+	@@prettyPrinterToC(this.kooc.stack["path_import"]
+		       + this.kooc.modules[sName].nameH + "_variable")@@
+	@@prettyPrinterToC(this.kooc.stack["path_import"]
+			   + this.kooc.modules[sName].nameC)@@
      }
 /*
   => if (existClass(sName) == 1)
      {
 	check_implementation(sName, this.kooc.classes);
-	prettyPrintExistFile(this.kooc.stack["path_import"] + this.kooc.classes[sName],
-			this.kooc.implementations[sName]);
+	@@prettyPrinterToC(this.kooc.stack["path_import"]
+			   + this.kooc.classes[sName].nameC)@@			this.kooc.implementations[sName]);
      }
 */
-//  #generatedFile(this.kooc.stack["pathC"]);
-
+  #generatedFile(this.kooc.stack["pathC"])
    '}'
 ;
 /**

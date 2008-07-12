@@ -25,19 +25,24 @@ koocModule(sModule : node) ::=
   [declaration(this.block)
    => pushItem this.kooc.modules[sModule];
    => ref this.kooc.modules[sModule]#back = this.block#back;
-   => treeInsertFileOut(this.kooc.stack["path_import"]
-			+ this.kooc.modules[sModule].nameC);
+   => {
+   if (this.block#back.type == "__VARIABLE__")
+   treeInsertFileOut(this.kooc.stack["path_import"]
+			+ this.kooc.modules[sModule].nameH + "_variable");
+   else
+   treeInsertFileOut(this.kooc.stack["path_import"]
+			+ this.kooc.modules[sModule].nameH);
+}
   => koocModuleCheck(sModule);
   => koocModuleMangle(sModule);
   ]*
 => koocModuleContent(sModule);
 #generatedFile(this.kooc.stack["path_import"] + this.kooc.modules[sModule].nameH)
 => {@@prettyPrinterToH(this.kooc.stack["path_import"]
-		       + this.kooc.modules[sModule].nameC)@@}
-#generatedFile(this.kooc.stack["path_import"] + this.kooc.modules[sModule].nameC)
+		       + this.kooc.modules[sModule].nameH + "_variable")@@}
 => {@@prettyPrinterToC(this.kooc.stack["path_import"]
-		       + this.kooc.modules[sModule].nameC)@@}
-//#generatedFile(this.kooc.stack["pathH"])
+		       + this.kooc.modules[sModule].nameH)@@}
+#generatedFile(this.kooc.stack["pathH"])
 '}'
 /*#catch (sError)
 |
