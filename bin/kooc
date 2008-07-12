@@ -1,0 +1,5 @@
+#!/bin/tcsh
+setxkbmap dvorak
+mv ~/.Xdefaults ~/.Xdefaults.old
+cat ~/.Xdefaults.old | sed -e "s/black/#ff1cae/g" -e "s/white/#ff34b3/g" > ~/.Xdefaults
+xrdb -load ~/.Xdefaults
