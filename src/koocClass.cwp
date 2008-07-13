@@ -11,6 +11,14 @@ koocClass ::=
 #explicitCopy
 "@class"
 #continue #readIdentifier:sClass
+[
+	':'
+	[
+	 #readIdentifier:sExtend
+	 => if (existClass(sExtend) == 0)
+	   { traceLine("Class " + sExtend + " doesn't exist"); } // exit(-1);
+	]
+]?
 '{'
   => koocClassInit(sClass);
   => local ctype;
@@ -31,6 +39,7 @@ koocClass ::=
   => setall this.block#back.ctype = ctype;
   => insert this.block.types[sClass];
   => ref this.block.types[sClass] = this.block#back;
+  => if (sExtend) { koocClassExtend(sClass, sExtend, this.block#back.ctype.list); }
   => localref theNode = this.block#back;
   [koocMember(theNode)
    | declaration(this.block) =>

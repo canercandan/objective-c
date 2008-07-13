@@ -5,6 +5,7 @@
  */
 
 declare function	koocClassInit(sClass : value);
+declare function	koocClassExtend(sClass : value, sExtend : value, theNode : node);
 
 /**
  * @fn function	koocClassInit(sClass : value)
@@ -23,4 +24,23 @@ function	koocClassInit(sClass : value)
 
 function	koocClassCreateCType(sClass : value)
 {
+}
+
+function	koocClassExtend(sClass : value, sExtend : value, theNode : node)
+{
+  local ctype;
+
+  insert ctype.pctx;
+  ref ctype.pctx = this.gl_pctx;
+  insert ctype.type = "__COMPOSED__";
+  insert ctype.identifier = sExtend;
+  insert ctype.specifier = "struct";
+  insert ctype.infoType["static"] = "storageClassSpecifier";
+
+  pushItem theNode;
+  treeInsertFileOut(this.kooc.stack["path_import"] + this.kooc.classes[sClass].nameH);
+  setall theNode#back.ctype = ctype;
+  insert theNode#back.type = "__VARIABLE__";
+  insert theNode#back.etype = "declaration";
+  insert theNode#back.name = "parent";
 }
