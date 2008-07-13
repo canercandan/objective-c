@@ -1,0 +1,32 @@
+/*
+** test_heritage.kh for  in /home/toumi_m/kooc/tests/tests
+** 
+** Made by User Toumi_m
+** Login   <toumi_m@epitech.net>
+** 
+** Started on  Sat Jul 12 18:28:35 2008 User Toumi_m
+** Last update Sat Jul 12 21:52:50 2008 User Toumi_m
+*/
+
+@class A
+{
+  @member
+    {
+      char	*title;
+      int	size;
+      int	idx;
+
+      void	init();
+    }
+  @member int	a[42];
+}
+
+@class B	: A
+{
+  @member int	b[42];
+}
+
+@class C	: B
+{
+  @member int	c[42];
+}

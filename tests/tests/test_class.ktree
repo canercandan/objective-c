@@ -1,0 +1,337 @@
+<project>
+	<block>
+		<__ARRAY_ENTRY __KEY="0">
+			<__FILE__ __VALUE="tests/kc_stackint.h" />
+			<name __VALUE="StackInt" />
+			<type __VALUE="__TYPE__" />
+			<etype __VALUE="declaration" />
+			<ctype>
+				<pctx __REFERENCE="project.block" />
+				<type __VALUE="__COMPOSED__" />
+				<identifier __VALUE="kc_stackint" />
+				<infoType>
+					<__ARRAY_ENTRY __KEY="typedef" __VALUE="storageClassSpecifier" />
+				</infoType>
+				<specifier __VALUE="struct" />
+				<list>
+					<__ARRAY_ENTRY __KEY="0">
+						<ctype>
+							<pctx __REFERENCE="project.block" />
+							<type __VALUE="__PRIMARY__" />
+							<identifier __VALUE="int" />
+							<sign __VALUE="signed" />
+						</ctype>
+						<type __VALUE="__VARIABLE__" />
+						<etype __VALUE="declaration" />
+						<name __VALUE="size" />
+					</__ARRAY_ENTRY>
+					<__ARRAY_ENTRY __KEY="1">
+						<ctype>
+							<pctx __REFERENCE="project.block" />
+							<type __VALUE="__PRIMARY__" />
+							<identifier __VALUE="int" />
+							<sign __VALUE="signed" />
+						</ctype>
+						<type __VALUE="__VARIABLE__" />
+						<etype __VALUE="declaration" />
+						<name __VALUE="nbitem" />
+					</__ARRAY_ENTRY>
+					<__ARRAY_ENTRY __KEY="2">
+						<ctype>
+							<pctx __REFERENCE="project.block" />
+							<type __VALUE="__PRIMARY__" />
+							<identifier __VALUE="int" />
+							<sign __VALUE="signed" />
+							<pointer>
+								<__ARRAY_ENTRY __KEY="0">
+									<level __VALUE="*" />
+								</__ARRAY_ENTRY>
+							</pointer>
+						</ctype>
+						<type __VALUE="__VARIABLE__" />
+						<etype __VALUE="declaration" />
+						<name __VALUE="data" />
+					</__ARRAY_ENTRY>
+				</list>
+			</ctype>
+		</__ARRAY_ENTRY>
+		<__ARRAY_ENTRY __KEY="1">
+			<ctype>
+				<pctx __REFERENCE="project.block" />
+				<type __VALUE="__PRIMARY__" />
+				<identifier __VALUE="void" />
+			</ctype>
+			<type __VALUE="__PROTOTYPE__" />
+			<etype __VALUE="declaration" />
+			<name __VALUE="init" />
+			<list>
+				<__ARRAY_ENTRY __KEY="0">
+					<ctype>
+						<pctx __REFERENCE="project.block" />
+						<type __VALUE="__PRIMARY__" />
+						<identifier __VALUE="int" />
+						<sign __VALUE="signed" />
+					</ctype>
+					<type __VALUE="__VARIABLE__" />
+					<etype __VALUE="declaration" />
+				</__ARRAY_ENTRY>
+			</list>
+		</__ARRAY_ENTRY>
+		<__ARRAY_ENTRY __KEY="2">
+			<ctype>
+				<pctx __REFERENCE="project.block" />
+				<type __VALUE="__PRIMARY__" />
+				<identifier __VALUE="void" />
+			</ctype>
+			<type __VALUE="__PROTOTYPE__" />
+			<etype __VALUE="declaration" />
+			<name __VALUE="clean" />
+			<list />
+		</__ARRAY_ENTRY>
+		<__ARRAY_ENTRY __KEY="3">
+			<ctype>
+				<pctx __REFERENCE="project.block" />
+				<type __VALUE="__PRIMARY__" />
+				<identifier __VALUE="int" />
+				<sign __VALUE="signed" />
+			</ctype>
+			<type __VALUE="__PROTOTYPE__" />
+			<etype __VALUE="declaration" />
+			<name __VALUE="nbitem" />
+			<list />
+		</__ARRAY_ENTRY>
+		<__ARRAY_ENTRY __KEY="4">
+			<ctype>
+				<pctx __REFERENCE="project.block" />
+				<type __VALUE="__PRIMARY__" />
+				<identifier __VALUE="void" />
+			</ctype>
+			<type __VALUE="__PROTOTYPE__" />
+			<etype __VALUE="declaration" />
+			<name __VALUE="push" />
+			<list>
+				<__ARRAY_ENTRY __KEY="0">
+					<ctype>
+						<pctx __REFERENCE="project.block" />
+						<type __VALUE="__PRIMARY__" />
+						<identifier __VALUE="int" />
+						<sign __VALUE="signed" />
+					</ctype>
+					<type __VALUE="__VARIABLE__" />
+					<etype __VALUE="declaration" />
+				</__ARRAY_ENTRY>
+			</list>
+		</__ARRAY_ENTRY>
+		<__ARRAY_ENTRY __KEY="5">
+			<__LINE__ __VALUE="26" />
+			<ctype>
+				<pctx __REFERENCE="project.block" />
+				<type __VALUE="__PRIMARY__" />
+				<identifier __VALUE="int" />
+				<sign __VALUE="signed" />
+				<infoType>
+					<__ARRAY_ENTRY __KEY="static" __VALUE="storageClassSpecifier" />
+				</infoType>
+			</ctype>
+			<type __VALUE="__PROTOTYPE__" />
+			<etype __VALUE="declaration" />
+			<name __VALUE="pop" />
+			<list>
+				<__ARRAY_ENTRY __KEY="0">
+					<ctype>
+						<pctx __REFERENCE="project.block" />
+						<type __VALUE="__COMPOSED__" />
+						<identifier __VALUE="StackInt" />
+						<pointer>
+							<__ARRAY_ENTRY __KEY="0">
+								<level __VALUE="*" />
+							</__ARRAY_ENTRY>
+						</pointer>
+					</ctype>
+					<type __VALUE="__VARIABLE__" />
+					<etype __VALUE="declaration" />
+				</__ARRAY_ENTRY>
+			</list>
+		</__ARRAY_ENTRY>
+		<__ARRAY_ENTRY __KEY="6">
+			<__LINE__ __VALUE="29" />
+			<ctype>
+				<pctx __REFERENCE="project.block" />
+				<type __VALUE="__PRIMARY__" />
+				<identifier __VALUE="int" />
+				<sign __VALUE="signed" />
+				<infoType>
+					<__ARRAY_ENTRY __KEY="static" __VALUE="storageClassSpecifier" />
+				</infoType>
+			</ctype>
+			<type __VALUE="__VARIABLE__" />
+			<etype __VALUE="declaration" />
+			<name __VALUE="nbstack" />
+			<init>
+				<type __VALUE="primary_expression" />
+				<value __VALUE="0" />
+				<ctype>
+					<identifier __VALUE="int" />
+				</ctype>
+				<operator __VALUE="literal" />
+				<otype __VALUE="terminal" />
+				<etype __VALUE="expression" />
+			</init>
+		</__ARRAY_ENTRY>
+		<__ARRAY_ENTRY __KEY="7">
+			<__LINE__ __VALUE="15" />
+			<ctype>
+				<pctx __REFERENCE="project.block" />
+				<type __VALUE="__PRIMARY__" />
+				<identifier __VALUE="void" />
+			</ctype>
+			<type __VALUE="__FUNCTION__" />
+			<etype __VALUE="declaration" />
+			<name __VALUE="init" />
+			<list>
+				<__ARRAY_ENTRY __KEY="0">
+					<ctype>
+						<pctx __REFERENCE="project.block" />
+						<type __VALUE="__PRIMARY__" />
+						<identifier __VALUE="int" />
+						<sign __VALUE="signed" />
+					</ctype>
+					<type __VALUE="__VARIABLE__" />
+					<etype __VALUE="declaration" />
+					<name __VALUE="size" />
+				</__ARRAY_ENTRY>
+			</list>
+			<otype __VALUE="rootblock" />
+			<block>
+				<__ARRAY_ENTRY __KEY="0">
+					<__LINE__ __VALUE="17" />
+					<ctype>
+						<pctx __REFERENCE="project.block[&quot;7&quot;].block" />
+						<type __VALUE="__PRIMARY__" />
+						<identifier __VALUE="int" />
+						<sign __VALUE="signed" />
+						<pointer>
+							<__ARRAY_ENTRY __KEY="0">
+								<level __VALUE="*" />
+							</__ARRAY_ENTRY>
+						</pointer>
+					</ctype>
+					<type __VALUE="__VARIABLE__" />
+					<etype __VALUE="declaration" />
+					<name __VALUE="buf" />
+				</__ARRAY_ENTRY>
+				<__ARRAY_ENTRY __KEY="1">
+					<left>
+						<type __VALUE="primary_expression" />
+						<value __VALUE="buf" />
+						<operator __VALUE="id" />
+						<otype __VALUE="terminal" />
+					</left>
+					<operator __VALUE="=" />
+					<right>
+						<type __VALUE="cast_expression" />
+						<left>
+							<ctype>
+								<pctx __REFERENCE="project.block[&quot;7&quot;].block" />
+								<type __VALUE="__PRIMARY__" />
+								<identifier __VALUE="int" />
+								<sign __VALUE="signed" />
+								<pointer>
+									<__ARRAY_ENTRY __KEY="0">
+										<level __VALUE="*" />
+									</__ARRAY_ENTRY>
+								</pointer>
+							</ctype>
+							<otype __VALUE="typecast" />
+							<type __VALUE="type_cast_expression" />
+							<operator __VALUE="()" />
+						</left>
+						<otype __VALUE="cast" />
+						<right>
+							<left>
+								<type __VALUE="primary_expression" />
+								<value __VALUE="calloc" />
+								<operator __VALUE="id" />
+								<otype __VALUE="terminal" />
+							</left>
+							<type __VALUE="call_expression" />
+							<otype __VALUE="call" />
+							<operator __VALUE="()" />
+							<list>
+								<__ARRAY_ENTRY __KEY="0">
+									<type __VALUE="primary_expression" />
+									<value __VALUE="size" />
+									<operator __VALUE="id" />
+									<otype __VALUE="terminal" />
+								</__ARRAY_ENTRY>
+								<__ARRAY_ENTRY __KEY="1">
+									<operator __VALUE="sizeof " />
+									<left>
+										<type __VALUE="__UNDEF__" />
+										<identifier __VALUE="__UNDEF__" />
+										<ctype>
+											<pctx __REFERENCE="project.block[&quot;7&quot;].block" />
+											<type __VALUE="__PRIMARY__" />
+											<identifier __VALUE="int" />
+											<sign __VALUE="signed" />
+										</ctype>
+										<otype __VALUE="typecast" />
+									</left>
+									<type __VALUE="sizeof_expression" />
+									<otype __VALUE="unary" />
+								</__ARRAY_ENTRY>
+							</list>
+						</right>
+						<operator __VALUE="cast" />
+					</right>
+					<type __VALUE="assignement_expression" />
+					<otype __VALUE="binary" />
+					<etype __VALUE="expression" />
+					<__LINE__ __VALUE="21" />
+				</__ARRAY_ENTRY>
+				<pctx __REFERENCE="project.block" />
+				<variables>
+					<__ARRAY_ENTRY __KEY="buf" __REFERENCE="project.block[&quot;7&quot;].block[&quot;0&quot;]" />
+				</variables>
+			</block>
+			<__FILE__ __VALUE="tests/kc_stackint.c" />
+			<mangle __VALUE="_ZN8StackInt4initEvi" />
+		</__ARRAY_ENTRY>
+		<pctx />
+		<types>
+			<__ARRAY_ENTRY __KEY="StackInt" __REFERENCE="project.block[&quot;0&quot;]" />
+		</types>
+		<prototypes>
+			<__ARRAY_ENTRY __KEY="pop" __REFERENCE="project.block[&quot;5&quot;]" />
+		</prototypes>
+		<variables>
+			<__ARRAY_ENTRY __KEY="nbstack" __REFERENCE="project.block[&quot;6&quot;]" />
+		</variables>
+		<functions>
+			<__ARRAY_ENTRY __KEY="_ZN8StackInt4initEvi" __REFERENCE="project.block[&quot;7&quot;]" />
+		</functions>
+	</block>
+	<gl_pctx __REFERENCE="project.block[&quot;7&quot;].block" />
+	<kooc>
+		<modules />
+		<classes>
+			<__ARRAY_ENTRY __KEY="StackInt">
+				<nameH __VALUE="kc_stackint.h" />
+				<nameC __VALUE="kc_stackint.c" />
+			</__ARRAY_ENTRY>
+		</classes>
+		<stack>
+			<__ARRAY_ENTRY __KEY="package" />
+			<__ARRAY_ENTRY __KEY="pathKc" __VALUE="tests/test_class.kc" />
+			<__ARRAY_ENTRY __KEY="pathTree" __VALUE="./tests/test_class.ktree" />
+			<__ARRAY_ENTRY __KEY="pathC" __VALUE="./tests/test_class.c" />
+			<__ARRAY_ENTRY __KEY="path_import" __VALUE="tests/" />
+			<__ARRAY_ENTRY __KEY="pathH" __VALUE="tests/test_class.h" />
+		</stack>
+		<implementations>
+			<__ARRAY_ENTRY __KEY="StackInt">
+				<__ARRAY_ENTRY __KEY="0" __REFERENCE="project.block[&quot;7&quot;]" />
+			</__ARRAY_ENTRY>
+		</implementations>
+	</kooc>
+</project>

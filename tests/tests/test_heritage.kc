@@ -1,0 +1,31 @@
+/*
+** test_heritage.kc for  in /home/toumi_m/kooc/tests/tests
+** 
+** Made by User Toumi_m
+** Login   <toumi_m@epitech.net>
+** 
+** Started on  Sat Jul 12 18:30:09 2008 User Toumi_m
+** Last update Sat Jul 12 18:31:31 2008 User Toumi_m
+*/
+
+@import	"test_heritage.kh"
+
+@implementation A
+{
+  @member void	init()
+    {
+      print("Initialisation\n");
+    }
+}
+
+
+@implementation B
+{
+
+}
+
+
+@implementation C
+{
+
+}
