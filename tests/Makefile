@@ -5,7 +5,7 @@
 ## Login   <armand_m@epitech.net>
 ## 
 ## Started on  Thu Jun 26 16:39:06 2008 morgan armand
-## Last update Sat Jul 12 15:00:07 2008 florent hochwelker
+## Last update Sat Jul 12 18:32:02 2008 User Toumi_m
 ##
 
 #$(wildcard tests/*.kc)
@@ -16,7 +16,8 @@ SRC	=	tests/test_import.kc			\
 		tests/test_implementation.kc		\
 		tests/test_package.kc			\
 		tests/main_package.kc			\
-		tests/test_class.kc
+		tests/test_class.kc			\
+		tests/test_heritage.kc
 
 TESTED	=	${SRC:.kc=.i}
 
