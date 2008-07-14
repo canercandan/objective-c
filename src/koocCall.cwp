@@ -43,13 +43,13 @@
 koocCall(expr : node) ::=
   => local module_name = "";
 => local type_name = "";
-#explicitCopy [cast:type_name]?
+#explicitCopy [cast(expr):type_name]?
 '['
 kooc_identifiant_module(expr, module_name, type_name)
 ']'
 ;
 
-cast : value ::= "@!("->(:cast)')'
+cast(expr : node) : value ::= "@!("->(:cast)')'
 	     ;
 
 kooc_identifiant_module(expr : node, module_name : node, type_name : value)
@@ -86,6 +86,7 @@ kooc_identifiant_module(expr : node, module_name : node, type_name : value)
 kooc_identifiant_fonction(expr : node, module_name : value, func_name : node, type : value, nb_arg : node)
 ::= kooc_identifier:func_name
   => local func = existFunc(module_name, func_name, type, nb_arg);
+//  => traceObject(this.block, 9);
 //=> { %>@func@(<% }
 => insert expr.left;
 => insert expr.left.type = "primary_expression";

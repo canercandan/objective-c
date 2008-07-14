@@ -5,7 +5,7 @@
 ** Login   <toumi_m@epitech.net>
 ** 
 ** Started on  Fri Jul  4 15:49:09 2008 User Toumi_m
-   Last update Sat Jul 12 15:17:02 2008 florent hochwelker
+   Last update Mon Jul 14 17:08:03 2008 florent hochwelker
 */
 
 @import "test_implementation.kh"
@@ -41,5 +41,5 @@
 int	main()
 {
 	[myTest.a] = 1337;
-	@!(int)[myTest function :12 :34];
+	@!(char*)[myTest function :12 :34];
 }
