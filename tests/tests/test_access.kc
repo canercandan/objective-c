@@ -1,0 +1,15 @@
+/*
+** test_access.kc for  in /home/toumi_m/kooc/tests
+** 
+** Made by User Toumi_m
+** Login   <toumi_m@epitech.net>
+** 
+** Started on  Mon Jul 14 14:34:36 2008 User Toumi_m
+** Last update Mon Jul 14 14:38:07 2008 User Toumi_m
+*/
+
+@import "test_access.kh" // on n'importe que
+// AnotherModule de acces.kh (cf python)
+
+/// reste de code utilisant AnotherModule
+// on ne pourra pas utilise [Extern ...] bien qu'il soit public.
