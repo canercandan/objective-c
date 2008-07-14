@@ -42,6 +42,7 @@ struct_declaration(theDecl)
     pushItem ctype.pointer;
     set ctype.pointer#back = "*";
     local selfNode;
+    insert selfNode.name = "self";
     insert selfNode.type = "__VARIABLE__";
     insert selfNode.etype = "declaration";
     setall selfNode.ctype = ctype;
