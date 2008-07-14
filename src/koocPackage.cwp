@@ -12,4 +12,7 @@ koocPackage ::=
 "@package"
 #continue #readIdentifier:this.kooc.stack["package"] ['.' #readIdentifier:sPackage => this.kooc.stack["package"] += '.' + sPackage;]*
 	  [ '.' #readIdentifier:val => this.kooc.stack["package"] += "." + val;]*
+	  ['{']? 
+	  translation_unit
+	  ['}']?// => this.kooc.stack["package"] = "";]?
 ;

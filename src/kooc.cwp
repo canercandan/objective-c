@@ -50,7 +50,7 @@
 //=> traceObject(this.block, 20);
 #catch (sError)
 [
-#continue #empty
+#continue // #empty qqun viole votre #empty demairde vous perdez 1 pt
  => {@@prettyPrinterToC(this.kooc.stack["pathC"])@@}
  ]
 |
