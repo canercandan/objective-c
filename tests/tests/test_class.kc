@@ -5,7 +5,7 @@
 ** Login   <armand_m@epitech.net>
 ** 
 ** Started on  Sat Jul  5 17:34:10 2008 morgan armand
-** Last update Sat Jul 12 18:15:59 2008 User Toumi_m
+** Last update Mon Jul 14 15:01:00 2008 User Toumi_m
 */
 
 @import	"test_class.kh"
@@ -22,46 +22,46 @@
 /*       [self.data] = buf; */
     }
 
-/*   @member */
-/*     { */
-/*       int	nbitem() */
-/*       { */
-/* 	int n; */
+  @member
+    {
+      int	nbitem()
+      {
+	int n;
 
 /* 	n = [self.nbitem]; */
-/* 	return (n); */
-/*       } */
+	return (n);
+      }
 
-/*       void	push(int i) */
-/*       { */
-/* 	int pos; */
-/* 	int *buf; */
+      void	push(int i)
+      {
+	int pos;
+	int *buf;
 
 /* 	pos = [self.nbitem]; */
 /* 	buf = [self.data]; */
-/* 	buf[pos++] = i; */
+	buf[pos++] = i;
 /* 	[self.nbitem] = pos; */
-/*       } */
-/*     } */
+      }
+    }
 
-/*   int	pop(StackInt *self) */
-/*   { */
-/*     int	*buf; */
-/*     int	pos; */
-/*      int	r; */
+  int	pop(StackInt *self)
+  {
+    int	*buf;
+    int	pos;
+     int	r;
 
 /*     pos = [self.nbitem]; */
 /*     buf = [self.data]; */
-/*     r = buf[pos--]; */
+    r = buf[pos--];
 /*     [self.nbitem] = pos; */
-/*     return (r); */
-/*   } */
+    return (r);
+  }
 
-/*   void	clean(StackInt *this) */
-/*   { */
-/*     int	*buf; */
+  void	clean(StackInt *this)
+  {
+    int	*buf;
 
 /*     buf = [this.data]; */
-/*     free(buf); */
-/*   } */
+    free(buf);
+  }
 }// fin @class

@@ -5,28 +5,39 @@
 ** Login   <toumi_m@epitech.net>
 ** 
 ** Started on  Sat Jul 12 18:28:35 2008 User Toumi_m
-** Last update Sat Jul 12 21:52:50 2008 User Toumi_m
+** Last update Mon Jul 14 13:41:38 2008 User Toumi_m
 */
 
-@class A
+@class Stack
 {
   @member
     {
-      char	*title;
       int	size;
-      int	idx;
-
-      void	init();
+      int	nbitem;
     }
-  @member int	a[42];
+
+  /* pour compter le nombre de pile presente dans le systeme */
+  int		nbstack = 0;
+/*   void		_.init(int); */
+/*   int		_.nbitem(); */
 }
 
-@class B	: A
+@class StackInt : Stack
 {
-  @member int	b[42];
-}
+  @member int	*data;
 
-@class C	: B
-{
-  @member int	c[42];
+  /* pour compter le nombre de pile presente dans le systeme */
+  int		nbstack = 0;
+
+  // fonctions membres
+  @member void	init(int);
+  @member void	clean();
+
+  // ou
+  @member
+    {
+      int	nbitem();
+      void	push(int);
+      int	pop();
+    }
 }

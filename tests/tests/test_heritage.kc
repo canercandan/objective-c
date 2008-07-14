@@ -5,27 +5,72 @@
 ** Login   <toumi_m@epitech.net>
 ** 
 ** Started on  Sat Jul 12 18:30:09 2008 User Toumi_m
-** Last update Sat Jul 12 18:31:31 2008 User Toumi_m
+** Last update Mon Jul 14 14:06:47 2008 User Toumi_m
 */
 
 @import	"test_heritage.kh"
 
-@implementation A
+@implementation Stack
 {
-  @member void	init()
+  @member
     {
-      print("Initialisation\n");
+      void	init(int size)
+      {
+	/* 	[super init]; */
+	/* 	[self.size] = size; */
+      }
+
+      int	nbitem()
+      {
+	int	n;
+
+	/* 	n = [self.nbitem]; */
+	return (n);
+      }
     }
 }
 
-
-@implementation B
+@implementation StackInt
 {
 
-}
+  @member void	init(int size)
+    {
+      int	*buf;
 
+      /*       [super init :size]; */
+      buf = (int *) calloc(size, sizeof(int));
+      /*       [self.data] = buf; */
+    }
 
-@implementation C
-{
+  @member void	push(int i)
+    {
+      int	pos;
+      int	*buf;
 
+      /*       pos = [self.nbitem]; */
+      /*       buf = [self.data]; */
+      buf[pos++] = i;
+      /*       [self.nbitem] = pos; */
+    }
+
+  @member int	pop()
+    {
+      int	*buf;
+      int	 pos;
+      int	r;
+
+      /*       pos = [self.nbitem]; */
+      /*       buf = [self.data]; */
+      r = buf[pos--];
+      /*       [self.nbitem] = pos; */
+      return (r);
+    }
+
+  @member void	clean()
+    {
+      int	*buf;
+
+/*       buf = [self.data]; */
+      free(buf);
+    }
 }

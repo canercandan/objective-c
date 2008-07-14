@@ -5,13 +5,14 @@
 ## Login   <armand_m@epitech.net>
 ## 
 ## Started on  Thu Jun 26 16:39:06 2008 morgan armand
-## Last update Sat Jul 12 18:32:02 2008 User Toumi_m
+## Last update Mon Jul 14 14:35:41 2008 User Toumi_m
 ##
 
 #$(wildcard tests/*.kc)
 
 SRC	=	tests/test_import.kc			\
 		tests/test_module.kc			\
+		tests/test_access.kc			\
 		tests/test_mod.kc			\
 		tests/test_implementation.kc		\
 		tests/test_package.kc			\
