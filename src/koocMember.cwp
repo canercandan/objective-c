@@ -33,19 +33,25 @@ struct_declaration(theDecl)
   }
   else
   {
+    local ctype;
+    insert ctype.pctx;
+    ref ctype.pctx = this.gl_pctx;
+    insert ctype.type = "__COMPOSED__";
+    insert ctype.identifier = theNode.name;
+    insert ctype.pointer;
+    pushItem ctype.pointer;
+    set ctype.pointer#back = "*";
+    local selfNode;
+    insert selfNode.type = "__VARIABLE__";
+    insert selfNode.etype = "declaration";
+    setall selfNode.ctype = ctype;
+    invertArray(theDecl.list);
+    pushItem theDecl.list;
+    setall theDecl.list#back = selfNode;
+    invertArray(theDecl.list);
     pushItem this.block;
     setall this.block#back = theDecl;
   }
-}
-| declaration(this.block)
-=>
-{
-  localref theNode = this.block#back;
-
-  if (!existVariable(theNode.ctype.infoType))
-    insert theNode.ctype.infoType;
-
-  insert theNode.ctype.infoType["static"] = "storageClassSpecifier";
 }
 ;
 
