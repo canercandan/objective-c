@@ -11,6 +11,7 @@ p * @file koocImplementation.cwp
  * @par #addImplementation
  * add an implementation if a module whit the same name exist
  *
+ * @todo @member { functions }
  * @bug generateString what the fuck Cedric!!! fixed by the
  * function prettyPrintExistFile
  */
@@ -19,10 +20,7 @@ p * @file koocImplementation.cwp
  * @cond
  */
 koocImplementation
-	::= #explicitCopy [ addImplementation ]
-;
-
-addImplementation ::= "@implementation" #continue #readIdentifier:sName
+	::= #explicitCopy "@implementation" #continue #readIdentifier:sName
   => local type = "";
   => local filenameC = "";
 
@@ -48,15 +46,12 @@ addImplementation ::= "@implementation" #continue #readIdentifier:sName
 
   '{'
   [
-    [ "@member" ]? declaration(this.block)
-    => pushItem this.kooc.implementations[sName];
-    => ref this.kooc.implementations[sName]#back = this.block#back;
-    => localref theNode = this.kooc.implementations[sName]#back;
-    => if (type == "module")
-      { treeInsertFileOut(this.kooc.stack["path_import"] + this.kooc.modules[sName].nameC); }
-    => if (type == "class")
-      { treeInsertFileOut(this.kooc.stack["path_import"] + this.kooc.classes[sName].nameC); }
-    => koocMangle(sName, theNode);
+    "@member" #continue
+    [
+      declaration(this.block) addImplementation(sName, type)
+    | '{' [ declaration(this.block) addImplementation(sName, type) ]* '}'
+    ]
+  | declaration(this.block) addImplementation(sName, type)
   ]*
 
   #generatedFile(this.kooc.stack["path_import"] + filenameC)
@@ -76,6 +71,18 @@ addImplementation ::= "@implementation" #continue #readIdentifier:sName
      }
   '}'
 ;
+
+addImplementation(sName : value, type : value) ::=
+  => pushItem this.kooc.implementations[sName];
+  => ref this.kooc.implementations[sName]#back = this.block#back;
+  => localref theNode = this.kooc.implementations[sName]#back;
+  => if (type == "module")
+    { treeInsertFileOut(this.kooc.stack["path_import"] + this.kooc.modules[sName].nameC); }
+  => if (type == "class")
+    { treeInsertFileOut(this.kooc.stack["path_import"] + this.kooc.classes[sName].nameC); }
+  => koocMangle(sName, theNode);
+;
+
 /**
  * @endcond
  */

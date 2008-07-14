@@ -12,7 +12,8 @@
  */
 koocModule(sModule : node) ::=
 #explicitCopy
-"@module"
+=> local access = "public";
+[ "@public" | "@private" => access = "private"; ]? "@module"
 #continue
 [
 //#try
@@ -21,7 +22,7 @@ koocModule(sModule : node) ::=
   => { if (this.kooc.stack["package"] != "")
       sModule = this.kooc.stack["package"] + "." +  sModule;
   }
-  => koocModuleInit(sModule);
+  => koocModuleInit(sModule, access);
   [declaration(this.block)
    => pushItem this.kooc.modules[sModule];
    => ref this.kooc.modules[sModule]#back = this.block#back;

@@ -4,7 +4,7 @@
  * @note @ref develop @ref contrib @ref tools
  */
 
-declare function	koocModuleInit(sModule : value);
+declare function	koocModuleInit(sModule : value, access : value);
 declare function	koocModuleContent(sModule : value);
 
 /**
@@ -12,12 +12,13 @@ declare function	koocModuleContent(sModule : value);
  * @brief init the tree'information to insert module
  * @param sModule module's name
  */
-function	koocModuleInit(sModule : value)
+function	koocModuleInit(sModule : value, access : value)
 {
   local		modH = "km_" + replaceString('.', '_', sModule.toLowerString()) + ".h";
   local		modC = "km_" + replaceString('.', '_', sModule.toLowerString()) + ".c";
 
   insert this.kooc.modules[sModule];
+  insert this.kooc.modules[sModule].access = access;
   insert this.kooc.modules[sModule].nameH = modH;
   insert this.kooc.modules[sModule].nameC = modC;
 }
