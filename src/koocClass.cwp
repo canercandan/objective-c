@@ -41,6 +41,7 @@ koocClass ::=
   => ref this.block.types[sClass] = this.block#back;
   => if (sExtend) { koocClassExtend(sClass, sExtend, this.block#back.ctype.list); }
   => localref theNode = this.block#back;
+  => this.kooc.stack["class"] = sClass;
   [koocMember(theNode)
    | declaration(this.block) =>
    {
@@ -50,12 +51,14 @@ koocClass ::=
        insert theDecl.ctype.infoType;
 
      insert theDecl.ctype.infoType["static"] = "storageClassSpecifier";
+     pushItem this.kooc.classes[sClass];
+     ref this.kooc.classes[sClass]#back = this.block#back;
    }
    ]*
 #generatedFile(this.kooc.stack["path_import"] + this.kooc.classes[sClass].nameH)
 => koocImportIfndef(this.kooc.classes[sClass].nameH);
 => {@@prettyPrinterToH(this.kooc.stack["path_import"]
-		       + this.kooc.classes[sClass].nameH + "_variable")@@}
+		       + this.kooc.classes[sClass].nameH)@@}
 => {@@prettyPrinterToC(this.kooc.stack["path_import"]
 		       + this.kooc.classes[sClass].nameH)@@}
 => koocImportEndif(this.kooc.classes[sClass].nameH);

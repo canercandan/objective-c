@@ -5,10 +5,15 @@
 ** Login   <armand_m@epitech.net>
 ** 
 ** Started on  Sat Jul  5 17:34:10 2008 morgan armand
-** Last update Mon Jul 14 15:01:00 2008 User Toumi_m
+** Last update Tue Jul 15 02:11:45 2008 caner candan
 */
 
 @import	"test_class.kh"
+
+int	main(void)
+{
+  return (0);
+}
 
 @implementation StackInt
 {

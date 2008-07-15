@@ -35,10 +35,10 @@ function	treeKooc()
 {
   insert this.kooc;
   insert this.kooc.modules;
-  //insert this.kooc.headers;
   insert this.kooc.classes;
   insert this.kooc.stack;
   insert this.kooc.stack["package"];
+  insert this.kooc.stack["class"];
 }
 
 /**

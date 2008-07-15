@@ -26,6 +26,7 @@ koocMemberDeclaration(theNode : node) ::=
 struct_declaration(theDecl)
 =>
 {
+  local sClass = this.kooc.stack["class"];
   if (theDecl.type == "__VARIABLE__")
   {
     pushItem theNode.ctype.list;
@@ -52,6 +53,8 @@ struct_declaration(theDecl)
     invertArray(theDecl.list);
     pushItem this.block;
     setall this.block#back = theDecl;
+    pushItem this.kooc.classes[sClass];
+    ref this.kooc.classes[sClass]#back = this.block#back;
   }
 }
 ;
