@@ -19,68 +19,29 @@ p * @file koocImplementation.cwp
 /**
  * @cond
  */
-koocImplementation
-	::= #explicitCopy "@implementation" #continue #readIdentifier:sName
+koocImplementation ::=
+#explicitCopy
+  "@implementation" #continue #readIdentifier:sName
   => local type = "";
-  => local filenameC = "";
-
-  => if (this.kooc.stack["package"] != "")
-      { sName = this.kooc.stack["package"] + '.' + sName; }
-
-  => if (existModule(sName) == 1)
-    {
-      type = "module";
-      filenameC = this.kooc.modules[sName].nameC;
-    }
-  => if (existClass(sName) == 1)
-    {
-      type = "class";
-      filenameC = this.kooc.classes[sName].nameC;
-    }
-
-  => if (type == "")
-    {
-      traceLine("Module or Class [" + sName + "] doesn't exist");
-      exit(-1);
-    }
-
-  '{'
-  [
-    "@member" #continue
-    [
-      declaration(this.block) addImplementation(sName, type)
-    | '{' [ declaration(this.block) addImplementation(sName, type) ]* '}'
-    ]
-  | declaration(this.block) addImplementation(sName, type)
-  ]*
-
-  #generatedFile(this.kooc.stack["path_import"] + filenameC)
-  => if (type == "module")
-     {
-	check_implementation(sName, this.kooc.modules);
-	@@prettyPrinterToC(this.kooc.stack["path_import"]
-		       + this.kooc.modules[sName].nameH + "_variable")@@
-	@@prettyPrinterToC(this.kooc.stack["path_import"]
-			   + this.kooc.modules[sName].nameC)@@
-     }
-  => if (type == "class")
-     {
-	check_implementation(sName, this.kooc.classes);
-	@@prettyPrinterToC(this.kooc.stack["path_import"]
-			   + this.kooc.classes[sName].nameC)@@
-     }
+=> local filenameC = "";
+=> koocImplementationInit(sName, type, filenameC);
+'{'
+[
+ "@member" #continue
+ [
+  declaration(this.block)
+  => koocImplementationAdd(sName, type);
+  | '{' [declaration(this.block)
+	 => koocImplementationAdd(sName, type);
+	 ]*
   '}'
-;
-
-addImplementation(sName : value, type : value) ::=
-  => pushItem this.kooc.implementations[sName];
-  => ref this.kooc.implementations[sName]#back = this.block#back;
-  => localref theNode = this.kooc.implementations[sName]#back;
-  => if (type == "module")
-    { treeInsertFileOut(this.kooc.stack["path_import"] + this.kooc.modules[sName].nameC); }
-  => if (type == "class")
-    { treeInsertFileOut(this.kooc.stack["path_import"] + this.kooc.classes[sName].nameC); }
-  => koocMangle(sName, theNode);
+  ]
+ | declaration(this.block)
+ => koocImplementationAdd(sName, type);
+ ]*
+#generatedFile(this.kooc.stack["path_import"] + filenameC)
+=> koocImplementationPrint(sName, type);
+'}'
 ;
 
 /**

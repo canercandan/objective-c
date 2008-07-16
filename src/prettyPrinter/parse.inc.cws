@@ -4,9 +4,9 @@ declare function	parseListEnum(theNode : node);
 declare function	replaceChar(theNode : node);
 declare function	parseList(theNode : node);
 declare function	parseCType(theNode : node);
-
 declare function	getPFname(theNode : node);
 declare function	getPointer(theNode : node);
+declare function	endPoint(block : node);
 
 function	parseInit(theNode : node)
 {
@@ -55,7 +55,7 @@ function	parseBlock(theNode : node, file : value = "")
 	    if (existVariable(var.etype))
 	      sResult += testEType<var.etype>(var) + ";\n";
 	    else if (existVariable(var.otype))
-	      sResult += testOType<var.otype>(var) ;
+	      sResult += testOType<var.otype>(var);
 	    else if (existVariable(var.init))
 	      {
 		sResult += parseInit(var);
@@ -128,4 +128,12 @@ function	parseCType(theNode : node)
   return sInfo + " " + sEType + theNode.sign + " " +
     theNode.specifier + " " +
     theNode.identifier + " " + sPInfo;
+}
+
+function	endPoint(block : node)
+{
+  if (existVariable(block.etype))
+    if (block.etype == "expression")
+      return (";\n");
+  return ("\n");
 }
