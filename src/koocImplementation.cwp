@@ -22,6 +22,7 @@
 koocImplementation ::=
 #explicitCopy
   "@implementation" #continue #readIdentifier:sName
+  => this.kooc.stack["class"] = sName;
   => local type = "";
 => local filenameC = "";
 => koocImplementationInit(sName, type, filenameC);

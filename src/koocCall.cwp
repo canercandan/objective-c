@@ -42,62 +42,93 @@
 
 koocCall(expr : node) ::=
   => local module_name = "";
-=> local type_name = "";
+  => local type_name = "";
+  => local func_name = "";
+  => local nb_arg = "";
 #explicitCopy [cast(expr):type_name]?
 '['
 kooc_identifiant_module(expr, module_name, type_name)
+[
+    kooc_identifiant_variable(expr, module_name, type_name)
+ |
+  [
+    kooc_identifiant_fonction(expr, module_name, func_name, type_name, nb_arg)
+    kooc_list_parametre(expr, module_name, func_name, nb_arg)
+  ]
+]
 ']'
 ;
 
 cast(expr : node) : value ::= "@!("->(:cast)')'
-	     ;
+;
 
 kooc_identifiant_module(expr : node, module_name : node, type_name : value)
-	   ::= [kooc_identifier ['.' kooc_identifier]*]:name
+	   ::= [kooc_identifier ['.' kooc_identifier]*]:module_name
+;
+
+kooc_identifiant_variable(expr : node, module_name : node, type_name : node) ::=
 	       [ !!']' // C'est une variable qui est demande
 	       => { local val = "";
+	       	    local name = module_name;
 	       	    module_name = midString(name, 0, findLastString(name, '.'));
 		    val = subString(name, $findLastString(name, '.') + 1$);
-		    if (!existModule(module_name))
-	       	       {
+		    if (module_name != "self" && !existModule(module_name))
+	       	      {
 			 traceLine("error - module " + name + " doesn't exist.");
 			 exit(-1);
-		       }
-		    local variable;
-	   	    variable = existVar(module_name, val, type_name);
-	   	    insert expr.value = variable;
-	   	    insert expr.operator = "id";
-	   	    insert expr.otype = "terminal";
+		      }
+		    if (module_name == "self")
+		      {
+		        existVar(this.kooc.stack["class"], val, type_name);
+			insert expr.left;
+			  insert expr.left.type = "primary_expression";
+			  insert expr.left.value = "self";
+			  insert expr.left.operator = "id";
+			  insert expr.left.otype = "terminal";
+			  insert expr.left.type = "primary_expression";
+			insert expr.type = "deref_expression";
+			insert expr.otype = "likebinary";
+			insert expr.etype = "expression";
+			insert expr.right;
+			  insert expr.right.type = "primary_expression";
+			  insert expr.right.value = val;
+			  insert expr.right.operator = "id";
+			  insert expr.right.otype = "terminal";
+			insert expr.operator = "-&gt;";
+		      }
+		    else
+		      {
+		        local variable;
+	   	    	variable = existVar(module_name, val, type_name);
+	   	    	insert expr.value = variable;
+	   	    	insert expr.operator = "id";
+	   	    	insert expr.otype = "terminal";
+		      }
 		  }
-	       ] | // C'est un appel de fonction
-	       [ [kooc_identifier ['.' kooc_identifier]*]:name
-	       	 => local func_name = "";
-	       	 => local nb_arg = 0;
-		 => {  if (!existModule(name))
-	       	       {
-			 traceLine("error - module " + name + " doesn't exist.");
-			 exit(-1);
-		       }
-		     }
-	       kooc_identifiant_fonction(expr, name, func_name, type_name, nb_arg)
-    	       kooc_list_parametre(expr, module_name, func_name, nb_arg)]
+	       ]
 ;
 
 kooc_identifiant_fonction(expr : node, module_name : value, func_name : node, type : value, nb_arg : node)
-::= kooc_identifier:func_name
+::= 
+  => {  if (!existModule(module_name))
+        {
+	  traceLine("error - module " + module_name + " doesn't exist.");
+	  exit(-1);
+	}
+      }
+  => local name = "";
+  kooc_identifier:func_name
   => local func = existFunc(module_name, func_name, type, nb_arg);
-//  => traceObject(this.block, 9);
-//=> { %>@func@(<% }
-=> insert expr.left;
-=> insert expr.left.type = "primary_expression";
-=> insert expr.left.value = func;
-=> insert expr.left.operator = "id";
-=> insert expr.left.otype = "terminal";
-=> insert expr.left.etype = "expression";
-=> insert expr.type = "call_expression";
-=> insert expr.otype = "call";
-=> insert expr.operator = "()";
-=> insert expr.list;
+  => insert expr.left;
+  => insert expr.left.type = "primary_expression";
+  => insert expr.left.value = func;
+  => insert expr.left.operator = "id";
+  => insert expr.left.otype = "terminal";
+  => insert expr.left.etype = "expression";
+  => insert expr.type = "call_expression";
+  => insert expr.otype = "call";
+  => insert expr.operator = "()";
+  => insert expr.list;
 ;
 
 kooc_list_parametre(expr : node, module : value, func : value, nb_arg : value)
