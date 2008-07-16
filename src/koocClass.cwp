@@ -12,55 +12,20 @@ koocClass ::=
 "@class"
 #continue #readIdentifier:sClass
 [
-	':'
-	[
-	 #readIdentifier:sExtend
-	 => if (existClass(sExtend) == 0)
-	   { traceLine("Class " + sExtend + " doesn't exist"); } // exit(-1);
-	]
-]?
-'{'
+ ':'
+ [#readIdentifier:sExtend => koocClassExtendErr(sExtend);
+  ]
+ ]?
+  '{'
   => koocClassInit(sClass);
-  => local ctype;
-  => insert ctype.pctx;
-  => ref ctype.pctx = this.gl_pctx;
-  => insert ctype.type = "__COMPOSED__";
-  => insert ctype.identifier = "kc_" + sClass.toLowerString();
-  => insert ctype.infoType;
-  => insert ctype.infoType["typedef"] = "storageClassSpecifier";
-  => insert ctype.specifier = "struct";
-  => insert ctype.list;
-  => pushItem this.block;
-  => treeInsertFileOut(this.kooc.stack["path_import"]
-       + this.kooc.classes[sClass].nameH);
-  => insert this.block#back.name = sClass;
-  => insert this.block#back.type = "__TYPE__";
-  => insert this.block#back.etype = "declaration";
-  => setall this.block#back.ctype = ctype;
-  => insert this.block.types[sClass];
-  => ref this.block.types[sClass] = this.block#back;
-  => if (sExtend) { koocClassExtend(sClass, sExtend, this.block#back.ctype.list); }
-  => localref theNode = this.block#back;
-  => this.kooc.stack["class"] = sClass;
-  [koocMember(theNode)
-   | declaration(this.block) =>
-   {
-     localref theDecl = this.block#back;
-
-     if (!existVariable(theDecl.ctype.infoType))
-       insert theDecl.ctype.infoType;
-
-     insert theDecl.ctype.infoType["static"] = "storageClassSpecifier";
-     pushItem this.kooc.classes[sClass];
-     ref this.kooc.classes[sClass]#back = this.block#back;
-   }
-   ]*
+=> koocClassFill(sClass, sExtend);
+=> localref theNode = this.block#back;
+[koocMember(theNode)
+ | declaration(this.block)
+ => koocClassErr();
+ => koocClassAdd(sClass);
+ ]*
 #generatedFile(this.kooc.stack["path_import"] + this.kooc.classes[sClass].nameH)
-=> koocImportIfndef(this.kooc.classes[sClass].nameH);
-=> {@@prettyPrinterToH(this.kooc.stack["path_import"]
-		       + this.kooc.classes[sClass].nameH)@@}
-=> {@@prettyPrinterToC(this.kooc.stack["path_import"]
-		       + this.kooc.classes[sClass].nameH)@@}
-=> koocImportEndif(this.kooc.classes[sClass].nameH);
+=> koocClassPrint(sClass);
 '}'
 ;

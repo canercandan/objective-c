@@ -24,27 +24,12 @@ koocModule(sModule : node) ::=
   }
   => koocModuleInit(sModule, access);
   [declaration(this.block)
-   => pushItem this.kooc.modules[sModule];
-   => ref this.kooc.modules[sModule]#back = this.block#back;
-   => {
-   if (this.block#back.type == "__VARIABLE__")
-   treeInsertFileOut(this.kooc.stack["path_import"]
-			+ this.kooc.modules[sModule].nameH + "_variable");
-   else
-   treeInsertFileOut(this.kooc.stack["path_import"]
-			+ this.kooc.modules[sModule].nameH);
-}
-  => koocModuleCheck(sModule);
-  => koocModuleMangle(sModule);
+   => koocModuleErr();
+   => koocModuleAdd(sModule);
   ]*
 => koocModuleContent(sModule);
 #generatedFile(this.kooc.stack["path_import"] + this.kooc.modules[sModule].nameH)
-=> koocImportIfndef(this.kooc.modules[sModule].nameH);
-=> {@@prettyPrinterToH(this.kooc.stack["path_import"]
-		       + this.kooc.modules[sModule].nameH + "_variable")@@}
-=> {@@prettyPrinterToC(this.kooc.stack["path_import"]
-		       + this.kooc.modules[sModule].nameH)@@}
-=> koocImportEndif(this.kooc.modules[sModule].nameH);
+=> koocModulePrint(sModule);
 #generatedFile(this.kooc.stack["pathH"])
 '}'
 /*#catch (sError)

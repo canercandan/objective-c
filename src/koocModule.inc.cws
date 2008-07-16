@@ -5,7 +5,12 @@
  */
 
 declare function	koocModuleInit(sModule : value, access : value);
+declare function	koocModuleCheck(sModule : value);
+declare function	koocModuleMangle(sModule : value);
 declare function	koocModuleContent(sModule : value);
+declare function	koocModuleErr();
+declare function	koocModuleAdd(sModule : value);
+declare function	koocModulePrint(sModule : value);
 
 /**
  * @fn function	koocModuleInit(sModule : value)
@@ -68,4 +73,40 @@ function	koocModuleMangle(sModule : value)
 function	koocModuleContent(sModule : value)
 {
   {%>#include "@this.kooc.modules[sModule].nameH@"@"\n"@<%}
+}
+
+function	koocModuleErr()
+{
+  localref	theNode = this.block#back;
+
+  if (theNode.type != "__VARIABLE__" &&
+      theNode.type != "__PROTOTYPE__")
+    {
+      traceLine("\"" + theNode.name + "\" is a incorrect declaration in @module");
+      exit(-1);
+    }
+}
+
+function	koocModuleAdd(sModule : value)
+{
+  pushItem this.kooc.modules[sModule];
+  ref this.kooc.modules[sModule]#back = this.block#back;
+  if (this.block#back.type == "__VARIABLE__")
+    treeInsertFileOut(this.kooc.stack["path_import"]
+		      + this.kooc.modules[sModule].nameH + "_variable");
+  else
+    treeInsertFileOut(this.kooc.stack["path_import"]
+		      + this.kooc.modules[sModule].nameH);
+  koocModuleCheck(sModule);
+  koocModuleMangle(sModule);
+}
+
+function	koocModulePrint(sModule : value)
+{
+  koocImportIfndef(this.kooc.modules[sModule].nameH);
+  {@@prettyPrinterToH(this.kooc.stack["path_import"]
+		      + this.kooc.modules[sModule].nameH + "_variable")@@}
+  {@@prettyPrinterToC(this.kooc.stack["path_import"]
+		      + this.kooc.modules[sModule].nameH)@@}
+  koocImportEndif(this.kooc.modules[sModule].nameH);
 }

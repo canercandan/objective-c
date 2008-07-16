@@ -5,7 +5,7 @@
 ** Login   <toumi_m@epitech.net>
 ** 
 ** Started on  Fri Jul  4 15:46:24 2008 User Toumi_m
-   Last update Mon Jul 14 13:09:24 2008 florent hochwelker
+** Last update Wed Jul 16 11:40:51 2008 caner candan
 */
 
 @module		myTest
@@ -18,11 +18,11 @@
 	char		*function(int argc, char **argv);
 	void		function();
 
-	typedef struct	s_list
-	{
-	  void		*data;
-	  struct s_list	*next;
-	}		t_list;
+/* 	typedef struct	s_list */
+/* 	{ */
+/* 	  void		*data; */
+/* 	  struct s_list	*next; */
+/* 	}		t_list; */
 
-	enum {A, B , C};
+/* 	enum {A, B , C}; */
 }

@@ -10,6 +10,7 @@
 
 declare function	koocImplementationInit(sName : value, type : node, filenameC : node);
 declare function	koocImplementationPrint(sName : value, type : value);
+declare function	koocImplementationErr();
 declare function	koocImplementationAdd(sName : value, type : value);
 declare function	check_implementation(name : value, theNode : node);
 declare function	check_prototypes(var1 : node, var2 : node);
@@ -57,11 +58,22 @@ function	koocImplementationPrint(sName : value, type : value)
     }
 }
 
+function	koocImplementationErr()
+{
+  localref	theNode = this.block#back;
+
+  if (theNode.type != "__FUNCTION__")
+    {
+      traceLine("\"" + theNode.name + "\" is a incorrect declaration in @implementation");
+      exit(-1);
+    }
+}
+
 function	koocImplementationAdd(sName : value, type : value)
 {
-  pushItem this.kooc.implementations[sName];
-  ref this.kooc.implementations[sName]#back = this.block#back;
-  localref theNode = this.kooc.implementations[sName]#back;
+  pushItem	this.kooc.implementations[sName];
+  ref		this.kooc.implementations[sName]#back = this.block#back;
+  localref	theNode = this.kooc.implementations[sName]#back;
 
   if (type == "module")
     treeInsertFileOut(this.kooc.stack["path_import"] + this.kooc.modules[sName].nameC);

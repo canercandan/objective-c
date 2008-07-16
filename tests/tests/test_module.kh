@@ -2,7 +2,7 @@ typedef int	Entier;
 
 @module		Test
 {
-  typedef int	Entier;
+/*   typedef int	Entier; */
   int		a = 42;
   char		a = 42;
   int		b;

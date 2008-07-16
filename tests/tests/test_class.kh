@@ -5,11 +5,13 @@
 ** Login   <armand_m@epitech.net>
 ** 
 ** Started on  Sat Jul  5 17:32:10 2008 morgan armand
-** Last update Mon Jul 14 17:10:58 2008 caner candan
+** Last update Wed Jul 16 13:06:58 2008 caner candan
 */
 
 @class StackInt
 {
+  int	a()
+  {return (1);}
   @member
     {
       int	size;

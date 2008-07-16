@@ -5,7 +5,12 @@
  */
 
 declare function	koocClassInit(sClass : value);
+declare function	koocClassFill(sClass : value, sExtend : value);
 declare function	koocClassExtend(sClass : value, sExtend : value, theNode : node);
+declare function	koocClassErr();
+declare function	koocClassAdd(sClass : value);
+declare function	koocClassPrint(sClass : value);
+declare function	koocClassExtendErr(sExtend : value);
 
 /**
  * @fn function	koocClassInit(sClass : value)
@@ -22,8 +27,30 @@ function	koocClassInit(sClass : value)
   insert this.kooc.classes[sClass].nameC = modC;
 }
 
-function	koocClassCreateCType(sClass : value)
+function	koocClassFill(sClass : value, sExtend : value)
 {
+  local		ctype;
+
+  insert ctype.pctx;
+  ref ctype.pctx = this.gl_pctx;
+  insert ctype.type = "__COMPOSED__";
+  insert ctype.identifier = "kc_" + sClass.toLowerString();
+  insert ctype.infoType;
+  insert ctype.infoType["typedef"] = "storageClassSpecifier";
+  insert ctype.specifier = "struct";
+  insert ctype.list;
+  pushItem this.block;
+  treeInsertFileOut(this.kooc.stack["path_import"]
+		    + this.kooc.classes[sClass].nameH);
+  insert this.block#back.name = sClass;
+  insert this.block#back.type = "__TYPE__";
+  insert this.block#back.etype = "declaration";
+  setall this.block#back.ctype = ctype;
+  insert this.block.types[sClass];
+  ref this.block.types[sClass] = this.block#back;
+  if (sExtend)
+    koocClassExtend(sClass, sExtend, this.block#back.ctype.list);
+  this.kooc.stack["class"] = sClass;
 }
 
 function	koocClassExtend(sClass : value, sExtend : value, theNode : node)
@@ -43,4 +70,44 @@ function	koocClassExtend(sClass : value, sExtend : value, theNode : node)
   insert theNode#back.type = "__VARIABLE__";
   insert theNode#back.etype = "declaration";
   insert theNode#back.name = "parent";
+}
+
+function	koocClassErr()
+{
+  localref	theNode = this.block#back;
+
+  if (theNode.type == "__VARIABLE__" &&
+      theNode.type == "__PROTOTYPE__")
+    {
+      traceLine("\"" + theNode.name + "\" is a incorrect declaration in @class");
+      exit(-1);
+    }
+}
+
+function	koocClassAdd(sClass : value)
+{
+  localref	theDecl = this.block#back;
+
+  if (!existVariable(theDecl.ctype.infoType))
+    insert theDecl.ctype.infoType;
+  insert theDecl.ctype.infoType["static"] = "storageClassSpecifier";
+  pushItem this.kooc.classes[sClass];
+  ref this.kooc.classes[sClass]#back = this.block#back;
+}
+
+function	koocClassPrint(sClass : value)
+{
+  koocImportIfndef(this.kooc.classes[sClass].nameH);
+  {@@prettyPrinterToH(this.kooc.stack["path_import"]
+		      + this.kooc.classes[sClass].nameH)@@}
+  {@@prettyPrinterToC(this.kooc.stack["path_import"]
+		      + this.kooc.classes[sClass].nameH)@@}
+  koocImportEndif(this.kooc.classes[sClass].nameH);
+}
+
+function	koocClassExtendErr(sExtend : value)
+{
+  if (!existClass(sExtend))
+    traceLine("Class " + sExtend + " doesn't exist");
+  exit(-1);
 }
