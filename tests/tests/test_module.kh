@@ -1,3 +1,4 @@
+
 typedef int	Entier;
 
 @module		Test
@@ -6,7 +7,7 @@ typedef int	Entier;
   int		a = 42;
   char		a = 42;
   int		b;
-//  Entier	lol;
+  Entier	lol;
   void		cool(int j);
 
   void		f1(int a, int b);

@@ -5,7 +5,7 @@
 ** Login   <armand_m@epitech.net>
 ** 
 ** Started on  Sat Jul  5 17:34:10 2008 morgan armand
-** Last update Tue Jul 15 02:11:45 2008 caner candan
+** Last update Wed Jul 16 19:43:17 2008 User Toumi_m
 */
 
 @import	"test_class.kh"
@@ -21,10 +21,10 @@ int	main(void)
     {
       int		*buf;
 
-/*       [self.nbitem] = 0; */
-/*       [self.size] = size; */
+      [self.nbitem] = 0;
+      [self.size] = size;
       buf = (int *) calloc(size, sizeof(int));
-/*       [self.data] = buf; */
+      [self.data] = buf;
     }
 
   @member
@@ -33,7 +33,7 @@ int	main(void)
       {
 	int n;
 
-/* 	n = [self.nbitem]; */
+	n = [self.nbitem];
 	return (n);
       }
 
@@ -42,10 +42,10 @@ int	main(void)
 	int pos;
 	int *buf;
 
-/* 	pos = [self.nbitem]; */
-/* 	buf = [self.data]; */
+	pos = [self.nbitem];
+	buf = [self.data];
 	buf[pos++] = i;
-/* 	[self.nbitem] = pos; */
+	[self.nbitem] = pos;
       }
     }
 
@@ -55,10 +55,10 @@ int	main(void)
     int	pos;
      int	r;
 
-/*     pos = [self.nbitem]; */
-/*     buf = [self.data]; */
+    pos = [self.nbitem];
+    buf = [self.data];
     r = buf[pos--];
-/*     [self.nbitem] = pos; */
+    [self.nbitem] = pos;
     return (r);
   }
 
@@ -66,7 +66,7 @@ int	main(void)
   {
     int	*buf;
 
-/*     buf = [this.data]; */
+    buf = [this.data];
     free(buf);
   }
 }// fin @class
