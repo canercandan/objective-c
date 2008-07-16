@@ -46,11 +46,10 @@
 [koocDeclaration(this.block)
  | declaration(this.block)
  => treeInsertFileOut(this.kooc.stack["pathC"]);
- ]*
+ ]* #continue #empty
 //=> traceObject(this.block, 20);
 #catch (sError)
 [
-#continue #empty
  => {@@prettyPrinterToC(this.kooc.stack["pathC"])@@}
  ]
 |
