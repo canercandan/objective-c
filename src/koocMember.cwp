@@ -23,29 +23,24 @@ koocMember(theNode : node) ::=
 
 koocMemberDeclaration(theNode : node) ::=
 #explicitCopy
-=> insert this.caca;
-=> insert this.caca.block;
-=> localref theDecl = this.caca;
-=> insert theDecl.block.pctx;
-=> if (existVariable(theDecl.gl_pctx)) ref theDecl.block.pctx = theDecl.gl_pctx; else insert theDecl.gl_pctx;
-=> ref theDecl.gl_pctx = theDecl.block;
-declaration(theDecl.block)
+declaration(this.block)
 =>
 {
   local sClass = this.kooc.stack["class"];
-  local dNode = theDecl.block#back;
+  localref theDecl = this.block#back;
 
-  if (dNode.type == "__VARIABLE__")
+  pushItem this.kooc.classes[sClass];
+  ref this.kooc.classes[sClass]#back = theDecl;
+
+  if (theDecl.type == "__VARIABLE__")
     {
       pushItem theNode.ctype.list;
-      setall theNode.ctype.list#back = dNode;
+      setall theNode.ctype.list#back = theDecl;
     }
   else
     {
-      pushItem this.kooc.classes[sClass];
-      ref this.kooc.classes[sClass]#back = this.block#back;
       pushItem this.block;
-      setall this.block#back = dNode;
+      setall this.block#back = theDecl;
     }
 }
 ;
