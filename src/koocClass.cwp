@@ -17,7 +17,7 @@ koocClass ::=
   ]
  ]?
   '{'
-  => koocClassInit(sClass);
+=> koocClassInit(sClass);
 => koocClassFill(sClass, sExtend);
 => localref theNode = this.block#back;
 [koocMember(theNode)
