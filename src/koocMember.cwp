@@ -16,15 +16,23 @@ koocMember(theNode : node) ::=
 "@member"
 #continue
 [
-  [ '{' [ koocMemberDeclaration(theNode) ]* '}']
-  |  koocMemberDeclaration(theNode) ]
+  [ '{' [ koocMemberDeclaration(theNode)
+	  => {sleep(100); traceLine("coucou");}
+ ]* '}']
+  |  koocMemberDeclaration(theNode)
+ ]
 ;
 
 koocMemberDeclaration(theNode : node) ::=
 #explicitCopy
-=> local theDecl;
-=> insert theDecl.block;
+=> insert this.caca;
+=> insert this.caca.block;
+=> localref theDecl = this.caca;
+=> insert theDecl.block.pctx;
+=> if (existVariable(theDecl.gl_pctx)) ref theDecl.block.pctx = theDecl.gl_pctx; else insert theDecl.gl_pctx;
+=> ref theDecl.gl_pctx = theDecl.block;
 declaration(theDecl.block)
+=> traceObject(theDecl, 1);
 =>
 {
   local sClass = this.kooc.stack["class"];
@@ -39,7 +47,6 @@ declaration(theDecl.block)
     {
       pushItem this.kooc.classes[sClass];
       ref this.kooc.classes[sClass]#back = this.block#back;
-
       pushItem this.block;
       setall this.block#back = dNode;
     }
