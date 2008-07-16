@@ -20,8 +20,6 @@ function	koocMangle(theMod : value, theNode : node)
 {
   local		pkgs = "";
   local		name = "_ZN";
-  //localref	theNode = this.kooc.modules[theMod].block#back;
-  //localref	theNode = this.block#back;
 
 /*   if (existVariable(theNode.ctype.infoType["static"])) */
 /*     return; */
@@ -62,7 +60,7 @@ function	koocMangle(theMod : value, theNode : node)
           ref this.block.structs[name] = this.block.structs[theNode.name];
           removeElement(this.block.structs, theNode.name);
         }
-      if (theNode.ctype.specifier == "union")
+      else if (theNode.ctype.specifier == "union")
         {
           ref this.block.unions[name] = this.block.unions[theNode.name];
           removeElement(this.block.unions, theNode.name);
