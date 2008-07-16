@@ -37,8 +37,15 @@ declaration(theDecl.block)
     }
   else
     {
+      pushItem this.kooc.classes[sClass];
+      ref this.kooc.classes[sClass]#back = this.block#back;
 
+      pushItem this.block;
+      setall this.block#back = dNode;
     }
+}
+;
+
   //   if (theDecl.type == "__VARIABLE__")
   //     {
   //       pushItem theNode.ctype.list;
@@ -85,8 +92,6 @@ declaration(theDecl.block)
   //       else if (theDecl.type == "__PROTOTYPE__")
   // 	ref this.block.prototypes[theDecl.name] = this.block#back;
   //     }
-}
-  ;
 
 /**
  * @endcond
