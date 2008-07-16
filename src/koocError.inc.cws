@@ -103,23 +103,14 @@ function	existClass(name : value)
   return (0);
 }
 
-/**
- * @fn existVar(module : value, name : value, type : value)
- * @brief check if the variable exist
- * @param module module's name
- * @param name variable's name
- * @param type type's name
- */
-function	existVar(module : value, name : value, type : value)
+function	searchVariable(search : value, module : value, name : value, type : value)
 {
   local		mangle = 0;
-
-  if (this.kooc.stack["package"] != "")
-    module = this.kooc.stack["package"] + "." + module;
   local count_pointer = countStringOccurences(type, "*");
   type = replaceString('*', "", type);
   type.trim();
-  foreach info in this.kooc.modules
+
+  foreach info in #evaluateVariable("this.kooc." + search)
   {
     if (key(info) == module)
       {
@@ -145,8 +136,31 @@ function	existVar(module : value, name : value, type : value)
   }
   if (mangle != 0)
     return (mangle);
-  traceLine("error - variable " + name + " doesn't exist in " + module + " module.");
-  exit(-1);
+  return 0;
+}
+
+/**
+ * @fn existVar(module : value, name : value, type : value)
+ * @brief check if the variable exist
+ * @param module module's name
+ * @param name variable's name
+ * @param type type's name
+ */
+function	existVar(module : value, name : value, type : value)
+{
+  local	mangle = "";
+  if (this.kooc.stack["package"] != "")
+    module = this.kooc.stack["package"] + "." + module;
+
+  mangle = searchVariable("modules", module, name, type);
+  if (!mangle)
+    mangle = searchVariable("classes", module, name, type);
+  if (!mangle)
+  {
+    traceLine("error - variable " + name + " doesn't exist in " + module + " module.");
+    exit(-1);
+  }
+  return mangle;
 }
 
 /**

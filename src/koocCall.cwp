@@ -94,7 +94,7 @@ kooc_identifiant_variable(expr : node, module_name : node, type_name : node) ::=
 			  insert expr.right.value = val;
 			  insert expr.right.operator = "id";
 			  insert expr.right.otype = "terminal";
-			insert expr.operator = "-&gt;";
+			insert expr.operator = "->";
 		      }
 		    else
 		      {
