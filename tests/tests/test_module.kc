@@ -6,6 +6,8 @@
 /*   int	cooc_b; */
 /* } */
 
+int	a;
+
 int	main()
 {
   int	b;

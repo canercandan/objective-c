@@ -32,12 +32,7 @@ function	getPFname(theNode : node)
 {
   local sResult = "(";
   foreach var in theNode
-  {
-    if (existVariable(var.function.mangle))
-      sResult += "*" + var.function.mangle;
-    else
-      sResult += "*" + var.function.name;
-  }
+    sResult += "*" + var.function.name;
   return sResult + ")";
 }
 
@@ -71,10 +66,7 @@ function	getSimpleType(theNode : node)
   if (existVariable(theNode.list))
     sList += "(" +  parseList(theNode.list) + ")";
   if (!existVariable(theNode.pfname))
-    if (existVariable(theNode.mangle))
-      sName = theNode.mangle;
-    else
-      sName = theNode.name;
+    sName = theNode.name;
   return (getType(theNode) + sPFname  + " " + sDesignation + sName
 	  + getArrayInfo(theNode) + sList + sInit);
 }
@@ -100,9 +92,7 @@ function	getStruct(theNode : node)
       sValue += "}";
     }
   return (getType(theNode) + " " + sValue + " "
-	  + (existVariable(theNode.mangle)
-	     ? theNode.mangle
-	     : theNode.name));
+	  + theNode.name);
 }
 
 function	getFunc(theNode : node)
@@ -114,10 +104,5 @@ function	getFunc(theNode : node)
   sValue += parseList(theNode.list);
   if (theNode.type == "__FUNCTION__")
     sInner = parseBlock(theNode);
-  return (getSimpleType(theNode) + " "
-//	  + (existVariable(theNode.mangle)
-//	     ? theNode.mangle
-//	     : theNode.name)
-//	  + "(" + sValue + ")"
-+ sInner);
+  return (getSimpleType(theNode) + " " + sInner);
 }

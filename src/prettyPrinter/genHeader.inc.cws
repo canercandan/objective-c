@@ -41,10 +41,7 @@ function	getPrototype(prototype : node)
   local		sInfo;
 
   sInfo = getSimpleTypeH(prototype) + ' ';
-  if (existVariable(prototype.mangle))
-    sInfo += "(*" + prototype.mangle + ')';
-  else
-    sInfo += "(*" + prototype.name + ')';
+  sInfo += "(*" + prototype.name + ')';
   sInfo += '(' + getArgument(prototype);
   if (existVariable(prototype.list.ellipsis))
     sInfo += ", ...";
@@ -87,18 +84,12 @@ function	oneArgument(theNode : node, type : value = 1)
   if ($type == 1$)
     {
       sInfo = getSimpleTypeH(theNode) + getPointerH(theNode);
-      if (existVariable(theNode.mangle))
-	sInfo += ' ' + theNode.mangle;
-      else if (existVariable(theNode.name))
-	sInfo += ' ' + theNode.name;
+      sInfo += ' ' + theNode.name;
       sInfo += getArrayInfoH(theNode) + getBits(theNode)
 	+ getCommentSuffix(theNode);
     }
   else
-    if (existVariable(theNode.mangle))
-      sInfo += ' ' + theNode.mangle;
-    else
-      sInfo = theNode.name;
+    sInfo = theNode.name;
   return (sInfo);
 }
 
