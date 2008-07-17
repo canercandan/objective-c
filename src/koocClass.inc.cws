@@ -61,8 +61,8 @@ function	koocClassExtend(sClass : value, sExtend : value, theNode : node)
   ref ctype.pctx = this.gl_pctx;
   insert ctype.type = "__COMPOSED__";
   insert ctype.identifier = sExtend;
-  insert ctype.specifier = "struct";
-  insert ctype.infoType["static"] = "storageClassSpecifier";
+  //insert ctype.specifier = "struct";
+  //insert ctype.infoType["static"] = "storageClassSpecifier";
 
   pushItem theNode;
   treeInsertFileOut(this.kooc.stack["path_import"] + this.kooc.classes[sClass].nameH);

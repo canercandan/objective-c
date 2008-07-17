@@ -11,19 +11,19 @@
  * @cond
  */
 
-koocMember(theNode : node) ::=
+koocMember(theClass : node) ::=
 #explicitCopy
 "@member"
 #continue
 [
-  [ '{' [ koocMemberDeclaration(theNode) ]* '}']
-  |  koocMemberDeclaration(theNode)
+  [ '{' [ koocMemberDeclaration(theClass) ]* '}']
+  |  koocMemberDeclaration(theClass)
  ]
 ;
 
-koocMemberDeclaration(theNode : node) ::=
+koocMemberDeclaration(theClass : node) ::=
 #explicitCopy
-declaration(this.block)
+declaration(this.block);
 =>
 {
   local sClass = this.kooc.stack["class"];
@@ -34,8 +34,8 @@ declaration(this.block)
 
   if (theDecl.type == "__VARIABLE__")
     {
-      pushItem theNode.ctype.list;
-      setall theNode.ctype.list#back = theDecl;
+      pushItem theClass.ctype.list;
+      setall theClass.ctype.list#back = theDecl;
     }
   else
     {
