@@ -108,6 +108,8 @@ function	koocClassPrint(sClass : value)
 function	koocClassExtendErr(sExtend : value)
 {
   if (!existClass(sExtend))
-    traceLine("Class " + sExtend + " doesn't exist");
-  exit(-1);
+    {
+      traceLine("Class " + sExtend + " doesn't exist");
+      exit(-1);
+    }
 }
