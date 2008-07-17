@@ -23,7 +23,7 @@ koocMember(theClass : node) ::=
 
 koocMemberDeclaration(theClass : node) ::=
 #explicitCopy
-declaration(this.block);
+declaration(this.block)
 =>
 {
   local sClass = this.kooc.stack["class"];
