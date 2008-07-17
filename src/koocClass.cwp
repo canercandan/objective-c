@@ -14,7 +14,6 @@ koocClass ::=
 [
  ':'
  [#readIdentifier:sExtend => koocClassExtendErr(sExtend);
- => traceLine("Extend =" + sExtend);
   ]
  ]?
   '{'
