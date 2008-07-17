@@ -65,6 +65,22 @@ koocDeclaration(block : node) ::=
  * @endcond
  */
 
+#overload declarator(theType : node) ::=
+#super::declarator(theType)
+=>
+{
+  local sPrefix = "";
+
+  if (this.kooc.stack["package"] != "")
+    sPrefix += this.kooc.stack["package"] + ".";
+
+  if (this.kooc.stack["module"] != "")
+    koocMangle(sPrefix + this.kooc.stack["module"], theType);
+  else if (this.kooc.stack["class"] != "")
+    koocMangle(sPrefix + this.kooc.stack["class"], theType);
+}
+;
+
 #include "koocImport.cwp"
 #include "koocModule.cwp"
 #include "koocImplementation.cwp"

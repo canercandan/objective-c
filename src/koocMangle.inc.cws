@@ -21,75 +21,6 @@ function	koocMangle(theMod : value, theNode : node)
   local		pkgs = "";
   local		name = "_ZN";
 
-/*   if (existVariable(theNode.ctype.infoType["static"])) */
-/*     return; */
-
-  cutString(theMod, '.', pkgs);
-
-  foreach pkg in pkgs
-    name += lengthString(pkg) + pkg;
-
-  name += lengthString(theNode.name) + theNode.name;
-  name += "E";
-
-  koocMangleType(theNode, name);
-  koocMangleArgs(theNode, name);
-
-  insert theNode.mangle = name;
-
-  if (theNode.type == "__VARIABLE__")
-    {
-      ref this.block.variables[name] = this.block.variables[theNode.name];
-      removeElement(this.block.variables, theNode.name);
-    }
-  else if (theNode.type == "__TYPE__")
-    {
-      ref this.block.types[name] = this.block.types[theNode.name];
-      removeElement(this.block.types, theNode.name);
-    }
-  else if (theNode.type != "__PROTOTYPE__" &&
-           theNode.ctype.type == "__COMPOSED__")
-    {
-      if (theNode.ctype.specifier == "enum")
-        {
-          ref this.block.enums[name] = this.block.enums[theNode.name];
-          removeElement(this.block.enums, theNode.name);
-        }
-      else if (theNode.ctype.specifier == "struct")
-        {
-          ref this.block.structs[name] = this.block.structs[theNode.name];
-          removeElement(this.block.structs, theNode.name);
-        }
-      else if (theNode.ctype.specifier == "union")
-        {
-          ref this.block.unions[name] = this.block.unions[theNode.name];
-          removeElement(this.block.unions, theNode.name);
-        }
-    }
-  else if (theNode.type == "__PFUNCTION__")
-    {
-      ref this.block.pfunctions[name] = this.block.pfunctions[theNode.name];
-      removeElement(this.block.pfunctions, theNode.name);
-    }
-  else if (theNode.type == "__FUNCTION__")
-    {
-      ref this.block.functions[name] = this.block.functions[theNode.name];
-      removeElement(this.block.functions, theNode.name);
-    }
-  else if (theNode.type == "__PROTOTYPE__")
-    {
-      ref this.block.prototypes[name] = this.block.prototypes[theNode.name];
-      removeElement(this.block.prototypes, theNode.name);
-    }
-}
-
-function	koocMangleImplementation(theMod : value)
-{
-  local		pkgs = "";
-  local		name = "_ZN";
-/*   localref	theNode = this.kooc.implementations[theMod].block#back; */
-  localref	theNode = this.block#back;
-
   if (existVariable(theNode.ctype.infoType["static"]))
     return;
 
@@ -98,7 +29,6 @@ function	koocMangleImplementation(theMod : value)
   foreach pkg in pkgs
     name += lengthString(pkg) + pkg;
 
-//  name += lengthString(theMod) + theMod;
   name += lengthString(theNode.name) + theNode.name;
   name += "E";
 
@@ -106,17 +36,7 @@ function	koocMangleImplementation(theMod : value)
   koocMangleArgs(theNode, name);
 
   insert theNode.oname = theNode.name;
-  insert theNode.name = name;
-
-  if (theNode.type == "__FUNCTION__")
-    {
-/*       ref this.kooc.implementations[theMod].block.functions[theNode.name] = */
-/* 	this.kooc.implementations[theMod].block.functions[theNode.oname]; */
-/*       removeElement(this.kooc.implementations[theMod].block.functions, theNode.oname); */
-      ref this.block.functions[theNode.name] =
-	this.block.functions[theNode.oname];
-      removeElement(this.block.functions, theNode.oname);
-    }
+  theNode.name = name;
 }
 
 function	koocMangleType(theNode : node, name : node)

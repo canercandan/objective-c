@@ -98,7 +98,7 @@ function	koocModuleAdd(sModule : value)
     treeInsertFileOut(this.kooc.stack["path_import"]
 		      + this.kooc.modules[sModule].nameH);
   koocModuleCheck(sModule);
-  koocModuleMangle(sModule);
+  //koocModuleMangle(sModule);
 }
 
 function	koocModulePrint(sModule : value)
