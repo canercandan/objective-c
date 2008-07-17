@@ -118,18 +118,16 @@ function	searchVariable(search : value, module : value, name : value, type : val
 	{
 	  if (val.type == "__VARIABLE__")
 	    {
-	      if (val.name == name && mangle == 0 && type == "")
-		mangle = val.mangle;
-	      else if (val.name == name && mangle != 0 && type == "")
+	      if (val.oname == name && mangle == 0 && type == "")
+		mangle = val.name;
+	      else if (val.oname == name && mangle != 0 && type == "")
 		{
    	         traceLine("error - variable " + name + " have multiple type in "
 			+ module + ", please use @!() to specifie the type.");
 	          exit(-1);
-//else if (val.name == name && val.ctype.identifier == type)
-//mangle = val.mangle;
 		}
-	      else if (val.name == name && val.ctype.identifier == type && count_pointer == getArraySize(val.ctype.pointer))
-		mangle = val.mangle;
+	      else if (val.oname == name && val.ctype.identifier == type && count_pointer == getArraySize(val.ctype.pointer))
+		mangle = val.name;
 	    }
 	}
       }
@@ -188,16 +186,16 @@ function	existFunc(module : value, name : value, type : value, nb_arg : node)
 	{
 	  if (val.type == "__PROTOTYPE__")
 	    {
-	      if (val.name == name && ret == 0 && type == "")
+	      if (val.oname == name && ret == 0 && type == "")
 		ref ret = val;
-	      else if (val.name == name && ret != 0 && type == "")
+	      else if (val.oname == name && ret != 0 && type == "")
 		{
 		  traceLine("error - function " + name
 			    + " have multiple type in " + module
 			    + ", please use @!() to specifie the type.");
 		  exit(-1);
 		}
-	      else if (val.name == name && val.ctype.identifier == type && count_pointer == getArraySize(val.ctype.pointer))
+	      else if (val.oname == name && val.ctype.identifier == type && count_pointer == getArraySize(val.ctype.pointer))
 		ref ret = val;
 	    }
 	}
