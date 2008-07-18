@@ -71,13 +71,15 @@ koocDeclaration(block : node) ::=
 {
   local sPrefix = "";
 
-  if (this.kooc.stack["package"] != "")
-    sPrefix += this.kooc.stack["package"] + ".";
-
-  if (this.kooc.stack["module"] != "")
-    koocMangle(sPrefix + this.kooc.stack["module"], theType);
-  else if (this.kooc.stack["class"] != "")
-    koocMangle(sPrefix + this.kooc.stack["class"], theType);
+  if (!existVariable(theType#parent.type))
+    {
+      if (this.kooc.stack["package"] != "")
+	sPrefix += this.kooc.stack["package"] + ".";
+      if (this.kooc.stack["module"] != "")
+	koocMangle(sPrefix + this.kooc.stack["module"], theType);
+      else if (this.kooc.stack["class"] != "")
+	koocMangle(sPrefix + this.kooc.stack["class"], theType);
+    }
 }
 ;
 
