@@ -39,8 +39,8 @@ declaration(this.block)
     }
   else
     {
-      pushItem this.block;
-      setall this.block#back = theDecl;
+      //pushItem this.block;
+      //setall this.block#back = theDecl;
     }
 }
 ;
