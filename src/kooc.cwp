@@ -71,10 +71,10 @@ koocDeclaration(block : node) ::=
 {
   local sPrefix = "";
 
-  traceLine("TRACEOBJECT THETYPE");
-  traceObject(theType);
-  traceLine("TRACEOBJECT THETYPE#PARENT");
-  traceObject(theType#parent#parent);
+/*   traceLine("TRACEOBJECT THETYPE"); */
+/*   traceObject(theType); */
+/*   traceLine("TRACEOBJECT THETYPE#PARENT"); */
+/*   traceObject(theType#parent#parent); */
   if (!existVariable(theType#parent#parent.type))
     {
       if (this.kooc.stack["package"] != "")
