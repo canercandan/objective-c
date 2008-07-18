@@ -79,7 +79,7 @@ function	koocImplementationAdd(sName : value, type : value)
     treeInsertFileOut(this.kooc.stack["path_import"] + this.kooc.modules[sName].nameC);
   else if (type == "class")
     treeInsertFileOut(this.kooc.stack["path_import"] + this.kooc.classes[sName].nameC);
-  koocMangle(sName, theNode);
+//  koocMangle(sName, theNode);
 }
 
 /**
