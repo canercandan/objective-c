@@ -14,6 +14,7 @@ koocModule(sModule : node) ::=
 #explicitCopy
 => local access = "public";
 [ "@public" | "@private" => access = "private"; ]? "@module"
+=> koocMangleOn();
 #continue
 [
 //#try

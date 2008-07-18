@@ -40,6 +40,7 @@ function	treeKooc()
   insert this.kooc.stack["package"];
   insert this.kooc.stack["class"];
   insert this.kooc.stack["module"];
+  insert this.kooc.stack["mangle"] = false;
 }
 
 /**

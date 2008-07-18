@@ -10,6 +10,9 @@ declare function	koocMangle(theMod : value, theNode : node);
 declare function	koocMangleImplementation(theMod : value);
 declare function	koocMangleType(theNode : node, name : node);
 declare function	koocMangleArgs(theNode : node, name : node);
+declare function	koocMangleOn();
+declare function	koocMangleOff();
+declare function	koocMangleIs();
 
 /**
  * @fn mangle(theMod : value)
@@ -59,4 +62,19 @@ function	koocMangleArgs(theNode : node, name : node)
 	  name += lengthString(item.ctype.identifier)
 	    + item.ctype.identifier;
     }
+}
+
+function	koocMangleOn()
+{
+  this.kooc.stack["mangle"] = true;
+}
+
+function	koocMangleOff()
+{
+  this.kooc.stack["mangle"] = false;
+}
+
+function	koocMangleIs()
+{
+  return (this.kooc.stack["mangle"]);
 }
