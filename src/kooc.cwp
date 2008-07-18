@@ -71,6 +71,8 @@ koocDeclaration(block : node) ::=
 {
   local sPrefix = "";
 
+  traceLine("TRACEOBJECT THETYPE");
+  traceObject(theType#parent#parent.type);
 /*   traceLine("TRACEOBJECT THETYPE"); */
 /*   traceObject(theType); */
 /*   traceLine("TRACEOBJECT THETYPE#PARENT"); */
