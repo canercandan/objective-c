@@ -7,7 +7,7 @@
 declare function	koocClassInit(sClass : value);
 declare function	koocClassFill(sClass : value, sExtend : value);
 declare function	koocClassExtend(sClass : value, sExtend : value, theNode : node);
-declare function	koocClassErr();
+declare function	koocClassErr(theNode : node);
 declare function	koocClassAdd(sClass : value);
 declare function	koocClassPrint(sClass : value);
 declare function	koocClassExtendErr(sExtend : value);
@@ -72,10 +72,8 @@ function	koocClassExtend(sClass : value, sExtend : value, theNode : node)
   insert theNode#back.name = "parent";
 }
 
-function	koocClassErr()
+function	koocClassErr(theNode : node)
 {
-  localref	theNode = this.block#back;
-
   if (theNode.type == "__VARIABLE__" &&
       theNode.type == "__PROTOTYPE__")
     {

@@ -18,19 +18,21 @@ koocMember(theClass : node) ::=
 [
   [ '{' [ koocMemberDeclaration(theClass) ]* '}']
   |  koocMemberDeclaration(theClass)
- ]
+]
 ;
 
 koocMemberDeclaration(theClass : node) ::=
 #explicitCopy
-declaration(this.block)
+=> local decl;
+=> insert decl.block;
+declaration(decl.block)
 =>
 {
   local sClass = this.kooc.stack["class"];
-  localref theDecl = this.block#back;
+  localref theDecl = decl.block#back;
 
-  pushItem this.kooc.classes[sClass];
-  ref this.kooc.classes[sClass]#back = theDecl;
+  //pushItem this.kooc.classes[sClass];
+  //ref this.kooc.classes[sClass]#back = theDecl;
 
   if (theDecl.type == "__VARIABLE__")
     {
@@ -39,10 +41,15 @@ declaration(this.block)
     }
   else
     {
-      //pushItem this.block;
-      //setall this.block#back = theDecl;
+      koocMangle(sClass, theDecl);
+
+      pushItem this.block;
+      setall this.block#back = theDecl;
+      koocToolsAddRef(this.block#back);
     }
 }
+=> traceLine("READ: " + decl.block#back.name);
+//=> traceObject(this, 2);
 ;
 
   //   if (theDecl.type == "__VARIABLE__")

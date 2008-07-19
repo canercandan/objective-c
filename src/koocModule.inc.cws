@@ -4,9 +4,9 @@
  * @note @ref develop @ref contrib @ref tools
  */
 
-declare function	koocModuleInit(sModule : value, access : value);
-declare function	koocModuleCheck(sModule : value);
-declare function	koocModuleMangle(sModule : value);
+declare function	koocModuleInit(sModule : value);//, access : value);
+declare function	koocModuleCheck(theNode : node);//sModule : value);
+declare function	koocModuleMangle(sModule : value, theNode : node);
 declare function	koocModuleContent(sModule : value);
 declare function	koocModuleErr();
 declare function	koocModuleAdd(sModule : value);
@@ -17,13 +17,13 @@ declare function	koocModulePrint(sModule : value);
  * @brief init the tree'information to insert module
  * @param sModule module's name
  */
-function	koocModuleInit(sModule : value, access : value)
+function	koocModuleInit(sModule : value)//, access : value)
 {
   local		modH = "km_" + replaceString('.', '_', sModule.toLowerString()) + ".h";
   local		modC = "km_" + replaceString('.', '_', sModule.toLowerString()) + ".c";
 
   insert this.kooc.modules[sModule];
-  insert this.kooc.modules[sModule].access = access;
+//  insert this.kooc.modules[sModule].access = access;
   insert this.kooc.modules[sModule].nameH = modH;
   insert this.kooc.modules[sModule].nameC = modC;
 }
@@ -33,17 +33,17 @@ function	koocModuleInit(sModule : value, access : value)
  * @brief check if the declaration is valid
  * @param sModule module's name
  */
-function	koocModuleCheck(sModule : value)
+function	koocModuleCheck(theNode : node)
 {
   //localref theNode = this.kooc.modules[sModule].block#back;
-  localref theNode = this.block#back;
+  //localref theNode = this.block#back;
 
   if (theNode.type != "__VARIABLE__" &&
-      theNode.type != "__PROTOTYPE__" &&
-      theNode.type != "__TYPE__")
+      theNode.type != "__PROTOTYPE__")
     {
       traceLine(getInputFilename() + ":" + countInputLines() + ": "
                 + "error: unexpected identifier");
+      traceObject(theNode, 5);
       exit(-1);
     }
 }
@@ -53,10 +53,10 @@ function	koocModuleCheck(sModule : value)
  * @brief call mangle only if we must mangle it
  * @param sModule module's name
  */
-function	koocModuleMangle(sModule : value)
+function	koocModuleMangle(sModule : value, theNode : node)
 {
   //localref theNode = this.kooc.modules[sModule].block#back;
-  localref theNode = this.block#back;
+  //localref theNode = this.block#back;
 
   if (theNode.type == "__VARIABLE__" ||
       theNode.type == "__PROTOTYPE__")
@@ -75,18 +75,6 @@ function	koocModuleContent(sModule : value)
   {%>#include "@this.kooc.modules[sModule].nameH@"@"\n"@<%}
 }
 
-function	koocModuleErr()
-{
-  localref	theNode = this.block#back;
-
-  if (theNode.type != "__VARIABLE__" &&
-      theNode.type != "__PROTOTYPE__")
-    {
-      traceLine("\"" + theNode.name + "\" is a incorrect declaration in @module");
-      exit(-1);
-    }
-}
-
 function	koocModuleAdd(sModule : value)
 {
   pushItem this.kooc.modules[sModule];
@@ -97,8 +85,6 @@ function	koocModuleAdd(sModule : value)
   else
     treeInsertFileOut(this.kooc.stack["path_import"]
 		      + this.kooc.modules[sModule].nameH);
-  koocModuleCheck(sModule);
-  //koocModuleMangle(sModule);
 }
 
 function	koocModulePrint(sModule : value)

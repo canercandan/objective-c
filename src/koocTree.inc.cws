@@ -19,6 +19,7 @@ declare function	treeCopyInfosInArray(dst : node,
  */
 function	treeInit()
 {
+//  insert this.debug = true;
   insert this.block.pctx;
   if (existVariable(this.gl_pctx))
     ref this.block.pctx = this.gl_pctx;
