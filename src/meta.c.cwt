@@ -37,7 +37,7 @@ foreach var in this.init
 <%
 }
 %>
-  
+
 void	@sStruct@_delete(@sStruct@ *self)
 {
   free(self);
