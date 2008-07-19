@@ -67,6 +67,7 @@ koocDeclaration(block : node) ::=
  * @endcond
  */
 
+/*
 #overload declaration(theBlock : node) ::=
 ';'
 | [
@@ -105,24 +106,24 @@ koocDeclaration(block : node) ::=
 	 | => local empty;
 	]]]]
 ;
+*/
+#overload declarator(theType : node) ::=
+#super::declarator(theType)
+=>
+{
+  local sPrefix = "";
 
-/* #overload declarator(theType : node) ::= */
-/* #super::declarator(theType) */
-/* => */
-/* { */
-/*   local sPrefix = ""; */
-
-/*   if (koocMangleIs()) */
-/*     { */
-/*       if (this.kooc.stack["package"] != "") */
-/* 	sPrefix += this.kooc.stack["package"] + "."; */
-/*       if (this.kooc.stack["module"] != "") */
-/* 	koocMangle(sPrefix + this.kooc.stack["module"], theType); */
-/*       else if (this.kooc.stack["class"] != "") */
-/* 	koocMangle(sPrefix + this.kooc.stack["class"], theType); */
-/*     } */
-/* } */
-/* ; */
+  if (koocMangleIs())
+    {
+      if (this.kooc.stack["package"] != "")
+	sPrefix += this.kooc.stack["package"] + ".";
+      if (this.kooc.stack["module"] != "")
+	koocMangle(sPrefix + this.kooc.stack["module"], theType);
+      else if (this.kooc.stack["class"] != "")
+	koocMangle(sPrefix + this.kooc.stack["class"], theType);
+    }
+}
+;
 
 #include "koocImport.cwp"
 #include "koocModule.cwp"
