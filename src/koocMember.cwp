@@ -23,13 +23,13 @@ koocMember(theClass : node) ::=
 
 koocMemberDeclaration(theClass : node) ::=
 #explicitCopy
-=> local decl;
-=> insert decl.block;
-declaration(decl.block)
+=> insert this.decl;
+=> insert this.decl.block;
+declaration(this.decl.block)
 =>
 {
   local sClass = this.kooc.stack["class"];
-  localref theDecl = decl.block#back;
+  localref theDecl = this.decl.block#back;
 
   //pushItem this.kooc.classes[sClass];
   //ref this.kooc.classes[sClass]#back = theDecl;
@@ -48,7 +48,7 @@ declaration(decl.block)
       koocToolsAddRef(this.block#back);
     }
 }
-=> traceLine("READ: " + decl.block#back.name);
+=> traceLine("READ: " + this.decl.block#back.name);
 //=> traceObject(this, 2);
 ;
 
