@@ -256,7 +256,7 @@ function	countNbArgInFunc(theNode : node)
 function	errorDebug(sError : value)
 {
   traceLine("error: " + sError);
-//  traceObject(this, 4);
+  traceObject(this, 4);
   saveProject(this.kooc.stack["pathTree"]);
   exit(-1);
 }
