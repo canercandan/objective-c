@@ -24,10 +24,11 @@ koocClass ::=
 => local decl;
 => insert decl.block;
 [koocMember(theNode)
- | declaration(decl.block)
+ |
+ declaration(decl.block)
  => koocClassErr(decl.block#back);
- => insert decl.block#back.infoType;
- => insert decl.block#back.infoType["static"] = "storageClassSpecifier";
+// => insert decl.ctype.infoType;
+// => insert decl.ctype.infoType["static"] = "storageClassSpecifier";
  => pushItem this.block;
  => setall this.block#back = decl.block#back;
  => koocToolsAddRef(this.block#back);

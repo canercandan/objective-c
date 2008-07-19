@@ -46,6 +46,7 @@ declaration(this.decl.block)
       pushItem this.block;
       setall this.block#back = theDecl;
       koocToolsAddRef(this.block#back);
+      koocClassAdd(sClass);
     }
 }
 => traceLine("READ: " + this.decl.block#back.name);

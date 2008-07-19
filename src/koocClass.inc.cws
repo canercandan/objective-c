@@ -86,18 +86,24 @@ function	koocClassAdd(sClass : value)
 {
   localref	theDecl = this.block#back;
 
-  if (!existVariable(theDecl.ctype.infoType))
-    insert theDecl.ctype.infoType;
-  insert theDecl.ctype.infoType["static"] = "storageClassSpecifier";
+  //if (!existVariable(theDecl.ctype.infoType))
+  //  insert theDecl.ctype.infoType;
+  //insert theDecl.ctype.infoType["static"] = "storageClassSpecifier";
   pushItem this.kooc.classes[sClass];
   ref this.kooc.classes[sClass]#back = this.block#back;
+  if (theDecl.type == "__VARIABLE__")
+    treeInsertFileOut(this.kooc.stack["path_import"]
+		      + this.kooc.classes[sClass].nameH + "_variable");
+  else
+    treeInsertFileOut(this.kooc.stack["path_import"]
+		      + this.kooc.classes[sClass].nameH);
 }
 
 function	koocClassPrint(sClass : value)
 {
   koocImportIfndef(this.kooc.classes[sClass].nameH);
   {@@prettyPrinterToH(this.kooc.stack["path_import"]
-		      + this.kooc.classes[sClass].nameH)@@}
+		      + this.kooc.classes[sClass].nameH + "_variable")@@}
   {@@prettyPrinterToC(this.kooc.stack["path_import"]
 		      + this.kooc.classes[sClass].nameH)@@}
   koocImportEndif(this.kooc.classes[sClass].nameH);
