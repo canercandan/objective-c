@@ -24,7 +24,8 @@ koocModule(sModule : node) ::=
       sModule = this.kooc.stack["package"] + "." +  sModule;
   }
   => koocModuleInit(sModule, access);
-  [declaration(this.block)
+  [
+declaration(this.block)
    => koocModuleErr();
    => koocModuleAdd(sModule);
   ]*

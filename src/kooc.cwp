@@ -46,7 +46,9 @@
 [koocDeclaration(this.block)
  | declaration(this.block)
  => treeInsertFileOut(this.kooc.stack["pathC"]);
- ]* #continue #empty
+]*
+#continue
+#empty
 //=> traceObject(this.block, 20);
 #catch (sError)
 [
@@ -65,23 +67,62 @@ koocDeclaration(block : node) ::=
  * @endcond
  */
 
-#overload declarator(theType : node) ::=
-#super::declarator(theType)
-=>
-{
-  local sPrefix = "";
-
-  if (koocMangleIs())
-    {
-      if (this.kooc.stack["package"] != "")
-	sPrefix += this.kooc.stack["package"] + ".";
-      if (this.kooc.stack["module"] != "")
-	koocMangle(sPrefix + this.kooc.stack["module"], theType);
-      else if (this.kooc.stack["class"] != "")
-	koocMangle(sPrefix + this.kooc.stack["class"], theType);
-    }
-}
+#overload declaration(theBlock : node) ::=
+';'
+| [
+#pushItem(theBlock)
+   => insert theBlock#back.__LINE__ = countInputLines();
+   [
+    asm_expr:theBlock#back.asm
+    => insert theBlock#back.otype = "asmexpr";
+    => insert theBlock#back.etype = "expression";
+    | [
+       => local ctype;
+       => insert ctype.pctx;
+       => ref ctype.pctx = this.gl_pctx;
+       => cnormCreateCtypeNode(ctype);
+       [ declaration_specifier(ctype) ]+
+       => cnormToolTypeNormalizeCType(ctype);
+       => cnormFillDeclarationNode(theBlock#back, "__CTYPE__", ctype);
+       => cnormCreateDeclarationNode(theBlock#back, "__VARIABLE__");
+       => cnormCheckTypeDeclaration(theBlock#back);
+       init_declarator(theBlock#back)
+       => local aType;
+       => {
+	 setall aType.type = theBlock#back.type;
+	 setall aType.ctype = theBlock#back.ctype;
+	 setall aType.etype = theBlock#back.etype;
+       }
+       [
+#check(!(theBlock#back.type == "__FUNCTION__" &&
+	 existVariable(theBlock#back.block)))
+	 [ ','
+#pushItem(theBlock)
+	   => setall theBlock#back = aType;
+	   init_declarator(theBlock#back)
+	   ]*
+	 ';'
+	 | => local empty;
+	]]]]
 ;
+
+/* #overload declarator(theType : node) ::= */
+/* #super::declarator(theType) */
+/* => */
+/* { */
+/*   local sPrefix = ""; */
+
+/*   if (koocMangleIs()) */
+/*     { */
+/*       if (this.kooc.stack["package"] != "") */
+/* 	sPrefix += this.kooc.stack["package"] + "."; */
+/*       if (this.kooc.stack["module"] != "") */
+/* 	koocMangle(sPrefix + this.kooc.stack["module"], theType); */
+/*       else if (this.kooc.stack["class"] != "") */
+/* 	koocMangle(sPrefix + this.kooc.stack["class"], theType); */
+/*     } */
+/* } */
+/* ; */
 
 #include "koocImport.cwp"
 #include "koocModule.cwp"
