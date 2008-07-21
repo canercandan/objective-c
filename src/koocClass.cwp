@@ -27,11 +27,11 @@ koocClass ::=
  |
  declaration(decl.block)
  => koocClassErr(decl.block#back);
-// => insert decl.ctype.infoType;
-// => insert decl.ctype.infoType["static"] = "storageClassSpecifier";
+ // => insert decl.ctype.infoType;
+ // => insert decl.ctype.infoType["static"] = "storageClassSpecifier";
  => pushItem this.block;
  => setall this.block#back = decl.block#back;
- => koocToolsAddRef(this.block#back);
+ //=> koocToolsAddRef(this.block#back);
  => koocClassAdd(sClass);
  ]*
 #generatedFile(this.kooc.stack["path_import"] + this.kooc.classes[sClass].nameH)

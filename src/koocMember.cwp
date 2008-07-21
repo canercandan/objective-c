@@ -39,6 +39,8 @@ declaration(this.block)
       removeVariable(theDecl);
       ref this.kooc.classes[sClass]#back
 	= theClass.ctype.list#back;
+      treeInsertFileOut(this.kooc.stack["path_import"]
+			+ this.kooc.classes[sClass].nameH + "_variable");
     }
   else
     {
@@ -77,8 +79,10 @@ declaration(this.block)
       pushItem this.block;
       setall this.block#back = theDecl;
 
-      koocClassAdd(sClass);
-      //ref this.kooc.classes[sClass]#back = theDecl;
+      //koocClassAdd(sClass);
+      ref this.kooc.classes[sClass]#back = theDecl;
+      treeInsertFileOut(this.kooc.stack["path_import"]
+		      + this.kooc.classes[sClass].nameH);
     }
 }
 //=> traceLine("READ: " + this.decl.block#back.name);
