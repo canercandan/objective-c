@@ -173,6 +173,7 @@ function	existFunc(module : value, name : value, type : value, nb_arg : node)
 {
   local		ret = 0;
 
+  traceLine("packName : " + module);
   if (this.kooc.stack["package"] != "")
     module = this.kooc.stack["package"] + "." + module;
   local count_pointer = countStringOccurences(type, "*");

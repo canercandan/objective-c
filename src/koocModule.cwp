@@ -19,10 +19,10 @@ koocModule ::=
 #readIdentifier:sModule
  '{'
 => koocManglePushBlock(sModule);
-=> this.kooc.stack["module"] = sModule;
-  => { if (this.kooc.stack["package"] != "")
-      sModule = this.kooc.stack["package"] + "." +  sModule;
-  }
+/* => this.kooc.stack["module"] = sModule; */
+/*  => { if (this.kooc.stack["package"] != "") */
+/*       sModule = this.kooc.stack["package"] + "." +  sModule; */
+/*   } */
   => koocModuleInit(sModule);//, access);
   => local decl;
   => insert decl.block;

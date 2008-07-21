@@ -104,6 +104,21 @@ function	koocMangleGet(theType : node)
   return (sMangle);
 }
 
+function	koocMangleGetPath(sName : value)
+{
+  local		sResult = "";
+
+  if (this.kooc.mangle.empty())
+    return (sName);
+  foreach var in this.kooc.mangle
+  {
+    sResult += var;
+    sResult += '.';
+  }
+  sResult += sName;
+  return (sResult);
+}
+
 function	koocManglePushBlock(sName : value)
 {
   local		block;
