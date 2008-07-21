@@ -65,7 +65,8 @@ function	koocClassExtend(sClass : value, sExtend : value, theNode : node)
   //insert ctype.infoType["static"] = "storageClassSpecifier";
 
   pushItem theNode;
-  treeInsertFileOut(this.kooc.stack["path_import"] + this.kooc.classes[sClass].nameH);
+  treeInsertFileOut(this.kooc.stack["path_import"]
+		    + this.kooc.classes[sClass].nameH);
   setall theNode#back.ctype = ctype;
   insert theNode#back.type = "__VARIABLE__";
   insert theNode#back.etype = "declaration";
