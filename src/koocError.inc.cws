@@ -204,8 +204,8 @@ function	existFunc(module : value, name : value, type : value, nb_arg : node)
   }
   if (ret != 0)
     {
-      //      nb_arg = countNbArgInFunc(ret.list);
-      //
+      nb_arg = countNbArgInFunc(ret.list);
+      return (ret.mangle);
     }
   traceLine("error - function " + name + " doesn't exist in " + module + " module.");
   exit(-1);
