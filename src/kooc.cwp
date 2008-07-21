@@ -51,13 +51,12 @@
 ]*
 #continue
 #empty
-//=> traceObject(this.block, 20);
 #catch (sError)
 [
  => {@@prettyPrinterToC(this.kooc.stack["pathC"])@@}
  ]
 |
-=> traceObject(this, 4);
+//=> traceObject(this, 4);
 => errorDebug(sError);
 ;
 

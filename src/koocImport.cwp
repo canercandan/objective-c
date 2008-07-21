@@ -28,7 +28,7 @@ koocImport ::= #explicitCopy
 #continue #readCString:file
 #catch(sError)
 [
- checkFile(file, module)
+ [checkFile(file, module) => koocManglePopAllBlock();]
  | => errorImport(sError);
  ]
 => indentFile(this.kooc.stack["pathH"], "C++");
@@ -54,7 +54,6 @@ checkFile(file : value, module : value) ::=
 #continue #empty
   => {@@prettyPrinterToC(this.kooc.stack["pathH"])@@}
   => koocImportEndif(file);
-  => this.kooc.stack["package"] = "";
   ]
  ]
 | => errorIncludeFile(this.kooc.stack["path_import"] + file);

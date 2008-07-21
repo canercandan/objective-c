@@ -147,8 +147,7 @@ function	existVar(module : value, name : value, type : value)
   local	mangle = "";
 //  if (this.kooc.stack["package"] != "")
 //    module = this.kooc.stack["package"] + "." + module;
-  //ici module na plus besoin d'etre passe en paramertre
-  module = koocMangleGetPath();
+//  module = koocMangleGetPath();
   mangle = searchVariable("modules", module, name, type);
   if (mangle == 0)
     mangle = searchVariable("classes", module, name, type);

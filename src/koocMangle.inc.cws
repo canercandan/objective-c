@@ -130,7 +130,7 @@ function	koocManglePushBlock(sName : value)
 	pushItem this.kooc.mangle = var;
     }
   else
-    pushItem this.kooc.mangle = sName;    
+    pushItem this.kooc.mangle = sName;  
 }
 
 function	koocManglePopBlock()
