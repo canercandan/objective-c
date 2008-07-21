@@ -139,14 +139,12 @@ function	searchVariable(search : value, module : value, name : value, type : val
 function	existVar(module : value, name : value, type : value)
 {
   local	mangle = "";
-  //ici module na plus besoin d'etre passe en paramertre
-  module = koocMangleSpacer('.');
   mangle = searchVariable("modules", module, name, type);
   if (mangle == 0)
     mangle = searchVariable("classes", module, name, type);
   if (mangle == 0)
   {
-    traceLine("error - variable " + name + " doesn't exist in " + module + " module.");
+    traceLine("error - variable \"" + name + "\" doesn't exist in \"" + module + "\" module.");
     exit(-1);
   }
   return mangle;
@@ -164,7 +162,6 @@ function	existFunc(module : value, name : value, type : value, nb_arg : node)
 {
   local		ret = 0;
 
-  traceLine("packName : " + module);
   local count_pointer = countStringOccurences(type, "*");
   type = replaceString('*', '', type);
   type.trim();
