@@ -28,7 +28,7 @@ koocModule ::=
   => insert decl.block;
   [declaration(decl.block)
    => koocModuleCheck(decl.block#back);
-   => koocMangle(sModule, decl.block#back);
+   //=> koocMangle(sModule, decl.block#back);
    => pushItem this.block;
    => setall this.block#back = decl.block#back;
    => koocToolsAddRef(this.block#back);
