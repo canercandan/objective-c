@@ -132,9 +132,7 @@ function	searchVariable(search : value, module : value, name : value, type : val
 	}
       }
   }
-  if (mangle != 0)
-    return (mangle);
-  return 0;
+  return mangle;
 }
 
 /**
@@ -152,9 +150,9 @@ function	existVar(module : value, name : value, type : value)
   //ici module na plus besoin d'etre passe en paramertre
   module = koocMangleGetPath();
   mangle = searchVariable("modules", module, name, type);
-  if (!mangle)
+  if (mangle == 0)
     mangle = searchVariable("classes", module, name, type);
-  if (!mangle)
+  if (mangle == 0)
   {
     traceLine("error - variable " + name + " doesn't exist in " + module + " module.");
     exit(-1);
@@ -206,7 +204,7 @@ function	existFunc(module : value, name : value, type : value, nb_arg : node)
   if (ret != 0)
     {
       nb_arg = countNbArgInFunc(ret.list);
-      return (ret.mangle);
+      return (ret.name);
     }
   traceLine("error - function " + name + " doesn't exist in " + module + " module.");
   exit(-1);
