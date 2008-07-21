@@ -53,7 +53,7 @@ declaration(this.decl.block)
       ref this.kooc.classes[sClass]#back = theDecl;
     }
 }
-=> traceLine("READ: " + this.decl.block#back.name);
+//=> traceLine("READ: " + this.decl.block#back.name);
 //=> traceObject(this, 2);
 ;
 
