@@ -44,6 +44,7 @@ function	koocImplementationPrint(sName : value, type : value)
 {
   if (type == "module")
     {
+      koocImportInclude(this.kooc.modules[sName].nameH);
       check_implementation(sName, this.kooc.modules);
       {@@prettyPrinterToC(this.kooc.stack["path_import"]
 			  + this.kooc.modules[sName].nameH + "_variable")@@}
@@ -52,6 +53,7 @@ function	koocImplementationPrint(sName : value, type : value)
     }
   else if (type == "class")
     {
+      koocImportInclude(this.kooc.classes[sName].nameH);
       check_implementation(sName, this.kooc.classes);
       {@@prettyPrinterToC(this.kooc.stack["path_import"]
 			  + this.kooc.classes[sName].nameC)@@}
