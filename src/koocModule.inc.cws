@@ -43,7 +43,7 @@ function	koocModuleCheck(theNode : node)
     {
       traceLine(getInputFilename() + ":" + countInputLines() + ": "
                 + "error: unexpected identifier");
-      traceObject(theNode, 5);
+      //traceObject(theNode, 5);
       exit(-1);
     }
 }
