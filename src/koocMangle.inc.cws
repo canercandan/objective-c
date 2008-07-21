@@ -6,41 +6,33 @@
  * @bug Temp mangling
  */
 
-declare function	koocMangle(theMod : value, theNode : node);
-declare function	koocMangleImplementation(theMod : value);
+declare function	koocMangle(theType : node);
 declare function	koocMangleType(theNode : node, name : node);
 declare function	koocMangleArgs(theNode : node, name : node);
-declare function	koocMangleOn();
-declare function	koocMangleOff();
-declare function	koocMangleIs();
-declare function	koocMangleGet(theType : node);
+declare function	koocMangleInit();
+declare function	koocMangleSpacer(spacer : value);
+declare function	koocManglePushBlock(sName : value);
+declare function	koocManglePopBlock();
+declare function	koocManglePopAllBlock();
 
-/**
- * @fn mangle(theMod : value)
- * @brief mangle variable
- * @param theMod variable's name
- */
-function	koocMangle(theMod : value, theNode : node)
+function	koocMangle(theType : node)
 {
-  local		pkgs = "";
-  local		name = "_ZN";
+  local		sMangle = "_ZN";
 
-  if (existVariable(theNode.ctype.infoType["static"]))
-    return;
-
-  cutString(theMod, '.', pkgs);
-
-  foreach pkg in pkgs
-    name += lengthString(pkg) + pkg;
-
-  name += lengthString(theNode.name) + theNode.name;
-  name += "E";
-
-  koocMangleType(theNode, name);
-  koocMangleArgs(theNode, name);
-
-  insert theNode.oname = theNode.name;
-  theNode.name = name;
+  if (this.kooc.mangle.empty() ||
+      existVariable(theType.ctype.infoType["static"]))
+    return (theType.name);
+  foreach var in this.kooc.mangle
+  {
+    sMangle += lengthString(var);
+    sMangle += var;
+  }
+  sMangle += lengthString(theType.name);
+  sMangle += theType.name;
+  sMangle += "E";
+  koocMangleType(theType, sMangle);
+  koocMangleArgs(theType, sMangle);
+  return (sMangle);
 }
 
 function	koocMangleType(theNode : node, name : node)
@@ -65,46 +57,12 @@ function	koocMangleArgs(theNode : node, name : node)
     }
 }
 
-function	koocMangleOn()
-{
-  this.kooc.stack["mangle"] = true;
-}
-
-function	koocMangleOff()
-{
-  this.kooc.stack["mangle"] = false;
-}
-
-function	koocMangleIs()
-{
-  return (this.kooc.stack["mangle"]);
-}
-
 function	koocMangleInit()
 {
   insert this.kooc.mangle;
 }
 
-function	koocMangleGet(theType : node)
-{
-  local		sMangle = "_ZN";
-
-  if (this.kooc.mangle.empty())
-    return (theType.name);
-  foreach var in this.kooc.mangle
-  {
-    sMangle += lengthString(var);
-    sMangle += var;
-  }
-  sMangle += lengthString(theType.name);
-  sMangle += theType.name;
-  sMangle += "E";
-  koocMangleType(theType, sMangle);
-  koocMangleArgs(theType, sMangle);
-  return (sMangle);
-}
-
-function	koocMangleGetPath()
+function	koocMangleSpacer(spacer : value)
 {
   local		sResult = "";
 
@@ -114,7 +72,7 @@ function	koocMangleGetPath()
   {
     sResult += var;
     if (!last(var))
-      sResult += '.';
+      sResult += spacer;
   }
   return (sResult);
 }
@@ -130,7 +88,7 @@ function	koocManglePushBlock(sName : value)
 	pushItem this.kooc.mangle = var;
     }
   else
-    pushItem this.kooc.mangle = sName;  
+    pushItem this.kooc.mangle = sName;
 }
 
 function	koocManglePopBlock()

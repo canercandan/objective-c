@@ -23,18 +23,21 @@ local	sHeader = "";
 }
 
 <%
-foreach var in this.init
+foreach var in this
 {
-%>
-  @sStruct@	*@sStruct@_new(@var.list@)
+  if (var.oname == "init")
     {
-      @sStruct@	*new;
-      
-      new = @sStruct@_alloc();
-      new = @sStruct@_init(new, @var.list@);
-      return (new);
-    }
+%>
+@koocMangleSpacer('_')@	*@koocMangle(var)@_new(@parseList(var.list)@)
+  {
+    @sStruct@	*new;
+
+    new = @sStruct@_alloc();
+    new = @sStruct@_init(new, @parseList(var.list)@);
+    return (new);
+  }
 <%
+    }
 }
 %>
 

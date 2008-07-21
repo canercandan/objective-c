@@ -6,7 +6,6 @@
 
 declare function	koocModuleInit(sModule : value);//, access : value);
 declare function	koocModuleCheck(theNode : node);//sModule : value);
-declare function	koocModuleMangle(sModule : value, theNode : node);
 declare function	koocModuleContent(sModule : value);
 declare function	koocModuleErr();
 declare function	koocModuleAdd(sModule : value);
@@ -45,23 +44,6 @@ function	koocModuleCheck(theNode : node)
                 + "error: unexpected identifier");
       //traceObject(theNode, 5);
       exit(-1);
-    }
-}
-
-/**
- * @fn function	koocModuleMangle(sModule : value)
- * @brief call mangle only if we must mangle it
- * @param sModule module's name
- */
-function	koocModuleMangle(sModule : value, theNode : node)
-{
-  //localref theNode = this.kooc.modules[sModule].block#back;
-  //localref theNode = this.block#back;
-
-  if (theNode.type == "__VARIABLE__" ||
-      theNode.type == "__PROTOTYPE__")
-    {
-      koocMangle(sModule, theNode);
     }
 }
 

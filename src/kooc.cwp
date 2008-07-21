@@ -119,7 +119,7 @@ koocDeclaration(block : node) ::=
   if (theType#parent#parent.type != "__FUNCTION__" &&
       theType#parent#parent.type != "__COMPOSED__" &&
       !equalTrees(theType, theType#parent))
-    theType.name = koocMangleGet(theType);
+    theType.name = koocMangle(theType);
 }
 ;
 

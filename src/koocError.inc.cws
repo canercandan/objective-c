@@ -14,8 +14,6 @@ declare function	existModule(name : value);
 declare function	existVar(module : value, name : value, type : value);
 declare function	existFunc(module : value, name : value, type : value, nb_arg : node);
 declare function	countNbArgInFunc(theNode : node);
-/* declare function	existVarInFunc(module : value, name_func : value, */
-/*  				       name_param : value, place : value); */
 declare function	errorDebug(sError : value);
 
 /**
@@ -69,8 +67,6 @@ function	existModule(name : value)
       traceLine("this.kooc.modules not found");
       exit(-1);
     }
-  //if (this.kooc.stack["package"] != "")
-  //  name = this.kooc.stack["package"] + "." + name;
   foreach info in this.kooc.modules
   {
     if (key(info) == name)
@@ -92,8 +88,6 @@ function	existClass(name : value)
       traceLine("this.kooc.classes not found");
       return(-1);
     }
-//  if (this.kooc.stack["package"] != "")
-//   name = this.kooc.stack["package"] + "." + name;
   foreach info in this.kooc.classes
   {
     if (key(info) == name)
@@ -145,9 +139,8 @@ function	searchVariable(search : value, module : value, name : value, type : val
 function	existVar(module : value, name : value, type : value)
 {
   local	mangle = "";
-//  if (this.kooc.stack["package"] != "")
-//    module = this.kooc.stack["package"] + "." + module;
-//  module = koocMangleGetPath();
+  //ici module na plus besoin d'etre passe en paramertre
+  module = koocMangleSpacer('.');
   mangle = searchVariable("modules", module, name, type);
   if (mangle == 0)
     mangle = searchVariable("classes", module, name, type);
@@ -172,8 +165,6 @@ function	existFunc(module : value, name : value, type : value, nb_arg : node)
   local		ret = 0;
 
   traceLine("packName : " + module);
-//  if (this.kooc.stack["package"] != "")
-//    module = this.kooc.stack["package"] + "." + module;
   local count_pointer = countStringOccurences(type, "*");
   type = replaceString('*', '', type);
   type.trim();
@@ -221,36 +212,6 @@ function	countNbArgInFunc(theNode : node)
   { i = $i + 1$; }
   return (i);
 }
-
-// function	existVarInFunc(module : value, name_func : value, name_param : value, place : value)
-// {
-//   local		modules;
-//   local		i = 0;
-//
-//   modules = this.kooc.modules;
-//   foreach info in modules
-//   {
-//     if (key(info) == module)
-//       {
-// 	foreach val in info
-// 	{
-// 		if (key(val) == name_func)
-// 		   {
-// 			foreach param in val
-// 			{
-// 				if (key(param) == name_param && i == place)
-// 				{
-// 					return (param);
-// 				}
-// 				i = i + 1;
-// 			}
-// 		   }
-// 	}
-//       }
-//   }
-//   traceLine("error - param " + name_param + " doesn't exist in " + module + " module.");
-//   exit(-1);
-// }
 
 function	errorDebug(sError : value)
 {
