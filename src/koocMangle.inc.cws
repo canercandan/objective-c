@@ -13,6 +13,7 @@ declare function	koocMangleArgs(theNode : node, name : node);
 declare function	koocMangleOn();
 declare function	koocMangleOff();
 declare function	koocMangleIs();
+declare function	koocMangleGet(theType : node);
 
 /**
  * @fn mangle(theMod : value)
@@ -77,4 +78,52 @@ function	koocMangleOff()
 function	koocMangleIs()
 {
   return (this.kooc.stack["mangle"]);
+}
+
+function	koocMangleInit()
+{
+  insert this.kooc.mangle;
+}
+
+function	koocMangleGet(theType : node)
+{
+  local		sMangle = "_ZN";
+
+  if (this.kooc.mangle.empty())
+    return (theType.name);
+  foreach var in this.kooc.mangle
+  {
+    sMangle += lengthString(var);
+    sMangle += var;
+  }
+  sMangle += lengthString(theType.name);
+  sMangle += theType.name;
+  sMangle += "E";
+  koocMangleType(theType, sMangle);
+  koocMangleArgs(theType, sMangle);
+  return (sMangle);
+}
+
+function	koocManglePushBlock(sName : value)
+{
+  local		block;
+
+  if (findString(sName, '.') != -1)
+    {
+      cutString(sName, '.', block);
+      foreach var in block
+	pushItem this.kooc.mangle = var;
+    }
+  else
+    pushItem this.kooc.mangle = sName;    
+}
+
+function	koocManglePopBlock()
+{
+  removeVariable(this.kooc.mangle#back);
+}
+
+function	koocManglePopAllBlock()
+{
+  removeAllElements(this.kooc.mangle);
 }

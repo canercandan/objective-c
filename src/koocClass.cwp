@@ -17,9 +17,9 @@ koocClass ::=
   ]
  ]?
   '{'
+  => koocManglePushBlock(sClass);
 => koocClassInit(sClass);
 => koocClassFill(sClass, sExtend);
-=> koocMangleOff();
 => localref theNode = this.block#back;
 => local decl;
 => insert decl.block;
@@ -37,4 +37,5 @@ koocClass ::=
 #generatedFile(this.kooc.stack["path_import"] + this.kooc.classes[sClass].nameH)
 => koocClassPrint(sClass);
 ['}' => this.kooc.stack["class"] = "";]
+=> koocManglePopBlock();
 ;

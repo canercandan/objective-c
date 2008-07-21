@@ -60,13 +60,74 @@
 ;
 
 koocDeclaration(block : node) ::=
-  => local name;
-[ koocImport | koocModule(name) | koocImplementation |
-  koocClass | koocCall(block) | koocPackage ]
+  [ koocImport | koocModule | koocImplementation |
+    koocClass | koocCall(block) | koocPackage ]
 ;
 /**
  * @endcond
  */
+
+#overload declaration(theBlock : node) ::=
+';'
+| [
+#pushItem(theBlock)
+   => insert theBlock#back.__LINE__ = countInputLines();
+   [
+    asm_expr:theBlock#back.asm
+    => insert theBlock#back.otype = "asmexpr";
+    => insert theBlock#back.etype = "expression";
+    | [
+       => local ctype;
+       => insert ctype.pctx;
+       => ref ctype.pctx = this.gl_pctx;
+       => cnormCreateCtypeNode(ctype);
+       [ declaration_specifier(ctype) ]+
+       => cnormToolTypeNormalizeCType(ctype);
+       => cnormFillDeclarationNode(theBlock#back, "__CTYPE__", ctype);
+       => cnormCreateDeclarationNode(theBlock#back, "__VARIABLE__");
+       => cnormCheckTypeDeclaration(theBlock#back);
+       init_declarator(theBlock#back)
+       //=> traceObject(theBlock#back);
+       => local aType;
+       => {
+	 setall aType.type = theBlock#back.type;
+	 setall aType.ctype = theBlock#back.ctype;
+	 setall aType.etype = theBlock#back.etype;
+       }
+       [
+#check(!(theBlock#back.type == "__FUNCTION__" &&
+	 existVariable(theBlock#back.block)))
+	 [ ','
+#pushItem(theBlock)
+	   => setall theBlock#back = aType;
+	   init_declarator(theBlock#back)
+	   ]*
+	 ';'
+	 | => local empty;
+	]
+       ]
+    ]
+   ]
+;
+
+#overload declarator(theType : node) ::=
+#super::declarator(theType)
+=>
+{
+  insert theType.oname = theType.name;
+/*   traceLine("theType"); */
+/*   traceObject(theType); */
+/*   traceLine("theType#parent"); */
+/*   traceObject(theType#parent); */
+/*   traceLine("theType#parent#parent"); */
+/*   traceObject(theType#parent#parent); */
+  if (theType#parent#parent.type != "__FUNCTION__" &&
+      theType#parent#parent.type != "__COMPOSED__" &&
+      !equalTrees(theType, theType#parent) &&
+      !existVariable(theType.nomangle))
+    theType.name = koocMangleGet(theType);
+}
+;
 
 #include "koocImport.cwp"
 #include "koocModule.cwp"

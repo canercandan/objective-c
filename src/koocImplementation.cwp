@@ -27,6 +27,7 @@ koocImplementation ::=
 => local filenameC = "";
 => koocImplementationInit(sName, type, filenameC);
 '{'
+=> koocManglePushBlock(sName);
 [
 //koocMember(this.block) | declaration(this.block)
  "@member" #continue
@@ -47,6 +48,7 @@ koocImplementation ::=
 #generatedFile(this.kooc.stack["path_import"] + filenameC)
 => koocImplementationPrint(sName, type);
 '}'
+=> koocManglePopBlock();
 ;
 
 /**

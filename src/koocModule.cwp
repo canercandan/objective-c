@@ -10,15 +10,16 @@
 /**
  * @cond
  */
-koocModule(sModule : node) ::=
+koocModule ::=
 #explicitCopy
 "@module"
-=> koocMangleOn();
 #continue
 [
 //#try
 #readIdentifier:sModule
-'{' => this.kooc.stack["module"] = sModule;
+ '{'
+=> koocManglePushBlock(sModule);
+=> this.kooc.stack["module"] = sModule;
   => { if (this.kooc.stack["package"] != "")
       sModule = this.kooc.stack["package"] + "." +  sModule;
   }
@@ -37,7 +38,9 @@ koocModule(sModule : node) ::=
 #generatedFile(this.kooc.stack["path_import"] + this.kooc.modules[sModule].nameH)
 => koocModulePrint(sModule);
 #generatedFile(this.kooc.stack["pathH"])
-'}' => this.kooc.stack["module"] = "";
+'}'
+=> koocManglePopBlock();
+=> this.kooc.stack["module"] = "";
 /*#catch (sError)
 |
 => errorModule();

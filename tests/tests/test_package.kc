@@ -1,21 +1,20 @@
 @import		"test_package.kh"
 
 @package	level1
-{
-  @implementation	mod1
-  {
-    void		print()
-    {
-      printf("level1.mod1\n");
-    }
-  }
 
-  @implementation	mod2
+@implementation	mod1
+{
+  void		print()
   {
-    void		print()
-    {
-	printf("level1.mod2\n");
-    }
+    printf("level1.mod1\n");
+  }
+}
+
+@implementation	mod2
+{
+  void		print()
+  {
+    printf("level1.mod2\n");
   }
 }
 
