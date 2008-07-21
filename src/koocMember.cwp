@@ -33,7 +33,6 @@ declaration(this.block)
 
   if (theDecl.type == "__VARIABLE__")
     {
-      theDecl.name = theDecl.oname;
       pushItem theClass.ctype.list;
       setall theClass.ctype.list#back = theDecl;
       removeVariable(theDecl);

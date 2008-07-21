@@ -117,16 +117,8 @@ koocDeclaration(block : node) ::=
 =>
 {
   insert theType.oname = theType.name;
-/*   traceLine("theType"); */
-/*   traceObject(theType); */
-/*   traceLine("theType#parent"); */
-/*   traceObject(theType#parent); */
-/*   traceLine("theType#parent#parent"); */
-/*   traceObject(theType#parent#parent); */
   if (theType#parent#parent.type != "__FUNCTION__" &&
-      theType#parent#parent.type != "__COMPOSED__" &&
-      !equalTrees(theType, theType#parent) &&
-      !existVariable(theType.nomangle))
+      theType#parent#parent.type != "__COMPOSED__")
     theType.name = koocMangleGet(theType);
 }
 ;
