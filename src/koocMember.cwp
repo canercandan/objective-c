@@ -44,7 +44,7 @@ declaration(this.decl.block)
     }
   else
     {
-      koocMangle(sClass, theDecl);
+      //koocMangle(sClass, theDecl);
 
       pushItem this.block;
       setall this.block#back = theDecl;
