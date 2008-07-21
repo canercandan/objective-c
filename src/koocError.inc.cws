@@ -142,11 +142,6 @@ function	existVar(module : value, name : value, type : value)
   mangle = searchVariable("modules", module, name, type);
   if (mangle == 0)
     mangle = searchVariable("classes", module, name, type);
-  if (mangle == 0)
-  {
-    traceLine("error - variable \"" + name + "\" doesn't exist in \"" + module + "\" module.");
-    exit(-1);
-  }
   return mangle;
 }
 

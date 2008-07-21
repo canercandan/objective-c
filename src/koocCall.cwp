@@ -72,39 +72,42 @@ kooc_identifiant_variable(expr : node, module_name : node, type_name : node) ::=
 	 local name = module_name;
 	 module_name = midString(name, 0, findLastString(name, '.'));
 	 val = subString(name, $findLastString(name, '.') + 1$);
-	 if (module_name != "self" && !existModule(module_name))
+	 local variable;
+	 if (variable = existVar(module_name, val, type_name))
 	   {
-	     traceLine("error - module " + name + " doesn't exist.");
-	     exit(-1);
-	   }
-	 if (module_name == "self")
-	   {
-	     val = existVar(this.kooc.stack["class"], val, type_name);
-	     insert expr.left;
-	     insert expr.left.type = "primary_expression";
-	     insert expr.left.value = "self";
-	     insert expr.left.operator = "id";
-	     insert expr.left.otype = "terminal";
-	     insert expr.left.type = "primary_expression";
-	     insert expr.type = "deref_expression";
-	     insert expr.otype = "likebinary";
-	     insert expr.etype = "expression";
-	     insert expr.right;
-	     insert expr.right.type = "primary_expression";
-	     insert expr.right.value = val;
-	     insert expr.right.operator = "id";
-	     insert expr.right.otype = "terminal";
-	     insert expr.operator = "->";
-	   }
-	 else
-	   {
-	     local variable;
-	     variable = existVar(module_name, val, type_name);
 	     insert expr.value = variable;
 	     insert expr.operator = "id";
 	     insert expr.otype = "terminal";
 	   }
-    }
+	 else // Check si on nous demande le premier arg
+	      // en tant que this ou self par exemple
+	   {
+	     if (expr#parent#parent#parent.type == "__FUNCTION__"
+	     	|| expr#parent#parent.type == "__FUNCTION__")
+	       {
+		  insert expr.left;
+	     	  insert expr.left.type = "primary_expression";
+	     	  insert expr.left.value = module_name;
+	     	  insert expr.left.operator = "id";
+	     	  insert expr.left.otype = "terminal";
+	     	  insert expr.left.type = "primary_expression";
+	     	  insert expr.type = "deref_expression";
+	     	  insert expr.otype = "likebinary";
+	     	  insert expr.etype = "expression";
+	     	  insert expr.right;
+	     	  insert expr.right.type = "primary_expression";
+	     	  insert expr.right.value = val;
+	     	  insert expr.right.operator = "id";
+	     	  insert expr.right.otype = "terminal";
+	     	  insert expr.operator = "->";
+	       }
+	       else
+	       {
+		 traceLine("error - module " + name + " doesn't exist.");
+	     	 exit(-1);
+	       }
+	     }
+	   }
     ]
   ;
 
