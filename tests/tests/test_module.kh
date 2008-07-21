@@ -11,5 +11,5 @@ typedef int	Entier;
   void		cool(int j);
 
   void		f1(int a, int b);
-  void		f2(char*, int);
+  void		f2(char* a, int b);
 }

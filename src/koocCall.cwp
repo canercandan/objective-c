@@ -113,7 +113,7 @@ kooc_identifiant_variable(expr : node, module_name : node, type_name : node) ::=
 
 kooc_identifiant_fonction(expr : node, module_name : value, func_name : node, type : value, nb_arg : node)
 ::= 
-  => {  if (!existModule(module_name))
+  => {  if (!existModule(module_name) && module_name != "super")
     {
       traceLine("error - module " + module_name + " doesn't exist.");
       exit(-1);
@@ -121,17 +121,20 @@ kooc_identifiant_fonction(expr : node, module_name : value, func_name : node, ty
 }
   => local name = "";
   kooc_identifier:func_name
-  => local func = existFunc(module_name, func_name, type, nb_arg);
-  => insert expr.left;
-  => insert expr.left.type = "primary_expression";
-  => insert expr.left.value = func;
-  => insert expr.left.operator = "id";
-  => insert expr.left.otype = "terminal";
-  => insert expr.left.etype = "expression";
-  => insert expr.type = "call_expression";
-  => insert expr.otype = "call";
-  => insert expr.operator = "()";
-  => insert expr.list;
+  => {
+  if (module_name != "super")
+   func_name = existFunc(module_name, func_name, type, nb_arg);
+  insert expr.left;
+  insert expr.left.type = "primary_expression";
+  insert expr.left.value = func_name;
+  insert expr.left.operator = "id";
+  insert expr.left.otype = "terminal";
+  insert expr.left.etype = "expression";
+  insert expr.type = "call_expression";
+  insert expr.otype = "call";
+  insert expr.operator = "()";
+  insert expr.list;
+  }
 ;
 
 kooc_list_parametre(expr : node, module : value, func : value, nb_arg : value)
