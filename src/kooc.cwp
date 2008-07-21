@@ -118,7 +118,8 @@ koocDeclaration(block : node) ::=
 {
   insert theType.oname = theType.name;
   if (theType#parent#parent.type != "__FUNCTION__" &&
-      theType#parent#parent.type != "__COMPOSED__")
+      theType#parent#parent.type != "__COMPOSED__" &&
+      !equalTrees(theType, theType#parent))
     theType.name = koocMangleGet(theType);
 }
 ;
