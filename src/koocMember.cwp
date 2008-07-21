@@ -48,8 +48,8 @@ declaration(this.decl.block)
 
       pushItem this.block;
       setall this.block#back = theDecl;
-      koocToolsAddRef(this.block#back);
-      koocClassAdd(sClass);
+/*       koocToolsAddRef(this.block#back); */
+/*       koocClassAdd(sClass); */
       ref this.kooc.classes[sClass]#back = theDecl;
     }
 }
