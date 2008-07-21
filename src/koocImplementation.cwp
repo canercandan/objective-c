@@ -25,9 +25,9 @@ koocImplementation ::=
   => this.kooc.stack["class"] = sName;
   => local type = "";
 => local filenameC = "";
+=> koocManglePushBlock(sName);
 => koocImplementationInit(sName, type, filenameC);
 '{'
-=> koocManglePushBlock(sName);
 [
  "@member" #continue
  [

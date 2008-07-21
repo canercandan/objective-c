@@ -18,6 +18,7 @@ koocClass ::=
  ]?
   '{'
   => koocManglePushBlock(sClass);
+  => sClass = koocMangleGetPath();
 => koocClassInit(sClass);
 => koocClassFill(sClass, sExtend);
 => localref theNode = this.block#back;

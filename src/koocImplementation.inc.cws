@@ -21,8 +21,10 @@ declare function	check_arguments(fun1 : node, fun2 : node);
 
 function	koocImplementationInit(sName : value, type : node, filenameC : node)
 {
-  if (this.kooc.stack["package"] != "")
-    sName = this.kooc.stack["package"] + '.' + sName;
+//  if (this.kooc.stack["package"] != "")
+  //  sName = this.kooc.stack["package"] + '.' + sName;
+  // Plus besoin de passe le sName en parametre
+  sName = koocMangleGetPath();
   if (existModule(sName) == 1)
     {
       type = "module";

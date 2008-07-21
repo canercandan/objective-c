@@ -147,9 +147,10 @@ function	searchVariable(search : value, module : value, name : value, type : val
 function	existVar(module : value, name : value, type : value)
 {
   local	mangle = "";
-  if (this.kooc.stack["package"] != "")
-    module = this.kooc.stack["package"] + "." + module;
-
+//  if (this.kooc.stack["package"] != "")
+//    module = this.kooc.stack["package"] + "." + module;
+  //ici module na plus besoin d'etre passe en paramertre
+  module = koocMangleGetPath();
   mangle = searchVariable("modules", module, name, type);
   if (!mangle)
     mangle = searchVariable("classes", module, name, type);
@@ -174,8 +175,8 @@ function	existFunc(module : value, name : value, type : value, nb_arg : node)
   local		ret = 0;
 
   traceLine("packName : " + module);
-  if (this.kooc.stack["package"] != "")
-    module = this.kooc.stack["package"] + "." + module;
+//  if (this.kooc.stack["package"] != "")
+//    module = this.kooc.stack["package"] + "." + module;
   local count_pointer = countStringOccurences(type, "*");
   type = replaceString('*', '', type);
   type.trim();

@@ -17,7 +17,7 @@ declare function	koocModulePrint(sModule : value);
  * @brief init the tree'information to insert module
  * @param sModule module's name
  */
-function	koocModuleInit(sModule : value)//, access : value)
+function	koocModuleInit(sModule : value)
 {
   local		modH = "km_" + replaceString('.', '_', sModule.toLowerString()) + ".h";
   local		modC = "km_" + replaceString('.', '_', sModule.toLowerString()) + ".c";

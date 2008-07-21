@@ -104,18 +104,18 @@ function	koocMangleGet(theType : node)
   return (sMangle);
 }
 
-function	koocMangleGetPath(sName : value)
+function	koocMangleGetPath()
 {
   local		sResult = "";
 
   if (this.kooc.mangle.empty())
-    return (sName);
+    return ("");
   foreach var in this.kooc.mangle
   {
     sResult += var;
-    sResult += '.';
+    if (!last(var))
+      sResult += '.';
   }
-  sResult += sName;
   return (sResult);
 }
 

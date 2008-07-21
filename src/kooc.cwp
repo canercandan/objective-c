@@ -18,10 +18,10 @@
 
 #include "../cnorm_2.6/src/cnorm.cwp"
 #include "koocPrettyPrinter.inc.cws"
+#include "koocMangle.inc.cws"
 #include "koocError.inc.cws"
 #include "koocImport.inc.cws"
 #include "koocClass.inc.cws"
-#include "koocMangle.inc.cws"
 #include "koocImplementation.inc.cws"
 #include "koocModule.inc.cws"
 #include "koocCall.inc.cws"
@@ -57,6 +57,7 @@
  => {@@prettyPrinterToC(this.kooc.stack["pathC"])@@}
  ]
 |
+=> traceObject(this, 4);
 => errorDebug(sError);
 ;
 
