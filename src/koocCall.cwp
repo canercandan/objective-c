@@ -79,7 +79,7 @@ kooc_identifiant_variable(expr : node, module_name : node, type_name : node) ::=
 	   }
 	 if (module_name == "self")
 	   {
-	     existVar(this.kooc.stack["class"], val, type_name);
+	     val = existVar(this.kooc.stack["class"], val, type_name);
 	     insert expr.left;
 	     insert expr.left.type = "primary_expression";
 	     insert expr.left.value = "self";
