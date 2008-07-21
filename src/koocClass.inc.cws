@@ -86,11 +86,9 @@ function	koocClassAdd(sClass : value)
 {
   localref	theDecl = this.block#back;
 
-  //if (!existVariable(theDecl.ctype.infoType))
-  //  insert theDecl.ctype.infoType;
-  //insert theDecl.ctype.infoType["static"] = "storageClassSpecifier";
   pushItem this.kooc.classes[sClass];
   ref this.kooc.classes[sClass]#back = this.block#back;
+
   if (theDecl.type == "__VARIABLE__")
     treeInsertFileOut(this.kooc.stack["path_import"]
 		      + this.kooc.classes[sClass].nameH + "_variable");

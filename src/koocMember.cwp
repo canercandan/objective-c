@@ -23,13 +23,11 @@ koocMember(theClass : node) ::=
 
 koocMemberDeclaration(theClass : node) ::=
 #explicitCopy
-=> insert this.decl;
-=> insert this.decl.block;
-declaration(this.decl.block)
+declaration(this.block)
 =>
 {
   local sClass = this.kooc.stack["class"];
-  localref theDecl = this.decl.block#back;
+  localref theDecl = this.block#back;
 
   pushItem this.kooc.classes[sClass];
 
@@ -46,11 +44,41 @@ declaration(this.decl.block)
     {
       //koocMangle(sClass, theDecl);
 
+      local name;
+      local self;
+      local ctype;
+
+      insert ctype.pctx;
+      ref ctype.pctx = this.gl_pctx;
+
+      // Create du ctype
+      cnormCreateCtypeNode(ctype);
+
+      // Self is a pointer
+      cnormFillCtypeNode(ctype, "__POINTER__", "*");
+
+      insert ctype.type = "__COMPOSED__";
+      insert ctype.identifier = theClass.name;
+
+      // Create declaration
+      cnormCreateDeclarationNode(self, "__VARIABLE__");
+
+      name = "self";
+      cnormFillDeclarationNode(self, "__NAME__", name);
+      cnormFillDeclarationNode(self, "__CTYPE__", ctype);
+
+      invertArray(theDecl.list);
+
+      pushItem theDecl.list;
+      setall theDecl.list#back = self;
+
+      invertArray(theDecl.list);
+
       pushItem this.block;
       setall this.block#back = theDecl;
-/*       koocToolsAddRef(this.block#back); */
-/*       koocClassAdd(sClass); */
-      ref this.kooc.classes[sClass]#back = theDecl;
+
+      koocClassAdd(sClass);
+      //ref this.kooc.classes[sClass]#back = theDecl;
     }
 }
 //=> traceLine("READ: " + this.decl.block#back.name);
