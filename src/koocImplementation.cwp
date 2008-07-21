@@ -29,10 +29,10 @@ koocImplementation ::=
 '{'
 => koocManglePushBlock(sName);
 [
-//koocMember(this.block) | declaration(this.block)
  "@member" #continue
  [
   declaration(this.block)
+  => koocMemberAddSelf(sName, this.block#back);
   => koocImplementationErr();
   => koocImplementationAdd(sName, type);
   | '{' [declaration(this.block)
