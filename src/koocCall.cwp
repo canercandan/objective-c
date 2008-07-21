@@ -72,8 +72,8 @@ kooc_identifiant_variable(expr : node, module_name : node, type_name : node) ::=
 	 local name = module_name;
 	 module_name = midString(name, 0, findLastString(name, '.'));
 	 val = subString(name, $findLastString(name, '.') + 1$);
-	 local variable;
-	 if (variable = existVar(module_name, val, type_name))
+	 local variable = existVar(module_name, val, type_name);
+	 if (variable != 0)
 	   {
 	     insert expr.value = variable;
 	     insert expr.operator = "id";
@@ -103,7 +103,7 @@ kooc_identifiant_variable(expr : node, module_name : node, type_name : node) ::=
 	       }
 	       else
 	       {
-		 traceLine("error - module " + name + " doesn't exist.");
+		 traceLine("error - module " + module_name + " doesn't exist.");
 	     	 exit(-1);
 	       }
 	     }
