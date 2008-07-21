@@ -26,6 +26,7 @@
 #include "koocModule.inc.cws"
 #include "koocCall.inc.cws"
 #include "koocTools.inc.cws"
+#include "koocMember.inc.cws"
 
 /**
  * @cond

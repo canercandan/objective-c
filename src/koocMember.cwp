@@ -44,97 +44,14 @@ declaration(this.block)
     }
   else
     {
-      //koocMangle(sClass, theDecl);
-
-      local name;
-      local self;
-      local ctype;
-
-      insert ctype.pctx;
-      ref ctype.pctx = this.gl_pctx;
-
-      // Create du ctype
-      cnormCreateCtypeNode(ctype);
-
-      // Self is a pointer
-      cnormFillCtypeNode(ctype, "__POINTER__", "*");
-
-      insert ctype.type = "__COMPOSED__";
-      insert ctype.identifier = theClass.name;
-
-      // Create declaration
-      cnormCreateDeclarationNode(self, "__VARIABLE__");
-
-      name = "self";
-      cnormFillDeclarationNode(self, "__NAME__", name);
-      cnormFillDeclarationNode(self, "__CTYPE__", ctype);
-
-      invertArray(theDecl.list);
-
-      pushItem theDecl.list;
-      setall theDecl.list#back = self;
-
-      invertArray(theDecl.list);
-
-      pushItem this.block;
-      setall this.block#back = theDecl;
-
+      koocMemberAddSelf(sClass, theDecl);
       //koocClassAdd(sClass);
       ref this.kooc.classes[sClass]#back = theDecl;
       treeInsertFileOut(this.kooc.stack["path_import"]
 		      + this.kooc.classes[sClass].nameH);
     }
 }
-//=> traceLine("READ: " + this.decl.block#back.name);
-//=> traceObject(this, 2);
 ;
-
-  //   if (theDecl.type == "__VARIABLE__")
-  //     {
-  //       pushItem theNode.ctype.list;
-  //       setall theNode.ctype.list#back = theDecl;
-  //     }
-  //   else
-  //     {
-  //       local ctype;
-  //       insert ctype.pctx;
-  //       ref ctype.pctx = this.gl_pctx;
-  //       insert ctype.type = "__COMPOSED__";
-  //       insert ctype.identifier = theNode.name;
-  //       insert ctype.pointer;
-  //       pushItem ctype.pointer;
-  //       set ctype.pointer#back = "*";
-  //       local selfNode;
-  //       setall selfNode.ctype = ctype;
-  //       insert selfNode.type = "__VARIABLE__";
-  //       insert selfNode.etype = "declaration";
-  //       insert selfNode.name = "self";
-  //       invertArray(theDecl.list);
-  //       pushItem theDecl.list;
-  //       setall theDecl.list#back = selfNode;
-  //       invertArray(theDecl.list);
-  //       pushItem this.block;
-  //       setall this.block#back = theDecl;
-  //       pushItem this.kooc.classes[sClass];
-  //       ref this.kooc.classes[sClass]#back = this.block#back;
-
-  //       if (theDecl.type != "__PROTOTYPE__" &&
-  // 	  theDecl.ctype.type == "__COMPOSED__")
-  // 	{
-  // 	  if (theDecl.ctype.specifier == "enum")
-  // 	    ref this.block.enums[theDecl.name] = this.block#back;
-  // 	  else if (theDecl.ctype.specifier == "struct")
-  // 	    ref this.block.structs[theDecl.name] = this.block#back;
-  // 	  else if (theDecl.ctype.specifier == "union")
-  // 	    ref this.block.unions[theDecl.name] = this.block#back;
-  // 	}
-  //       else if (theDecl.type == "__PFUNCTION__")
-  // 	ref this.block.pfunctions[theDecl.name] = this.block#back;
-  //       else if (theDecl.type == "__FUNCTION__")
-  // 	ref this.block.functions[theDecl.name] = this.block#back;
-  //       else if (theDecl.type == "__PROTOTYPE__")
-  // 	ref this.block.prototypes[theDecl.name] = this.block#back;
-  //     }
 
 /**
  * @endcond

@@ -1,0 +1,41 @@
+/**
+ * @file koocMember.inc.cws
+ * @brief koocMember functions
+ * @note @ref develop @ref contrib @ref tools
+ */
+
+declare function	koocMemberAddSelf(sClass : value, theNode : node);
+
+
+function	koocMemberAddSelf(sClass : value, theNode : node)
+{
+      local name;
+      local self;
+      local ctype;
+
+      insert ctype.pctx;
+      ref ctype.pctx = this.gl_pctx;
+
+      // Create du ctype
+      cnormCreateCtypeNode(ctype);
+
+      // Self is a pointer
+      cnormFillCtypeNode(ctype, "__POINTER__", "*");
+
+      insert ctype.type = "__COMPOSED__";
+      insert ctype.identifier = sClass;
+
+      // Create declaration
+      cnormCreateDeclarationNode(self, "__VARIABLE__");
+
+      name = "self";
+      cnormFillDeclarationNode(self, "__NAME__", name);
+      cnormFillDeclarationNode(self, "__CTYPE__", ctype);
+
+      invertArray(theNode.list);
+
+      pushItem theNode.list;
+      setall theNode.list#back = self;
+
+      invertArray(theNode.list);
+}
