@@ -5,7 +5,7 @@
 ** Login   <armand_m@epitech.net>
 ** 
 ** Started on  Sat Jul  5 17:34:10 2008 morgan armand
-   Last update Sat Jul 19 18:10:03 2008 florent hochwelker
+** Last update Mon Jul 21 18:07:17 2008 morgan armand
 */
 
 @import	"test_class.kh"
@@ -33,8 +33,8 @@ int	main(void)
       {
 	int	n;
 
-	//n = [self.nbitem];
-	//return (n);
+	n = [self.nbitem];
+	return (n);
       }
 
       void	push(int i)

@@ -36,6 +36,7 @@ koocImplementation ::=
   => koocImplementationErr();
   => koocImplementationAdd(sName, type);
   | '{' [declaration(this.block)
+    	 => koocMemberAddSelf(sName, this.block#back);
 	 => koocImplementationErr();
 	 => koocImplementationAdd(sName, type);
 	 ]*
