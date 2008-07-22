@@ -87,6 +87,7 @@ kooc_identifiant_variable(expr : node, module_name : node, type_name : node) ::=
 	     if (expr#parent#parent#parent.type == "__FUNCTION__"
 	     	|| expr#parent#parent.type == "__FUNCTION__")
 	       {
+		  variable = existVar(this.kooc.mangle#back, val, type_name);
 		  insert expr.left;
 	     	  insert expr.left.type = "primary_expression";
 	     	  insert expr.left.value = module_name;
@@ -98,7 +99,7 @@ kooc_identifiant_variable(expr : node, module_name : node, type_name : node) ::=
 	     	  insert expr.etype = "expression";
 	     	  insert expr.right;
 	     	  insert expr.right.type = "primary_expression";
-	     	  insert expr.right.value = val;
+	     	  insert expr.right.value = variable;
 	     	  insert expr.right.operator = "id";
 	     	  insert expr.right.otype = "terminal";
 	     	  insert expr.operator = "->";
@@ -139,7 +140,7 @@ kooc_identifiant_fonction(expr : node, module_name : value, func_name : node, ty
       func_name = existFunc(class_name, func, type, nb_arg);
       if (func_name == 0)
         {
-          traceLine("error - function " + func_name + " doesn't exist in " + class_name + " module.");
+          traceLine("error - function " + func + " doesn't exist in " + class_name + " module.");
           exit(-1);
         }
       i = $i + 1$;
