@@ -5,7 +5,7 @@
 ** Login   <armand_m@epitech.net>
 ** 
 ** Started on  Sat Jul  5 17:34:10 2008 morgan armand
-** Last update Mon Jul 21 18:07:17 2008 morgan armand
+** Last update Tue Jul 22 10:16:01 2008 caner candan
 */
 
 @import	"test_class.kh"
@@ -17,15 +17,15 @@ int	main(void)
 
 @implementation StackInt
 {
-  @member void	init(int size)
-    {
-      int		*buf;
+/*   @member void	init(int size) */
+/*     { */
+/*       int		*buf; */
 
-      [self.nbitem] = 0;
-      [self.size] = size;
-      buf = (int *) calloc(size, sizeof(int));
-      [self.data] = buf;
-    }
+/*       [self.nbitem] = 0; */
+/*       [self.size] = size; */
+/*       buf = (int *) calloc(size, sizeof(int)); */
+/*       [self.data] = buf; */
+/*     } */
 
   @member
     {

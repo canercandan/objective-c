@@ -3,6 +3,7 @@ declare function	parseBlock(theNode : node, file : value = "");
 declare function	parseListEnum(theNode : node);
 declare function	replaceChar(theNode : node);
 declare function	parseList(theNode : node);
+declare function	parseListWithOutType(theNode : node);
 declare function	parseCType(theNode : node);
 declare function	getPFname(theNode : node);
 declare function	getPointer(theNode : node);
@@ -11,6 +12,7 @@ declare function	endPoint(block : node);
 function	parseInit(theNode : node)
 {
   local sResult = "";
+
   if (existVariable(theNode.designation))
     {
       if (theNode.designation.design == "indexed")
@@ -72,6 +74,7 @@ function	parseBlock(theNode : node, file : value = "")
 function	parseListEnum(theNode : node)
 {
   local sResult = "";
+
   foreach var in theNode
   {
     sResult += key(var);
@@ -88,6 +91,7 @@ function	replaceChar(theNode : node)
 function	parseList(theNode : node)
 {
   local sValue = "";
+
   foreach var in theNode
   {
     if (existVariable(var.value))
@@ -100,10 +104,25 @@ function	parseList(theNode : node)
       sValue += testType<var.ctype.type>(var);
     else if (existVariable(var.otype))
       sValue += testOType<var.otype>(var);
-    if (!last(var)) sValue += ", ";
+    if (!last(var))
+      sValue += ", ";
   }
   if (theNode.ellipsis == "true")
     sValue += ", ...";
+  return (sValue);
+}
+
+function	parseListWithOutType(theNode : node)
+{
+  local sValue = "";
+
+  foreach var in theNode
+  {
+    if (existVariable(var.name))
+      sValue += replaceChar(var.name);
+    if (!last(var))
+      sValue += ", ";
+  }
   return (sValue);
 }
 

@@ -7,6 +7,7 @@
  */
 
 declare function	koocMangle(theType : node);
+declare function	koocMangleStringWithOutTypeAndArgs(sName : value);
 declare function	koocMangleType(theNode : node, name : node);
 declare function	koocMangleArgs(theNode : node, name : node);
 declare function	koocMangleInit();
@@ -32,6 +33,23 @@ function	koocMangle(theType : node)
   sMangle += "E";
   koocMangleType(theType, sMangle);
   koocMangleArgs(theType, sMangle);
+  return (sMangle);
+}
+
+function	koocMangleStringWithOutTypeAndArgs(sName : value)
+{
+  local		sMangle = "_ZN";
+
+  if (this.kooc.mangle.empty())
+    return (sName);
+  foreach var in this.kooc.mangle
+  {
+    sMangle += lengthString(var);
+    sMangle += var;
+  }
+  sMangle += lengthString(sName);
+  sMangle += sName;
+  sMangle += "E";
   return (sMangle);
 }
 
@@ -67,7 +85,10 @@ function	koocMangleSpacer(spacer : value)
   local		sResult = "";
 
   if (this.kooc.mangle.empty())
-    return ("");
+    {
+      traceLine("error - mangle's stack is empty");
+      exit(-1);
+    }
   foreach var in this.kooc.mangle
   {
     sResult += var;

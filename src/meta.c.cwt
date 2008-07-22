@@ -1,6 +1,7 @@
 <%
-local	sStruct = "";
+local	sStruct = koocMangleSpacer('_');
 local	sHeader = "";
+traceObject(this.kooc.mangle);
 %>/*
 ** KOOC - Kind of Objective C for **@this.nameH@**
 ** { dream team 42. } -> Tek3s Strasbourg
@@ -14,7 +15,7 @@ local	sHeader = "";
 {
   @sStruct@	*new;
 
-  if (!(new = (@sStruct@*)calloc(1, sizeof(@sStruct@))))
+  if (!(new = (@sStruct@*)calloc(1, sizeof(*new))))
     {
       fprintf(stderr, "not enough memory\n");
       exit(-1);
@@ -23,25 +24,52 @@ local	sHeader = "";
 }
 
 <%
+local	fndInit = false;
+local	fndClean = false;
+local	sClean;
+
 foreach var in this
 {
   if (var.oname == "init")
     {
+      fndInit = true;
 %>
-@koocMangleSpacer('_')@	*@koocMangle(var)@_new(@parseList(var.list)@)
+@sStruct@	*@replaceString("init", "new", var.name)@(@parseList(var.list)@)
   {
     @sStruct@	*new;
 
     new = @sStruct@_alloc();
-    new = @sStruct@_init(new, @parseList(var.list)@);
+    @var.name@(new, @parseListWithOutType(var.list)@);
     return (new);
   }
 <%
     }
+  if (var.oname == "clean")
+    {
+      fndClean = true;
+      sClean = var.name;
+    }
 }
+
+if (!fndInit)
+  {
+%>
+    @sStruct@	*@koocMangleStringWithOutTypeAndArgs("init")@()
+  {
+    @sStruct@	*new;
+
+    new = @sStruct@_alloc();
+    return (new);
+  }
+<%
+  }
 %>
 
 void	@sStruct@_delete(@sStruct@ *self)
 {
+  <%
+  if (fndClean)
+    {%>@sClean@();<%}
+  %>
   free(self);
 }
