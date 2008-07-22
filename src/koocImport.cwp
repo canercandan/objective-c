@@ -48,7 +48,7 @@ checkFile(file : value, module : value) ::=
   => koocImportIfndef(file);
   [koocDeclaration(this.block):kc checkModule(module, kc)
    | declaration(this.block)
-   => treeInsertFileOut(getEnv("pathH"));
+   => treeInsertFileOut(getEnv("pathH"), this.block#back);
    ]*
 #continue #empty
   => {@@prettyPrinterToC(getEnv("pathH"))@@}

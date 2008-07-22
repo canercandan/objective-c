@@ -79,9 +79,13 @@ function	koocImplementationAdd(sName : value, type : value)
   localref	theNode = this.kooc.implementations[sName]#back;
 
   if (type == "module")
-    treeInsertFileOut(getEnv("path_import") + this.kooc.modules[sName].nameC);
+    treeInsertFileOut(getEnv("path_import")
+		      + this.kooc.modules[sName].nameC,
+		      this.block#back);
   else if (type == "class")
-    treeInsertFileOut(getEnv("path_import") + this.kooc.classes[sName].nameC);
+    treeInsertFileOut(getEnv("path_import")
+		      + this.kooc.classes[sName].nameC,
+		      this.block#back);
 }
 
 /**

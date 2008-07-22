@@ -38,7 +38,8 @@ function	koocMemberDeclarationIfFunction(sClass : value, theDecl : node)
     {
       koocMemberAddSelf(sClass, theDecl);
       treeInsertFileOut(getEnv("path_import")
-			+ this.kooc.classes[sClass].nameH);
+			+ this.kooc.classes[sClass].nameH,
+			theDecl);
     }
 }
 

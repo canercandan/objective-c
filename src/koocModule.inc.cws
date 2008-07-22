@@ -18,11 +18,12 @@ declare function	koocModulePrint(sModule : value);
  */
 function	koocModuleInit(sModule : value)
 {
-  local		modH = "km_" + replaceString('.', '_', sModule.toLowerString()) + ".h";
-  local		modC = "km_" + replaceString('.', '_', sModule.toLowerString()) + ".c";
+  local		modH = "km_" + replaceString('.', '_',
+					     sModule.toLowerString()) + ".h";
+  local		modC = "km_" + replaceString('.', '_',
+					     sModule.toLowerString()) + ".c";
 
   insert this.kooc.modules[sModule];
-//  insert this.kooc.modules[sModule].access = access;
   insert this.kooc.modules[sModule].nameH = modH;
   insert this.kooc.modules[sModule].nameC = modC;
 }
@@ -34,15 +35,11 @@ function	koocModuleInit(sModule : value)
  */
 function	koocModuleCheck(theNode : node)
 {
-  //localref theNode = this.kooc.modules[sModule].block#back;
-  //localref theNode = this.block#back;
-
   if (theNode.type != "__VARIABLE__" &&
       theNode.type != "__PROTOTYPE__")
     {
       traceLine(getInputFilename() + ":" + countInputLines() + ": "
                 + "error: unexpected identifier");
-      //traceObject(theNode, 5);
       exit(-1);
     }
 }
@@ -63,10 +60,12 @@ function	koocModuleAdd(sModule : value)
   ref this.kooc.modules[sModule]#back = this.block#back;
   if (this.block#back.type == "__VARIABLE__")
     treeInsertFileOut(getEnv("path_import")
-		      + this.kooc.modules[sModule].nameH + "_variable");
+		      + this.kooc.modules[sModule].nameH + "_variable",
+		      this.block#back);
   else
     treeInsertFileOut(getEnv("path_import")
-		      + this.kooc.modules[sModule].nameH);
+		      + this.kooc.modules[sModule].nameH,
+		      this.block#back);
 }
 
 function	koocModulePrint(sModule : value)

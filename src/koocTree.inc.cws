@@ -8,6 +8,7 @@ declare function	treeInit();
 declare function	treeKooc();
 declare function	treeCopyInfos(block : node);
 declare function	treeCopyInfosInArray(dst : node, src : node);
+declare function	treeInsertFileOut(file : value, theNode : node);
 
 /**
  * @fn treeInit(block : node)
@@ -64,7 +65,7 @@ function	treeCopyInfosInArray(dst : node, src : node)
     ref dst[key(var)] = var;
 }
 
-function	treeInsertFileOut(file : value)
+function	treeInsertFileOut(file : value, theNode : node)
 {
-  insert this.block#back.__FILE__ = file;
+  insert theNode.__FILE__ = file;
 }
