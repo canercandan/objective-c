@@ -23,10 +23,10 @@
 #include "koocError.inc.cws"
 #include "koocImport.inc.cws"
 #include "koocClass.inc.cws"
+#include "koocMember.inc.cws"
 #include "koocImplementation.inc.cws"
 #include "koocModule.inc.cws"
 #include "koocTools.inc.cws"
-#include "koocMember.inc.cws"
 
 /**
  * @cond

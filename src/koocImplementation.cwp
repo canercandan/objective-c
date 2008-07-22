@@ -28,28 +28,18 @@ koocImplementation ::=
 => koocImplementationInit(sName, type, filenameC);
 '{'
 [
- [ "@virtual" [ "@member" ]? ] | "@member" #continue
- [
-  declaration(this.block)
-  => koocMemberAddSelf(sName, this.block#back);
+ [ "@member" | [ "@virtual" [ "@member" ]? ] ]
+ [ declaration(this.block) => koocImplementationContent(sName, type);
+   | '{' [ [ "@virtual" ]? declaration(this.block) => koocImplementationContent(sName, type); ]* '}'
+   ]
+ | declaration(this.block)
   => koocImplementationErr();
   => koocImplementationAdd(sName, type);
-  | '{' [declaration(this.block)
-    	 => koocMemberAddSelf(sName, this.block#back);
-	 => koocImplementationErr();
-	 => koocImplementationAdd(sName, type);
-	 ]*
-  '}'
-  ]
- | declaration(this.block)
- => koocImplementationErr();
- => koocImplementationAdd(sName, type);
  ]*
 #generatedFile(getEnv("path_import") + filenameC)
 => koocImplementationPrint(sName, type);
 '}'
 => koocManglePopBlock();
-//=> koocImplementationCheck();
 ;
 
 /**

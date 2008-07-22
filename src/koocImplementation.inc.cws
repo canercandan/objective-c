@@ -9,6 +9,7 @@
  */
 
 declare function	koocImplementationInit(sName : value, type : node, filenameC : node);
+declare function	koocImplementationContent(sName : value, type : value);
 declare function	koocImplementationPrint(sName : value, type : value);
 declare function	koocImplementationErr();
 declare function	koocImplementationAdd(sName : value, type : value);
@@ -39,6 +40,13 @@ function	koocImplementationInit(sName : value, type : node, filenameC : node)
       traceLine("Module or Class [" + sName + "] doesn't exist");
       exit(-1);
     }
+}
+
+function	koocImplementationContent(sName : value, type : value)
+{
+  koocMemberAddSelf(sName, this.block#back);
+  koocImplementationErr();
+  koocImplementationAdd(sName, type);
 }
 
 function	koocImplementationPrint(sName : value, type : value)
