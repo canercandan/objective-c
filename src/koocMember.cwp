@@ -23,31 +23,8 @@ koocMember(theClass : node) ::=
 
 koocMemberDeclaration(theClass : node) ::=
 #explicitCopy
-declaration(this.block)
-=>
-{
-  local sClass = this.kooc.stack["class"];
-  localref theDecl = this.block#back;
-
-  pushItem this.kooc.classes[sClass];
-
-  if (theDecl.type == "__VARIABLE__")
-    {
-      pushItem theClass.ctype.list;
-      setall theClass.ctype.list#back = theDecl;
-      removeElement(this.block.variables, theDecl.name);
-      removeVariable(theDecl);
-      ref this.kooc.classes[sClass]#back
-	= theClass.ctype.list#back;
-    }
-  else
-    {
-      koocMemberAddSelf(sClass, theDecl);
-      ref this.kooc.classes[sClass]#back = theDecl;
-      treeInsertFileOut(this.kooc.stack["path_import"]
-			+ this.kooc.classes[sClass].nameH);
-    }
-}
+  declaration(this.block)
+  => koocMemberDeclaration(theClass);
 ;
 
 /**

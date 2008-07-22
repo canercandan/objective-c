@@ -4,6 +4,7 @@
  * @note @ref develop @ref contrib @ref tools
  */
 
+declare function	koocClassDeclaration(sClass : value);
 declare function	koocClassInit(sClass : value);
 declare function	koocClassFill(sClass : value, sExtend : value);
 declare function	koocClassExtend(sClass : value, sExtend : value, theNode : node);
@@ -11,6 +12,27 @@ declare function	koocClassErr(theNode : node);
 declare function	koocClassAdd(sClass : value);
 declare function	koocClassPrint(sClass : value);
 declare function	koocClassExtendErr(sExtend : value);
+
+
+function	koocClassDeclaration(sClass : value)
+{
+  localref	theBlock = this.block#back;
+  local		isSelf = (theBlock.ctype.list#front.identifier == sClass &&
+			  existVariable(theBlock.ctype.list#front.pointer) &&
+			  theBlock.ctype.list#front.pointer.getArraySize() == 1);
+
+  if (!isSelf)
+    {
+      insert this.block#back.ctype.infoType;
+      insert this.block#back.ctype.infoType["static"] = "storageClassSpecifier";
+    }
+  if (this.block#back.type == "__VARIABLE__")
+    treeInsertFileOut(this.kooc.stack["path_import"]
+		      + this.kooc.classes[sClass].nameH + "_variable");
+  else
+    treeInsertFileOut(this.kooc.stack["path_import"]
+		      + this.kooc.classes[sClass].nameH);
+}
 
 /**
  * @fn function	koocClassInit(sClass : value)
@@ -100,6 +122,8 @@ function	koocClassAdd(sClass : value)
 
 function	koocClassPrint(sClass : value)
 {
+  local		sFile;
+
   koocImportIfndef(this.kooc.classes[sClass].nameH);
   {@@prettyPrinterToH(this.kooc.stack["path_import"]
 		      + this.kooc.classes[sClass].nameH + "_variable")@@}
@@ -107,10 +131,14 @@ function	koocClassPrint(sClass : value)
 		      + this.kooc.classes[sClass].nameH)@@}
   koocImportEndif(this.kooc.classes[sClass].nameH);
   setall this.kooc.classes[sClass].kooc.mangle = this.kooc.mangle;
-  generate("meta.c.cwt", this.kooc.classes[sClass],
-	   this.kooc.stack["path_import"]
-	   + replaceString(".c", ".meta.c",
-			   this.kooc.classes[sClass].nameC));
+  sFile = this.kooc.stack["path_import"]
+    + replaceString(".c", ".meta.c", this.kooc.classes[sClass].nameC);
+  generate("meta.c.cwt", this.kooc.classes[sClass], sFile);
+  indentFile(sFile, "C++");
+  sFile = this.kooc.stack["path_import"]
+    + replaceString(".h", ".meta.h", this.kooc.classes[sClass].nameH);
+  generate("meta.h.cwt", this.kooc.classes[sClass], sFile);
+  indentFile(sFile, "C++");
 }
 
 function	koocClassExtendErr(sExtend : value)

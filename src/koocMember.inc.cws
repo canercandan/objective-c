@@ -4,38 +4,62 @@
  * @note @ref develop @ref contrib @ref tools
  */
 
+declare function	koocMemberDeclaration(theClass : node);
 declare function	koocMemberAddSelf(sClass : value, theNode : node);
 
+function	koocMemberDeclaration(theClass : node)
+{
+  local		sClass = this.kooc.stack["class"];
+  localref	theDecl = this.block#back;
+
+  pushItem this.kooc.classes[sClass];
+  if (theDecl.type == "__VARIABLE__")
+    {
+      pushItem theClass.ctype.list;
+      setall theClass.ctype.list#back = theDecl;
+      removeElement(this.block.variables, theDecl.name);
+      removeVariable(theDecl);
+      ref this.kooc.classes[sClass]#back
+	= theClass.ctype.list#back;
+    }
+  else
+    {
+      koocMemberAddSelf(sClass, theDecl);
+      ref this.kooc.classes[sClass]#back = theDecl;
+      treeInsertFileOut(this.kooc.stack["path_import"]
+			+ this.kooc.classes[sClass].nameH);
+    }
+}
 
 function	koocMemberAddSelf(sClass : value, theNode : node)
 {
-      local name;
-      local self;
-      local ctype;
+  local		name;
+  local		self;
+  local		ctype;
 
-      insert ctype.pctx;
-      ref ctype.pctx = this.gl_pctx;
+  insert ctype.pctx;
+  ref ctype.pctx = this.gl_pctx;
 
-      // Create du ctype
-      cnormCreateCtypeNode(ctype);
+  // Create du ctype
+  cnormCreateCtypeNode(ctype);
 
-      // Self is a pointer
-      cnormFillCtypeNode(ctype, "__POINTER__", "*");
+  // Self is a pointer
+  cnormFillCtypeNode(ctype, "__POINTER__", "*");
 
-      insert ctype.type = "__COMPOSED__";
-      insert ctype.identifier = sClass;
+  insert ctype.type = "__COMPOSED__";
+  insert ctype.identifier = sClass;
 
-      // Create declaration
-      cnormCreateDeclarationNode(self, "__VARIABLE__");
+  // Create declaration
+  cnormCreateDeclarationNode(self, "__VARIABLE__");
 
-      name = "self";
-      cnormFillDeclarationNode(self, "__NAME__", name);
-      cnormFillDeclarationNode(self, "__CTYPE__", ctype);
+  name = "self";
+  cnormFillDeclarationNode(self, "__NAME__", name);
+  cnormFillDeclarationNode(self, "__CTYPE__", ctype);
 
-      invertArray(theNode.list);
+  invertArray(theNode.list);
 
-      pushItem theNode.list;
-      setall theNode.list#back = self;
+  pushItem theNode.list;
+  setall theNode.list#back = self;
 
-      invertArray(theNode.list);
+  invertArray(theNode.list);
 }

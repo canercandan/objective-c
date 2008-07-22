@@ -1,6 +1,5 @@
 <%
-local	sStruct = "";
-local	sHeader = "";
+local	sStruct = koocMangleSpacer('_');
 %>/*
 ** KOOC - Kind of Objective C for **@this.nameH@**
 ** { dream team 42. } -> Tek3s Strasbourg
@@ -9,7 +8,6 @@ local	sHeader = "";
 #ifndef __@toUpperString(sStruct)@_META_H__
 # define __@toUpperString(sStruct)@_META_H__
 
-@sStruct@	*@sStruct@_alloc();
 <%
 foreach var in this.init
 {

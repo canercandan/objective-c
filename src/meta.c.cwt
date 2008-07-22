@@ -1,6 +1,5 @@
 <%
 local	sStruct = koocMangleSpacer('_');
-local	sHeader = "";
 %>/*
 ** KOOC - Kind of Objective C for **@this.nameH@**
 ** { dream team 42. } -> Tek3s Strasbourg
@@ -8,9 +7,9 @@ local	sHeader = "";
 
 #include <stdlib.h>
 #include <stdio.h>
-#include "@sStruct@.meta.h"
+#include "kc_@toLowerString(sStruct)@.meta.h"
 
-@sStruct@	*@sStruct@_alloc()
+static @sStruct@	alloc()
 {
   @sStruct@	*new;
 
