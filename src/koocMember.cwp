@@ -35,6 +35,7 @@ declaration(this.block)
     {
       pushItem theClass.ctype.list;
       setall theClass.ctype.list#back = theDecl;
+      removeElement(this.block.variables, theDecl.name);
       removeVariable(theDecl);
       ref this.kooc.classes[sClass]#back
 	= theClass.ctype.list#back;

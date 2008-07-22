@@ -22,18 +22,21 @@ koocClass ::=
 => koocClassInit(sClass);
 => koocClassFill(sClass, sExtend);
 => localref theNode = this.block#back;
-=> local decl;
-=> insert decl.block;
 [koocMember(theNode)
  |
- declaration(decl.block)
- => koocClassErr(decl.block#back);
- // => insert decl.ctype.infoType;
- // => insert decl.ctype.infoType["static"] = "storageClassSpecifier";
- => pushItem this.block;
- => setall this.block#back = decl.block#back;
- //=> koocToolsAddRef(this.block#back);
- //=> koocClassAdd(sClass);
+ declaration(this.block)
+ => koocClassErr(this.block#back);
+// => insert this.block#back.ctype.infoType;
+// => insert this.block#back.ctype.infoType["static"] = "storageClassSpecifier";
+ =>
+ {
+  if (this.block#back.type == "__VARIABLE__")
+    treeInsertFileOut(this.kooc.stack["path_import"]
+		      + this.kooc.classes[sClass].nameH + "_variable");
+  else
+    treeInsertFileOut(this.kooc.stack["path_import"]
+		      + this.kooc.classes[sClass].nameH);
+ }
  ]*
 #generatedFile(this.kooc.stack["path_import"] + this.kooc.classes[sClass].nameH)
 => koocClassPrint(sClass);
