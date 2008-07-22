@@ -26,10 +26,22 @@ koocClass ::=
  |
  declaration(this.block)
  => koocClassErr(this.block#back);
-// => insert this.block#back.ctype.infoType;
-// => insert this.block#back.ctype.infoType["static"] = "storageClassSpecifier";
  =>
  {
+   localref theBlock = this.block#back;
+
+   local isSelf = (
+     theBlock.ctype.list#front.identifier == sClass &&
+     existVariable(theBlock.ctype.list#front.pointer) &&
+     theBlock.ctype.list#front.pointer.getArraySize() == 1
+   );
+
+   if (!isSelf)
+   {
+     insert this.block#back.ctype.infoType;
+     insert this.block#back.ctype.infoType["static"] = "storageClassSpecifier";
+   }
+
   if (this.block#back.type == "__VARIABLE__")
     treeInsertFileOut(this.kooc.stack["path_import"]
 		      + this.kooc.classes[sClass].nameH + "_variable");
