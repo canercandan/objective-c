@@ -45,26 +45,28 @@ koocCall(expr : node) ::=
   => local type_name = "";
   => local func_name = "";
   => local nb_arg = "";
+  => local i = 0;
+  => local ptr = "";
 #explicitCopy [cast(expr):type_name]?
 '['
-kooc_identifiant_module(expr, module_name, type_name)
+kooc_identifiant_module(expr, module_name, type_name, ptr)
 [
  kooc_identifiant_variable(expr, module_name, type_name)
  |
  [
-  kooc_identifiant_fonction(expr, module_name, func_name, type_name, nb_arg)
-  kooc_list_parametre(expr, module_name, func_name, nb_arg)
+  kooc_identifiant_fonction(expr, module_name, func_name, type_name, nb_arg, i, ptr)
+  kooc_list_parametre(expr, module_name, func_name, nb_arg, i)
   ]
  ]
 ']'
 ;
 
 cast(expr : node) : value ::= "@!("->(:cast)')'
-  ;
+;
 
-kooc_identifiant_module(expr : node, module_name : node, type_name : value)
-::= [kooc_identifier ['.' kooc_identifier]*]:module_name
-  ;
+kooc_identifiant_module(expr : node, module_name : node, type_name : value, ptr : node)
+::= ['&']*:ptr [kooc_identifier ['.' kooc_identifier]*]:module_name
+;
 
 kooc_identifiant_variable(expr : node, module_name : node, type_name : node) ::=
   [ !!']' // C'est une variable qui est demande
@@ -111,8 +113,9 @@ kooc_identifiant_variable(expr : node, module_name : node, type_name : node) ::=
     ]
   ;
 
-kooc_identifiant_fonction(expr : node, module_name : value, func_name : node, type : value, nb_arg : node)
+kooc_identifiant_fonction(expr : node, module_name : value, func_name : node, type : value, nb_arg : node, i : node, ptr : value)
 ::= 
+  => local class_name = "";
   => {  if (!existModule(module_name) && module_name != "super")
     {
       traceLine("error - module " + module_name + " doesn't exist.");
@@ -120,10 +123,33 @@ kooc_identifiant_fonction(expr : node, module_name : value, func_name : node, ty
     }
 }
   => local name = "";
-  kooc_identifier:func_name
+  kooc_identifier:func
   => {
   if (module_name != "super")
-   func_name = existFunc(module_name, func_name, type, nb_arg);
+  {
+    func_name = existFunc(module_name, func, type, nb_arg);
+    if (func_name == 0) // on test si ce n'est pas une instance
+    {
+      class_name = isAnInstance(module_name, expr);
+      if (class_name == "")
+      {
+        traceLine("error - function " + func_name + " doesn't exist in " + class_name + " module.");
+        exit(-1);
+      }
+      func_name = existFunc(class_name, func, type, nb_arg);
+      if (func_name == 0)
+        {
+          traceLine("error - function " + func_name + " doesn't exist in " + class_name + " module.");
+          exit(-1);
+        }
+      i = $i + 1$;
+      pushItem expr.list;
+      insert expr.list#back.type = "primary_expression";
+      insert expr.list#back.value = ptr + module_name;
+      insert expr.list#back.operator = "id";
+      insert expr.list#back.otype = "terminal";
+    }
+  }
   insert expr.left;
   insert expr.left.type = "primary_expression";
   insert expr.left.value = func_name;
@@ -137,9 +163,8 @@ kooc_identifiant_fonction(expr : node, module_name : value, func_name : node, ty
   }
 ;
 
-kooc_list_parametre(expr : node, module : value, func : value, nb_arg : value)
+kooc_list_parametre(expr : node, module : value, func : value, nb_arg : value, i : node)
      ::=
-     => local i = 0;
      [
       ':' kooc_param(expr):val
       => i = $i + 1$;
@@ -163,9 +188,10 @@ kooc_identifier ::= #readIdentifier
 kooc_param(expr : node) ::=
   => pushItem expr.list;
   => insert expr.list#back.type = "primary_expression";
+  ['&']*:ptr
    [
-   #readIdentifier:val | #readNumeric:val
-   => insert expr.list#back.value = val;
+   [#readIdentifier:val | #readNumeric:val]
+   => insert expr.list#back.value = ptr + val;
    => insert expr.list#back.operator = "id";
    => insert expr.list#back.otype = "terminal";
    ]

@@ -4,3 +4,15 @@
  * @note @ref develop @ref contrib @ref tools
  */
 
+function	isAnInstance(key : value, type : node)
+{
+  	local leaf;
+
+	ref leaf = type#parent;
+	while (leaf.variables[key].oname != key && existVariable(leaf.pctx))
+	{
+	  traceLine(leaf.variables[key].oname);
+	  leaf = leaf.pctx;
+	}
+	return leaf.variables[key].ctype.identifier;
+}

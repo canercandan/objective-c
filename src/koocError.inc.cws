@@ -107,7 +107,7 @@ function	searchVariable(search : value, module : value, name : value, type : val
   foreach info in #evaluateVariable("this.kooc." + search)
   {
     if (key(info) == module)
-      {
+    {
 	foreach val in info
 	{
 	  if (val.type == "__VARIABLE__")
@@ -145,22 +145,14 @@ function	existVar(module : value, name : value, type : value)
   return mangle;
 }
 
-/**
- * @fn existFunc(module : value, name : value, type : value, nb_arg : node)
- * @brief check if the function exist
- * @param module module's name
- * @param name function's name
- * @param type type's name
- * @param nb_arg the number of argument
- */
-function	existFunc(module : value, name : value, type : value, nb_arg : node)
+function	searchFunction(search : value, module : value, name : value, type : value, nb_arg : node)
 {
   local		ret = 0;
 
   local count_pointer = countStringOccurences(type, "*");
   type = replaceString('*', '', type);
   type.trim();
-  foreach info in this.kooc.modules
+  foreach info in #evaluateVariable("this.kooc." + search)
   {
     if (key(info) == module)
       {
@@ -188,8 +180,27 @@ function	existFunc(module : value, name : value, type : value, nb_arg : node)
       nb_arg = countNbArgInFunc(ret.list);
       return (ret.name);
     }
-  traceLine("error - function " + name + " doesn't exist in " + module + " module.");
-  exit(-1);
+  return 0;
+}
+
+
+/**
+ * @fn existFunc(module : value, name : value, type : value, nb_arg : node)
+ * @brief check if the function exist
+ * @param module module's name
+ * @param name function's name
+ * @param type type's name
+ * @param nb_arg the number of argument
+ */
+function	existFunc(module : value, name : value, type : value, nb_arg : node)
+{
+  local mangle = "";
+  mangle = searchFunction("modules", module, name, type, nb_arg);
+  if (mangle == 0)
+   mangle = searchFunction("classes", module, name, type, nb_arg);
+  if (mangle != 0)
+     return (mangle);
+  return 0;
 }
 
 /**
