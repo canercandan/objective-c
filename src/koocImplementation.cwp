@@ -28,7 +28,7 @@ koocImplementation ::=
 => koocImplementationInit(sName, type, filenameC);
 '{'
 [
- [ "@virtual" [ "@member" ]? | "@member" ] #continue
+ [ "@virtual" [ "@member" ]? ] | "@member" #continue
  [
   declaration(this.block)
   => koocMemberAddSelf(sName, this.block#back);
