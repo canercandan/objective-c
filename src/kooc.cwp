@@ -49,6 +49,7 @@
  | declaration(this.block)
  => treeInsertFileOut(this.kooc.stack["pathC"]);
 ]*
+=> koocImplementationCheck();
 #continue
 #empty
 #catch (sError)
@@ -63,7 +64,8 @@
 koocDeclaration(block : node) ::=
   [ koocImport | koocModule | koocImplementation |
     koocClass | koocCall(block) | koocPackage ]
-;
+  ;
+
 /**
  * @endcond
  */
