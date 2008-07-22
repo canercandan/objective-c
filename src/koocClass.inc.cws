@@ -107,8 +107,6 @@ function	koocClassPrint(sClass : value)
 		      + this.kooc.classes[sClass].nameH)@@}
   koocImportEndif(this.kooc.classes[sClass].nameH);
   setall this.kooc.classes[sClass].kooc.mangle = this.kooc.mangle;
-/*   traceObject(this.kooc.classes[sClass].kooc.mangle); */
-/*   traceObject(this.kooc.mangle); */
   generate("meta.c.cwt", this.kooc.classes[sClass],
 	   this.kooc.stack["path_import"]
 	   + replaceString(".c", ".meta.c",

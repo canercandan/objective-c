@@ -1,7 +1,6 @@
 <%
 local	sStruct = koocMangleSpacer('_');
 local	sHeader = "";
-traceObject(this.kooc.mangle);
 %>/*
 ** KOOC - Kind of Objective C for **@this.nameH@**
 ** { dream team 42. } -> Tek3s Strasbourg
@@ -54,7 +53,7 @@ foreach var in this
 if (!fndInit)
   {
 %>
-    @sStruct@	*@koocMangleStringWithOutTypeAndArgs("init")@()
+    @sStruct@	*@koocMangleStringWithOutTypeAndArgs("new")@()
   {
     @sStruct@	*new;
 
