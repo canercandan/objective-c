@@ -62,19 +62,19 @@ function	koocModuleAdd(sModule : value)
   pushItem this.kooc.modules[sModule];
   ref this.kooc.modules[sModule]#back = this.block#back;
   if (this.block#back.type == "__VARIABLE__")
-    treeInsertFileOut(this.kooc.stack["path_import"]
+    treeInsertFileOut(getEnv("path_import")
 		      + this.kooc.modules[sModule].nameH + "_variable");
   else
-    treeInsertFileOut(this.kooc.stack["path_import"]
+    treeInsertFileOut(getEnv("path_import")
 		      + this.kooc.modules[sModule].nameH);
 }
 
 function	koocModulePrint(sModule : value)
 {
   koocImportIfndef(this.kooc.modules[sModule].nameH);
-  {@@prettyPrinterToH(this.kooc.stack["path_import"]
+  {@@prettyPrinterToH(getEnv("path_import")
 		      + this.kooc.modules[sModule].nameH + "_variable")@@}
-  {@@prettyPrinterToC(this.kooc.stack["path_import"]
+  {@@prettyPrinterToC(getEnv("path_import")
 		      + this.kooc.modules[sModule].nameH)@@}
   koocImportEndif(this.kooc.modules[sModule].nameH);
 }

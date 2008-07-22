@@ -28,10 +28,10 @@ function	koocClassDeclaration(sClass : value)
       insert this.block#back.ctype.infoType["static"] = "storageClassSpecifier";
     }
   if (this.block#back.type == "__VARIABLE__")
-    treeInsertFileOut(this.kooc.stack["path_import"]
+    treeInsertFileOut(getEnv("path_import")
 		      + this.kooc.classes[sClass].nameH + "_variable");
   else
-    treeInsertFileOut(this.kooc.stack["path_import"]
+    treeInsertFileOut(getEnv("path_import")
 		      + this.kooc.classes[sClass].nameH);
 }
 
@@ -91,7 +91,7 @@ function	koocClassFill(sClass : value, sExtend : value)
   insert ctype.specifier = "struct";
   insert ctype.list;
   pushItem this.block;
-  treeInsertFileOut(this.kooc.stack["path_import"]
+  treeInsertFileOut(getEnv("path_import")
 		    + this.kooc.classes[sClass].nameH);
   insert this.block#back.name = sClass;
   insert this.block#back.type = "__TYPE__";
@@ -101,7 +101,6 @@ function	koocClassFill(sClass : value, sExtend : value)
   ref this.block.types[sClass] = this.block#back;
   if (sExtend)
     koocClassExtend(sClass, sExtend, this.block#back.ctype.list);
-  this.kooc.stack["class"] = sClass;
 }
 
 function	koocClassExtend(sClass : value, sExtend : value, theNode : node)
@@ -112,11 +111,9 @@ function	koocClassExtend(sClass : value, sExtend : value, theNode : node)
   ref ctype.pctx = this.gl_pctx;
   insert ctype.type = "__COMPOSED__";
   insert ctype.identifier = sExtend;
-  //insert ctype.specifier = "struct";
-  //insert ctype.infoType["static"] = "storageClassSpecifier";
 
   pushItem theNode;
-  treeInsertFileOut(this.kooc.stack["path_import"]
+  treeInsertFileOut(getEnv("path_import")
 		    + this.kooc.classes[sClass].nameH);
   setall theNode#back.ctype = ctype;
   insert theNode#back.type = "__VARIABLE__";
@@ -142,10 +139,10 @@ function	koocClassAdd(sClass : value)
   ref this.kooc.classes[sClass]#back = this.block#back;
 
   if (theDecl.type == "__VARIABLE__")
-    treeInsertFileOut(this.kooc.stack["path_import"]
+    treeInsertFileOut(getEnv("path_import")
 		      + this.kooc.classes[sClass].nameH + "_variable");
   else
-    treeInsertFileOut(this.kooc.stack["path_import"]
+    treeInsertFileOut(getEnv("path_import")
 		      + this.kooc.classes[sClass].nameH);
 }
 
@@ -154,17 +151,17 @@ function	koocClassPrint(sClass : value)
   local		sFile;
 
   koocImportIfndef(this.kooc.classes[sClass].nameH);
-  {@@prettyPrinterToH(this.kooc.stack["path_import"]
+  {@@prettyPrinterToH(getEnv("path_import")
 		      + this.kooc.classes[sClass].nameH + "_variable")@@}
-  {@@prettyPrinterToC(this.kooc.stack["path_import"]
+  {@@prettyPrinterToC(getEnv("path_import")
 		      + this.kooc.classes[sClass].nameH)@@}
   koocImportEndif(this.kooc.classes[sClass].nameH);
   setall this.kooc.classes[sClass].kooc.mangle = this.kooc.mangle;
-  sFile = this.kooc.stack["path_import"]
+  sFile = getEnv("path_import")
     + replaceString(".c", ".meta.c", this.kooc.classes[sClass].nameC);
   generate("meta.c.cwt", this.kooc.classes[sClass], sFile);
   indentFile(sFile, "C++");
-  sFile = this.kooc.stack["path_import"]
+  sFile = getEnv("path_import")
     + replaceString(".h", ".meta.h", this.kooc.classes[sClass].nameH);
   generate("meta.h.cwt", this.kooc.classes[sClass], sFile);
   indentFile(sFile, "C++");

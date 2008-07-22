@@ -10,6 +10,8 @@ declare function	mainFunc(file : value);
 declare function	testFile(file : value);
 declare function	initTree(file : value);
 declare function	loopFile();
+declare function	setPathFiles(file : value);
+declare function	setPathImport(file : value);
 
 loopFile();
 
@@ -39,14 +41,13 @@ function	loopFile()
  */
 function	mainFunc(file : value)
 {
-  traceLine("[KOOC] Processing: [" + project.kooc.stack["pathKc"]
-	    + "] to [" + project.kooc.stack["pathC"] + "].");
-  translate("./kooc.cwp", project,
-	    project.kooc.stack["pathKc"],
-	    project.kooc.stack["pathC"]);
-  saveProject(project.kooc.stack["pathTree"]);
+  traceLine("[KOOC] Processing: [" + getEnv("pathKc")
+	    + "] to [" + getEnv("pathC") + "].");
+  translate("./kooc.cwp", project, getEnv("pathKc"),
+	    getEnv("pathC"));
+  saveProject(getEnv("pathTree"));
   traceLine("[KOOC] PrettyPrinter...");
-  indentFile(project.kooc.stack["pathC"], "C++");
+  indentFile(getEnv("pathC"), "C++");
   traceLine("[KOOC] Done.");
 }
 
@@ -74,6 +75,28 @@ function	initTree(file : value)
 {
   treeInit();
   treeKooc();
-  treePathToTree(file);
-  treePathImport(file);
+  setPathFiles(file);
+  setPathImport(file);
+}
+
+function	setPathFiles(file : value)
+{
+  local		sRoot = getWorkingPath();
+  local		sExtension = rightString(file, 3);
+
+  putEnv("pathKc", file);
+  putEnv("pathTree", sRoot + replaceString(sExtension, ".ktree", file));
+  putEnv("pathC", sRoot + replaceString(sExtension, ".c", file));
+}
+
+function	setPathImport(file : value)
+{
+  local		size = lengthString(file);
+  local		pos = $size - findLastString(file, '/')$;
+
+  pos = $pos - 1$;
+  if ($pos != size$)
+    putEnv("path_import", rsubString(file, pos));
+  else
+    putEnv("path_import", "./");
 }

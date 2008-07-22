@@ -47,16 +47,16 @@ function	koocImplementationPrint(sName : value, type : value)
     {
       koocImportInclude(this.kooc.modules[sName].nameH);
       check_implementation(sName, this.kooc.modules);
-      {@@prettyPrinterToC(this.kooc.stack["path_import"]
+      {@@prettyPrinterToC(getEnv("path_import")
 			  + this.kooc.modules[sName].nameH + "_variable")@@}
-      {@@prettyPrinterToC(this.kooc.stack["path_import"]
+      {@@prettyPrinterToC(getEnv("path_import")
 			  + this.kooc.modules[sName].nameC)@@}
     }
   else if (type == "class")
     {
       koocImportInclude(this.kooc.classes[sName].nameH);
       check_implementation(sName, this.kooc.classes);
-      {@@prettyPrinterToC(this.kooc.stack["path_import"]
+      {@@prettyPrinterToC(getEnv("path_import")
 			  + this.kooc.classes[sName].nameC)@@}
     }
 }
@@ -79,10 +79,9 @@ function	koocImplementationAdd(sName : value, type : value)
   localref	theNode = this.kooc.implementations[sName]#back;
 
   if (type == "module")
-    treeInsertFileOut(this.kooc.stack["path_import"] + this.kooc.modules[sName].nameC);
+    treeInsertFileOut(getEnv("path_import") + this.kooc.modules[sName].nameC);
   else if (type == "class")
-    treeInsertFileOut(this.kooc.stack["path_import"] + this.kooc.classes[sName].nameC);
-//  koocMangle(sName, theNode);
+    treeInsertFileOut(getEnv("path_import") + this.kooc.classes[sName].nameC);
 }
 
 /**

@@ -6,11 +6,8 @@
 
 declare function	treeInit();
 declare function	treeKooc();
-declare function	treePathImport(file : value);
-declare function	treePathToTree(file : value);
 declare function	treeCopyInfos(block : node);
-declare function	treeCopyInfosInArray(dst : node,
-					     src : node);
+declare function	treeCopyInfosInArray(dst : node, src : node);
 
 /**
  * @fn treeInit(block : node)
@@ -19,7 +16,6 @@ declare function	treeCopyInfosInArray(dst : node,
  */
 function	treeInit()
 {
-//  insert this.debug = true;
   insert this.block.pctx;
   if (existVariable(this.gl_pctx))
     ref this.block.pctx = this.gl_pctx;
@@ -37,43 +33,6 @@ function	treeKooc()
   insert this.kooc;
   insert this.kooc.modules;
   insert this.kooc.classes;
-  insert this.kooc.stack;
-  insert this.kooc.stack["package"];
-  insert this.kooc.stack["class"];
-  insert this.kooc.stack["module"];
-  insert this.kooc.stack["accolade"] = false;
-}
-
-/**
- * @fn treePathImport(file : value)
- * @brief insert import's path in tree
- * @param file filename
- */
-function	treePathImport(file : value)
-{
-  local		size = lengthString(file);
-  local		pos = $size - findLastString(file, '/')$;
-
-  pos = $pos - 1$;
-  if ($pos != size$)
-    insert this.kooc.stack["path_import"] = rsubString(file, pos);
-  else
-    insert this.kooc.stack["path_import"] = "./";
-}
-
-/**
- * @fn treePathToTree(file : value)
- * @brief put path to tree
- * @param file filename
- */
-function	treePathToTree(file : value)
-{
-  local		sRoot = getWorkingPath();
-  local		sExtension = rightString(file, 3);
-
-  insert this.kooc.stack["pathKc"] = file;
-  insert this.kooc.stack["pathTree"] = sRoot + replaceString(sExtension, ".ktree", file);
-  insert this.kooc.stack["pathC"] = sRoot + replaceString(sExtension, ".c", file);
 }
 
 /**

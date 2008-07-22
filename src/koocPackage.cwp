@@ -18,7 +18,7 @@ koocPackage ::=
   => koocManglePushBlock(sPackage);
 [koocDeclaration(this.block)
  | declaration(this.block)
- => treeInsertFileOut(this.kooc.stack["pathC"]);
+ => treeInsertFileOut(getEnv("pathC"));
  ]*
 ['}' => koocManglePopBlock();]?
 ;

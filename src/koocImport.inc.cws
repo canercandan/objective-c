@@ -20,7 +20,7 @@ declare function	koocImportInclude(file : value);
  */
 function	koocImportPathKh(file : value)
 {
-  return (this.kooc.stack["path_import"] + file);
+  return (getEnv("path_import") + file);
 }
 
 /**

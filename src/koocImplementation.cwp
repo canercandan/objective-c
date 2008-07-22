@@ -22,7 +22,6 @@
 koocImplementation ::=
 #explicitCopy
   "@implementation" #continue #readIdentifier:sName
-  => this.kooc.stack["class"] = sName;
 => local type = "";
 => local filenameC = "";
 => koocManglePushBlock(sName);
@@ -46,7 +45,7 @@ koocImplementation ::=
  => koocImplementationErr();
  => koocImplementationAdd(sName, type);
  ]*
-#generatedFile(this.kooc.stack["path_import"] + filenameC)
+#generatedFile(getEnv("path_import") + filenameC)
 => koocImplementationPrint(sName, type);
 '}'
 => koocManglePopBlock();

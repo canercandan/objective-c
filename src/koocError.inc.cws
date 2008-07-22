@@ -169,7 +169,9 @@ function	searchFunction(search : value, module : value, name : value, type : val
 			    + ", please use @!() to specifie the type.");
 		  exit(-1);
 		}
-	      else if (val.oname == name && val.ctype.identifier == type && count_pointer == getArraySize(val.ctype.pointer))
+	      else if (val.oname == name &&
+		       val.ctype.identifier == type
+		       && count_pointer == getArraySize(val.ctype.pointer))
 		ref ret = val;
 	    }
 	}
@@ -220,6 +222,6 @@ function	errorDebug(sError : value)
 {
   traceLine("error: " + sError);
   //traceObject(this, 4);
-  saveProject(this.kooc.stack["pathTree"]);
+  saveProject(getEnv("pathTree"));
   exit(-1);
 }

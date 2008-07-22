@@ -5,29 +5,62 @@
  */
 
 declare function	koocMemberDeclaration(theClass : node);
+declare function	koocMemberDeclarationIfVariable(theClass : node, theDecl : node);
+declare function	koocMemberDeclarationIfFunction(sClass : value, theDecl : node);
+declare function	koocMemberInsertReference(theClass : node, sClass : value, theDecl : node);
+declare function	koocMemberCreateNew(theDecl : node);
 declare function	koocMemberAddSelf(sClass : value, theNode : node);
 
 function	koocMemberDeclaration(theClass : node)
 {
-  local		sClass = this.kooc.stack["class"];
+  local		sClass = koocMangleSpacer('.');
   localref	theDecl = this.block#back;
 
-  pushItem this.kooc.classes[sClass];
+  koocMemberDeclarationIfVariable(theClass, theDecl);
+  koocMemberCreateNew(theDecl);
+  koocMemberDeclarationIfFunction(sClass, theDecl);
+  koocMemberInsertReference(theClass, sClass, theDecl);
+}
+
+function	koocMemberDeclarationIfVariable(theClass : node, theDecl : node)
+{
   if (theDecl.type == "__VARIABLE__")
     {
       pushItem theClass.ctype.list;
       setall theClass.ctype.list#back = theDecl;
       removeElement(this.block.variables, theDecl.name);
-      removeVariable(theDecl);
-      ref this.kooc.classes[sClass]#back
-	= theClass.ctype.list#back;
     }
-  else
+}
+
+function	koocMemberDeclarationIfFunction(sClass : value, theDecl : node)
+{
+  if (theDecl.type != "__VARIABLE__")
     {
       koocMemberAddSelf(sClass, theDecl);
-      ref this.kooc.classes[sClass]#back = theDecl;
-      treeInsertFileOut(this.kooc.stack["path_import"]
+      treeInsertFileOut(getEnv("path_import")
 			+ this.kooc.classes[sClass].nameH);
+    }
+}
+
+function	koocMemberInsertReference(theClass : node, sClass : value, theDecl : node)
+{
+  pushItem this.kooc.classes[sClass];
+  if (theDecl.type == "__VARIABLE__")
+    ref this.kooc.classes[sClass]#back = theClass.ctype.list#back;
+  else
+    ref this.kooc.classes[sClass]#back = theDecl;
+    
+}
+
+function	koocMemberCreateNew(theDecl : node)
+{
+  if (theDecl.oname == "init")
+    {
+      pushItem this.block;
+      localref theSrc = this.block#back;
+      setall theSrc = theDecl;
+      theSrc.name = replaceString("init", "new", theSrc.name);
+      theSrc.oname = replaceString("init", "new", theSrc.oname);
     }
 }
 

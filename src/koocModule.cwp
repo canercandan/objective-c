@@ -12,37 +12,36 @@
  */
 koocModule ::=
 #explicitCopy
-"@module"
+  "@module"
 #continue
-[
-//#try
+  [
+   //#try
 #readIdentifier:sModule
- '{'
-=> koocManglePushBlock(sModule);
-  => sModule = koocMangleSpacer('.');
-  => koocModuleInit(sModule);
-  => local decl;
-  => insert decl.block;
-  [declaration(decl.block)
-   => koocModuleCheck(decl.block#back);
-   => pushItem this.block;
-   => setall this.block#back = decl.block#back;
-   => koocToolsAddRef(this.block#back);
-   => koocModuleAdd(sModule);
-  ]*
-=> koocModuleContent(sModule);
-#generatedFile(this.kooc.stack["path_import"]
- + this.kooc.modules[sModule].nameH)
-=> koocModulePrint(sModule);
-#generatedFile(this.kooc.stack["pathH"])
-'}'
-=> koocManglePopBlock();
-=> this.kooc.stack["module"] = "";
-/*#catch (sError)
-|
-=> errorModule();
-*/]
-;
+   '{'
+   => koocManglePushBlock(sModule);
+   => sModule = koocMangleSpacer('.');
+   => koocModuleInit(sModule);
+   => local decl;
+   => insert decl.block;
+   [declaration(decl.block)
+    => koocModuleCheck(decl.block#back);
+    => pushItem this.block;
+    => setall this.block#back = decl.block#back;
+    => koocToolsAddRef(this.block#back);
+    => koocModuleAdd(sModule);
+    ]*
+   => koocModuleContent(sModule);
+#generatedFile(getEnv("path_import")
+   + this.kooc.modules[sModule].nameH)
+   => koocModulePrint(sModule);
+#generatedFile(getEnv("pathH"))
+   '}'
+   => koocManglePopBlock();
+   /*#catch (sError)
+     |
+     => errorModule();
+   */]
+  ;
 /**
  * @endcond
  */
