@@ -6,8 +6,8 @@
 
 declare function	koocClassDeclaration(sClass : value);
 declare function	koocClassInit(sClass : value);
-declare function	koocClassInitVtable(sClass : value);
 declare function	koocClassFill(sClass : value, sExtend : value);
+declare function	koocClassInitVtable(sClass : value, sExtend : value);
 declare function	koocClassExtend(sClass : value, sExtend : value, theNode : node);
 declare function	koocClassErr(theNode : node);
 declare function	koocClassAdd(sClass : value);
@@ -48,11 +48,9 @@ function	koocClassInit(sClass : value)
   insert this.kooc.classes[sClass];
   insert this.kooc.classes[sClass].nameH = modH;
   insert this.kooc.classes[sClass].nameC = modC;
-
-  koocClassInitVtable(sClass);
 }
 
-function	koocClassInitVtable(sClass : value)
+function	koocClassInitVtable(sClass : value, sExtend : value)
 {
   local decl;
   local name;
@@ -65,6 +63,13 @@ function	koocClassInitVtable(sClass : value)
   insert ctype.identifier = "vt_" + sClass + "_s";
   insert ctype.specifier = "struct";
   insert ctype.list;
+
+  if (existVariable(this.block.types[sExtend]))
+  {
+    localref rExt = this.block.types[sExtend];
+
+    merge ctype.list = rExt.ctype.list;
+  }
 
   cnormCreateDeclarationNode(decl, "__TYPE__");
 

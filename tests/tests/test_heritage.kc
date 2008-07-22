@@ -5,7 +5,7 @@
 ** Login   <toumi_m@epitech.net>
 ** 
 ** Started on  Sat Jul 12 18:30:09 2008 User Toumi_m
-** Last update Tue Jul 15 11:44:17 2008 User Toumi_m
+** Last update Tue Jul 22 17:30:28 2008 morgan armand
 */
 
 @import	"test_heritage.kh"
@@ -16,15 +16,15 @@
     {
       void	init(int size)
       {
-	/* 	[super init]; */
-	/* 	[self.size] = size; */
+	[super init];
+	[self.size] = size;
       }
 
       int	nbitem()
       {
 	int	n;
 
-	/* 	n = [self.nbitem]; */
+	n = [self.nbitem];
 	return (n);
       }
     }
@@ -37,9 +37,9 @@
     {
       int	*buf;
 
-      /*       [super init :size]; */
+      [super init :size];
       buf = (int *) calloc(size, sizeof(int));
-      /*       [self.data] = buf; */
+      [self.data] = buf;
     }
 
   @member void	push(int i)
@@ -47,10 +47,10 @@
       int	pos;
       int	*buf;
 
-      /*       pos = [self.nbitem]; */
-      /*       buf = [self.data]; */
+      pos = [self.nbitem];
+      buf = [self.data];
       buf[pos++] = i;
-      /*       [self.nbitem] = pos; */
+      [self.nbitem] = pos;
     }
 
   @member int	pop()
@@ -59,10 +59,10 @@
       int	 pos;
       int	r;
 
-      /*       pos = [self.nbitem]; */
-      /*       buf = [self.data]; */
+      pos = [self.nbitem];
+      buf = [self.data];
       r = buf[pos--];
-      /*       [self.nbitem] = pos; */
+      [self.nbitem] = pos;
       return (r);
     }
 
@@ -70,7 +70,7 @@
     {
       int	*buf;
 
-/*       buf = [self.data]; */
+      buf = [self.data];
       free(buf);
     }
 }

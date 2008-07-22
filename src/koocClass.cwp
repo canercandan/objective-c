@@ -19,6 +19,7 @@ koocClass ::=
   '{'
   => koocManglePushBlock(sClass);
 => sClass = koocMangleSpacer('.');
+=> koocClassInitVtable(sClass, sExtend);
 => koocClassInit(sClass);
 => koocClassFill(sClass, sExtend);
 => localref theNode = this.block#back;
