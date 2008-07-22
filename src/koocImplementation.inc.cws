@@ -109,7 +109,7 @@ function	koocImplementationCheck()
 	local name = namePrototype.oname;
 	local line = namePrototype.__LINE__;
 	local file = namePrototype.__FILE__;
-	traceLine(file + ": (line " + line + ") function [" + name + "] undeclared");
+	traceLine("[KOOC] " + file + ": (line " + line + ") function [" + name + "] undeclared");
 	//	exit(-1);
       }
   }
