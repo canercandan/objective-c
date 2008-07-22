@@ -130,3 +130,4 @@ koocDeclaration(block : node) ::=
 #include "koocClass.cwp"
 #include "koocCall.cwp"
 #include "koocPackage.cwp"
+#include "koocVirtual.cwp"

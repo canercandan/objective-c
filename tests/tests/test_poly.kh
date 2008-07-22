@@ -1,0 +1,24 @@
+@class A
+{
+  @member {
+    int		value;
+    void	init();
+    @virtual void	print();
+  }
+}
+
+@class B : A
+{
+  @member int	value;
+  @member void	init();
+  // @virtual peut etre  ecris hors de @member
+  @virtual void	print();
+}
+
+@class C : B
+{
+  @member int	value;
+
+  @member  void	init();
+  @virtual void	print();
+}

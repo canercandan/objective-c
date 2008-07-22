@@ -1,12 +1,12 @@
 @package	level1
 
-// @class		int1
-//  {
-//    @member
-//    {
-//      int	a;
-//    }
-// }
+@class		int1
+{
+  @member
+    {
+      int	a;
+    }
+}
 
 
 @module		mod1
@@ -21,13 +21,13 @@
 
 @package	level1.level2
 
-// @class		int1
-//  {
-//    @member
-//    {
-//      int	a;
-//    }
-// }
+@class		int1
+{
+  @member
+    {
+      int	a;
+    }
+}
 
 @module		mod1
 {

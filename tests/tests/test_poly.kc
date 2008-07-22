@@ -1,0 +1,73 @@
+@import "test_poly.kh"
+
+@implementation A
+{
+  @member void	init()
+    {
+      [super init];
+      [self.value] = 42;
+    }
+
+  @virtual void	print()
+    {
+      int	value;
+      char	*name;
+
+      name = [self.name_of_interface];
+      value = [self.value];
+      print("%d %s\n", value, name);
+    }
+}
+
+@implementation B
+{
+  @member void	init()
+    {
+      [super init];
+      [self.value] = 124;
+    }
+
+  @virtual void	print()
+    {
+      int	value;
+      char	*name;
+
+      name = [self.name_of_interface];
+      value = [self.value];
+      print("%d %s\n", value, name);
+    }
+}
+
+@implementation C
+{
+  @member {
+    void	init()
+    {
+      [super init];
+      [self.value] = 666;
+    }
+
+    @virtual void	print()
+      {
+	intvalue;
+	char*name;
+
+	name = [self.name_of_interface];
+	value = [self.value];
+	print("%d %s\n", value, name);
+      }
+  }
+}
+
+int	main(int ac, char **av)
+{
+  A	*a;
+
+  a = [A new];
+  [a print];// affiche "42 A\n"
+  a = [B new];
+  [a print];//affiche "124 B\n"
+  a = [C new];
+  [a print];//affiche "666 C\n"
+  [A print :a];//affiche "42 C\n"
+}

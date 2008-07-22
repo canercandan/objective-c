@@ -1,0 +1,45 @@
+/**
+ * @file koocVirtual.cwp
+ * @brief rule \@virtual
+ * @note @ref develop @ref contrib @ref tools
+ *
+ * @par koocVirtual
+ * rule \@virtual
+ */
+
+koocVirtual(theClass : node) ::=
+#explicitCopy
+"@virtual"
+#continue
+[
+  [ '{' [ koocVirtualDeclaration(theClass) ]* '}']
+  |  koocVirtualDeclaration(theClass)
+]
+;
+
+koocVirtualDeclaration(theClass : node) ::=
+#explicitCopy
+declaration(this.block)
+=>
+{
+  local sVtable = "vt_" + theClass.name + "_t";
+
+  if (!existVariable(this.block.types[sVtable]))
+  {
+    traceLine("Internal error: Can't find vtable");
+    exit(-1);
+  }
+
+  localref rVtable = this.block.types[sVtable];
+
+  pushItem rVtable.list;
+  setall rVtable.list#back = this.block#back;
+
+  // build a pf
+  insert rVtable.list#back.pfname;
+
+  pushItem rVtable.list#back.pfname;
+  insert rVtable.list#back.pfname#back.function;
+  insert rVtable.list#back.pfname#back.function.name = this.block#back.name;
+}
+;

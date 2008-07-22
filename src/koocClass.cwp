@@ -23,8 +23,8 @@ koocClass ::=
 => koocClassFill(sClass, sExtend);
 => localref theNode = this.block#back;
 [koocMember(theNode)
- |
- declaration(this.block)
+ | koocVirtual(theNode)
+ | declaration(this.block)
  => koocClassErr(this.block#back);
  => koocClassDeclaration(sClass);
  ]*

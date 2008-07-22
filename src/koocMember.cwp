@@ -23,8 +23,9 @@ koocMember(theClass : node) ::=
 
 koocMemberDeclaration(theClass : node) ::=
 #explicitCopy
-  declaration(this.block)
-  => koocMemberDeclaration(theClass);
+koocVirtual(theClass)
+| declaration(this.block)
+=> koocMemberDeclaration(theClass);
 ;
 
 /**

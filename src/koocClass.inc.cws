@@ -6,6 +6,7 @@
 
 declare function	koocClassDeclaration(sClass : value);
 declare function	koocClassInit(sClass : value);
+declare function	koocClassInitVtable(sClass : value);
 declare function	koocClassFill(sClass : value, sExtend : value);
 declare function	koocClassExtend(sClass : value, sExtend : value, theNode : node);
 declare function	koocClassErr(theNode : node);
@@ -47,6 +48,34 @@ function	koocClassInit(sClass : value)
   insert this.kooc.classes[sClass];
   insert this.kooc.classes[sClass].nameH = modH;
   insert this.kooc.classes[sClass].nameC = modC;
+
+  koocClassInitVtable(sClass);
+}
+
+function	koocClassInitVtable(sClass : value)
+{
+  local decl;
+  local name;
+  local ctype;
+
+  insert ctype.pctx;
+  ref ctype.pctx = this.gl_pctx;
+
+  insert ctype.type = "__COMPOSED__";
+  insert ctype.identifier = "vt_" + sClass + "_s";
+  insert ctype.specifier = "struct";
+  insert ctype.list;
+
+  cnormCreateDeclarationNode(decl, "__TYPE__");
+
+  name = "vt_" + sClass + "_t";
+  cnormFillDeclarationNode(decl, "__NAME__", name);
+  cnormFillDeclarationNode(decl, "__CTYPE__", ctype);
+
+  pushItem this.block;
+  setall this.block#back = decl;
+
+  ref this.block.types[name] = this.block#back;
 }
 
 function	koocClassFill(sClass : value, sExtend : value)
