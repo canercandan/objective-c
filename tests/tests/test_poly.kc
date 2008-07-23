@@ -4,7 +4,7 @@
 {
   @member void	init()
     {
-      [super init];
+      //      [super init];
       [self.value] = 42;
     }
 
@@ -23,7 +23,7 @@
 {
   @member void	init()
     {
-      [super init];
+      //      [super init];
       [self.value] = 124;
     }
 
@@ -43,14 +43,14 @@
   @member {
     void	init()
     {
-      [super init];
+      //      [super init];
       [self.value] = 666;
     }
 
     @virtual void	print()
       {
-	intvalue;
-	char*name;
+	int	value;
+	char	*name;
 
 	name = [self.name_of_interface];
 	value = [self.value];
@@ -64,10 +64,10 @@ int	main(int ac, char **av)
   A	*a;
 
   a = [A new];
-  [a print];// affiche "42 A\n"
-  a = [B new];
-  [a print];//affiche "124 B\n"
-  a = [C new];
-  [a print];//affiche "666 C\n"
-  [A print :a];//affiche "42 C\n"
+  //  [a print];// affiche "42 A\n"
+  //  a = [B new];
+  //  [a print];//affiche "124 B\n"
+  //  a = [C new];
+  //  [a print];//affiche "666 C\n"
+  //  [A print :a];//affiche "42 C\n"
 }
