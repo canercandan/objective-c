@@ -31,7 +31,6 @@ function	loopFile()
       testFile(_ARGS[$i$]);
       initTree(_ARGS[$i$]);
       mainFunc(_ARGS[$i$]);
-      removeAllElements(project);
       i = $i + 1$;
     }
   exit(0);
