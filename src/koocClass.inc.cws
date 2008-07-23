@@ -158,23 +158,14 @@ function	koocClassAdd(sClass : value)
 
 function	koocClassPrint(sClass : value)
 {
-  local		sFile;
-
   koocImportIfndef(this.kooc.classes[sClass].nameH);
   {@@prettyPrinterToH(getEnv("path_import")
 		      + this.kooc.classes[sClass].nameH + "_variable")@@}
   {@@prettyPrinterToC(getEnv("path_import")
 		      + this.kooc.classes[sClass].nameH)@@}
   koocImportEndif(this.kooc.classes[sClass].nameH);
+  indentFile(getEnv("path_import") + this.kooc.classes[sClass].nameH, "C++");
   setall this.kooc.classes[sClass].kooc.mangle = this.kooc.mangle;
-  sFile = getEnv("path_import")
-    + replaceString(".c", ".meta.c", this.kooc.classes[sClass].nameC);
-  generate("meta.c.cwt", this.kooc.classes[sClass], sFile);
-  indentFile(sFile, "C++");
-  sFile = getEnv("path_import")
-    + replaceString(".h", ".meta.h", this.kooc.classes[sClass].nameH);
-  generate("meta.h.cwt", this.kooc.classes[sClass], sFile);
-  indentFile(sFile, "C++");
 }
 
 function	koocClassExtendErr(sExtend : value)

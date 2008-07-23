@@ -36,6 +36,21 @@ function	treeKooc()
   insert this.kooc.classes;
 }
 
+function	treeSeekForSameMangle(theNode : node,
+				      sName : value)
+{
+  traceLine("sName: " + sName);
+  foreach var in theNode
+  {
+    if (var.name == sName)
+      {
+	traceObject(var);
+	return (var);
+      }
+  }
+  return (this);
+}
+
 /**
  * @fn treeCopyInfos(block : node)
  * @brief copy typedef, struct, enum, function [, ...]* in Cnorm

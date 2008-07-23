@@ -8,7 +8,7 @@ declare function	koocMemberDeclaration(theClass : node);
 declare function	koocMemberDeclarationIfVariable(theClass : node, theDecl : node);
 declare function	koocMemberDeclarationIfFunction(sClass : value, theDecl : node);
 declare function	koocMemberInsertReference(theClass : node, sClass : value, theDecl : node);
-declare function	koocMemberCreateNew(theDecl : node);
+declare function	koocMemberCreateNew(sClass : value, theDecl : node);
 declare function	koocMemberAddSelf(sClass : value, theNode : node);
 
 function	koocMemberDeclaration(theClass : node)
@@ -17,7 +17,7 @@ function	koocMemberDeclaration(theClass : node)
   localref	theDecl = this.block#back;
 
   koocMemberDeclarationIfVariable(theClass, theDecl);
-  koocMemberCreateNew(theDecl);
+  koocMemberCreateNew(sClass, theDecl);
   koocMemberDeclarationIfFunction(sClass, theDecl);
   koocMemberInsertReference(theClass, sClass, theDecl);
 }
@@ -53,15 +53,18 @@ function	koocMemberInsertReference(theClass : node, sClass : value, theDecl : no
     
 }
 
-function	koocMemberCreateNew(theDecl : node)
+function	koocMemberCreateNew(sClass : value, theDecl : node)
 {
   if (theDecl.oname == "init")
     {
       pushItem this.block;
       localref theSrc = this.block#back;
       setall theSrc = theDecl;
+      insert theSrc.init = theDecl.name;
       theSrc.name = replaceString("init", "new", theSrc.name);
       theSrc.oname = replaceString("init", "new", theSrc.oname);
+      pushItem this.kooc.classes[sClass];
+      ref this.kooc.classes[sClass]#back = theSrc;
     }
 }
 

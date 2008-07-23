@@ -25,16 +25,18 @@ koocImplementation ::=
 => local type = "";
 => local filenameC = "";
 => koocManglePushBlock(sName);
+=> sName = koocMangleSpacer('.');
 => koocImplementationInit(sName, type, filenameC);
 '{'
 [
  [ "@member" | [ "@virtual" [ "@member" ]? ] ]
- [ declaration(this.block) => koocImplementationContent(sName, type);
-   | '{' [ [ "@virtual" ]? declaration(this.block) => koocImplementationContent(sName, type); ]* '}'
+ [ declaration(this.block)
+   => koocImplementationContent(sName, type);
+   | '{' [ [ "@virtual" ]? declaration(this.block)
+	   => koocImplementationContent(sName, type); ]* '}'
    ]
  | declaration(this.block)
-  => koocImplementationErr();
-  => koocImplementationAdd(sName, type);
+ => koocImplementationContent(sName, type);
  ]*
 #generatedFile(getEnv("path_import") + filenameC)
 => koocImplementationPrint(sName, type);

@@ -23,8 +23,6 @@ declare function	check_arguments(fun1 : node, fun2 : node);
 
 function	koocImplementationInit(sName : value, type : node, filenameC : node)
 {
-  // Plus besoin de passe le sName en parametre
-  sName = koocMangleSpacer('.');
   if (existModule(sName) == 1)
     {
       type = "module";
@@ -44,13 +42,14 @@ function	koocImplementationInit(sName : value, type : node, filenameC : node)
 
 function	koocImplementationContent(sName : value, type : value)
 {
-  koocMemberAddSelf(sName, this.block#back);
   koocImplementationErr();
   koocImplementationAdd(sName, type);
 }
 
 function	koocImplementationPrint(sName : value, type : value)
 {
+  local		sFile;
+
   if (type == "module")
     {
       koocImportInclude(this.kooc.modules[sName].nameH);
@@ -66,6 +65,14 @@ function	koocImplementationPrint(sName : value, type : value)
       check_implementation(sName, this.kooc.classes);
       {@@prettyPrinterToC(getEnv("path_import")
 			  + this.kooc.classes[sName].nameC)@@}
+      sFile = getEnv("path_import")
+	+ replaceString(".c", ".meta.c", this.kooc.classes[sName].nameC);
+      generate("meta.c.cwt", this, sFile);
+      indentFile(sFile, "C++");
+      sFile = getEnv("path_import")
+	+ replaceString(".h", ".meta.h", this.kooc.classes[sName].nameH);
+      generate("meta.h.cwt", this.kooc.classes[sName], sFile);
+      indentFile(sFile, "C++");
     }
 }
 
@@ -80,20 +87,40 @@ function	koocImplementationErr()
     }
 }
 
+function	koocImplementationCreateNew(sName : value, theDecl : node)
+{
+  if (theDecl.oname == "init")
+    {
+      pushItem this.block;
+      localref theSrc = this.block#back;
+      setall theSrc = theDecl;
+      insert theSrc.init = theDecl.name;
+      theSrc.name = replaceString("init", "new", theSrc.name);
+      theSrc.oname = replaceString("init", "new", theSrc.oname);
+      pushItem this.kooc.implementations[sName];
+      ref this.kooc.implementations[sName]#back = theSrc;
+    }
+}
+
 function	koocImplementationAdd(sName : value, type : value)
 {
   pushItem	this.kooc.implementations[sName];
   ref		this.kooc.implementations[sName]#back = this.block#back;
   localref	theNode = this.kooc.implementations[sName]#back;
+  localref	theDecl = this.block#back;
 
   if (type == "module")
     treeInsertFileOut(getEnv("path_import")
 		      + this.kooc.modules[sName].nameC,
-		      this.block#back);
+		      theDecl);
   else if (type == "class")
-    treeInsertFileOut(getEnv("path_import")
-		      + this.kooc.classes[sName].nameC,
-		      this.block#back);
+    {
+      koocImplementationCreateNew(sName, theDecl);
+      treeInsertFileOut(getEnv("path_import")
+			+ this.kooc.classes[sName].nameC,
+			theDecl);
+    }
+  koocMemberAddSelf(sName, theDecl);
 }
 
 /**

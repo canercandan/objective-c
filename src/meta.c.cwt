@@ -1,5 +1,6 @@
 <%
 local	sStruct = koocMangleSpacer('_');
+local	sClass = koocMangleSpacer('.');
 %>/*
 ** KOOC - Kind of Objective C for **@this.nameH@**
 ** { dream team 42. } -> Tek3s Strasbourg
@@ -9,7 +10,7 @@ local	sStruct = koocMangleSpacer('_');
 #include <stdio.h>
 #include "kc_@toLowerString(sStruct)@.meta.h"
 
-static @sStruct@	alloc()
+static @sStruct@	*alloc()
 {
   @sStruct@	*new;
 
@@ -26,18 +27,18 @@ local	fndInit = false;
 local	fndClean = false;
 local	sClean;
 
-foreach var in this
+foreach var in this.kooc.implementations[sClass]
 {
-  if (var.oname == "init")
+  if (var.oname == "new")
     {
       fndInit = true;
 %>
-@sStruct@	*@replaceString("init", "new", var.name)@(@parseList(var.list)@)
+@sStruct@	*@var.name@(@parseList(var.list)@)
   {
     @sStruct@	*new;
 
-    new = @sStruct@_alloc();
-    @var.name@(new, @parseListWithOutType(var.list)@);
+    new = alloc();
+    @var.init@(new, @parseListWithOutType(var.list)@);
     return (new);
   }
 <%
@@ -56,7 +57,7 @@ if (!fndInit)
   {
     @sStruct@	*new;
 
-    new = @sStruct@_alloc();
+    new = alloc();
     return (new);
   }
 <%

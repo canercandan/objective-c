@@ -40,7 +40,6 @@ function	prettyPrinterToH(file : value = "")
 
   if (existVariable(this.block.prototypes))
     {
-      sInfo += "/* prototypes definitions: */\n";
       foreach var in this.block.prototypes
 	if (file == "" || file == var.__FILE__)
 	  if (!existVariable(var.ctype.infoType["static"]))
@@ -49,7 +48,6 @@ function	prettyPrinterToH(file : value = "")
     }
   if (existVariable(this.block.variables))
     {
-      sInfo += "/* variables declarations: */\n";
       foreach var in this.block.variables
 	if (file == "" || file == var.__FILE__)
 	  if (!existVariable(var.ctype.infoType["static"]))
