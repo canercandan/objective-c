@@ -5,11 +5,12 @@
 FOR EXAMPLE:
 > tar xf cnorm_x.x.tar
 
-2) YOU HAVE TO SET KOOC_PATH AND PATH IN ENVIRONNEMENT VARIABLE
+2) YOU HAVE TO SET KOOC_PATH, PATH, CNORM_PATH IN ENVIRONNEMENT VARIABLE
 
 FOR EXAMPLE:
 > export PATH=$PATH':'`pwd`"/bin"
 > export KOOC_PATH=`pwd`
+> export CNORM_PATH=`pwd`"/cnorm_x.x"
 
 3) LAUNCH ./bin/kooc WITH YOUR KC FILE
 
@@ -25,4 +26,5 @@ ou alors tu copie colle sa:
 --
 setenv PATH $PATH':'`pwd`/bin
 setenv KOOC_PATH `pwd`
+setenv CNORM_PATH `pwd`/cnorm_2.6
 

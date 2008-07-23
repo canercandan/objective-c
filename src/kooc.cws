@@ -4,14 +4,17 @@
  * @note @ref develop @ref contrib @ref tools
  */
 
-#include "koocTree.inc.cws"
-
+declare function	setIncludes();
 declare function	mainFunc(file : value);
 declare function	testFile(file : value);
 declare function	initTree(file : value);
 declare function	loopFile();
 declare function	setPathFiles(file : value);
 declare function	setPathImport(file : value);
+
+setIncludes();
+
+#include "koocTree.inc.cws"
 
 loopFile();
 
@@ -32,6 +35,16 @@ function	loopFile()
       i = $i + 1$;
     }
   exit(0);
+}
+
+function	setIncludes()
+{
+  if (!existEnv("CNORM_PATH"))
+    {
+      traceLine("[KOOC] CNORM_PATH isn't setted in environnement variables");
+      exit(-1);
+    }
+  setIncludePath(getEnv("CNORM_PATH") + "/src;");
 }
 
 /**
