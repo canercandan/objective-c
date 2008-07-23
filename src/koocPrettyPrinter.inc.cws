@@ -11,13 +11,13 @@ declare function	testCType<T>(theNode : node);
 declare function	testOType<T>(theNode : node);
 declare function	testEType<T>(theNode : node);
 
-#include "prettyPrinter/genHeader.inc.cws"
-#include "prettyPrinter/parse.inc.cws"
-#include "prettyPrinter/get.inc.cws"
-#include "prettyPrinter/testType.inc.cws"
-#include "prettyPrinter/testCType.inc.cws"
-#include "prettyPrinter/testEType.inc.cws"
-#include "prettyPrinter/testOType.inc.cws"
+#include "genHeader.inc.cws"
+#include "parse.inc.cws"
+#include "get.inc.cws"
+#include "testType.inc.cws"
+#include "testCType.inc.cws"
+#include "testEType.inc.cws"
+#include "testOType.inc.cws"
 
 /**
  * @fn prettyPrinterToC()

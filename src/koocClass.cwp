@@ -30,6 +30,8 @@ koocClass ::=
  => koocClassErr(this.block#back);
  => koocClassDeclaration(sClass);
  ]*
+=> koocMemberCreateNew(sClass);
+=> koocMemberCreateDelete(sClass);
 #generatedFile(getEnv("path_import") + this.kooc.classes[sClass].nameH)
 => koocClassPrint(sClass);
 '}'

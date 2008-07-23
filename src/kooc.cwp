@@ -17,8 +17,9 @@
  */
 
 #include "cnorm.cwp"
-#include "koocPrettyPrinter.inc.cws"
 #include "koocMangle.inc.cws"
+#include "koocTree.inc.cws"
+#include "koocPrettyPrinter.inc.cws"
 #include "koocCall.inc.cws"
 #include "koocError.inc.cws"
 #include "koocImport.inc.cws"
@@ -45,6 +46,8 @@
 #overload translation_unit ::=
 #ignore("KOOC")
 #try
+=> treeInit();
+=> treeKooc();
 [koocDeclaration(this.block)
  | declaration(this.block)
  => treeInsertFileOut(getEnv("pathC"), this.block#back);

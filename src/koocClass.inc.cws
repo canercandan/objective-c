@@ -49,6 +49,7 @@ function	koocClassInit(sClass : value, sExtend : value)
   local		modC = "kc_" + replaceString('.', '_', sClass) + ".c";
 
   insert this.kooc.classes[sClass];
+  insert this.kooc.implementations[sClass];
   insert this.kooc.classes[sClass].nameH = modH;
   insert this.kooc.classes[sClass].nameC = modC;
   insert this.kooc.classes[sClass].parent = sExtend;

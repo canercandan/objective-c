@@ -36,51 +36,44 @@ function	treeKooc()
   insert this.kooc.classes;
 }
 
-function	treeSeekForSameMangle(theNode : node,
-				      sName : value)
-{
-  traceLine("sName: " + sName);
-  foreach var in theNode
-  {
-    if (var.name == sName)
-      {
-	traceObject(var);
-	return (var);
-      }
-  }
-  return (this);
-}
-
-/**
- * @fn treeCopyInfos(block : node)
- * @brief copy typedef, struct, enum, function [, ...]* in Cnorm
- * @param block tree's block
- */
-function	treeCopyInfos(block : node)
-{
-  treeCopyInfosInArray(this.block.structs, block.structs);
-  treeCopyInfosInArray(this.block.enums, block.enums);
-  treeCopyInfosInArray(this.block.unions, block.unions);
-  treeCopyInfosInArray(this.block.types, block.types);
-  treeCopyInfosInArray(this.block.variables, block.variables);
-  treeCopyInfosInArray(this.block.functions, block.functions);
-}
-
-/**
- * @fn treeCopyInfosInArray(dst : node, src : node)
- * @brief copy infos form source to destination
- * @param dst destination tree's block
- * @param src source tree's block
- */
-function	treeCopyInfosInArray(dst : node, src : node)
-{
-  if (!existVariable(dst))
-    insert dst;
-  foreach var in src
-    ref dst[key(var)] = var;
-}
-
 function	treeInsertFileOut(file : value, theNode : node)
 {
   insert theNode.__FILE__ = file;
+}
+
+function	treeSeekForFunctionOrPrototype(theNode : node, sName : value)
+{
+  foreach var in theNode
+    if (var.oname == "init" &&
+	(var.type == "__FUNCTION__" ||
+	 var.type == "__PROTOTYPE__"))
+      return (true);
+  return (false);
+}
+
+function	treeCreateFunctionEmpty(sName : node, refPath : node,
+					sType : value)
+{
+  local		ctype;
+
+  pushItem this.block;
+  localref theDecl = this.block#back;
+  ref ctype.pctx = this.gl_pctx;
+  cnormCreateCtypeNode(ctype);
+  cnormCreateDeclarationNode(theDecl, sType);
+  cnormFillCtypeNode(ctype, "__TYPEID__", "void");
+  cnormFillDeclarationNode(theDecl, "__NAME__", sName);
+  cnormFillDeclarationNode(theDecl, "__CTYPE__", ctype);
+  insert theDecl.etype = "declaration";
+  insert theDecl.list;
+  insert theDecl.oname = theDecl.name;
+  theDecl.name = koocMangle(theDecl);
+  pushItem refPath;
+  ref refPath#back = theDecl;
+}
+
+function	treeCreateLink(theNode : node,
+			       theLink : node)
+{
+  ref theNode.link = theLink;
 }

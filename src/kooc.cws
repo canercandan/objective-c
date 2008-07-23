@@ -7,15 +7,12 @@
 declare function	setIncludes();
 declare function	mainFunc(file : value);
 declare function	testFile(file : value);
-declare function	initTree(file : value);
 declare function	loopFile();
+declare function	setPath(file : value);
 declare function	setPathFiles(file : value);
 declare function	setPathImport(file : value);
 
 setIncludes();
-
-#include "koocTree.inc.cws"
-
 loopFile();
 
 /**
@@ -29,7 +26,7 @@ function	loopFile()
   while (_ARGS[$i$] != "")
     {
       testFile(_ARGS[$i$]);
-      initTree(_ARGS[$i$]);
+      setPath(_ARGS[$i$]);
       mainFunc(_ARGS[$i$]);
       i = $i + 1$;
     }
@@ -43,7 +40,8 @@ function	setIncludes()
       traceLine("[KOOC] CNORM_PATH isn't setted in environnement variables");
       exit(-1);
     }
-  setIncludePath(getEnv("CNORM_PATH") + "/src;");
+  setIncludePath(getEnv("CNORM_PATH") + "/src;"
+		 + "prettyPrinter;");
 }
 
 /**
@@ -83,10 +81,8 @@ function	testFile(file : value)
  * @brief init the tree'functions
  * @param file filename
  */
-function	initTree(file : value)
+function	setPath(file : value)
 {
-  treeInit();
-  treeKooc();
   setPathFiles(file);
   setPathImport(file);
 }
