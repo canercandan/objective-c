@@ -22,6 +22,8 @@ koocVirtualDeclaration(theClass : node) ::=
 declaration(this.block)
 =>
 {
+  koocMemberAddSelf(theClass.name, this.block#back);
+
   local sVtable = "_kc_vtable_" + theClass.name;
   local sImplementation = "_kc_implementation_" + theClass.name;
 
