@@ -8,8 +8,9 @@ typedef int	Entier;
   char		a = 42;
   int		b;
   Entier	lol;
-  void		cool(int j);
 
+
+  void		cool(int j);
   void		f1(int a, int b);
   void		f2(char* a, int b);
 }
