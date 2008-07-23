@@ -64,10 +64,10 @@ int	main(int ac, char **av)
   A	*a;
 
   a = [A new];
-  //  [a print];// affiche "42 A\n"
-  //  a = [B new];
-  //  [a print];//affiche "124 B\n"
-  //  a = [C new];
-  //  [a print];//affiche "666 C\n"
-  //  [A print :a];//affiche "42 C\n"
+  [a print];// affiche "42 A\n"
+  a = [B new];
+  [a print];//affiche "124 B\n"
+  a = [C new];
+  [a print];//affiche "666 C\n"
+  [A print :a];//affiche "42 C\n"
 }

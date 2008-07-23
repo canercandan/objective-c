@@ -50,7 +50,6 @@ function	koocMemberInsertReference(theClass : node, sClass : value, theDecl : no
     ref this.kooc.classes[sClass]#back = theClass.ctype.list#back;
   else
     ref this.kooc.classes[sClass]#back = theDecl;
-    
 }
 
 function	koocMemberCreateNew(sClass : value, theDecl : node)

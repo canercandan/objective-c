@@ -72,5 +72,8 @@ declaration(this.block)
     insert rVEntry.init.otype = "terminal";
     insert rVEntry.init.etype = "expression";
   }
+
+  pushItem this.kooc.classes[theClass.name];
+  ref this.kooc.classes[theClass.name]#back = this.block#back;
 }
 ;
