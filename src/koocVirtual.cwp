@@ -37,18 +37,12 @@ declaration(this.block)
 
   foreach item in rImplementation.ctype.list
   {
+    traceLine(theClass.name + "::" + item.name);
     if (this.block#back.oname == item.oname)
     {
       localref rVtable = this.block.variables[sVtable];
-
-      foreach pointer in rVtable.init.block
-      {
-        if (pointer.init.value == item.name)
-        {
-          pointer.init.value = this.block#back.name;
-	  break;
-        }
-      }
+      localref pointer = rVtable.init.block[key(item)];
+      pointer.init.value = this.block#back.name;
       isPresent = true;
       break;
     }
