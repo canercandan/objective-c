@@ -133,14 +133,13 @@ kooc_identifiant_fonction(expr : node, module_name : value, func_name : node, ty
   => {
   if (module_name != "super")
   {
-  traceLine("module_name: " + module_name + ", func = " + func);
     func_name = existFunc(module_name, func, type, nb_arg);
     if (func_name == 0) // on test si ce n'est pas une instance
     {
       class_name = isAnInstance(module_name, expr);
       if (class_name == "")
       {
-        traceLine("error - function " + func_name + " doesn't exist in " + class_name + " module.");
+        traceLine("error - function " + func + " doesn't exist in " + module_name + " module.");
         exit(-1);
       }
       func_name = existFunc(class_name, func, type, nb_arg);

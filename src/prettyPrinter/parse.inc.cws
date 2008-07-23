@@ -136,6 +136,7 @@ function	parseCType(theNode : node)
 
   foreach info in theNode.infoType
   {sInfo += key(info) + " ";}
+  sInfo.trim();
   if (theNode.specifier == "enum")
     sPInfo += "\n{\n" + parseListEnum(theNode.list) + "\n}";
   else if (existVariable(theNode.list))

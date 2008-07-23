@@ -35,7 +35,7 @@ function	loopBlock(block : node, file : value = "")
 
   foreach var in block
     if (file == "" || file == var.__FILE__)
-      sInfo += blockType<var.type>(var);
+      sInfo += trim(blockType<var.type>(var));
   return (sInfo);
 }
 
@@ -51,7 +51,7 @@ function	loopArgument(block : node)
 
   foreach var in block
   {
-    sInfo += blockType<var.type>(var);
+    sInfo += trim(blockType<var.type>(var));
     if (!last(var))
       sInfo += ", ";
   }
@@ -115,7 +115,7 @@ function	blockType<"__FUNCTION__">(block : node)
 
   sInfo = getFunction(block)
     + "\n{\n" + loopBlock(block.block) + "}\n\n";
-  return (sInfo);
+  return (trim(sInfo));
 }
 
 /**
