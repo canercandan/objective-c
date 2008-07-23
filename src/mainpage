@@ -27,6 +27,7 @@
  * #!/bin/sh
  * export PATH=$PATH':'`pwd`"/bin"
  * export KOOC_PATH=`pwd`
+ * export CNORM_PATH=`pwd`"/cnorm_x.x"
  * @endcode
  * 
  * @subsection step3 Step 3: Launch excutable
@@ -39,8 +40,14 @@
  * @section develop Developpers
  * @author Caner Candan
  * @author Florent Hochwelker
- * @author Majdi Toumi
+ * @author Majdi Toumi 
  * @author Morgan Armand
+ *
+ * @section brute the Brutes
+ * @author Mes2Couilles
+ * @author OverFlo
+ * @author Buttozail
+ * @author 3z3k
  *
  * @section contrib Contributors
  * @author Cedric Lemaire
