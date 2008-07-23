@@ -137,6 +137,23 @@ function	koocClassFill(sClass : value, sExtend : value)
   insert ctype.infoType["typedef"] = "storageClassSpecifier";
   insert ctype.specifier = "struct";
   insert ctype.list;
+
+  // vtable pointer
+  local vt_decl;
+  local vt_ctype;
+
+  ref vt_ctype.pctx = this.gl_pctx;
+
+  cnormFillCtypeNode(vt_ctype, "__POINTER__", "*");
+  insert vt_ctype.identifier = "void";
+
+  cnormCreateDeclarationNode(vt_decl, "__VARIABLE__");
+  cnormFillDeclarationNode(vt_decl, "__CTYPE__", vt_ctype);
+  insert vt_decl.name = "vt";
+
+  pushItem ctype.list;
+  setall ctype.list#back = vt_decl;
+
   pushItem this.block;
   treeInsertFileOut(getEnv("path_import")
 		    + this.kooc.classes[sClass].nameH,
@@ -160,20 +177,6 @@ function	koocClassExtend(sClass : value, sExtend : value, theNode : node)
     }
 
   setall theNode = this.block.types[sExtend].ctype.list;
-  //   local		ctype;
-
-  //   insert ctype.pctx;
-  //   ref ctype.pctx = this.gl_pctx;
-  //   insert ctype.type = "__COMPOSED__";
-  //   insert ctype.identifier = sExtend;
-  //   pushItem theNode;
-  //   treeInsertFileOut(getEnv("path_import")
-  // 		    + this.kooc.classes[sClass].nameH,
-  // 		    theNode#back);
-  //   setall theNode#back.ctype = ctype;
-  //   insert theNode#back.type = "__VARIABLE__";
-  //   insert theNode#back.etype = "declaration";
-  //   insert theNode#back.name = "parent";
 }
 
 function	koocClassErr(theNode : node)
