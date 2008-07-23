@@ -8,7 +8,8 @@ local	sClass = koocMangleSpacer('.');
 
 #include <stdlib.h>
 #include <stdio.h>
-#include "kc_@toLowerString(sStruct)@.meta.h"
+#include "kc_@sStruct@.h"
+#include "kc_@sStruct@.meta.h"
 
 static @sStruct@	*alloc()
 {

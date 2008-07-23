@@ -45,8 +45,8 @@ function	koocClassDeclaration(sClass : value)
  */
 function	koocClassInit(sClass : value)
 {
-  local		modH = "kc_" + replaceString('.', '_', sClass.toLowerString()) + ".h";
-  local		modC = "kc_" + replaceString('.', '_', sClass.toLowerString()) + ".c";
+  local		modH = "kc_" + replaceString('.', '_', sClass) + ".h";
+  local		modC = "kc_" + replaceString('.', '_', sClass) + ".c";
 
   insert this.kooc.classes[sClass];
   insert this.kooc.classes[sClass].nameH = modH;
@@ -164,8 +164,6 @@ function	koocClassPrint(sClass : value)
   {@@prettyPrinterToC(getEnv("path_import")
 		      + this.kooc.classes[sClass].nameH)@@}
   koocImportEndif(this.kooc.classes[sClass].nameH);
-  indentFile(getEnv("path_import") + this.kooc.classes[sClass].nameH, "C++");
-  setall this.kooc.classes[sClass].kooc.mangle = this.kooc.mangle;
 }
 
 function	koocClassExtendErr(sExtend : value)

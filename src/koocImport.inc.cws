@@ -43,8 +43,7 @@ function	koocImportPathH(file : value)
 function	koocImportNameH(file : value)
 {
   return (replaceString('.', '_',
-			replaceString('/', '_',
-				      toUpperString(file))));
+			replaceString('/', '_', file)));
 }
 
 /**

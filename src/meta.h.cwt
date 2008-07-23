@@ -1,21 +1,21 @@
 <%
 local	sStruct = koocMangleSpacer('_');
+local	sClass = koocMangleSpacer('.');
+local	sHeader = replaceString(".h", ".meta.h",
+				this.kooc.classes[sClass].nameH);
 %>/*
 ** KOOC - Kind of Objective C for **@this.nameH@**
 ** { dream team 42. } -> Tek3s Strasbourg
 */
 
-#ifndef __@toUpperString(sStruct)@_META_H__
-# define __@toUpperString(sStruct)@_META_H__
-
+@koocImportIfndef(sHeader)@
 <%
-foreach var in this.init
+foreach var in this.kooc.implementations[sClass]
 {
-%>
-  @sStruct@	*@sStruct@_new(@var.list@);
-<%
+  if (var.oname == "new")
+    {%>@sStruct@	*@var.name@(@parseList(var.list)@);@"\n"@<%}
 }
 %>
 void	@sStruct@_delete(@sStruct@ *self);
 
-#endif /* !__@toUpperString(sStruct)@_META_H__ */
+@koocImportEndif(sHeader)@
