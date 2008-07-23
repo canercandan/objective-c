@@ -5,7 +5,7 @@
  */
 
 declare function	koocClassDeclaration(sClass : value);
-declare function	koocClassInit(sClass : value);
+declare function	koocClassInit(sClass : value, sExtend : value);
 declare function	koocClassFill(sClass : value, sExtend : value);
 declare function	koocClassInitVtable(sClass : value, sExtend : value);
 declare function	koocClassExtend(sClass : value, sExtend : value, theNode : node);
@@ -43,7 +43,7 @@ function	koocClassDeclaration(sClass : value)
  * @brief init the tree'information to insert module
  * @param sClass module's name
  */
-function	koocClassInit(sClass : value)
+function	koocClassInit(sClass : value, sExtend : value)
 {
   local		modH = "kc_" + replaceString('.', '_', sClass) + ".h";
   local		modC = "kc_" + replaceString('.', '_', sClass) + ".c";
@@ -51,6 +51,7 @@ function	koocClassInit(sClass : value)
   insert this.kooc.classes[sClass];
   insert this.kooc.classes[sClass].nameH = modH;
   insert this.kooc.classes[sClass].nameC = modC;
+  insert this.kooc.classes[sClass].parent = sExtend;
 }
 
 function	koocClassInitVtable(sClass : value, sExtend : value)

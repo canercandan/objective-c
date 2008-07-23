@@ -10,7 +10,7 @@
 @class B : A
 {
   @member int	value;
-  //@member void	init();
+  @member void	init();
   // @virtual peut etre  ecris hors de @member
   @virtual void	print();
 }
@@ -19,6 +19,6 @@
 {
   @member int	value;
 
-  //@member  void	init();
+  @member  void	init();
   @virtual void	print();
 }
