@@ -39,7 +39,6 @@ declaration(this.block)
 
   foreach item in rImplementation.ctype.list
   {
-    traceLine(theClass.name + "::" + item.name);
     if (this.block#back.oname == item.oname)
     {
       localref rVtable = this.block.variables[sVtable];
