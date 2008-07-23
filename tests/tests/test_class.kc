@@ -5,7 +5,7 @@
 ** Login   <armand_m@epitech.net>
 ** 
 ** Started on  Sat Jul  5 17:34:10 2008 morgan armand
-   Last update Tue Jul 22 18:16:11 2008 florent hochwelker
+   Last update Tue Jul 22 19:24:51 2008 florent hochwelker
 */
 
 @import	"test_class.kh"
@@ -14,13 +14,13 @@ int		main(void)
 {
   StackInt	*my_stack;
 
-//  my_stack = [StackInt new :4242];
-//  [my_stack push :10];
-//  [StackInt push :my_stack :11];//appel compatible module
-//  [my_stack push :12];
-//  [my_stack push :13];
-//  [my_stack push :14];
-//  [my_stack delete];
+  my_stack = [StackInt new :4242];
+  [my_stack push :10];
+  [StackInt push :my_stack :11];//appel compatible module
+  [my_stack push :12];
+  [my_stack push :13];
+  [my_stack push :14];
+  [my_stack delete];
 }
 
 @implementation StackInt
