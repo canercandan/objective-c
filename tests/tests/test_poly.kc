@@ -43,7 +43,7 @@
   @member {
     void	init()
     {
-      //      [super init];
+      [super init];
       [self.value] = 666;
     }
 

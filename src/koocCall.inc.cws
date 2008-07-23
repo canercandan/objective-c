@@ -16,3 +16,8 @@ function	isAnInstance(key : value, type : node)
 	}
 	return leaf.variables[key].ctype.identifier;
 }
+
+function	getParent(child : node)
+{
+	return (child.parent);
+}

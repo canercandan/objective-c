@@ -117,44 +117,48 @@ kooc_identifiant_variable(expr : node, module_name : node, type_name : node) ::=
 	     }
 	   }
     ]
-  ;
+;
 
 kooc_identifiant_fonction(expr : node, module_name : value, func_name : node, type : value, nb_arg : node, i : node, ptr : value)
 ::= 
   => local class_name = "";
-  => {  if (!existModule(module_name) && module_name != "super")
-    {
-      traceLine("error - module " + module_name + " doesn't exist.");
-      exit(-1);
-    }
-}
+  => { if (module_name == "super")
+       {
+         module_name = #evaluateVariable('this.kooc.classes["' + this.kooc.mangle#back + '"].parent');
+	 nb_arg = 1;
+	 i = 1;
+	}
+     }
+  => {  if (!existModule(module_name))
+        {
+          traceLine("error - module " + module_name + " doesn't exist.");
+          exit(-1);
+        }
+     }
   => local name = "";
   kooc_identifier:func
   => {
-  if (module_name != "super")
+  func_name = existFunc(module_name, func, type, nb_arg);
+  if (func_name == 0) // on test si ce n'est pas une instance
   {
-    func_name = existFunc(module_name, func, type, nb_arg);
-    if (func_name == 0) // on test si ce n'est pas une instance
+    class_name = isAnInstance(module_name, expr);
+    if (class_name == "")
     {
-      class_name = isAnInstance(module_name, expr);
-      if (class_name == "")
+      traceLine("error - function " + func + " doesn't exist in " + module_name + " module.");
+      exit(-1);
+    }
+    func_name = existFunc(class_name, func, type, nb_arg);
+    if (func_name == 0)
       {
-        traceLine("error - function " + func + " doesn't exist in " + module_name + " module.");
+        traceLine("error - function " + func + " doesn't exist in " + class_name + " module.");
         exit(-1);
       }
-      func_name = existFunc(class_name, func, type, nb_arg);
-      if (func_name == 0)
-        {
-          traceLine("error - function " + func + " doesn't exist in " + class_name + " module.");
-          exit(-1);
-        }
-      i = $i + 1$;
-      pushItem expr.list;
-      insert expr.list#back.type = "primary_expression";
-      insert expr.list#back.value = ptr + module_name;
-      insert expr.list#back.operator = "id";
-      insert expr.list#back.otype = "terminal";
-    }
+    i = $i + 1$;
+    pushItem expr.list;
+    insert expr.list#back.type = "primary_expression";
+    insert expr.list#back.value = ptr + module_name;
+    insert expr.list#back.operator = "id";
+    insert expr.list#back.otype = "terminal";
   }
   insert expr.left;
   insert expr.left.type = "primary_expression";
@@ -171,6 +175,18 @@ kooc_identifiant_fonction(expr : node, module_name : value, func_name : node, ty
 
 kooc_list_parametre(expr : node, module : value, func : value, nb_arg : value, i : node)
      ::=
+     => { 
+     	  if (module == "super")
+	  {
+     	     nb_arg = $1 + nb_arg$;
+	     i = $i + 1$;
+  	     pushItem expr.list;
+  	     insert expr.list#back.type = "primary_expression";
+  	     insert expr.list#back.value = "self";
+   	     insert expr.list#back.operator = "id";
+   	     insert expr.list#back.otype = "terminal";
+	  }
+	}
      [
       ':' kooc_param(expr):val
       => i = $i + 1$;
