@@ -154,7 +154,11 @@ function	treeCreateDelete(sName : value, sType : value, theNode : node)
 
   sFunc = "clean";
   if (!treeSeekForFunctionOrPrototype(theNode, sFunc))
-    treeCreateFunctionEmpty(sFunc, theNode, sType);
+    {
+      treeCreateFunctionEmpty(sFunc, theNode, sType);
+      treeInsertFileOut(this.kooc.classes[sName].nameC,
+			this.block#back);
+    }
   sFunc = "delete";
   treeCreateFunctionEmpty(sFunc, theNode, sType);
   localref theDelete = this.block#back;
