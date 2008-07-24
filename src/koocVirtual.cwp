@@ -22,8 +22,7 @@ koocVirtualDeclaration(theClass : node) ::=
 declaration(this.block)
 =>
 {
-  koocMemberAddSelf(theClass.name, this.block#back);
-
+  treeAddSelf(theClass.name, this.block#back);
   treeInsertFileOut(getEnv("path_import") + this.kooc.classes[theClass.name].nameH,
   		    this.block#back);
 

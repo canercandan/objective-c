@@ -8,14 +8,13 @@ local	sHeader = replaceString(".h", ".meta.h",
 ** { dream team 42. } -> Tek3s Strasbourg
 */
 
-@koocImportIfndef(sHeader)@
-<%
+@koocImportIfndef(sHeader)@<%
 foreach var in this.kooc.implementations[sClass]
 {
   if (var.oname == "new")
     {%>@sStruct@	*@var.name@(@parseList(var.list)@);@"\n"@<%}
+  if (var.oname == "delete")
+    {%>void	@var.name@(@parseList(var.list)@);@"\n"@<%}
 }
 %>
-void	@sStruct@_delete(@sStruct@ *self);
-
 @koocImportEndif(sHeader)@

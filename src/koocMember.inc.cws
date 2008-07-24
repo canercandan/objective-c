@@ -7,23 +7,31 @@
 declare function	koocMemberDeclaration(theClass : node);
 declare function	koocMemberDeclarationVariableFunction(theClass : node, sClass : value, theDecl : node);
 declare function	koocMemberInsertReference(theClass : node, sClass : value, theDecl : node);
-declare function	koocMemberCreateOneNew(sClass : value, theDecl : node,
-					       sType : value, theNode : node);
-declare function	koocMemberCreateNew(sClass : value, sType : value, theNode : node);
-declare function	koocMemberCreateDelete(sClass : value, sType : value, theNode : node);
-declare function	koocMemberAddSelf(sClass : value, theNode : node);
 
+/**
+ * @fn koocMemberDeclaration(theClass : node)
+ * @brief undef
+ * @param theClass node
+ */
 function	koocMemberDeclaration(theClass : node)
 {
   local		sClass = koocMangleSpacer('.');
   localref	theDecl = this.block#back;
 
-  koocMemberCreateOneNew(sClass, theDecl, "__PROTOTYPE__", this.kooc.classes[sClass]);
+  treeCreateOneNew(theDecl, "__PROTOTYPE__", this.kooc.classes[sClass]);
   koocMemberDeclarationVariableFunction(theClass, sClass, theDecl);
   koocMemberInsertReference(theClass, sClass, theDecl);
 }
 
-function	koocMemberDeclarationVariableFunction(theClass : node, sClass : value, theDecl : node)
+/**
+ * @fn koocMemberDeclarationVariableFunction(theClass : node, sClass : value, theDecl : node)
+ * @brief undef
+ * @param theClass node
+ * @param sClass value
+ * @param theDecl node
+ */
+function	koocMemberDeclarationVariableFunction(theClass : node, sClass : value,
+						      theDecl : node)
 {
   if (theDecl.type == "__VARIABLE__")
     {
@@ -33,13 +41,20 @@ function	koocMemberDeclarationVariableFunction(theClass : node, sClass : value, 
     }
   else
     {
-      koocMemberAddSelf(sClass, theDecl);
+      treeAddSelf(sClass, theDecl);
       treeInsertFileOut(getEnv("path_import")
 			+ this.kooc.classes[sClass].nameH,
 			theDecl);
     }
 }
 
+/**
+ * @fn koocMemberInsertReference(theClass : node, sClass : value, theDecl : node)
+ * @brief undef
+ * @param theClass node
+ * @param sClass value
+ * @param theDecl node
+ */
 function	koocMemberInsertReference(theClass : node, sClass : value, theDecl : node)
 {
   pushItem this.kooc.classes[sClass];
@@ -47,88 +62,4 @@ function	koocMemberInsertReference(theClass : node, sClass : value, theDecl : no
     ref this.kooc.classes[sClass]#back = theClass.ctype.list#back;
   else
     ref this.kooc.classes[sClass]#back = theDecl;
-}
-
-function	koocMemberCreateNew(sClass : value, sType : value, theNode : node)
-{
-  local		fnd = false;
-  local		sName;
-
-  if (!treeSeekForFunctionOrPrototype(theNode, "init"))
-    {
-      sName = "init";
-      treeCreateFunctionEmpty(sName, theNode, sType);
-      localref theInit = this.block#back;
-      sName = "new";
-      treeCreateFunctionEmpty(sName, theNode, sType);
-      localref theNew = this.block#back;
-      treeCreateLink(theInit, theNew);
-      treeCreateLink(theNew, theInit);
-    }
-}
-
-function	koocMemberCreateDelete(sClass : value, sType : value, theNode : node)
-{
-  local		fnd = false;
-  local		sName;
-
-  if (!treeSeekForFunctionOrPrototype(theNode, "clean"))
-    {
-      sName = "clean";
-      treeCreateFunctionEmpty(sName, theNode, sType);
-    }
-  sName = "delete";
-  treeCreateFunctionEmpty(sName, theNode, sType);
-  localref theDelete = this.block#back;
-  koocMemberAddSelf(sClass, theDelete);
-}
-
-function	koocMemberCreateOneNew(sClass : value, theDecl : node,
-				       sType : value, theNode : node)
-{
-  local		sName = "new";
-
-  if (theDecl.oname == "init")
-    {
-      treeCreateFunctionEmpty(sName, theNode, sType);
-      localref theSrc = this.block#back;
-      setall theSrc.list = theDecl.list;
-      treeCreateLink(theSrc, theDecl);
-      treeCreateLink(theDecl, theSrc);
-      theSrc.name = theSrc.oname;
-      theSrc.name = koocMangle(theSrc);
-    }
-}
-
-function	koocMemberAddSelf(sClass : value, theNode : node)
-{
-  local		name;
-  local		self;
-  local		ctype;
-
-  insert ctype.pctx;
-  ref ctype.pctx = this.gl_pctx;
-
-  // Create du ctype
-  cnormCreateCtypeNode(ctype);
-
-  // Self is a pointer
-  cnormFillCtypeNode(ctype, "__POINTER__", "*");
-
-  insert ctype.type = "__COMPOSED__";
-  insert ctype.identifier = sClass;
-
-  // Create declaration
-  cnormCreateDeclarationNode(self, "__VARIABLE__");
-
-  name = "self";
-  cnormFillDeclarationNode(self, "__NAME__", name);
-  cnormFillDeclarationNode(self, "__CTYPE__", ctype);
-
-  invertArray(theNode.list);
-
-  pushItem theNode.list;
-  setall theNode.list#back = self;
-
-  invertArray(theNode.list);
 }

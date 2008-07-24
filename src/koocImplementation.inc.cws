@@ -18,9 +18,6 @@ declare function	check_implementation(name : value, theNode : node);
 declare function	check_prototypes(var1 : node, var2 : node);
 declare function	check_arguments(fun1 : node, fun2 : node);
 
-// Fonctions non finis: normal que vous comprenez pas tout...
-// Implementation de base marche mais je fixe qlq trucs.
-
 function	koocImplementationInit(sName : value, type : node, filenameC : node)
 {
   if (existModule(sName) == 1)
@@ -89,23 +86,23 @@ function	koocImplementationErr()
 
 function	koocImplementationAdd(sName : value, type : value)
 {
-  pushItem	this.kooc.implementations[sName];
-  ref		this.kooc.implementations[sName]#back = this.block#back;
-  localref	theNode = this.kooc.implementations[sName]#back;
-  localref	theDecl = this.block#back;
-
+  pushItem this.kooc.implementations[sName];
+  localref theImplementation = this.kooc.implementations[sName];
+  ref theImplementation#back = this.block#back;
+  localref theNode = theImplementation#back;
+  localref theDecl = this.block#back;
   if (type == "module")
     treeInsertFileOut(getEnv("path_import")
 		      + this.kooc.modules[sName].nameC,
 		      theDecl);
   else if (type == "class")
     {
-      koocMemberCreateOneNew(sName, theDecl, "__PROTOTYPE__", this.kooc.implementations[sName]);
+      treeCreateOneNew(theDecl, "__PROTOTYPE__", theImplementation);
       treeInsertFileOut(getEnv("path_import")
 			+ this.kooc.classes[sName].nameC,
 			theDecl);
     }
-  koocMemberAddSelf(sName, theDecl);
+  treeAddSelf(sName, theDecl);
 }
 
 /**

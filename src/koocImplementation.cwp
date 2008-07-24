@@ -39,8 +39,8 @@ koocImplementation ::=
  => koocImplementationContent(sName, type);
  ]*
 => localref theImplementation = this.kooc.implementations[sName];
-=> koocMemberCreateNew(sName, "__FUNCTION__", theImplementation);
-=> koocMemberCreateDelete(sName, "__FUNCTION__", theImplementation);
+=> treeCreateNew(sName, "__FUNCTION__", theImplementation);
+=> treeCreateDelete(sName, "__FUNCTION__", theImplementation);
 #generatedFile(getEnv("path_import") + filenameC)
 => koocImplementationPrint(sName, type);
 '}'

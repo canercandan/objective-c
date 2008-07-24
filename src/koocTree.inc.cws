@@ -9,6 +9,15 @@ declare function	treeKooc();
 declare function	treeCopyInfos(block : node);
 declare function	treeCopyInfosInArray(dst : node, src : node);
 declare function	treeInsertFileOut(file : value, theNode : node);
+declare function	treeSeekForFunctionOrPrototype(theNode : node,
+						       sName : value);
+declare function	treeCreateFunctionEmpty(sName : node, refPath : node,
+						sType : value);
+declare function	treeCreateLink(theNode : node, theLink : node);
+declare function	treeCreateNew(sName : value, sType : value, theNode : node);
+declare function	treeCreateDelete(sName : value, sType : value, theNode : node);
+declare function	treeCreateOneNew(theDecl : node, sType : value, theNode : node);
+declare function	treeAddSelf(sName : value, theNode : node);
 
 /**
  * @fn treeInit(block : node)
@@ -34,13 +43,27 @@ function	treeKooc()
   insert this.kooc;
   insert this.kooc.modules;
   insert this.kooc.classes;
+  insert this.kooc.implementations;
+  insert this.kooc.mangle;
 }
 
+/**
+ * @fn treeInsertFileOut(file : value, theNode : node)
+ * @brief undef
+ * @param file value
+ * @param theNode node
+ */
 function	treeInsertFileOut(file : value, theNode : node)
 {
   insert theNode.__FILE__ = file;
 }
 
+/**
+ * @fn treeSeekForFunctionOrPrototype(theNode : node, sName : value)
+ * @brief undef
+ * @param theNode node
+ * @param sName value
+ */
 function	treeSeekForFunctionOrPrototype(theNode : node,
 					       sName : value)
 {
@@ -52,6 +75,13 @@ function	treeSeekForFunctionOrPrototype(theNode : node,
   return (false);
 }
 
+/**
+ * @fn treeCreateFunctionEmpty(sName : node, refPath : node, sType : value)
+ * @brief undef
+ * @param sName node
+ * @param refPath node
+ * @param sType value
+ */
 function	treeCreateFunctionEmpty(sName : node, refPath : node,
 					sType : value)
 {
@@ -73,8 +103,111 @@ function	treeCreateFunctionEmpty(sName : node, refPath : node,
   ref refPath#back = theDecl;
 }
 
+/**
+ * @fn treeCreateLink(theNode : node, theLink : node)
+ * @brief undef
+ * @param theNode node
+ * @param theLink node
+ */
 function	treeCreateLink(theNode : node,
 			       theLink : node)
 {
   ref theNode.link = theLink;
+}
+
+/**
+ * @fn treeCreateNew(sName : value, sType : value, theNode : node)
+ * @brief undef
+ * @param sName value
+ * @param sType value
+ * @param theNode node
+ */
+function	treeCreateNew(sName : value, sType : value, theNode : node)
+{
+  local		fnd = false;
+  local		sFunc;
+
+  sFunc = "init";
+  if (!treeSeekForFunctionOrPrototype(theNode, sFunc))
+    {
+      treeCreateFunctionEmpty(sFunc, theNode, sType);
+      localref theInit = this.block#back;
+      sFunc = "new";
+      treeCreateFunctionEmpty(sFunc, theNode, sType);
+      localref theNew = this.block#back;
+      treeCreateLink(theInit, theNew);
+      treeCreateLink(theNew, theInit);
+    }
+}
+
+/**
+ * @fn treeCreateDelete(sName : value, sType : value, theNode : node)
+ * @brief undef
+ * @param sName value
+ * @param sType value
+ * @param theNode node
+ */
+function	treeCreateDelete(sName : value, sType : value, theNode : node)
+{
+  local		fnd = false;
+  local		sFunc;
+
+  sFunc = "clean";
+  if (!treeSeekForFunctionOrPrototype(theNode, sFunc))
+    treeCreateFunctionEmpty(sFunc, theNode, sType);
+  sFunc = "delete";
+  treeCreateFunctionEmpty(sFunc, theNode, sType);
+  localref theDelete = this.block#back;
+  treeAddSelf(sName, theDelete);
+}
+
+/**
+ * @fn treeCreateOneNew(theDecl : node, sType : value, theNode : node)
+ * @brief undef
+ * @param theDecl node
+ * @param sType value
+ * @param theNode node
+ */
+function	treeCreateOneNew(theDecl : node, sType : value, theNode : node)
+{
+  local		sName = "new";
+
+  if (theDecl.oname == "init")
+    {
+      treeCreateFunctionEmpty(sName, theNode, sType);
+      localref theSrc = this.block#back;
+      setall theSrc.list = theDecl.list;
+      treeCreateLink(theSrc, theDecl);
+      treeCreateLink(theDecl, theSrc);
+      theSrc.name = theSrc.oname;
+      theSrc.name = koocMangle(theSrc);
+    }
+}
+
+/**
+ * @fn treeAddSelf(sName : value, theNode : node)
+ * @brief undef
+ * @param sName value
+ * @param theNode node
+ */
+function	treeAddSelf(sName : value, theNode : node)
+{
+  local		name;
+  local		self;
+  local		ctype;
+
+  insert ctype.pctx;
+  ref ctype.pctx = this.gl_pctx;
+  cnormCreateCtypeNode(ctype);
+  cnormFillCtypeNode(ctype, "__POINTER__", "*");
+  insert ctype.type = "__COMPOSED__";
+  insert ctype.identifier = sName;
+  cnormCreateDeclarationNode(self, "__VARIABLE__");
+  name = "self";
+  cnormFillDeclarationNode(self, "__NAME__", name);
+  cnormFillDeclarationNode(self, "__CTYPE__", ctype);
+  invertArray(theNode.list);
+  pushItem theNode.list;
+  setall theNode.list#back = self;
+  invertArray(theNode.list);
 }
