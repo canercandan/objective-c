@@ -1,0 +1,35 @@
+/*
+** Object.kh for libkrt in /home/armand_m/kooc/lib/libkrt
+** 
+** Made by morgan armand
+** Login   <armand_m@epitech.net>
+** 
+** Started on  Thu Jul 24 21:50:37 2008 morgan armand
+** Last update Thu Jul 24 22:28:06 2008 morgan armand
+*/
+
+#define OBJECT_TYPE	"Object"
+
+@class	Object
+{
+  @member const char	*name_of_interface;
+
+  Object		*alloc();
+  Object		*new();
+
+  @member
+    {
+      // vtable pointer
+      void		*vt;
+
+      void		init();
+      @virtual void	clean();
+      void		delete();
+
+      @virtual int	isKindOf(const char *);
+      @virtual int	isKindOf(Object *);
+
+      @virtual int	isInstanceOf(const char *);
+      @virtual int	isInstanceOf(Object *);
+    }
+}

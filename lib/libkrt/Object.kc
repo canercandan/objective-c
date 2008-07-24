@@ -1,0 +1,51 @@
+/*
+** Object.kc for libkrt in /home/armand_m/kooc/lib/libkrt
+** 
+** Made by morgan armand
+** Login   <armand_m@epitech.net>
+** 
+** Started on  Thu Jul 24 21:56:09 2008 morgan armand
+** Last update Thu Jul 24 22:31:28 2008 morgan armand
+*/
+
+#include <string.h>
+
+@import "Object.kh"
+
+@implementation	Object
+{
+  //  @member const char	*name_of_interface = OBJECT_TYPE;
+
+  @member
+    {
+      @virtual int	isKindOf(const char *name)
+	{
+	  if ([self isInstanceOf :name])
+	    return (1);
+
+	  if (!strcmp([self.name_of_interface], OBJECT_TYPE))
+	    return (0);
+
+	  return ([super isKindOf :name]);
+	}
+
+      @virtual int	isKindOf(Object *o)
+	{
+	  const char	*name;
+
+	  name = [o.name_of_interface];
+	  return ([self isKindOf :name]);
+	}
+
+      @virtual int	isInstanceOf(const char *name)
+	{
+	  return (!strcmp([self.name_of_interface], name));
+	}
+
+      @virtual int	isInstanceOf(Object *o)
+	{
+	  return (!strcmp([self.name_of_interface],
+			  [o.name_of_interface]));
+	}
+    }
+}
