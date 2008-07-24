@@ -10,9 +10,16 @@ declare function	koocCallIdentifiantFunctionInit(callTree : node);
 declare function	koocCallIdentifiantFunctionRun(expr : node, callTree : node,
 						       func : value);
 declare function	koocCallIdentifiantFunctionInsertExpr(expr : node, callTree : node);
+declare function	koocCallListParameter(expr : node, callTree : node);
+declare function	koocCallListParameterCheck(callTree : node);
 declare function	isAnInstance(key : value, type : node);
 declare function	getParent(child : node);
 
+/**
+ * @fn koocCallInit(callTree : node)
+ * @brief undef
+ * @param callTree node
+ */
 function	koocCallInit(callTree : node)
 {
   insert callTree.sModule = "";
@@ -24,11 +31,17 @@ function	koocCallInit(callTree : node)
   insert callTree.ptr = "";
 }
 
+/**
+ * @fn koocCallIdentifantVariable(expr : node, callTree : node)
+ * @brief undef
+ * @param expr node
+ * @param callTree node
+ */
 function	koocCallIdentifantVariable(expr : node, callTree : node)
 {
   local		val = "";
   local		name = callTree.sModule;
-
+  
   callTree.sModule = midString(name, 0, findLastString(name, '.'));
   val = subString(name, $findLastString(name, '.') + 1$);
   local variable = existVar(callTree.sModule, val, callTree.sType);
@@ -147,6 +160,12 @@ function	koocCallIdentifiantFunctionInsertExpr(expr : node, callTree : node)
   insert expr.list;
 }
 
+/**
+ * @fn koocCallListParameter(expr : node, callTree : node)
+ * @brief undef
+ * @param expr node
+ * @param callTree node
+ */
 function	koocCallListParameter(expr : node, callTree : node)
 {
   if (callTree.sModule == "super")

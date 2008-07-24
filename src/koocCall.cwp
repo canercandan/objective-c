@@ -6,28 +6,28 @@
  * @par primary_expression(expr : node)
  * rule (overload of Cnorm)
  *
- * @par koocCall
+ * @par koocCall(expr : node)
  * nothing
  *
- * @par cast : value
+ * @par koocCallCast : value
  * nothing
  *
- * @par kooc_identifiant_module(name : node, type_name : value)
+ * @par koocCallIdentifiantModule(callTree : node)
  * nothing
  *
- * @par kooc_identifiant_variable(module_name : value, type : value)
+ * @par koocCallIdentifiantVariable(expr : node, callTree : node)
  * nothing
  *
- * @par kooc_identifiant_fonction(module_name : value, func_name : node, type : value, nb_arg : node)
+ * @par koocCallIdentifiantFunction(expr : node, callTree : node)
  * nothing
  *
- * @par kooc_list_parametre(module : value, func : value, nb_arg : value)
+ * @par koocCallListParameter(expr : node, callTree : node)
  * nothing
  *
- * @par kooc_identifier
+ * @par koocCallIdentifier
  * nothing
  * 
- * @par kooc_param
+ * @par koocCallParam(expr : node)
  * nothing
  *
  */
@@ -45,7 +45,7 @@ koocCall(expr : node) ::=
   => koocCallInit(callTree);
 #explicitCopy [koocCallCast(expr):callTree.sType]?
 '['
-koocCallIdentifiantModule(expr, callTree)
+koocCallIdentifiantModule(callTree)
 [
  koocCallIdentifiantVariable(expr, callTree)
  |
@@ -61,7 +61,7 @@ koocCallCast(expr : node) : value ::=
   "@!("->(:koocCallCast)')'
 ;
 
-koocCallIdentifiantModule(expr : node, callTree : node) ::=
+koocCallIdentifiantModule(callTree : node) ::=
   ['&']*:callTree.ptr [koocCallIdentifier ['.' koocCallIdentifier]*]:callTree.sModule
 ;
 
