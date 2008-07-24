@@ -87,21 +87,6 @@ function	koocImplementationErr()
     }
 }
 
-function	koocImplementationCreateNew(sName : value, theDecl : node)
-{
-  if (theDecl.oname == "init")
-    {
-      pushItem this.block;
-      localref theSrc = this.block#back;
-      setall theSrc = theDecl;
-      insert theSrc.init = theDecl.name;
-      theSrc.name = replaceString("init", "new", theSrc.name);
-      theSrc.oname = replaceString("init", "new", theSrc.oname);
-      pushItem this.kooc.implementations[sName];
-      ref this.kooc.implementations[sName]#back = theSrc;
-    }
-}
-
 function	koocImplementationAdd(sName : value, type : value)
 {
   pushItem	this.kooc.implementations[sName];
@@ -115,7 +100,7 @@ function	koocImplementationAdd(sName : value, type : value)
 		      theDecl);
   else if (type == "class")
     {
-      koocImplementationCreateNew(sName, theDecl);
+      koocMemberCreateOneNew(sName, theDecl, "__PROTOTYPE__", this.kooc.implementations[sName]);
       treeInsertFileOut(getEnv("path_import")
 			+ this.kooc.classes[sName].nameC,
 			theDecl);

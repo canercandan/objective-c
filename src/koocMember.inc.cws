@@ -7,9 +7,10 @@
 declare function	koocMemberDeclaration(theClass : node);
 declare function	koocMemberDeclarationVariableFunction(theClass : node, sClass : value, theDecl : node);
 declare function	koocMemberInsertReference(theClass : node, sClass : value, theDecl : node);
-declare function	koocMemberCreateOneNew(sClass : value, theDecl : node);
-declare function	koocMemberCreateNew(sClass : value);
-declare function	koocMemberCreateDelete(sClass : value);
+declare function	koocMemberCreateOneNew(sClass : value, theDecl : node,
+					       sType : value, theNode : node);
+declare function	koocMemberCreateNew(sClass : value, sType : value, theNode : node);
+declare function	koocMemberCreateDelete(sClass : value, sType : value, theNode : node);
 declare function	koocMemberAddSelf(sClass : value, theNode : node);
 
 function	koocMemberDeclaration(theClass : node)
@@ -17,7 +18,7 @@ function	koocMemberDeclaration(theClass : node)
   local		sClass = koocMangleSpacer('.');
   localref	theDecl = this.block#back;
 
-  koocMemberCreateOneNew(sClass, theDecl);
+  koocMemberCreateOneNew(sClass, theDecl, "__PROTOTYPE__", this.kooc.classes[sClass]);
   koocMemberDeclarationVariableFunction(theClass, sClass, theDecl);
   koocMemberInsertReference(theClass, sClass, theDecl);
 }
@@ -48,66 +49,54 @@ function	koocMemberInsertReference(theClass : node, sClass : value, theDecl : no
     ref this.kooc.classes[sClass]#back = theDecl;
 }
 
-function	koocMemberCreateNew(sClass : value)
+function	koocMemberCreateNew(sClass : value, sType : value, theNode : node)
 {
   local		fnd = false;
   local		sName;
-  localref	theClass = this.kooc.classes[sClass];
-  localref	theImplementation = this.kooc.implementations[sClass];
 
-  if (!treeSeekForFunctionOrPrototype(theClass, "init"))
+  if (!treeSeekForFunctionOrPrototype(theNode, "init"))
     {
       sName = "init";
-      treeCreateFunctionEmpty(sName, theClass, "__PROTOTYPE__");
+      treeCreateFunctionEmpty(sName, theNode, sType);
       localref theInit = this.block#back;
-      treeCreateFunctionEmpty(sName, theImplementation, "__PROTOTYPE__");
-      localref theInitFunc = this.block#back;
       sName = "new";
-      treeCreateFunctionEmpty(sName, theClass, "__PROTOTYPE__");
+      treeCreateFunctionEmpty(sName, theNode, sType);
       localref theNew = this.block#back;
-      treeCreateFunctionEmpty(sName, theImplementation, "__FUNCTION__");
-      localref theNewFunc = this.block#back;
       treeCreateLink(theInit, theNew);
-      treeCreateLink(theInitFunc, theNewFunc);
       treeCreateLink(theNew, theInit);
-      treeCreateLink(theNewFunc, theInitFunc);
     }
 }
 
-function	koocMemberCreateDelete(sClass)
+function	koocMemberCreateDelete(sClass : value, sType : value, theNode : node)
 {
   local		fnd = false;
   local		sName;
-  localref	theClass = this.kooc.classes[sClass];
-  localref	theImplementation = this.kooc.implementations[sClass];
 
-  if (!treeSeekForFunctionOrPrototype(theClass, "clean"))
+  if (!treeSeekForFunctionOrPrototype(theNode, "clean"))
     {
       sName = "clean";
-      treeCreateFunctionEmpty(sName, theClass, "__PROTOTYPE__");
+      treeCreateFunctionEmpty(sName, theNode, sType);
     }
   sName = "delete";
-  treeCreateFunctionEmpty(sName, theClass, "__PROTOTYPE__");
+  treeCreateFunctionEmpty(sName, theNode, sType);
   localref theDelete = this.block#back;
   koocMemberAddSelf(sClass, theDelete);
-  treeCreateFunctionEmpty(sName, theImplementation, "__PROTOTYPE__");
-  localref theDeleteFunc = this.block#back;
-  koocMemberAddSelf(sClass, theDeleteFunc);
 }
 
-function	koocMemberCreateOneNew(sClass : value, theDecl : node)
+function	koocMemberCreateOneNew(sClass : value, theDecl : node,
+				       sType : value, theNode : node)
 {
   local		sName = "new";
 
   if (theDecl.oname == "init")
     {
-      treeCreateFunctionEmpty(sName, this.kooc.classes[sClass], "__PROTOTYPE__");
+      treeCreateFunctionEmpty(sName, theNode, sType);
       localref theSrc = this.block#back;
       setall theSrc.list = theDecl.list;
       treeCreateLink(theSrc, theDecl);
       treeCreateLink(theDecl, theSrc);
-      traceObject(theSrc);
-      traceObject(theDecl);
+      theSrc.name = theSrc.oname;
+      theSrc.name = koocMangle(theSrc);
     }
 }
 

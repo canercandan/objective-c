@@ -41,7 +41,8 @@ function	treeInsertFileOut(file : value, theNode : node)
   insert theNode.__FILE__ = file;
 }
 
-function	treeSeekForFunctionOrPrototype(theNode : node, sName : value)
+function	treeSeekForFunctionOrPrototype(theNode : node,
+					       sName : value)
 {
   foreach var in theNode
     if (var.oname == "init" &&

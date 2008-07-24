@@ -30,9 +30,10 @@ koocClass ::=
  => koocClassErr(this.block#back);
  => koocClassDeclaration(sClass);
  ]*
-=> koocMemberCreateNew(sClass);
-=> koocMemberCreateDelete(sClass);
-#generatedFile(getEnv("path_import") + this.kooc.classes[sClass].nameH)
+=> localref theClass = this.kooc.classes[sClass];
+=> koocMemberCreateNew(sClass, "__PROTOTYPE__", theClass);
+=> koocMemberCreateDelete(sClass, "__PROTOTYPE__", theClass);
+#generatedFile(getEnv("path_import") + theClass.nameH)
 => koocClassPrint(sClass);
 '}'
 => koocManglePopBlock();

@@ -25,7 +25,8 @@ static @sStruct@	*alloc()
 
 <%
 local	fndInit = false;
-local	fndClean = false;
+local	theClean;
+local	theDelete;
 local	sClean;
 
 foreach var in this.kooc.implementations[sClass]
@@ -39,16 +40,15 @@ foreach var in this.kooc.implementations[sClass]
     @sStruct@	*new;
 
     new = alloc();
-    @var.init@(new, @parseListWithOutType(var.list)@);
+    @var.link.name@(new, @parseListWithOutType(var.list)@);
     return (new);
   }
 <%
     }
   if (var.oname == "clean")
-    {
-      fndClean = true;
-      sClean = var.name;
-    }
+    ref theClean = var;
+  if (var.oname == "delete")
+    ref theDelete = var;
 }
 
 if (!fndInit)
@@ -65,11 +65,8 @@ if (!fndInit)
   }
 %>
 
-void	@sStruct@_delete(@sStruct@ *self)
+void	@theDelete.name@(@parseList(theDelete.list)@)
 {
-  <%
-  if (fndClean)
-    {%>@sClean@();<%}
-  %>
+  @theClean.name@();
   free(self);
 }
