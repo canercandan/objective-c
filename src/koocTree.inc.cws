@@ -140,21 +140,6 @@ function	treeCreateNew(sName : value, sType : value, theNode : node)
 }
 
 /**
- * @fn treeCreateDelete(sName : value, sType : value, theNode : node)
- * @brief undef
- * @param sName value
- * @param sType value
- * @param theNode node
- */
-function	treeCreateDelete(sName : value, sType : value, theNode : node)
-{
-  local		sFunc = "clean";
-
-  if (!treeSeekForFunctionOrPrototype(theNode, sFunc))
-    treeCreateFunctionEmpty(sFunc, theNode, sType);
-}
-
-/**
  * @fn treeCreateClean(sName : value, sType : value, theNode : node)
  * @brief undef
  * @param sName value
@@ -162,6 +147,24 @@ function	treeCreateDelete(sName : value, sType : value, theNode : node)
  * @param theNode node
  */
 function	treeCreateClean(sName : value, sType : value, theNode : node)
+{
+  local		sFunc = "clean";
+
+  if (!treeSeekForFunctionOrPrototype(theNode, sFunc))
+    {
+      treeCreateFunctionEmpty(sFunc, theNode, sType);
+      treeAddSelf(sName, this.block#back);
+    }
+}
+
+/**
+ * @fn treeCreateDelete(sName : value, sType : value, theNode : node)
+ * @brief undef
+ * @param sName value
+ * @param sType value
+ * @param theNode node
+ */
+function	treeCreateDelete(sName : value, sType : value, theNode : node)
 {
   local		sFunc = "delete";
 

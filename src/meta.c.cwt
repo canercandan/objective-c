@@ -53,6 +53,6 @@ foreach var in this.kooc.implementations[sClass]
 
 void	@theDelete.name@(@parseList(theDelete.list)@)
 {
-  @theClean.name@();
+  @theClean.name@(@parseListWithOutType(theClean.list)@);
   free(self);
 }
