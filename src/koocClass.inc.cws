@@ -18,16 +18,7 @@ declare function	koocClassExtendErr(sExtend : value);
 function	koocClassDeclaration(sClass : value)
 {
   localref	theBlock = this.block#back;
-//   local		isSelf = (theBlock.ctype.list#front.identifier == sClass &&
-// 			  existVariable(theBlock.ctype.list#front.pointer) &&
-// 			  theBlock.ctype.list#front.pointer.getArraySize() == 1);
 
-//   if (!isSelf)
-//     {
-//       insert theBlock.ctype.infoType;
-//       insert theBlock.ctype.infoType["static"]
-// 	= "storageClassSpecifier";
-//     }
   if (this.block#back.type == "__VARIABLE__")
     treeInsertFileOut(getEnv("path_import")
 		      + this.kooc.classes[sClass].nameH + "_variable",

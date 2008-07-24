@@ -33,15 +33,14 @@ foreach var in this.kooc.implementations[sClass]
 {
   if (var.oname == "new")
     {
-      fndInit = true;
 %>
 @sStruct@	*@var.name@(@parseList(var.list)@)
   {
-    @sStruct@	*new;
+    @sStruct@	*self;
 
-    new = alloc();
-    @var.link.name@(new, @parseListWithOutType(var.list)@);
-    return (new);
+    self = alloc();
+    @var.link.name@(@parseListWithOutType(var.link.list)@);
+    return (self);
   }
 <%
     }
@@ -50,19 +49,6 @@ foreach var in this.kooc.implementations[sClass]
   if (var.oname == "delete")
     ref theDelete = var;
 }
-
-if (!fndInit)
-  {
-%>
-    @sStruct@	*@koocMangleStringWithOutTypeAndArgs("new")@()
-  {
-    @sStruct@	*new;
-
-    new = alloc();
-    return (new);
-  }
-<%
-  }
 %>
 
 void	@theDelete.name@(@parseList(theDelete.list)@)

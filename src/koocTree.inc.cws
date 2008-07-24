@@ -45,7 +45,7 @@ function	treeSeekForFunctionOrPrototype(theNode : node,
 					       sName : value)
 {
   foreach var in theNode
-    if (var.oname == "init" &&
+    if (var.oname == sName &&
 	(var.type == "__FUNCTION__" ||
 	 var.type == "__PROTOTYPE__"))
       return (true);
