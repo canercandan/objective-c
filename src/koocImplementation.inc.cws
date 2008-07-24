@@ -18,6 +18,13 @@ declare function	check_implementation(name : value, theNode : node);
 declare function	check_prototypes(var1 : node, var2 : node);
 declare function	check_arguments(fun1 : node, fun2 : node);
 
+/**
+ * @fn koocImplementationInit(sName : value, type : node, filenameC : node)
+ * @brief undef
+ * @param sName value
+ * @param type node
+ * @param filenameC node
+ */
 function	koocImplementationInit(sName : value, type : node, filenameC : node)
 {
   if (existModule(sName) == 1)
@@ -37,12 +44,24 @@ function	koocImplementationInit(sName : value, type : node, filenameC : node)
     }
 }
 
+/**
+ * @fn koocImplementationContent(sName : value, type : value)
+ * @brief undef
+ * @param sName value
+ * @param type value
+ */
 function	koocImplementationContent(sName : value, type : value)
 {
   koocImplementationErr();
   koocImplementationAdd(sName, type);
 }
 
+/**
+ * @fn koocImplementationPrint(sName : value, type : value)
+ * @brief undef
+ * @param sName value
+ * @param type value
+ */
 function	koocImplementationPrint(sName : value, type : value)
 {
   local		sFile;
@@ -73,6 +92,10 @@ function	koocImplementationPrint(sName : value, type : value)
     }
 }
 
+/**
+ * @fn koocImplementationErr()
+ * @brief undef
+ */
 function	koocImplementationErr()
 {
   localref	theNode = this.block#back;
@@ -84,6 +107,12 @@ function	koocImplementationErr()
     }
 }
 
+/**
+ * @fn koocImplementationAdd(sName : value, type : value)
+ * @brief undef
+ * @param sName value
+ * @param type value
+ */
 function	koocImplementationAdd(sName : value, type : value)
 {
   pushItem this.kooc.implementations[sName];
@@ -107,7 +136,7 @@ function	koocImplementationAdd(sName : value, type : value)
 
 /**
  * @fn koocImplementationCheck()
- * @brief check si toutes les fonctions definies on ete implementate
+ * @brief check if all functions defined have been implemented
  */
 function	koocImplementationCheck()
 {
@@ -137,10 +166,11 @@ function	koocImplementationCheck()
 }
 
 /**
- * @fn check_implementation(name : value)
- * @brief check si les fonctions implementater ont bien ete defini
- * dans le module concerne
- * @param name (value): nom de l'implementation
+ * @fn check_implementation(name : value, theNode : node)
+ * @brief check if functions implemented have been great defined
+ * in the good module
+ * @param name (value): implentation's name
+ * @param theNode node
  */
 function	check_implementation(name : value, theNode : node)
 {
@@ -166,19 +196,17 @@ function	check_implementation(name : value, theNode : node)
 	    prototype = item.sign + " " + item.identifier;
 	    prototype += " " + item.name + "(...)";
 	    traceLine("error: [ " + prototype + " ]'s declaration is missing");
-	    //	    exit(-1);
 	  }
       }
   }
 }
 
 /**
- * @fn check_prototypes(var1 : node, var2 : node, name : value)
- * @brief verifie si 2 prototypes de fonctions sont egals
- * @param var1 (node): noeud du 1er prototype
- * @param var2 (node): noeud du 2nd prototype
- * @param name (value): nom manglee de la fonction
- * @return true si ok, false sinon :p
+ * @fn check_prototypes(var1 : node, var2 : node)
+ * @brief check if both prototype are equal
+ * @param var1 (node): node to first prototype
+ * @param var2 (node): node to second prototype
+ * @return true if ok otherwise false
  */
 function	check_prototypes(var1 : node, var2 : node)
 {
@@ -188,16 +216,15 @@ function	check_prototypes(var1 : node, var2 : node)
       && (var2.ctype.sign == var1.ctype.sign)
       && (check_arguments(var1.list, var2.list) == true))
     return (true);
-  else
-    return (false);
+  return (false);
 }
 
 /**
  * @fn check_arguments(fun1 : node, fun2 : node)
- * @brief verifie si les arguments de 2 prototypes de fonctions sont egals
- * @param fun1 (node): noeud du 1er prototype
- * @param fun2 (node): noeud du 2nd prototype
- * @return true si ok, false sinon :p
+ * @brief check if prototypes' arguments are equal
+ * @param fun1 (node): node to first prototype
+ * @param fun2 (node): node to second prototype
+ * @return true if ok otherwise false
  */
 function	check_arguments(fun1 : node, fun2 : node)
 {
@@ -212,6 +239,5 @@ function	check_arguments(fun1 : node, fun2 : node)
     argsFun2 += "[" + info.ctype.identifier + info.ctype.sign + "]";
   if (argsFun1 == argsFun2)
     return (true);
-  else
-    return (false);
+  return (false);
 }

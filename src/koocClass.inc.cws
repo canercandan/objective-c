@@ -15,6 +15,11 @@ declare function	koocClassPrint(sClass : value, sExtend : value);
 declare function	koocClassExtendErr(sExtend : value);
 
 
+/**
+ * @fn koocClassDeclaration(sClass : value)
+ * @brief undef
+ * @param sClass value
+ */
 function	koocClassDeclaration(sClass : value)
 {
   localref	theBlock = this.block#back;
@@ -30,9 +35,10 @@ function	koocClassDeclaration(sClass : value)
 }
 
 /**
- * @fn function	koocClassInit(sClass : value)
+ * @fn function	koocClassInit(sClass : value, sExtend : value)
  * @brief init the tree'information to insert module
  * @param sClass module's name
+ * @param sExtend value
  */
 function	koocClassInit(sClass : value, sExtend : value)
 {
@@ -45,6 +51,12 @@ function	koocClassInit(sClass : value, sExtend : value)
   insert this.kooc.classes[sClass].parent = sExtend;
 }
 
+/**
+ * @fn koocClassInitVtable(sClass : value, sExtend : value)
+ * @brief undef
+ * @param sClass value
+ * @param sExtend value
+ */
 function	koocClassInitVtable(sClass : value, sExtend : value)
 {
   local decl;
@@ -53,31 +65,31 @@ function	koocClassInitVtable(sClass : value, sExtend : value)
 
   insert ctype.pctx;
   ref ctype.pctx = this.gl_pctx;
-
   insert ctype.type = "__COMPOSED__";
   insert ctype.identifier = "_kc_implementation_" + sClass;
   insert ctype.specifier = "struct";
   insert ctype.list;
-
   if (sExtend)
   {
     local pname = "_kc_implementation_" + sExtend;
     setall ctype.list = this.block.structs[pname].ctype.list;
   }
-
   insert decl.type = "__TYPE__";
   insert decl.etype = "declaration";
   cnormFillDeclarationNode(decl, "__CTYPE__", ctype);
-
   pushItem this.block;
   setall this.block#back = decl;
-
   treeInsertFileOut(getEnv("path_import") + this.kooc.classes[sClass].nameH,
 		    this.block#back);
-
   ref this.block.structs[ctype.identifier] = this.block#back;
 }
 
+/**
+ * @fn koocClassFillVtable(sClass : value, sExtend : value)
+ * @brief undef
+ * @param sClass value
+ * @param sExtend value
+ */
 function	koocClassFillVtable(sClass : value, sExtend : value)
 {
   local decl;
@@ -86,36 +98,34 @@ function	koocClassFillVtable(sClass : value, sExtend : value)
 
   insert ctype.pctx;
   ref ctype.pctx = this.gl_pctx;
-
   insert ctype.type = "__COMPOSED__";
   insert ctype.identifier = "_kc_implementation_" + sClass;
   insert ctype.specifier = "struct";
-
   cnormCreateDeclarationNode(decl, "__VARIABLE__");
-
   name = "_kc_vtable_" + sClass;
   cnormFillDeclarationNode(decl, "__NAME__", name);
   cnormFillDeclarationNode(decl, "__CTYPE__", ctype);
-
   insert decl.init;
   insert decl.init.block;
   insert decl.init.etype = "init";
-
   if (sExtend)
   {
     local pname = "_kc_vtable_" + sExtend;
     setall decl.init.block = this.block.variables[pname].init.block;
   }
-
   pushItem this.block;
   setall this.block#back = decl;
-
   treeInsertFileOut(getEnv("path_import") + this.kooc.classes[sClass].nameC,
   		    this.block#back);
-
   ref this.block.variables[name] = this.block#back;
 }
 
+/**
+ * @fn koocClassFill(sClass : value, sExtend : value)
+ * @brief undef
+ * @param sClass value
+ * @param sExtend value
+ */
 function	koocClassFill(sClass : value, sExtend : value)
 {
   local		ctype;
@@ -128,23 +138,16 @@ function	koocClassFill(sClass : value, sExtend : value)
   insert ctype.infoType["typedef"] = "storageClassSpecifier";
   insert ctype.specifier = "struct";
   insert ctype.list;
-
-  // vtable pointer
   local vt_decl;
   local vt_ctype;
-
   ref vt_ctype.pctx = this.gl_pctx;
-
   cnormFillCtypeNode(vt_ctype, "__POINTER__", "*");
   insert vt_ctype.identifier = "void";
-
   cnormCreateDeclarationNode(vt_decl, "__VARIABLE__");
   cnormFillDeclarationNode(vt_decl, "__CTYPE__", vt_ctype);
   insert vt_decl.name = "vt";
-
   pushItem ctype.list;
   setall ctype.list#back = vt_decl;
-
   pushItem this.block;
   treeInsertFileOut(getEnv("path_import")
 		    + this.kooc.classes[sClass].nameH,
@@ -159,6 +162,13 @@ function	koocClassFill(sClass : value, sExtend : value)
     koocClassExtend(sClass, sExtend, this.block#back.ctype.list);
 }
 
+/**
+ * @fn koocClassExtend(sClass : value, sExtend : value, theNode : node)
+ * @brief undef
+ * @param sClass value
+ * @param sExtend value
+ * @param theNode node
+ */
 function	koocClassExtend(sClass : value, sExtend : value, theNode : node)
 {
   if (!existVariable(this.block.types[sExtend]))
@@ -166,10 +176,14 @@ function	koocClassExtend(sClass : value, sExtend : value, theNode : node)
       traceLine("error: unknown class " + sExtend);
       exit(-1);
     }
-
   setall theNode = this.block.types[sExtend].ctype.list;
 }
 
+/**
+ * @fn koocClassErr(theNode : node)
+ * @brief undef
+ * @param theNode node
+ */
 function	koocClassErr(theNode : node)
 {
   if (theNode.type == "__VARIABLE__" &&
@@ -180,6 +194,11 @@ function	koocClassErr(theNode : node)
     }
 }
 
+/**
+ * @fn koocClassAdd(sClass : value)
+ * @brief undef
+ * @param sClass value
+ */
 function	koocClassAdd(sClass : value)
 {
   localref	theDecl = this.block#back;
@@ -196,6 +215,12 @@ function	koocClassAdd(sClass : value)
 		      theDecl);
 }
 
+/**
+ * @fn koocClassPrint(sClass : value, sExtend : value)
+ * @brief undef
+ * @param sClass value
+ * @param sExtend value
+ */
 function	koocClassPrint(sClass : value, sExtend : value)
 {
   koocImportIfndef(this.kooc.classes[sClass].nameH);
@@ -208,6 +233,11 @@ function	koocClassPrint(sClass : value, sExtend : value)
   koocImportEndif(this.kooc.classes[sClass].nameH);
 }
 
+/**
+ * @fn koocClassExtendErr(sExtend : value)
+ * @brief undef
+ * @param sExtend value
+ */
 function	koocClassExtendErr(sExtend : value)
 {
   if (existClass(sExtend) == 0)
