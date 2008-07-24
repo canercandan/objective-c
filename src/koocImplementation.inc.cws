@@ -14,6 +14,7 @@ declare function	koocImplementationPrint(sName : value, type : value);
 declare function	koocImplementationErr();
 declare function	koocImplementationAdd(sName : value, type : value);
 declare function	koocImplementationCheck();
+declare function	koocImplementationDependency(sName : value, theImplementation : node);
 declare function	check_implementation(name : value, theNode : node);
 declare function	check_prototypes(var1 : node, var2 : node);
 declare function	check_arguments(fun1 : node, fun2 : node);
@@ -160,6 +161,15 @@ function	koocImplementationCheck()
 	traceLine("[KOOC] " + file + ": (line " + line + ") function [" + name + "] undeclared");
       }
   }
+}
+
+function	koocImplementationDependency(sName : value, theImplementation : node)
+{
+  treeCreateNew(sName, "__FUNCTION__", theImplementation);
+  treeCreateClean(sName, "__FUNCTION__", theImplementation);
+  treeInsertFileOut(this.kooc.classes[sName].nameC, this.block#back);
+  ref this.block.functions[this.block#back.name] = this.block#back;
+  treeCreateDelete(sName, "__FUNCTION__", theImplementation);
 }
 
 /**

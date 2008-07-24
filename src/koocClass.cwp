@@ -31,12 +31,7 @@ koocClass ::=
  => koocClassDeclaration(sClass);
  ]*
 => localref theClass = this.kooc.classes[sClass];
-=> treeCreateNew(sClass, "__PROTOTYPE__", theClass);
-=> treeCreateClean(sClass, "__PROTOTYPE__", theClass);
-=> treeInsertFileOut(theClass.nameH, this.block#back);
-=> ref this.block.prototypes[this.block#back.name] = this.block#back;
-=> treeCreateDelete(sClass, "__PROTOTYPE__", theClass);
-=> koocImportInclude(this.kooc.classes[sClass].nameH);
+=> koocClassDependency(sClass, theClass);
 #generatedFile(getEnv("path_import") + theClass.nameH)
 => koocClassPrint(sClass, sExtend);
 '}'

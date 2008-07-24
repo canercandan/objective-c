@@ -13,7 +13,7 @@ declare function	koocClassErr(theNode : node);
 declare function	koocClassAdd(sClass : value);
 declare function	koocClassPrint(sClass : value, sExtend : value);
 declare function	koocClassExtendErr(sExtend : value);
-
+declare function	koocClassDependency(sClass : value, theClass : node);
 
 /**
  * @fn koocClassDeclaration(sClass : value)
@@ -245,4 +245,14 @@ function	koocClassExtendErr(sExtend : value)
       traceLine("Class " + sExtend + " doesn't exist");
       exit(-1);
     }
+}
+
+function	koocClassDependency(sClass : value, theClass : node)
+{
+  treeCreateNew(sClass, "__PROTOTYPE__", theClass);
+  treeCreateClean(sClass, "__PROTOTYPE__", theClass);
+  treeInsertFileOut(theClass.nameH, this.block#back);
+  ref this.block.prototypes[this.block#back.name] = this.block#back;
+  treeCreateDelete(sClass, "__PROTOTYPE__", theClass);
+  koocImportInclude(this.kooc.classes[sClass].nameH);
 }
