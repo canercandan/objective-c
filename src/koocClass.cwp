@@ -34,7 +34,7 @@ koocClass ::=
 => koocMemberCreateNew(sClass, "__PROTOTYPE__", theClass);
 => koocMemberCreateDelete(sClass, "__PROTOTYPE__", theClass);
 #generatedFile(getEnv("path_import") + theClass.nameH)
-=> koocClassPrint(sClass);
+=> koocClassPrint(sClass, sExtend);
 '}'
 => koocManglePopBlock();
 ;

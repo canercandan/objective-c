@@ -11,7 +11,7 @@ declare function	koocClassInitVtable(sClass : value, sExtend : value);
 declare function	koocClassExtend(sClass : value, sExtend : value, theNode : node);
 declare function	koocClassErr(theNode : node);
 declare function	koocClassAdd(sClass : value);
-declare function	koocClassPrint(sClass : value);
+declare function	koocClassPrint(sClass : value, sExtend : value);
 declare function	koocClassExtendErr(sExtend : value);
 
 
@@ -206,9 +206,11 @@ function	koocClassAdd(sClass : value)
 		      theDecl);
 }
 
-function	koocClassPrint(sClass : value)
+function	koocClassPrint(sClass : value, sExtend : value)
 {
   koocImportIfndef(this.kooc.classes[sClass].nameH);
+  if (sExtend)
+    {%>#include "kc_@sExtend@.h"@"\n"@<%}
   {@@prettyPrinterToH(getEnv("path_import")
 		      + this.kooc.classes[sClass].nameH + "_variable")@@}
   {@@prettyPrinterToC(getEnv("path_import")
