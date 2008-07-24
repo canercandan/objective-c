@@ -25,8 +25,7 @@ function	koocVirtualDeclaration(theClass : node)
   treeInsertFileOut(getEnv("path_import") + this.kooc.classes[theClass.name].nameH,
   		    this.block#back);
   koocVirtualCheckVtable(theClass, sVtable, sImplementation);
-
-
+  koocVirtualRun(theClass, sVtable, sImplementation);
   pushItem this.kooc.classes[theClass.name];
   ref this.kooc.classes[theClass.name]#back = this.block#back;
 }
