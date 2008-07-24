@@ -7,6 +7,10 @@
  * rule \@virtual
  */
 
+/**
+ * @cond
+ */
+
 koocVirtual(theClass : node) ::=
 #explicitCopy
 "@virtual" ["@member"]?
@@ -20,63 +24,9 @@ koocVirtual(theClass : node) ::=
 koocVirtualDeclaration(theClass : node) ::=
 #explicitCopy
 declaration(this.block)
-=>
-{
-  treeAddSelf(theClass.name, this.block#back);
-  treeInsertFileOut(getEnv("path_import") + this.kooc.classes[theClass.name].nameH,
-  		    this.block#back);
-
-  local sVtable = "_kc_vtable_" + theClass.name;
-  local sImplementation = "_kc_implementation_" + theClass.name;
-
-  if (!existVariable(this.block.structs[sImplementation]) ||
-      !existVariable(this.block.variables[sVtable]))
-  {
-    traceLine("Internal error: Can't find vtable for class " + theClass.name);
-    exit(-1);
-  }
-
-  local isPresent = false;
-  localref rImplementation = this.block.structs[sImplementation];
-
-  foreach item in rImplementation.ctype.list
-  {
-    if (this.block#back.oname == item.oname)
-    {
-      localref rVtable = this.block.variables[sVtable];
-      localref pointer = rVtable.init.block[key(item)];
-      pointer.init.value = this.block#back.name;
-      isPresent = true;
-      break;
-    }
-  }
-
-  if (isPresent == false)
-  {
-    pushItem rImplementation.ctype.list;
-    localref rIEntry = rImplementation.ctype.list#back;
-
-    setall rIEntry = this.block#back;
-    insert rIEntry.pfname;
-
-    pushItem rIEntry.pfname;
-    insert rIEntry.pfname#back.function;
-    insert rIEntry.pfname#back.function.name = this.block#back.name;
-
-    localref rVtable = this.block.variables[sVtable];
-
-    pushItem rVtable.init.block;
-    localref rVEntry = rVtable.init.block#back;
-
-    insert rVEntry.init;
-    insert rVEntry.init.type = "primary_expression";
-    insert rVEntry.init.value = this.block#back.name;
-    insert rVEntry.init.operator = "id";
-    insert rVEntry.init.otype = "terminal";
-    insert rVEntry.init.etype = "expression";
-  }
-
-  pushItem this.kooc.classes[theClass.name];
-  ref this.kooc.classes[theClass.name]#back = this.block#back;
-}
+  => koocVirtualDeclaration(theClass);
 ;
+
+/**
+ * @endcond
+ */

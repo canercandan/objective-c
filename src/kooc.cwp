@@ -28,6 +28,7 @@
 #include "koocImplementation.inc.cws"
 #include "koocModule.inc.cws"
 #include "koocTools.inc.cws"
+#include "koocVirtual.inc.cws"
 
 /**
  * @cond
