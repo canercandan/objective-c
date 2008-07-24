@@ -20,5 +20,5 @@
   @member int	value;
 
   @member  void	init();
-  @virtual void	print();
+  //  @virtual void	print();
 }

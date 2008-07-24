@@ -60,6 +60,7 @@ function	koocVirtualRun(theClass : node, sVtable : value, sImplementation : valu
   localref	rImplementation = this.block.structs[sImplementation];
 
   foreach item in rImplementation.ctype.list
+  {
     if (this.block#back.oname == item.oname)
       {
 	localref rVtable = this.block.variables[sVtable];
@@ -68,6 +69,7 @@ function	koocVirtualRun(theClass : node, sVtable : value, sImplementation : valu
 	isPresent = true;
 	break;
       }
+  }
   if (isPresent == false)
     koocVirtualRunOk(rImplementation, sVtable);
 }
