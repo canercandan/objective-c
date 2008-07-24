@@ -1,0 +1,100 @@
+/**
+ * @file koocVirtual.inc.cws
+ * @brief undef
+ * @note @ref develop @ref contrib @ref tools
+ */
+
+declare function	koocVirtualDeclaration(theClass : node);
+declare function	koocVirtualCheckVtable(theClass : node, sVtable : value,
+					       sImplementation : value);
+declare function	koocVirtualRun(theClass : node, sVtable : value,
+				       sImplementation : value);
+declare function	koocVirtualRunOk(rImplementation : node, sVtable : value);
+
+/**
+ * @fn koocVirtualDeclaration(theClass : node)
+ * @brief undef
+ * @param theClass : node
+ */
+function	koocVirtualDeclaration(theClass : node)
+{
+  local		sVtable = "_kc_vtable_" + theClass.name;
+  local		sImplementation = "_kc_implementation_" + theClass.name;
+
+  treeAddSelf(theClass.name, this.block#back);
+  treeInsertFileOut(getEnv("path_import") + this.kooc.classes[theClass.name].nameH,
+  		    this.block#back);
+  koocVirtualCheckVtable(theClass, sVtable, sImplementation);
+
+
+  pushItem this.kooc.classes[theClass.name];
+  ref this.kooc.classes[theClass.name]#back = this.block#back;
+}
+
+/**
+ * @fn koocVirtualCheckVtable(theClass : node, sVtable : value, sImplementation : value)
+ * @brief undef
+ * @param theClass node
+ * @param sVtable value
+ * @param sImplementation value
+ */
+function	koocVirtualCheckVtable(theClass : node, sVtable : value, sImplementation : value)
+{
+  if (!existVariable(this.block.structs[sImplementation]) ||
+      !existVariable(this.block.variables[sVtable]))
+    {
+      traceLine("Internal error: Can't find vtable for class " + theClass.name);
+      exit(-1);
+    }
+}
+
+/**
+ * @fn koocVirtualRun(theClass : node, sVtable : value, sImplementation : value)
+ * @brief undef
+ * @param theClass node
+ * @param sVtable value
+ * @param sImplementation value
+ */
+function	koocVirtualRun(theClass : node, sVtable : value, sImplementation : value)
+{
+  local		isPresent = false;
+  localref	rImplementation = this.block.structs[sImplementation];
+
+  foreach item in rImplementation.ctype.list
+    if (this.block#back.oname == item.oname)
+      {
+	localref rVtable = this.block.variables[sVtable];
+	localref pointer = rVtable.init.block[key(item)];
+	pointer.init.value = this.block#back.name;
+	isPresent = true;
+	break;
+      }
+  if (isPresent == false)
+    koocVirtualRunOk(rImplementation, sVtable);
+}
+
+/**
+ * @fn koocVirtualRunOk(rImplementation : node, sVtable : value)
+ * @brief undef
+ * @param rImplementation node
+ * @param sVtable value
+ */
+function	koocVirtualRunOk(rImplementation : node, sVtable : value)
+{
+  pushItem rImplementation.ctype.list;
+  localref rIEntry = rImplementation.ctype.list#back;
+  setall rIEntry = this.block#back;
+  insert rIEntry.pfname;
+  pushItem rIEntry.pfname;
+  insert rIEntry.pfname#back.function;
+  insert rIEntry.pfname#back.function.name = this.block#back.name;
+  localref rVtable = this.block.variables[sVtable];
+  pushItem rVtable.init.block;
+  localref rVEntry = rVtable.init.block#back;
+  insert rVEntry.init;
+  insert rVEntry.init.type = "primary_expression";
+  insert rVEntry.init.value = this.block#back.name;
+  insert rVEntry.init.operator = "id";
+  insert rVEntry.init.otype = "terminal";
+  insert rVEntry.init.etype = "expression";
+}
