@@ -32,6 +32,8 @@ koocClass ::=
  ]*
 => localref theClass = this.kooc.classes[sClass];
 => treeCreateNew(sClass, "__PROTOTYPE__", theClass);
+=> treeCreateClean(sClass, "__PROTOTYPE__", theClass);
+=> treeInsertFileOut(theClass.nameH, this.block#back);
 => treeCreateDelete(sClass, "__PROTOTYPE__", theClass);
 => koocImportInclude(this.kooc.classes[sClass].nameH);
 #generatedFile(getEnv("path_import") + theClass.nameH)

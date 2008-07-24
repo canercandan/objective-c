@@ -40,6 +40,8 @@ koocImplementation ::=
  ]*
 => localref theImplementation = this.kooc.implementations[sName];
 => treeCreateNew(sName, "__FUNCTION__", theImplementation);
+=> treeCreateClean(sName, "__PROTOTYPE__", theImplementation);
+=> treeInsertFileOut(this.kooc.classes[sName].nameC, this.block#back);
 => treeCreateDelete(sName, "__FUNCTION__", theImplementation);
 #generatedFile(getEnv("path_import") + filenameC)
 => koocImplementationPrint(sName, type);

@@ -124,7 +124,6 @@ function	treeCreateLink(theNode : node,
  */
 function	treeCreateNew(sName : value, sType : value, theNode : node)
 {
-  local		fnd = false;
   local		sFunc;
 
   sFunc = "init";
@@ -149,20 +148,25 @@ function	treeCreateNew(sName : value, sType : value, theNode : node)
  */
 function	treeCreateDelete(sName : value, sType : value, theNode : node)
 {
-  local		fnd = false;
-  local		sFunc;
+  local		sFunc = "clean";
 
-  sFunc = "clean";
   if (!treeSeekForFunctionOrPrototype(theNode, sFunc))
-    {
-      treeCreateFunctionEmpty(sFunc, theNode, sType);
-      treeInsertFileOut(this.kooc.classes[sName].nameC,
-			this.block#back);
-    }
-  sFunc = "delete";
+    treeCreateFunctionEmpty(sFunc, theNode, sType);
+}
+
+/**
+ * @fn treeCreateClean(sName : value, sType : value, theNode : node)
+ * @brief undef
+ * @param sName value
+ * @param sType value
+ * @param theNode node
+ */
+function	treeCreateClean(sName : value, sType : value, theNode : node)
+{
+  local		sFunc = "delete";
+
   treeCreateFunctionEmpty(sFunc, theNode, sType);
-  localref theDelete = this.block#back;
-  treeAddSelf(sName, theDelete);
+  treeAddSelf(sName, this.block#back);
 }
 
 /**
