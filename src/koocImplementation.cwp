@@ -13,7 +13,7 @@
  *
  * @todo @member { functions }
  * @bug generateString what the fuck Cedric!!! fixed by the
- * function prettyPrintExistFile
+ * function prettyPrintExistFile 42
  */
 
 /**
