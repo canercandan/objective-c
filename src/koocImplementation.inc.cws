@@ -147,20 +147,17 @@ function	koocImplementationCheck()
   {
     bool = false;
     foreach nameFunction in this.block.functions
-    {
       if (key(namePrototype) == key(nameFunction))
 	{
 	  bool = true;
 	  break;
 	}
-    }
     if (bool == false)
       {
 	local name = namePrototype.oname;
 	local line = namePrototype.__LINE__;
 	local file = namePrototype.__FILE__;
 	traceLine("[KOOC] " + file + ": (line " + line + ") function [" + name + "] undeclared");
-	//	exit(-1);
       }
   }
 }
@@ -237,7 +234,5 @@ function	check_arguments(fun1 : node, fun2 : node)
     argsFun1 += "[" + info.ctype.identifier + info.ctype.sign + "]";
   foreach info in fun2
     argsFun2 += "[" + info.ctype.identifier + info.ctype.sign + "]";
-  if (argsFun1 == argsFun2)
-    return (true);
-  return (false);
+  return (argsFun1 == argsFun2);
 }

@@ -1,4 +1,4 @@
-/*
+/**
  * @file koocCall.cwp
  * @brief [ ... ] Kooc Expression file
  * @note @ref develop @ref contrib @ref tools
@@ -41,173 +41,55 @@
 ;
 
 koocCall(expr : node) ::=
-  => local module_name = "";
-  => local type_name = "";
-  => local func_name = "";
-  => local nb_arg = "";
-  => local i = 0;
-  => local ptr = "";
-#explicitCopy [cast(expr):type_name]?
+  => local callTree;
+  => koocCallInit(callTree);
+#explicitCopy [koocCallCast(expr):callTree.sType]?
 '['
-kooc_identifiant_module(expr, module_name, type_name, ptr)
+koocCallIdentifiantModule(expr, callTree)
 [
- kooc_identifiant_variable(expr, module_name, type_name)
+ koocCallIdentifiantVariable(expr, callTree)
  |
  [
-  kooc_identifiant_fonction(expr, module_name, func_name, type_name, nb_arg, i, ptr)
-  kooc_list_parametre(expr, module_name, func_name, nb_arg, i)
+  koocCallIdentifiantFunction(expr, callTree)
+  koocCallListParameter(expr, callTree)
   ]
  ]
 ']'
 ;
 
-cast(expr : node) : value ::= "@!("->(:cast)')'
+koocCallCast(expr : node) : value ::=
+  "@!("->(:koocCallCast)')'
 ;
 
-kooc_identifiant_module(expr : node, module_name : node, type_name : value, ptr : node)
-::= ['&']*:ptr [kooc_identifier ['.' kooc_identifier]*]:module_name
+koocCallIdentifiantModule(expr : node, callTree : node) ::=
+  ['&']*:callTree.ptr [koocCallIdentifier ['.' koocCallIdentifier]*]:callTree.sModule
 ;
 
-kooc_identifiant_variable(expr : node, module_name : node, type_name : node) ::=
-  [ !!']' // C'est une variable qui est demande
-    => { local val = "";
-	 local name = module_name;
-	 module_name = midString(name, 0, findLastString(name, '.'));
-	 val = subString(name, $findLastString(name, '.') + 1$);
-	 local variable = existVar(module_name, val, type_name);
-	 if (variable != 0)
-	   {
-	     insert expr.value = variable;
-	     insert expr.operator = "id";
-	     insert expr.otype = "terminal";
-	   }
-	 else // Check si on nous demande le premier arg
-	      // en tant que this ou self par exemple
-	   {
-	     if (expr#parent#parent#parent.type == "__FUNCTION__"
-	     	|| expr#parent#parent.type == "__FUNCTION__")
-	       {
-		  variable = existVar(this.kooc.mangle#back, val, type_name);
-		  if (variable == 0)
-		  {
-		    traceLine("error - variable " + val + " doesn't exist.");
-	     	    exit(-1);
-		  }
-		  insert expr.left;
-	     	  insert expr.left.type = "primary_expression";
-	     	  insert expr.left.value = module_name;
-	     	  insert expr.left.operator = "id";
-	     	  insert expr.left.otype = "terminal";
-	     	  insert expr.left.type = "primary_expression";
-	     	  insert expr.type = "deref_expression";
-	     	  insert expr.otype = "likebinary";
-	     	  insert expr.etype = "expression";
-	     	  insert expr.right;
-	     	  insert expr.right.type = "primary_expression";
-	     	  insert expr.right.value = variable;
-	     	  insert expr.right.operator = "id";
-	     	  insert expr.right.otype = "terminal";
-	     	  insert expr.operator = "->";
-	       }
-	       else
-	       {
-		 traceLine("error - module " + module_name + " doesn't exist.");
-	     	 exit(-1);
-	       }
-	     }
-	   }
+koocCallIdentifiantVariable(expr : node, callTree : node) ::=
+  [ !!']'
+    => koocCallIdentifantVariable(expr, callTree);
     ]
 ;
 
-kooc_identifiant_fonction(expr : node, module_name : value, func_name : node, type : value, nb_arg : node, i : node, ptr : value)
-::= 
-  => local class_name = "";
-  => { if (module_name == "super")
-       {
-         module_name = #evaluateVariable('this.kooc.classes["' + this.kooc.mangle#back + '"].parent');
-	 nb_arg = 1;
-	 i = 1;
-	}
-     }
-  => {  if (!existModule(module_name))
-        {
-          traceLine("error - module " + module_name + " doesn't exist.");
-          exit(-1);
-        }
-     }
-  => local name = "";
-  kooc_identifier:func
-  => {
-  func_name = existFunc(module_name, func, type, nb_arg);
-  if (func_name == 0) // on test si ce n'est pas une instance
-  {
-    class_name = isAnInstance(module_name, expr);
-    if (class_name == "")
-    {
-      traceLine("error - function " + func + " doesn't exist in " + module_name + " module.");
-      exit(-1);
-    }
-    func_name = existFunc(class_name, func, type, nb_arg);
-    if (func_name == 0)
-      {
-        traceLine("error - function " + func + " doesn't exist in " + class_name + " module.");
-        exit(-1);
-      }
-    i = $i + 1$;
-    pushItem expr.list;
-    insert expr.list#back.type = "primary_expression";
-    insert expr.list#back.value = ptr + module_name;
-    insert expr.list#back.operator = "id";
-    insert expr.list#back.otype = "terminal";
-  }
-  insert expr.left;
-  insert expr.left.type = "primary_expression";
-  insert expr.left.value = func_name;
-  insert expr.left.operator = "id";
-  insert expr.left.otype = "terminal";
-  insert expr.left.etype = "expression";
-  insert expr.type = "call_expression";
-  insert expr.otype = "call";
-  insert expr.operator = "()";
-  insert expr.list;
-  }
+koocCallIdentifiantFunction(expr : node, callTree : node) ::=
+=> koocCallIdentifiantFunctionInit(callTree);
+koocCallIdentifier:func
+=> koocCallIdentifiantFunctionRun(expr, callTree, func);
 ;
 
-kooc_list_parametre(expr : node, module : value, func : value, nb_arg : value, i : node)
-     ::=
-     => { 
-     	  if (module == "super")
-	  {
-     	     nb_arg = $1 + nb_arg$;
-	     i = $i + 1$;
-  	     pushItem expr.list;
-  	     insert expr.list#back.type = "primary_expression";
-  	     insert expr.list#back.value = "self";
-   	     insert expr.list#back.operator = "id";
-   	     insert expr.list#back.otype = "terminal";
-	  }
-	}
-     [
-      ':' kooc_param(expr):val
-      => i = $i + 1$;
-      ]*
-     => { if (nb_arg > i)
-	 {
-	   traceLine("error - function " + func + " not enouch param in argument (need " + nb_arg + " arg,  you give " + i + " arg)");
-	   exit(-1);
-	 }
-	  if (nb_arg < i)
-	    {
-	      traceLine("error - function " + func + " too many param in argument (need " + nb_arg + " arg,  you give " + i + " arg)");
-	      exit(-1);
-	    }
-     }
+koocCallListParameter(expr : node, callTree : node) ::=
+  => koocCallListParameter(expr, callTree);
+[
+ ':' koocCallParam(expr):val
+ => callTree.cnt = $callTree.cnt + 1$;
+ ]*
+=> koocCallListParameterCheck(callTree);
 ;
 
-kooc_identifier ::= #readIdentifier
+koocCallIdentifier ::= #readIdentifier
 ;
 
-kooc_param(expr : node) ::=
+koocCallParam(expr : node) ::=
   => pushItem expr.list;
   => insert expr.list#back.type = "primary_expression";
   ['&']*:ptr
@@ -239,6 +121,7 @@ kooc_param(expr : node) ::=
     => insert expr.list#back.operator = "literal";
     ]
 ;
+
 /**
  * @endcond
  */

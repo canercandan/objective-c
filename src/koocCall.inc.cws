@@ -4,17 +4,208 @@
  * @note @ref develop @ref contrib @ref tools
  */
 
-function	isAnInstance(key : value, type : node)
-{
-  	local leaf;
+declare function	koocCallInit(callTree : node);
+declare function	koocCallIdentifantVariable(expr : node, callTree : node);
+declare function	koocCallIdentifiantFunctionInit(callTree : node);
+declare function	koocCallIdentifiantFunctionRun(expr : node, callTree : node,
+						       func : value);
+declare function	koocCallIdentifiantFunctionInsertExpr(expr : node, callTree : node);
+declare function	isAnInstance(key : value, type : node);
+declare function	getParent(child : node);
 
-	ref leaf = type#parent;
-	while ((leaf.variables[key].oname != key) && existVariable(leaf.pctx))
-	  ref leaf = leaf.pctx;
-	return leaf.variables[key].ctype.identifier;
+function	koocCallInit(callTree : node)
+{
+  insert callTree.sModule = "";
+  insert callTree.sClass = "";
+  insert callTree.sType = "";
+  insert callTree.sFunc = "";
+  insert callTree.nbArg = "";
+  insert callTree.cnt = 0;
+  insert callTree.ptr = "";
 }
 
+function	koocCallIdentifantVariable(expr : node, callTree : node)
+{
+  local		val = "";
+  local		name = callTree.sModule;
+
+  callTree.sModule = midString(name, 0, findLastString(name, '.'));
+  val = subString(name, $findLastString(name, '.') + 1$);
+  local variable = existVar(callTree.sModule, val, callTree.sType);
+  if (variable != 0)
+    {
+      insert expr.value = variable;
+      insert expr.operator = "id";
+      insert expr.otype = "terminal";
+    }
+  else
+    {
+      if (expr#parent#parent#parent.type == "__FUNCTION__" ||
+	  expr#parent#parent.type == "__FUNCTION__")
+	{
+	  variable = existVar(this.kooc.mangle#back, val, callTree.sType);
+	  if (variable == 0)
+	    {
+	      traceLine("error - variable " + val + " doesn't exist.");
+	      exit(-1);
+	    }
+	  insert expr.left;
+	  insert expr.left.type = "primary_expression";
+	  insert expr.left.value = callTree.sModule;
+	  insert expr.left.operator = "id";
+	  insert expr.left.otype = "terminal";
+	  insert expr.left.type = "primary_expression";
+	  insert expr.type = "deref_expression";
+	  insert expr.otype = "likebinary";
+	  insert expr.etype = "expression";
+	  insert expr.right;
+	  insert expr.right.type = "primary_expression";
+	  insert expr.right.value = variable;
+	  insert expr.right.operator = "id";
+	  insert expr.right.otype = "terminal";
+	  insert expr.operator = "->";
+	}
+      else
+	{
+	  traceLine("error - module " + callTree.sModule + " doesn't exist.");
+	  exit(-1);
+	}
+    }
+}
+
+/**
+ * @fn koocCallIdentifiantFunctionInit(callTree : node)
+ * @brief undef
+ * @param callTree node
+ */
+function	koocCallIdentifiantFunctionInit(callTree : node)
+{
+  if (callTree.sModule == "super")
+    {
+      callTree.sModule = #evaluateVariable('this.kooc.classes["'
+					   + this.kooc.mangle#back + '"].parent');
+      callTree.nbArg = 1;
+      callTree.cnt = 1;
+    }
+}
+
+/**
+ * @fn koocCallIdentifiantFunctionRun(expr : node, callTree : node, func : value)
+ * @brief undef
+ * @param expr node
+ * @param callTree node
+ * @param func value
+ */
+function	koocCallIdentifiantFunctionRun(expr : node, callTree : node, func : value)
+{
+  callTree.sFunc = existFunc(callTree.sModule, func,
+			     callTree.sType, callTree.nbArg);
+  if (callTree.sFunc == 0)
+    {
+      callTree.sClass = isAnInstance(callTree.sModule, expr);
+      if (callTree.sClass == "")
+	{
+	  traceLine("error - function " + func + " doesn't exist in "
+		    + callTree.sModule + " module.");
+	  exit(-1);
+	}
+      callTree.sFunc = existFunc(callTree.sClass, func,
+				 callTree.sType, callTree.nbArg);
+      if (!callTree.sFunc)
+	{
+	  traceLine("error - function " + func + " doesn't exist in "
+		    + callTree.sClass + " module.");
+	  exit(-1);
+	}
+      callTree.cnt = $callTree.cnt + 1$;
+      pushItem expr.list;
+      insert expr.list#back.type = "primary_expression";
+      insert expr.list#back.value = callTree.ptr + callTree.sModule;
+      insert expr.list#back.operator = "id";
+      insert expr.list#back.otype = "terminal";
+    }
+  koocCallIdentifiantFunctionInsertExpr(expr, callTree);
+}
+
+/**
+ * @fn koocCallIdentifiantFunctionInsertExpr(expr : node, callTree : node)
+ * @brief undef
+ * @param expr node
+ * @param callTree node
+ */
+function	koocCallIdentifiantFunctionInsertExpr(expr : node, callTree : node)
+{
+  insert expr.left;
+  insert expr.left.type = "primary_expression";
+  insert expr.left.value = callTree.sFunc;
+  insert expr.left.operator = "id";
+  insert expr.left.otype = "terminal";
+  insert expr.left.etype = "expression";
+  insert expr.type = "call_expression";
+  insert expr.otype = "call";
+  insert expr.operator = "()";
+  insert expr.list;
+}
+
+function	koocCallListParameter(expr : node, callTree : node)
+{
+  if (callTree.sModule == "super")
+    {
+      callTree.nbArg = $1 + callTree.nbArg$;
+      callTree.cnt = $callTree.cnt + 1$;
+      pushItem expr.list;
+      insert expr.list#back.type = "primary_expression";
+      insert expr.list#back.value = "self";
+      insert expr.list#back.operator = "id";
+      insert expr.list#back.otype = "terminal";
+    }
+}
+
+/**
+ * @fn koocCallListParameterCheck(func : value, callTree : node)
+ * @brief undef
+ * @param func value
+ * @param callTree node
+ */
+function	koocCallListParameterCheck(callTree : node)
+{
+  if (callTree.nbArg > callTree.cnt)
+    {
+      traceLine("error - function " + callTree.sFunc + " not enouch param in argument (need "
+		+ callTree.nbArg + " arg,  you give " + callTree.cnt + " arg)");
+      exit(-1);
+    }
+  if (callTree.nbArg < callTree.cnt)
+    {
+      traceLine("error - function " + callTree.sFunc + " too many param in argument (need "
+		+ callTree.nbArg + " arg,  you give " + callTree.cnt + " arg)");
+      exit(-1);
+    }
+}
+
+/**
+ * @fn isAnInstance(key : value, type : node)
+ * @brief undef
+ * @param key value
+ * @param type node
+ */
+function	isAnInstance(key : value, type : node)
+{
+  local leaf;
+
+  ref leaf = type#parent;
+  while (leaf.variables[key].oname != key &&
+	 existVariable(leaf.pctx))
+    ref leaf = leaf.pctx;
+  return (leaf.variables[key].ctype.identifier);
+}
+
+/**
+ * @fn getParent(child : node)
+ * @brief undef
+ * @param child node
+ */
 function	getParent(child : node)
 {
-	return (child.parent);
+  return (child.parent);
 }

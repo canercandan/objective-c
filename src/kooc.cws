@@ -33,6 +33,10 @@ function	loopFile()
   exit(0);
 }
 
+/**
+ * @fn setIncludes()
+ * @brief undef
+ */
 function	setIncludes()
 {
   if (!existEnv("CNORM_PATH"))
@@ -87,6 +91,11 @@ function	setPath(file : value)
   setPathImport(file);
 }
 
+/**
+ * @fn setPathFiles(file : value)
+ * @brief undef
+ * @param file value
+ */
 function	setPathFiles(file : value)
 {
   local		sRoot = getWorkingPath();
@@ -97,6 +106,11 @@ function	setPathFiles(file : value)
   putEnv("pathC", sRoot + replaceString(sExtension, ".c", file));
 }
 
+/**
+ * @fn setPathImport(file : value)
+ * @brief undef
+ * @param file value
+ */
 function	setPathImport(file : value)
 {
   local		size = lengthString(file);

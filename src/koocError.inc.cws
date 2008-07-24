@@ -196,12 +196,13 @@ function	searchFunction(search : value, module : value, name : value, type : val
  */
 function	existFunc(module : value, name : value, type : value, nb_arg : node)
 {
-  local mangle = "";
+  local		mangle = "";
+
   mangle = searchFunction("modules", module, name, type, nb_arg);
   if (mangle == 0)
-   mangle = searchFunction("classes", module, name, type, nb_arg);
+    mangle = searchFunction("classes", module, name, type, nb_arg);
   if (mangle != 0)
-     return (mangle);
+    return (mangle);
   return 0;
 }
 
