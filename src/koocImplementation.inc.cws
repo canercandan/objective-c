@@ -166,11 +166,16 @@ function	koocImplementationCheck()
 function	koocImplementationDependency(sName : value, theImplementation : node)
 {
   treeCreateNew(sName, "__FUNCTION__", theImplementation);
+  localref theNew = this.block#back;
   treeCreateClean(sName, "__FUNCTION__", theImplementation);
-  treeInsertFileOut(getEnv("path_import") + this.kooc.classes[sName].nameC,
-		    this.block#back);
-  insert this.block#back.block;
-  ref this.block.functions[this.block#back.name] = this.block#back;
+  localref theClean = this.block#back;
+  if (!equalTrees(theNew, theClean))
+    {
+      treeInsertFileOut(getEnv("path_import") + this.kooc.classes[sName].nameC,
+			theClean);
+      insert theClean.block;
+      ref this.block.functions[theClean.name] = theClean;
+    }
   treeCreateDelete(sName, "__FUNCTION__", theImplementation);
 }
 
