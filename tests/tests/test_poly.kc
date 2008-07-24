@@ -23,7 +23,7 @@
 {
   @member void	init()
     {
-      //      [super init];
+      [super init];
       [self.value] = 124;
     }
 
@@ -32,7 +32,7 @@
       int	value;
       char	*name;
 
-      //name = [self.name_of_interface];
+//      name = [self.name_of_interface];
       value = [self.value];
       printf("%d %s\n", value, name);
     }

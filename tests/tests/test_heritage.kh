@@ -5,7 +5,7 @@
 ** Login   <toumi_m@epitech.net>
 ** 
 ** Started on  Sat Jul 12 18:28:35 2008 User Toumi_m
-** Last update Tue Jul 22 17:32:04 2008 morgan armand
+   Last update Wed Jul 23 22:37:58 2008 florent hochwelker
 */
 
 @class Stack
@@ -18,8 +18,8 @@
 
   /* pour compter le nombre de pile presente dans le systeme */
   int		nbstack = 0;
-  //  void		_.init(int);
-  //  int		_.nbitem();
+  @member void		init(int);
+  int		nbitem();
 }
 
 @class StackInt : Stack

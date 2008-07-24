@@ -13,7 +13,9 @@ declare function	koocCallIdentifiantFunctionInsertExpr(expr : node, callTree : n
 declare function	koocCallListParameter(expr : node, callTree : node);
 declare function	koocCallListParameterCheck(callTree : node);
 declare function	isAnInstance(key : value, type : node);
-declare function	getParent(child : node);
+declare function	checkSelf(expr : node, module_name, val, type_name, nb_arg : node);
+
+
 
 /**
  * @fn koocCallInit(callTree : node)
@@ -26,7 +28,7 @@ function	koocCallInit(callTree : node)
   insert callTree.sClass = "";
   insert callTree.sType = "";
   insert callTree.sFunc = "";
-  insert callTree.nbArg = "";
+  insert callTree.nbArg = 0;
   insert callTree.cnt = 0;
   insert callTree.ptr = "";
 }
@@ -53,36 +55,15 @@ function	koocCallIdentifantVariable(expr : node, callTree : node)
     }
   else
     {
-      if (expr#parent#parent#parent.type == "__FUNCTION__" ||
-	  expr#parent#parent.type == "__FUNCTION__")
-	{
-	  variable = existVar(this.kooc.mangle#back, val, callTree.sType);
-	  if (variable == 0)
-	    {
-	      traceLine("error - variable " + val + " doesn't exist.");
-	      exit(-1);
-	    }
-	  insert expr.left;
-	  insert expr.left.type = "primary_expression";
-	  insert expr.left.value = callTree.sModule;
-	  insert expr.left.operator = "id";
-	  insert expr.left.otype = "terminal";
-	  insert expr.left.type = "primary_expression";
-	  insert expr.type = "deref_expression";
-	  insert expr.otype = "likebinary";
-	  insert expr.etype = "expression";
-	  insert expr.right;
-	  insert expr.right.type = "primary_expression";
-	  insert expr.right.value = variable;
-	  insert expr.right.operator = "id";
-	  insert expr.right.otype = "terminal";
-	  insert expr.operator = "->";
-	}
-      else
-	{
+      local dummy = 0;
+      if (!this.kooc.mangle.empty())
+      {	   
+        if (checkSelf(expr, callTree.sModule, val, callTree.sType, dummy) == 0)
+        {
 	  traceLine("error - module " + callTree.sModule + " doesn't exist.");
-	  exit(-1);
-	}
+     	  exit(-1);
+        }
+      }
     }
 }
 
@@ -97,6 +78,11 @@ function	koocCallIdentifiantFunctionInit(callTree : node)
     {
       callTree.sModule = #evaluateVariable('this.kooc.classes["'
 					   + this.kooc.mangle#back + '"].parent');
+      if (callTree.sModule == "")
+	{
+          traceLine("error - super use but parent doesn't exist.");
+          exit(-1);
+	 }     
       callTree.nbArg = 1;
       callTree.cnt = 1;
     }
@@ -115,21 +101,27 @@ function	koocCallIdentifiantFunctionRun(expr : node, callTree : node, func : val
 			     callTree.sType, callTree.nbArg);
   if (callTree.sFunc == 0)
     {
-      callTree.sClass = isAnInstance(callTree.sModule, expr);
-      if (callTree.sClass == "")
-	{
-	  traceLine("error - function " + func + " doesn't exist in "
+      callTree.nbArg = 1;
+      if (!this.kooc.mangle.empty())
+        callTree.sFunc = checkSelf(expr, callTree.sModule, func, callTree.sType, callTree.nbArg);
+      if (callTree.sFunc == 0)
+       {
+        callTree.sClass = isAnInstance(callTree.sModule, expr);
+        if (callTree.sClass == "")
+	  {
+	     traceLine("error - function " + func + " doesn't exist in "
 		    + callTree.sModule + " module.");
-	  exit(-1);
-	}
-      callTree.sFunc = existFunc(callTree.sClass, func,
+	     exit(-1);
+	  }
+        callTree.sFunc = existFunc(callTree.sClass, func,
 				 callTree.sType, callTree.nbArg);
-      if (!callTree.sFunc)
+        if (!callTree.sFunc)
 	{
 	  traceLine("error - function " + func + " doesn't exist in "
 		    + callTree.sClass + " module.");
 	  exit(-1);
 	}
+      }
       callTree.cnt = $callTree.cnt + 1$;
       pushItem expr.list;
       insert expr.list#back.type = "primary_expression";
@@ -219,12 +211,47 @@ function	isAnInstance(key : value, type : node)
   return (leaf.variables[key].ctype.identifier);
 }
 
-/**
- * @fn getParent(child : node)
- * @brief undef
- * @param child node
- */
-function	getParent(child : node)
+function	checkSelf(expr : node, module_name, val, type_name, nb_arg : node)
 {
-  return (child.parent);
+// traceObject(expr#parent#parent#parent, 3);
+ //if (expr#parent#parent#parent.type == "__FUNCTION__"
+   // 	|| expr#parent#parent.type == "__FUNCTION__")
+  //{
+    local variable = "";
+    if (nb_arg == 0)
+    {
+      variable = existVar(this.kooc.mangle#back, val, type_name);
+      if (variable == 0)
+      {
+	traceLine("error - variable " + val + " doesn't exist.");
+	exit(-1);
+      }
+    insert expr.left;
+    insert expr.left.type = "primary_expression";
+    insert expr.left.value = module_name;
+    insert expr.left.operator = "id";
+    insert expr.left.otype = "terminal";
+    insert expr.left.type = "primary_expression";
+    insert expr.type = "deref_expression";
+    insert expr.otype = "likebinary";
+    insert expr.etype = "expression";
+    insert expr.right;
+    insert expr.right.type = "primary_expression";
+    insert expr.right.value = variable;
+    insert expr.right.operator = "id";
+    insert expr.right.otype = "terminal";
+    insert expr.operator = "->";
+    }
+    else
+    {
+      variable = existFunc(this.kooc.mangle#back, val, type_name, nb_arg);
+      if (variable == 0)
+      {
+	traceLine("error - function " + val + " doesn't exist.");
+	exit(-1);
+      }
+    return variable;
+    }
+//   }
+//   return 0;
 }

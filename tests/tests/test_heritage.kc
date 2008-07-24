@@ -5,7 +5,7 @@
 ** Login   <toumi_m@epitech.net>
 ** 
 ** Started on  Sat Jul 12 18:30:09 2008 User Toumi_m
-** Last update Tue Jul 22 17:30:28 2008 morgan armand
+   Last update Wed Jul 23 22:28:17 2008 florent hochwelker
 */
 
 @import	"test_heritage.kh"
@@ -16,7 +16,7 @@
     {
       void	init(int size)
       {
-	[super init];
+//	[super init];
 	[self.size] = size;
       }
 

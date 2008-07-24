@@ -222,7 +222,6 @@ function	countNbArgInFunc(theNode : node)
 function	errorDebug(sError : value)
 {
   traceLine("error: " + sError);
-  //traceObject(this, 4);
   saveProject(getEnv("pathTree"));
   exit(-1);
 }
