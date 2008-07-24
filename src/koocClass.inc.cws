@@ -32,6 +32,8 @@ function	koocClassDeclaration(sClass : value)
     treeInsertFileOut(getEnv("path_import")
 		      + this.kooc.classes[sClass].nameH,
 		      theBlock);
+  pushItem this.kooc.classes[sClass];
+  ref this.kooc.classes[sClass]#back = this.block#back;
 }
 
 /**

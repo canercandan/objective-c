@@ -5,7 +5,7 @@
 ** Login   <armand_m@epitech.net>
 ** 
 ** Started on  Sat Jul  5 17:34:10 2008 morgan armand
-   Last update Tue Jul 22 19:24:51 2008 florent hochwelker
+** Last update Fri Jul 25 01:40:59 2008 morgan armand
 */
 
 @import	"test_class.kh"
@@ -21,6 +21,8 @@ int		main(void)
   [my_stack push :13];
   [my_stack push :14];
   [my_stack delete];
+  printf("POP: %d\n", [StackInt pop :my_stack]);
+  printf("POP: %d\n", [my_stack pop]);
 }
 
 @implementation StackInt
