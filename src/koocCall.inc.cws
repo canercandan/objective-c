@@ -104,7 +104,7 @@ function	koocCallIdentifiantFunctionRun(expr : node, callTree : node, func : val
 //  if (callTree.sFunc != 0)
 //  {
 //    callTree.sFunc =
-//      "((_kc_implementation_" + callTree.sModule + "*)" + callTree.sModule + "->vt)->" + callTree.sFunc;
+//      "((struct _kc_implementation_" + callTree.sModule + "*)" + callTree.sModule + "->vt)->" + callTree.sFunc;
 //  }
   if  (callTree.sFunc == 0)
   {
@@ -128,7 +128,7 @@ function	koocCallIdentifiantFunctionRun(expr : node, callTree : node, func : val
           if (callTree.sFunc != 0)
 	  {
             callTree.sFunc =
-              "((_kc_implementation_" + callTree.sClass + "*)" + callTree.sModule + "->vt)->" + callTree.sFunc;
+              "((struct _kc_implementation_" + callTree.sClass + "*)" + callTree.sModule + "->vt)->" + callTree.sFunc;
 	  }
 	  else // (callTree.sFunc == 0)
 	  {
