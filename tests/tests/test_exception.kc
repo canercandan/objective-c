@@ -1,0 +1,56 @@
+/*
+** test_exception.kc for  in /home/toumi_m/kooc/tests/tests
+** 
+** Made by User Toumi_m
+** Login   <toumi_m@epitech.net>
+** 
+** Started on  Thu Jul 24 18:41:25 2008 User Toumi_m
+** Last update Fri Jul 25 08:37:13 2008 User Toumi_m
+*/
+
+@import "test_exception.kh"
+
+int		env;
+
+@implementation FileNotFoundException
+{
+  @member void  init(const char *msg)
+    {
+      [self.msg] = msg;
+    }
+
+  void	print(int n)
+  {
+    printf("TEST int  = %d\n", in);
+  }
+}
+
+FILE*	OpenRead(char *filename)
+{
+  FILE*	f;
+
+  f = fopen(filename, "r");
+/*   if (!f) */
+/*     @throw "todo"; //(FileNotFoundException*)("Fucking bastard!"); */
+  return (f);
+}
+
+int	main(int ac, char *av)
+{
+  if (!(ret = setjmp(env)))
+    {
+    }
+  else
+    {
+    }
+  @try
+    {
+      OpenRead("SomeFile");
+    }
+  @catch //(FileNotFoundException *ex)
+    {
+      printf("%s\n", [ex.msg]);
+      exit(1);
+    }
+  return (0);
+}

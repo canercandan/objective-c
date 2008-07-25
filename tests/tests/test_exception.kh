@@ -1,0 +1,26 @@
+/*
+** test_exception.kh for  in /home/toumi_m/kooc/tests/tests
+** 
+** Made by User Toumi_m
+** Login   <toumi_m@epitech.net>
+** 
+** Started on  Thu Jul 24 18:40:45 2008 User Toumi_m
+** Last update Fri Jul 25 06:35:23 2008 User Toumi_m
+*/
+
+@class Exception
+{
+
+}
+
+@class FileNotFoundException : Exception
+{
+  @member
+    {
+      const char	*msg;
+      void	init(const char *);
+    }
+  void	print(int n);
+}
+
+
