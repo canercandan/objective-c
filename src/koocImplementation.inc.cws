@@ -214,7 +214,6 @@ function	koocImplementationFinalize(sName : value)
 	insert block.left.otype = "likebinary";
 	insert block.left.operator = "->";
 
-	traceObject(item.list, 2);
 	insert block.left.left;
 	insert block.left.left.type = "primary_expression";
 	insert block.left.left.value = item.list#front.name;
