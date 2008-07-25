@@ -240,12 +240,10 @@ function	checkSelf(expr : node, module_name, val, type_name, nb_arg : node)
       while (existVariable(this.kooc.classes[mod]))// &&
       	     //this.kooc.classes[mod].parent != "")
       {
-        traceLine("le mod = " + mod);
         variable = existVar(mod, val, type_name);
 	if (variable != 0)
 	   break;
 	mod = this.kooc.classes[mod].parent;
-        traceLine("le new mod = " + mod);
       }
       if (variable == 0)
       {
