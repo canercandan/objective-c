@@ -32,7 +32,7 @@
     }
 }
 
-@implementation Cochon
+@implementation Koala
 {
   @member void	init(int age, int poid, int faim)
     {
@@ -42,7 +42,7 @@
     }
   @virtual @member void	crier()
     {
-      printf("Je suis un cochon rRonRonRron !");
+      printf("Je suis un koala et j'aime l'eucalyptus !\n");
     }
 }
 
@@ -73,10 +73,17 @@ int	main()
 {
   Nourriture stock;
   [&stock init :100];
-  Animal *ferme[100];
+  Animal *animal1;
+  Animal *animal2;
+  Animal *animal3;
 
-  ferme[0] = [Animal new];
-  ferme[1] = [Cochon new :2 :15 :3];
-  ferme[2] = [Singe new :2 :15 :3];
+  animal1 = [Animal new];
+  [animal1 crier];
+  animal2 = [Singe new :3 :22 :32];
+  [animal2 crier];
+  animal3 = [Koala new :2 :12 :3];
+  [animal3 crier];
+  [&stock servirNourriture :42];
+  
   return (0);
 }

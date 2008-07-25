@@ -25,7 +25,7 @@
   @virtual @member void crier();
 }
 
-@class Cochon : Animal
+@class Koala : Animal
 {
   @member void	init(int age, int poid, int faim);
   @virtual @member void crier();
