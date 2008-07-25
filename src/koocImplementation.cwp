@@ -29,15 +29,20 @@ koocImplementation ::=
 => koocImplementationInit(sName, type, filenameC);
 '{'
 [
- [ "@member" | [ "@virtual" [ "@member" ]? ] ]
- [ declaration(this.block)
-   => koocImplementationContent(sName, type, true);
-   | '{' [ [ "@virtual" ]? declaration(this.block)
-	   => koocImplementationContent(sName, type, true);
-	   ]* '}'
-   ]
+[ [ "@member" | [ "@virtual" [ "@member" ]? ] ]
+ [
+'{' [ [ "@virtual" ]? declaration(this.block)
+      => koocImplementationContent(sName, type, true);
+      ]*
+#continue
+'}'
+|
+declaration(this.block)
+=> koocImplementationContent(sName, type, true);
+  ]
+]
  | declaration(this.block)
- => koocImplementationContent(sName, type, false);
+=> koocImplementationContent(sName, type, false);
  ]*
 => localref theImplementation = this.kooc.implementations[sName];
 => koocImplementationDependency(sName, theImplementation);

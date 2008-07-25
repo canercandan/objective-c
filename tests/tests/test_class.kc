@@ -5,7 +5,7 @@
 ** Login   <armand_m@epitech.net>
 ** 
 ** Started on  Sat Jul  5 17:34:10 2008 morgan armand
-** Last update Fri Jul 25 06:01:08 2008 morgan armand
+** Last update Fri Jul 25 07:30:04 2008 caner candan
 */
 
 @import	"test_class.kh"
@@ -14,7 +14,8 @@ int		main(void)
 {
   StackInt	*my_stack;
 
-  my_stack = [StackInt new :4242];
+  //my_stack = [StackInt new :4242];
+  my_stack = [StackInt new];
   [my_stack push :10];
   [StackInt push :my_stack :11];//appel compatible module
   [my_stack push :12];
@@ -27,15 +28,15 @@ int		main(void)
 
 @implementation StackInt
 {
-  @member void	init(int size)
-    {
-      int		*buf;
+/*   @member void	init(int size) */
+/*     { */
+/*       int		*buf; */
 
-      [self.nbitem] = 0;
-      [self.size] = size;
-      buf = (int *) calloc(size, sizeof(int));
-      [self.data] = buf;
-    }
+/*       [self.nbitem] = 0; */
+/*       [self.size] = size; */
+/*       buf = (int *) calloc(size, sizeof(int)); */
+/*       [self.data] = buf; */
+/*     } */
 
   @member
     {

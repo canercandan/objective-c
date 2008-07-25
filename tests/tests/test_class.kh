@@ -5,7 +5,7 @@
 ** Login   <armand_m@epitech.net>
 ** 
 ** Started on  Sat Jul  5 17:32:10 2008 morgan armand
-** Last update Fri Jul 25 05:56:47 2008 morgan armand
+** Last update Fri Jul 25 07:04:10 2008 caner candan
 */
 
 @class StackInt
@@ -15,7 +15,7 @@
       int	size;
       int	nbitem;
 
-      void	init(int);
+      //void	init(int);
       void	clean();
       int	nbitem();
     }
