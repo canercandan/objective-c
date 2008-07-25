@@ -15,7 +15,7 @@
 
       //name = [self.name_of_interface];
       value = [self.value];
-      printf("%d %s\n", value, name);
+      printf("%d\n", value, name);
     }
 }
 
@@ -34,7 +34,7 @@
 
 //      name = [self.name_of_interface];
       value = [self.value];
-      printf("%d %s\n", value, name);
+      printf("%d\n", value, name);
     }
 }
 
@@ -54,7 +54,7 @@
 
     	//name = [self.name_of_interface];
     	value = [self.value];
-    	printf("%d %s\n", value, name);
+    	printf("%d\n", value, name);
       }
   }
 }
