@@ -16,7 +16,7 @@
     }
   @virtual @member void	crier()
     {
-      printf("Je suis fouu..!");
+      printf("Je suis fouu..!\n");
     }
 }
 
@@ -28,7 +28,7 @@
     }
   @virtual @member void	crier()
     {
-      printf("Je suis un singe hihihihanhi !");
+      printf("Je suis un singe hihihihanhi !\n");
     }
 }
 
@@ -42,17 +42,30 @@
 
 @implementation Nourriture
 {
-  @member init(int qte)
+  @member void init(int qte)
     {
       [self.qte] = qte;
     }
-  @member approvisionner(int);
-  @member servirNourriture(int);
+  @member void	approvisionner(int val)
+    {
+      [self.qte] += val;
+      printf("Le stock a ete approvisionne de %d unitees.\n", val);
+    }
+  @member void	servirNourriture(int val)
+    {
+      if ([self.qte] - val < 0)
+	{
+	  printf("La ferme fait faillite.\n");
+	  return (0);
+	}
+      [self.qte] -= val;
+      printf("Le stock se vide de %d unitees\n", val);
+    }
 }
 
 int	main()
 {
-  [Nourriture stock];
-  [Nourriture init];
+  Nourriture stock;
+  [stock init :100];
   return (0);
 }
