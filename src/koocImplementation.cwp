@@ -31,16 +31,13 @@ koocImplementation ::=
 [
  [ "@member" | [ "@virtual" [ "@member" ]? ] ]
  [ declaration(this.block)
-   => treeAddSelf(sName, this.block#back);
-   => koocImplementationContent(sName, type);
-   => treeAddSelf(sName, this.block#back);
+   => koocImplementationContent(sName, type, true);
    | '{' [ [ "@virtual" ]? declaration(this.block)
-	   => koocImplementationContent(sName, type);
-	   => treeAddSelf(sName, this.block#back);
+	   => koocImplementationContent(sName, type, true);
 	   ]* '}'
    ]
  | declaration(this.block)
- => koocImplementationContent(sName, type);
+ => koocImplementationContent(sName, type, false);
  ]*
 => localref theImplementation = this.kooc.implementations[sName];
 => koocImplementationDependency(sName, theImplementation);

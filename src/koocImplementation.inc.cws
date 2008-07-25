@@ -9,10 +9,10 @@
  */
 
 declare function	koocImplementationInit(sName : value, type : node, filenameC : node);
-declare function	koocImplementationContent(sName : value, type : value);
+declare function	koocImplementationContent(sName : value, type : value, self : value);
 declare function	koocImplementationPrint(sName : value, type : value);
 declare function	koocImplementationErr();
-declare function	koocImplementationAdd(sName : value, type : value);
+declare function	koocImplementationAdd(sName : value, type : value, self : value);
 declare function	koocImplementationCheck();
 declare function	koocImplementationDependency(sName : value, theImplementation : node);
 declare function	check_implementation(name : value, theNode : node);
@@ -51,10 +51,10 @@ function	koocImplementationInit(sName : value, type : node, filenameC : node)
  * @param sName value
  * @param type value
  */
-function	koocImplementationContent(sName : value, type : value)
+function	koocImplementationContent(sName : value, type : value, self : value)
 {
   koocImplementationErr();
-  koocImplementationAdd(sName, type);
+  koocImplementationAdd(sName, type, self);
 }
 
 /**
@@ -114,7 +114,7 @@ function	koocImplementationErr()
  * @param sName value
  * @param type value
  */
-function	koocImplementationAdd(sName : value, type : value)
+function	koocImplementationAdd(sName : value, type : value, self : value)
 {
   pushItem this.kooc.implementations[sName];
   localref theDecl = this.block#back;
@@ -124,9 +124,15 @@ function	koocImplementationAdd(sName : value, type : value)
 		      + this.kooc.modules[sName].nameC,
 		      theDecl);
   else if (type == "class")
-    treeInsertFileOut(getEnv("path_import")
-		      + this.kooc.classes[sName].nameC,
-		      theDecl);
+    {
+      treeCreateOneNew(theDecl, "__PROTOTYPE__",
+		       this.kooc.implementations[sName]);
+      treeInsertFileOut(getEnv("path_import")
+			+ this.kooc.classes[sName].nameC,
+			theDecl);
+    }
+  if (self)
+    treeAddSelf(sName, theDecl);
 }
 
 /**
