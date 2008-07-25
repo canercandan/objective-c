@@ -53,7 +53,7 @@
  | declaration(this.block)
  => treeInsertFileOut(getEnv("pathC"), this.block#back);
 ]*
-=> koocImplementationCheck();
+//=> koocImplementationCheck();
 #continue
 #empty
 #catch (sError)
