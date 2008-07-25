@@ -5,7 +5,7 @@
 ** Login   <armand_m@epitech.net>
 ** 
 ** Started on  Sat Jul  5 17:34:10 2008 morgan armand
-** Last update Fri Jul 25 05:24:01 2008 caner candan
+** Last update Fri Jul 25 06:01:08 2008 morgan armand
 */
 
 @import	"test_class.kh"
@@ -20,9 +20,9 @@ int		main(void)
   [my_stack push :12];
   [my_stack push :13];
   [my_stack push :14];
-  [my_stack delete];
   printf("POP: %d\n", [StackInt pop :my_stack]);
-//  printf("POP: %d\n", [my_stack pop]);
+  //  printf("POP: %d\n", [my_stack pop]);
+  [my_stack delete];
 }
 
 @implementation StackInt
@@ -67,7 +67,7 @@ int		main(void)
 
     pos = [self.nbitem];
     buf = [self.data];
-    r = buf[pos--];
+    r = buf[--pos];
     [self.nbitem] = pos;
     return (r);
   }
@@ -78,10 +78,5 @@ int		main(void)
 
     buf = [this.data];
     free(buf);
-  }
-
-  void	pap(void)
-  {
-    int a;
   }
 }// fin @class

@@ -5,7 +5,7 @@
 ** Login   <armand_m@epitech.net>
 ** 
 ** Started on  Sat Jul  5 17:32:10 2008 morgan armand
-** Last update Fri Jul 25 05:12:06 2008 caner candan
+** Last update Fri Jul 25 05:56:47 2008 morgan armand
 */
 
 @class StackInt
@@ -24,8 +24,6 @@
   @member void	push(int);
 
   int		pop(StackInt *); //pop fonction membre
-
-  void		pap(void);
 
   /* pour compter le nombre de pile presente dans le systeme */
   int		nbstack = 0;

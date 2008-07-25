@@ -29,3 +29,36 @@ function	koocToolsAddRef(theNode : node)
   else if (theNode.type == "__PROTOTYPE__")
     ref this.block.prototypes[theNode.name] = theNode;
 }
+
+function	koocToolsEqualFuncs(f1 : node, f2 : node)
+{
+  local		i;
+  local		av1;
+  local		av2;
+
+  av1 = f1.list.getArraySize();
+  av2 = f2.list.getArraySize();
+
+  if (av1 != av2)
+    return (false);
+
+  if (equalTrees(f1.ctype, f2.ctype) == false)
+    return (false);
+
+  traceLine("CTYPE EQUALS");
+  i = 0;
+
+  while (i < av1)
+    {
+      if (equalTrees(f1.list[i].ctype, f2.list[i].ctype) == false)
+	{
+	  traceObject(f1.list[i].ctype);
+	  traceObject(f2.list[i].ctype);
+	  return (false);
+	}
+      i = $i + 1$;
+    }
+
+  traceLine("ALL EQUALS");
+  return (true);
+}

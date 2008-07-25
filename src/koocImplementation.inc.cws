@@ -15,6 +15,7 @@ declare function	koocImplementationErr();
 declare function	koocImplementationAdd(sName : value, type : value, self : value);
 declare function	koocImplementationCheck();
 declare function	koocImplementationDependency(sName : value, theImplementation : node);
+declare function	koocClassFinalize(sClass : value);
 declare function	check_implementation(name : value, theNode : node);
 declare function	check_prototypes(var1 : node, var2 : node);
 declare function	check_arguments(fun1 : node, fun2 : node);
@@ -185,6 +186,81 @@ function	koocImplementationDependency(sName : value, theImplementation : node)
       ref this.block.functions[theClean.name] = theClean;
     }
   treeCreateDelete(sName, "__FUNCTION__", theImplementation);
+}
+
+function	koocImplementationFinalize(sName : value)
+{
+  foreach item in this.kooc.implementations[sName]
+  {
+    if (item.oname == "init")
+      {
+        local block;
+
+	insert block.left;
+	insert block.left.type = "deref_expression";
+	insert block.left.otype = "likebinary";
+	insert block.left.operator = "->";
+
+	insert block.left.left;
+	insert block.left.left.type = "primary_expression";
+	insert block.left.left.value = item.list[0].name;
+	insert block.left.left.operator = "id";
+	insert block.left.left.otype = "terminal";
+
+	insert block.left.right;
+	insert block.left.right.type = "primary_expression";
+	insert block.left.right.value = "vt";
+	insert block.left.right.operator = "id";
+	insert block.left.right.otype = "terminal";
+
+	insert block.operator = "=";
+
+	insert block.right;
+	insert block.right.type = "cast_expression";
+
+	insert block.right.left;
+	insert block.right.left.ctype;
+
+	insert block.right.left.ctype.pctx;
+
+	ref block.right.left.ctype.pctx = this.gl_pctx;
+
+	cnormFillCtypeNode(block.right.left.ctype, "__POINTER__", "*");
+
+	insert block.right.left.ctype.type = "__PRIMARY__";
+	insert block.right.left.ctype.identifier = "void";
+
+	insert block.right.left.otype = "typecast";
+	insert block.right.left.type = "type_cast_expression";
+	insert block.right.left.operator = "()";
+
+	insert block.right.otype = "cast";
+
+
+	insert block.right.right;
+	insert block.right.right.operator = "&";
+
+	insert block.right.right.left;
+	insert block.right.right.left.type = "primary_expression";
+	insert block.right.right.left.value = "_kc_vtable_" + item.list[0].ctype.identifier;
+	insert block.right.right.left.operator = "id";
+	insert block.right.right.left.otype = "terminal";
+
+	insert block.right.right.type = "unary_expression";
+	insert block.right.right.otype = "unary";
+
+	insert block.type = "assignement_expression";
+	insert block.otype = "binary";
+	insert block.etype = "expression";
+
+	invertArray(item.block);
+
+	pushItem item.block;
+	setall item.block#back = block;
+
+	invertArray(item.block);
+      }
+  }
 }
 
 /**

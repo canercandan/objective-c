@@ -41,6 +41,7 @@ koocImplementation ::=
  ]*
 => localref theImplementation = this.kooc.implementations[sName];
 => koocImplementationDependency(sName, theImplementation);
+=> koocImplementationFinalize(sName);
 #generatedFile(getEnv("path_import") + filenameC)
 => koocImplementationPrint(sName, type);
 '}'
