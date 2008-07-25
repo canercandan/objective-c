@@ -10,13 +10,11 @@ function testOType<"terminal">(theNode : node)
 
 function testOType<"cast">(theNode : node)
 {
-  //          return "(" + theNode.left.ctype.identifier + ") " + getLeftNOpe(theNode.right);
   return "(" + getType(theNode.left) + getPointer(theNode.left.ctype)  + ") " + getLeftNOpe(theNode.right);
 }
 
 function testOType<"typecast">(theNode : node)
 {
-  //        return "(" + theNode.ctype.identifier + ")";
   return "(" + getType(theNode) + ")";
 }
 
@@ -123,7 +121,6 @@ function testOType<"do">(theNode : node)
 
 function testOType<"call">(theNode : node)
 {
-  //	return theNode.left.value + "(" + parseList(theNode.list)  + ")";
   return getLeftNOpe(theNode.left) + "(" + parseList(theNode.list)  + ")";
 }
 

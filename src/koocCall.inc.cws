@@ -98,56 +98,50 @@ function	koocCallIdentifiantFunctionInit(callTree : node)
 function	koocCallIdentifiantFunctionRun(expr : node, callTree : node, func : value)
 {
   callTree.sFunc = 0;
-//  callTree.sFunc = searchInVtable(callTree.sModule, func, callTree.sType, callTree.nbArg);
-//  if (callTree.sFunc != 0)
-//  {
-//    callTree.sFunc =
-//      "((struct _kc_implementation_" + callTree.sModule + "*)" + callTree.sModule + "->vt)->" + callTree.sFunc;
-//  }
   if  (callTree.sFunc == 0)
-  {
-    callTree.sFunc = existFunc(callTree.sModule, func,
-			     callTree.sType, callTree.nbArg);
-    if (callTree.sFunc == 0)
-      {
-       callTree.nbArg = 1;
-        if (!this.kooc.mangle.empty())
-          callTree.sFunc = checkSelf(expr, callTree.sModule, func, callTree.sType, callTree.nbArg);
-        if (callTree.sFunc == 0)
-         {
-          callTree.sClass = isAnInstance(callTree.sModule, expr);
-	  if (callTree.sClass == "")
-	    {
-	       traceLine("error - function " + func + " doesn't exist in "
-		    + callTree.sModule + " module.");
-     	       exit(-1);
-	    }
-          callTree.sFunc = searchInVtable(callTree.sClass, func, callTree.sType, callTree.nbArg);
-          if (callTree.sFunc != 0)
-	  {
-            callTree.sFunc =
-              "((struct _kc_implementation_" + callTree.sClass + "*)" + callTree.sModule + "->vt)->" + callTree.sFunc;
-	  }
-	  else // (callTree.sFunc == 0)
-	  {
-	    callTree.sFunc = existFunc(callTree.sClass, func,
+    {
+      callTree.sFunc = existFunc(callTree.sModule, func,
 				 callTree.sType, callTree.nbArg);
-            if (!callTree.sFunc)
-  	    {
-	      traceLine("error - function " + func + " doesn't exist in "
-		    + callTree.sClass + " module.");
-	      exit(-1);
+      if (callTree.sFunc == 0)
+	{
+	  callTree.nbArg = 1;
+	  if (!this.kooc.mangle.empty())
+	    callTree.sFunc = checkSelf(expr, callTree.sModule, func, callTree.sType, callTree.nbArg);
+	  if (callTree.sFunc == 0)
+	    {
+	      callTree.sClass = isAnInstance(callTree.sModule, expr);
+	      if (callTree.sClass == "")
+		{
+		  traceLine("error - function " + func + " doesn't exist in "
+			    + callTree.sModule + " module.");
+		  exit(-1);
+		}
+	      callTree.sFunc = searchInVtable(callTree.sClass, func, callTree.sType, callTree.nbArg);
+	      if (callTree.sFunc != 0)
+		{
+		  callTree.sFunc =
+		    "((struct _kc_implementation_" + callTree.sClass + "*)" + callTree.sModule + "->vt)->" + callTree.sFunc;
+		}
+	      else
+		{
+		  callTree.sFunc = existFunc(callTree.sClass, func,
+					     callTree.sType, callTree.nbArg);
+		  if (!callTree.sFunc)
+		    {
+		      traceLine("error - function " + func + " doesn't exist in "
+				+ callTree.sClass + " module.");
+		      exit(-1);
+		    }
+		}
 	    }
-	  }
-        }
-      callTree.cnt = $callTree.cnt + 1$;
-      pushItem expr.list;
-      insert expr.list#back.type = "primary_expression";
-      insert expr.list#back.value = callTree.ptr + callTree.sModule;
-      insert expr.list#back.operator = "id";
-      insert expr.list#back.otype = "terminal";
+	  callTree.cnt = $callTree.cnt + 1$;
+	  pushItem expr.list;
+	  insert expr.list#back.type = "primary_expression";
+	  insert expr.list#back.value = callTree.ptr + callTree.sModule;
+	  insert expr.list#back.operator = "id";
+	  insert expr.list#back.otype = "terminal";
+	}
     }
-   }
   koocCallIdentifiantFunctionInsertExpr(expr, callTree);
 }
 

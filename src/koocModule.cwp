@@ -15,7 +15,6 @@ koocModule ::=
   "@module"
 #continue
   [
-   //#try
 #readIdentifier:sModule
    '{'
    => koocManglePushBlock(sModule);
@@ -40,10 +39,7 @@ koocModule ::=
    + this.kooc.modules[sModule].nameH + "_variable")@@}
    '}'
    => koocManglePopBlock();
-   /*#catch (sError)
-     |
-     => errorModule();
-   */]
+]
   ;
 /**
  * @endcond

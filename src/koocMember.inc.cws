@@ -21,7 +21,6 @@ function	koocMemberDeclaration(theClass : node)
   treeCreateOneNew(theDecl, "__PROTOTYPE__", this.kooc.classes[sClass]);
   koocMemberDeclarationVariableFunction(theClass, sClass, theDecl);
   koocMemberInsertReference(theClass, sClass, theDecl);
-  //traceObject(theDecl);
 }
 
 /**

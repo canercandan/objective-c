@@ -1,7 +1,6 @@
 
 function testType<T>(theNode : node)
 {
-  //	traceLine("Type inconnu :" + T);
   return getSimpleType(theNode);
 }
 

@@ -4,8 +4,8 @@
  * @note @ref develop @ref contrib @ref tools
  */
 
-declare function	koocModuleInit(sModule : value);//, access : value);
-declare function	koocModuleCheck(theNode : node);//sModule : value);
+declare function	koocModuleInit(sModule : value);
+declare function	koocModuleCheck(theNode : node);
 declare function	koocModuleContent(sModule : value);
 declare function	koocModuleErr();
 declare function	koocModuleAdd(sModule : value);

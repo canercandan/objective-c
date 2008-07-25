@@ -149,8 +149,6 @@ function	treeCreateOneNew(theDecl : node, sType : value, theNode : node)
       treeCreateLink(theDecl, theSrc);
       theSrc.name = theSrc.oname;
       theSrc.name = koocMangle(theSrc);
-/*       traceObject(theDecl); */
-/*       traceObject(theSrc); */
     }
 }
 

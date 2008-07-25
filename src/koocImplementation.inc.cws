@@ -268,12 +268,8 @@ function	koocImplementationFinalize(sName : value)
 	insert block.otype = "binary";
 	insert block.etype = "expression";
 
-	//invertArray(item.block);
-
 	pushItem item.block;
 	setall item.block#back = block;
-
-	//invertArray(item.block);
       }
   }
 }
