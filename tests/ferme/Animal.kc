@@ -24,7 +24,9 @@
 {
   @member void	init(int age, int poid, int faim)
     {
-      [super init];
+      [self.age] = age;
+      [self.poid] = poid;
+      [self.faim] = faim;
     }
   @virtual @member void	crier()
     {
