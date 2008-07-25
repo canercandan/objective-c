@@ -145,6 +145,43 @@ function	existVar(module : value, name : value, type : value)
   return mangle;
 }
 
+function	searchInVtable(module : value, name : value, type : value, nb_arg : node)
+{
+  local		ret = 0;
+
+  local count_pointer = countStringOccurences(type, "*");
+  type = replaceString('*', '', type);
+  type.trim();
+    if (existVariable(this.block.structs["_kc_implementation_" + module]))
+    {
+      foreach val in this.block.structs["_kc_implementation_" + module].ctype.list
+      {
+	if (val.type == "__PROTOTYPE__")
+	  {
+	    if (val.oname == name && ret == 0 && type == "")
+	      ref ret = val;
+	    else if (val.oname == name && ret != 0 && type == "")
+	      {
+	        traceLine("error - function " + name
+			    + " have multiple type in " + module
+			    + ", please use @!() to specifie the type.");
+		exit(-1);
+	      }
+	      else if (val.oname == name &&
+		       val.ctype.identifier == type
+		       && count_pointer == getArraySize(val.ctype.pointer))
+	      ref ret = val;
+      }
+    }
+  }
+  if (ret != 0)
+    {
+      nb_arg = countNbArgInFunc(ret.list);
+      return (ret.name);
+    }
+  return 0;
+}
+
 function	searchFunction(search : value, module : value, name : value, type : value, nb_arg : node)
 {
   local		ret = 0;
