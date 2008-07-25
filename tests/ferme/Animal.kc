@@ -61,6 +61,7 @@
     {
       if ([self.qte] - val < 0)
 	{
+	  [self.qte] = 0;
 	  printf("La ferme fait faillite.\n");
 	  return (0);
 	}
@@ -84,6 +85,6 @@ int	main()
   animal3 = [Koala new :2 :12 :3];
   [animal3 crier];
   [&stock servirNourriture :42];
-  
+  [&stock servirNourriture :100];
   return (0);
 }
