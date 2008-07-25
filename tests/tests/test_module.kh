@@ -3,7 +3,7 @@ typedef int	Entier;
 
 @module		Test
 {
-/*   typedef int	Entier; */
+  /*   typedef int	Entier; */
   int		a = 42;
   char		a = 42;
   int		b;
@@ -13,4 +13,19 @@ typedef int	Entier;
   void		cool(int j);
   void		f1(int a, int b);
   void		f2(char* a, int b);
+  void		yata(char a);
+  void		yata(int b);
+}
+
+@implementation	Test
+{
+  void	yatta(char a)
+  {
+    printf("yata en char: %c\n",  a);
+  }
+
+  void	yatta(int b)
+  {
+    printf("yata en char: %d\n", b);
+  }
 }

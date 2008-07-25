@@ -17,4 +17,5 @@ int	main()
    printf("%d\n", @!(int)[Test.a]);
 //   [Test cool :2];
 //   [Test f2 :"tata" :b];
+     [Test yata :2];
 }

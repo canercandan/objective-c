@@ -202,7 +202,7 @@ function	koocCallListParameterCheck(callTree : node)
 {
   if (callTree.nbArg > callTree.cnt)
     {
-      traceLine("error - function " + callTree.sFunc + " not enouch param in argument (need "
+      traceLine("error - function " + callTree.sFunc + " not enough param in argument (need "
 		+ callTree.nbArg + " arg,  you give " + callTree.cnt + " arg)");
       exit(-1);
     }
