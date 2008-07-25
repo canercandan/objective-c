@@ -15,8 +15,6 @@ declare function	koocCallListParameterCheck(callTree : node);
 declare function	isAnInstance(key : value, type : node);
 declare function	checkSelf(expr : node, module_name, val, type_name, nb_arg : node);
 
-
-
 /**
  * @fn koocCallInit(callTree : node)
  * @brief undef

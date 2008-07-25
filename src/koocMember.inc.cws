@@ -21,6 +21,7 @@ function	koocMemberDeclaration(theClass : node)
   treeCreateOneNew(theDecl, "__PROTOTYPE__", this.kooc.classes[sClass]);
   koocMemberDeclarationVariableFunction(theClass, sClass, theDecl);
   koocMemberInsertReference(theClass, sClass, theDecl);
+  //traceObject(theDecl);
 }
 
 /**
@@ -41,10 +42,12 @@ function	koocMemberDeclarationVariableFunction(theClass : node, sClass : value,
     }
   else
     {
+      removeElement(this.block.prototypes, theDecl.name);
       treeAddSelf(sClass, theDecl);
       treeInsertFileOut(getEnv("path_import")
 			+ this.kooc.classes[sClass].nameH,
 			theDecl);
+      ref this.block.prototypes[theDecl.name] = theDecl;
     }
 }
 

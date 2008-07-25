@@ -21,7 +21,6 @@ function	koocMangle(theType : node)
 
   if (this.kooc.mangle.empty() || existVariable(theType.ctype.infoType["static"]))
     return (theType.name);
-
   foreach var in this.kooc.mangle
   {
     sMangle += lengthString(var);
@@ -64,18 +63,15 @@ function	koocMangleType(theNode : node, name : node)
 function	koocMangleArgs(theNode : node, name : node)
 {
   if (existVariable(theNode.list))
+    foreach item in theNode.list
     {
-      foreach item in theNode.list
-      {
-        foreach pointer in item.pointer
-	  name += 'P';
-
-	if (item.ctype.type == "__PRIMARY__")
+      foreach pointer in item.pointer
+	name += 'P';
+      if (item.ctype.type == "__PRIMARY__")
 	  name += item.ctype.identifier.charAt(0);
-	else
-	  name += lengthString(item.ctype.identifier)
-	    + item.ctype.identifier;
-      }
+      else
+	name += lengthString(item.ctype.identifier)
+	  + item.ctype.identifier;
     }
 }
 

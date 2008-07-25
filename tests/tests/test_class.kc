@@ -5,7 +5,7 @@
 ** Login   <armand_m@epitech.net>
 ** 
 ** Started on  Sat Jul  5 17:34:10 2008 morgan armand
-   Last update Fri Jul 25 01:54:05 2008 florent hochwelker
+** Last update Fri Jul 25 05:24:01 2008 caner candan
 */
 
 @import	"test_class.kh"
@@ -78,5 +78,10 @@ int		main(void)
 
     buf = [this.data];
     free(buf);
+  }
+
+  void	pap(void)
+  {
+    int a;
   }
 }// fin @class

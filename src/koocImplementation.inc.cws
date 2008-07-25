@@ -127,14 +127,18 @@ function	koocImplementationAdd(sName : value, type : value, self : value)
 		      theDecl);
   else if (type == "class")
     {
-      treeCreateOneNew(theDecl, "__PROTOTYPE__",
+      treeCreateOneNew(theDecl, "__FUNCTION__",
 		       this.kooc.implementations[sName]);
       treeInsertFileOut(getEnv("path_import")
 			+ this.kooc.classes[sName].nameC,
 			theDecl);
     }
   if (self)
-    treeAddSelf(sName, theDecl);
+    {
+      removeElement(this.block.functions, theDecl.name);
+      treeAddSelf(sName, theDecl);
+      ref this.block.functions[theDecl.name] = theDecl;
+    }
 }
 
 /**

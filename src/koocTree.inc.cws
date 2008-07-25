@@ -192,6 +192,8 @@ function	treeCreateOneNew(theDecl : node, sType : value, theNode : node)
       treeCreateLink(theDecl, theSrc);
       theSrc.name = theSrc.oname;
       theSrc.name = koocMangle(theSrc);
+/*       traceObject(theDecl); */
+/*       traceObject(theSrc); */
     }
 }
 
@@ -221,4 +223,6 @@ function	treeAddSelf(sName : value, theNode : node)
   pushItem theNode.list;
   setall theNode.list#back = self;
   invertArray(theNode.list);
+  theNode.name = theNode.oname;
+  theNode.name = koocMangle(theNode);
 }
