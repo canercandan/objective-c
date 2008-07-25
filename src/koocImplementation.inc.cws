@@ -117,21 +117,16 @@ function	koocImplementationErr()
 function	koocImplementationAdd(sName : value, type : value)
 {
   pushItem this.kooc.implementations[sName];
-  localref theImplementation = this.kooc.implementations[sName];
-  ref theImplementation#back = this.block#back;
-  localref theNode = theImplementation#back;
   localref theDecl = this.block#back;
+  ref this.kooc.implementations[sName]#back = theDecl;
   if (type == "module")
     treeInsertFileOut(getEnv("path_import")
 		      + this.kooc.modules[sName].nameC,
 		      theDecl);
   else if (type == "class")
-    {
-      treeCreateOneNew(theDecl, "__PROTOTYPE__", theImplementation);
-      treeInsertFileOut(getEnv("path_import")
-			+ this.kooc.classes[sName].nameC,
-			theDecl);
-    }
+    treeInsertFileOut(getEnv("path_import")
+		      + this.kooc.classes[sName].nameC,
+		      theDecl);
 }
 
 /**
@@ -164,6 +159,8 @@ function	koocImplementationCheck()
 
 function	koocImplementationDependency(sName : value, theImplementation : node)
 {
+  foreach var in theImplementation
+    treeCreateOneNew(var, "__FUNCTION__", theImplementation);
   treeCreateNew(sName, "__FUNCTION__", theImplementation);
   localref theNew = this.block#back;
   treeCreateClean(sName, "__FUNCTION__", theImplementation);

@@ -251,6 +251,8 @@ function	koocClassExtendErr(sExtend : value)
 
 function	koocClassDependency(sClass : value, theClass : node)
 {
+  foreach var in theClass
+    treeCreateOneNew(var, "__PROTOTYPE__", theClass);
   treeCreateNew(sClass, "__PROTOTYPE__", theClass);
   localref theNew = this.block#back;
   treeCreateClean(sClass, "__PROTOTYPE__", theClass);

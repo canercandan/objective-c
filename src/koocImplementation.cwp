@@ -33,9 +33,11 @@ koocImplementation ::=
  [ declaration(this.block)
    => treeAddSelf(sName, this.block#back);
    => koocImplementationContent(sName, type);
+   => treeAddSelf(sName, this.block#back);
    | '{' [ [ "@virtual" ]? declaration(this.block)
-     	   => treeAddSelf(sName, this.block#back);
-	   => koocImplementationContent(sName, type); ]* '}'
+	   => koocImplementationContent(sName, type);
+	   => treeAddSelf(sName, this.block#back);
+	   ]* '}'
    ]
  | declaration(this.block)
  => koocImplementationContent(sName, type);
