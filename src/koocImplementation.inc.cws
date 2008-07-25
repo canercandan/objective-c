@@ -132,7 +132,6 @@ function	koocImplementationAdd(sName : value, type : value)
 			+ this.kooc.classes[sName].nameC,
 			theDecl);
     }
-  treeAddSelf(sName, theDecl);
 }
 
 /**

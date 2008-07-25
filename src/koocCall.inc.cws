@@ -31,6 +31,7 @@ function	koocCallInit(callTree : node)
   insert callTree.nbArg = 0;
   insert callTree.cnt = 0;
   insert callTree.ptr = "";
+  insert callTree.super = 0;
 }
 
 /**
@@ -76,6 +77,7 @@ function	koocCallIdentifiantFunctionInit(callTree : node)
 {
   if (callTree.sModule == "super")
     {
+      callTree.super = 1;
       callTree.sModule = #evaluateVariable('this.kooc.classes["'
 					   + this.kooc.mangle#back + '"].parent');
       if (callTree.sModule == "")
@@ -101,7 +103,7 @@ function	koocCallIdentifiantFunctionRun(expr : node, callTree : node, func : val
 			     callTree.sType, callTree.nbArg);
   if (callTree.sFunc == 0)
     {
-      callTree.nbArg = 1;
+     callTree.nbArg = 1;
       if (!this.kooc.mangle.empty())
         callTree.sFunc = checkSelf(expr, callTree.sModule, func, callTree.sType, callTree.nbArg);
       if (callTree.sFunc == 0)
@@ -160,7 +162,7 @@ function	koocCallIdentifiantFunctionInsertExpr(expr : node, callTree : node)
  */
 function	koocCallListParameter(expr : node, callTree : node)
 {
-  if (callTree.sModule == "super")
+  if (callTree.super == 1)
     {
       callTree.nbArg = $1 + callTree.nbArg$;
       callTree.cnt = $callTree.cnt + 1$;
@@ -169,6 +171,7 @@ function	koocCallListParameter(expr : node, callTree : node)
       insert expr.list#back.value = "self";
       insert expr.list#back.operator = "id";
       insert expr.list#back.otype = "terminal";
+      callTree.super = 0;
     }
 }
 
