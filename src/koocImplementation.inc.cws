@@ -46,10 +46,11 @@ function	koocImplementationInit(sName : value, type : node, filenameC : node)
 }
 
 /**
- * @fn koocImplementationContent(sName : value, type : value)
+ * @fn koocImplementationContent(sName : value, type : value, self : value)
  * @brief undef
  * @param sName value
  * @param type value
+ * @param self value
  */
 function	koocImplementationContent(sName : value, type : value, self : value)
 {
@@ -109,10 +110,11 @@ function	koocImplementationErr()
 }
 
 /**
- * @fn koocImplementationAdd(sName : value, type : value)
+ * @fn koocImplementationAdd(sName : value, type : value, self : value)
  * @brief undef
  * @param sName value
  * @param type value
+ * @param self value
  */
 function	koocImplementationAdd(sName : value, type : value, self : value)
 {
