@@ -189,13 +189,15 @@ function	koocImplementationDependency(sName : value, theImplementation : node)
       treeCreateLink(theNew, theInit);
       treeAddSelf(sName, theInit);
     }
-  treeCreateClean(sName, "__FUNCTION__", theImplementation);
-  localref theClean = this.block#back;
-  if (!equalTrees(theNew, theClean))
+  sFunc = "clean";
+  if (!treeSeekForFunctionOrPrototype(theImplementation, sFunc))
     {
+      treeCreateFunctionEmpty(sFunc, theImplementation, "__FUNCTION__");
+      localref theClean = this.block#back;
+      insert theClean.block;
+      treeAddSelf(sName, theClean);
       treeInsertFileOut(getEnv("path_import") + this.kooc.classes[sName].nameC,
 			theClean);
-      insert theClean.block;
       ref this.block.functions[theClean.name] = theClean;
     }
   treeCreateDelete(sName, "__FUNCTION__", theImplementation);

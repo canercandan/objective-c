@@ -14,7 +14,6 @@ declare function	treeSeekForFunctionOrPrototype(theNode : node,
 declare function	treeCreateFunctionEmpty(sName : node, refPath : node,
 						sType : value);
 declare function	treeCreateLink(theNode : node, theLink : node);
-declare function	treeCreateClean(sName : value, sType : value, theNode : node);
 declare function	treeCreateDelete(sName : value, sType : value, theNode : node);
 declare function	treeCreateOneNew(theDecl : node, sType : value, theNode : node);
 declare function	treeAddSelf(sName : value, theNode : node);
@@ -113,24 +112,6 @@ function	treeCreateLink(theNode : node,
 			       theLink : node)
 {
   ref theNode.link = theLink;
-}
-
-/**
- * @fn treeCreateClean(sName : value, sType : value, theNode : node)
- * @brief undef
- * @param sName value
- * @param sType value
- * @param theNode node
- */
-function	treeCreateClean(sName : value, sType : value, theNode : node)
-{
-  local		sFunc = "clean";
-
-  if (!treeSeekForFunctionOrPrototype(theNode, sFunc))
-    {
-      treeCreateFunctionEmpty(sFunc, theNode, sType);
-      treeAddSelf(sName, this.block#back);
-    }
 }
 
 /**
