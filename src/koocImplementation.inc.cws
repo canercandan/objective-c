@@ -214,9 +214,10 @@ function	koocImplementationFinalize(sName : value)
 	insert block.left.otype = "likebinary";
 	insert block.left.operator = "->";
 
+	traceObject(item.list, 2);
 	insert block.left.left;
 	insert block.left.left.type = "primary_expression";
-	insert block.left.left.value = item.list[0].name;
+	insert block.left.left.value = item.list#front.name;
 	insert block.left.left.operator = "id";
 	insert block.left.left.otype = "terminal";
 
@@ -255,7 +256,7 @@ function	koocImplementationFinalize(sName : value)
 
 	insert block.right.right.left;
 	insert block.right.right.left.type = "primary_expression";
-	insert block.right.right.left.value = "_kc_vtable_" + item.list[0].ctype.identifier;
+	insert block.right.right.left.value = "_kc_vtable_" + this.kooc.mangle#back;
 	insert block.right.right.left.operator = "id";
 	insert block.right.right.left.otype = "terminal";
 
