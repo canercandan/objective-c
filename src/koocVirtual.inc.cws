@@ -61,7 +61,8 @@ function	koocVirtualRun(theClass : node, sVtable : value, sImplementation : valu
 
   foreach item in rImplementation.ctype.list
   {
-    if (this.block#back.oname == item.oname)
+    if (this.block#back.oname == item.oname &&
+        this.block#back.ctype.identifier == item.ctype.identifier)
       {
 	localref rVtable = this.block.variables[sVtable];
 	localref pointer = rVtable.init.block[key(item)];

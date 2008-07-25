@@ -75,5 +75,7 @@ function	koocModulePrint(sModule : value)
 		      + this.kooc.modules[sModule].nameH + "_variable")@@}
   {@@prettyPrinterToC(getEnv("path_import")
 		      + this.kooc.modules[sModule].nameH)@@}
+  {@@prettyPrinterToC(getEnv("path_import")
+		      + this.kooc.modules[sModule].nameC + "_variable")@@}
   koocImportEndif(this.kooc.modules[sModule].nameH);
 }

@@ -34,7 +34,10 @@ koocModule ::=
 #generatedFile(getEnv("path_import")
    + this.kooc.modules[sModule].nameH)
    => koocModulePrint(sModule);
-#generatedFile(getEnv("pathH"))
+#generatedFile(getEnv("path_import")
+   + this.kooc.modules[sModule].nameC)
+   => {@@prettyPrinterToC(getEnv("path_import")
+   + this.kooc.modules[sModule].nameH + "_variable")@@}
    '}'
    => koocManglePopBlock();
    /*#catch (sError)
