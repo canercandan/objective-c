@@ -29,11 +29,11 @@ koocImplementation ::=
 => koocImplementationInit(sName, type, filenameC);
 '{'
 [
-[ [ "@member" | [ "@virtual" [ "@member" ]? ] ]
- [
-'{' [ [ "@virtual" ]? declaration(this.block)
-      => koocImplementationContent(sName, type, true);
-      ]*
+ [ [ "@member" | [ "@virtual" [ "@member" ]? ] ]
+   [
+    '{' [ [ "@virtual" ]? declaration(this.block)
+	  => koocImplementationContent(sName, type, true);
+	  ]*
 #continue
 '}'
 |

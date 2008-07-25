@@ -251,8 +251,22 @@ function	koocClassExtendErr(sExtend : value)
 
 function	koocClassDependency(sClass : value, theClass : node)
 {
-  treeCreateNew(sClass, "__PROTOTYPE__", theClass);
-  localref theNew = this.block#back;
+  local		sFunc = "init";
+  local		theInit;
+  local		theNew;
+
+  if (!treeSeekForFunctionOrPrototype(theClass, sFunc))
+    {
+      treeCreateFunctionEmpty(sFunc, theClass, "__PROTOTYPE__");
+      ref theInit = this.block#back;
+      treeInsertFileOut(getEnv("path_import") + this.kooc.classes[sClass].nameH,
+			theInit);
+      sFunc = "new";
+      treeCreateFunctionEmpty(sFunc, theClass, "__PROTOTYPE__");
+      ref theNew = this.block#back;
+      treeCreateLink(theInit, theNew);
+      treeCreateLink(theNew, theInit);
+    }
   treeCreateClean(sClass, "__PROTOTYPE__", theClass);
   localref theClean = this.block#back;
   if (!equalTrees(theNew, theClean))

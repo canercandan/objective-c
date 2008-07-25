@@ -43,7 +43,7 @@ foreach var in this.kooc.implementations[sClass]
     return (self);
   }
 <%
-    }
+  }
   if (var.oname == "clean")
     ref theClean = var;
   if (var.oname == "delete")
