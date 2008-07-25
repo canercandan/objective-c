@@ -1,22 +1,21 @@
 /*
-** test_heritage.kc for  in /home/toumi_m/kooc/tests/tests
+** test_heritage.kh for  in /home/toumi_m/kooc/tests/tests
 ** 
 ** Made by User Toumi_m
 ** Login   <toumi_m@epitech.net>
 ** 
-** Started on  Sat Jul 12 18:30:09 2008 User Toumi_m
-   Last update Wed Jul 23 22:28:17 2008 florent hochwelker
+** Started on  Sat Jul 12 18:28:35 2008 User Toumi_m
+** Last update Fri Jul 25 11:40:35 2008 majdi toumi
 */
 
 @import	"test_heritage.kh"
 
-@implementation Stack
+@implementation File
 {
   @member
     {
       void	init(int size)
       {
-//	[super init];
 	[self.size] = size;
       }
 
@@ -30,7 +29,7 @@
     }
 }
 
-@implementation StackInt
+@implementation FileInt
 {
 
   @member void	init(int size)

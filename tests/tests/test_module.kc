@@ -1,11 +1,5 @@
 @import "test_module.kh"
 
-/* @module COOC */
-/* { */
-/*   int	cooc_a; */
-/*   int	cooc_b; */
-/* } */
-
 int	a;
 
 int	main()
@@ -15,7 +9,6 @@ int	main()
    b = @!(int)[Test.a];
 
    printf("%d\n", @!(int)[Test.a]);
-//   [Test cool :2];
-//   [Test f2 :"tata" :b];
-     [Test yata :2];
+   [Test f1 :4 :2];
+   [Test f2 :"quarante " :2];
 }

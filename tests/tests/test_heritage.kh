@@ -5,15 +5,16 @@
 ** Login   <toumi_m@epitech.net>
 ** 
 ** Started on  Sat Jul 12 18:28:35 2008 User Toumi_m
-   Last update Wed Jul 23 22:37:58 2008 florent hochwelker
+** Last update Fri Jul 25 11:41:29 2008 majdi toumi
 */
 
-@class Stack
+@class	File
 {
   @member
     {
       int	size;
       int	nbitem;
+      //   void	init(int size);
     }
 
   /* pour compter le nombre de pile presente dans le systeme */
@@ -22,15 +23,16 @@
   int		nbitem();
 }
 
-@class StackInt : Stack
+@class FileInt : File
 {
   @member int	*data;
 
   /* pour compter le nombre de pile presente dans le systeme */
   int		nbstack = 0;
+  int		nbitem;
 
   // fonctions membres
-  @member void	init(int);
+  //  @member void	init(int);
   @member void	clean();
 
   // ou
