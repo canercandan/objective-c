@@ -187,6 +187,7 @@ function	koocImplementationDependency(sName : value, theImplementation : node)
       ref theNew = this.block#back;
       treeCreateLink(theInit, theNew);
       treeCreateLink(theNew, theInit);
+      treeAddSelf(sName, theInit);
     }
   treeCreateClean(sName, "__FUNCTION__", theImplementation);
   localref theClean = this.block#back;

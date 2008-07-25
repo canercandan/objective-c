@@ -266,6 +266,7 @@ function	koocClassDependency(sClass : value, theClass : node)
       ref theNew = this.block#back;
       treeCreateLink(theInit, theNew);
       treeCreateLink(theNew, theInit);
+      treeAddSelf(sClass, theInit);
     }
   treeCreateClean(sClass, "__PROTOTYPE__", theClass);
   localref theClean = this.block#back;
