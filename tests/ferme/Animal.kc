@@ -1,0 +1,58 @@
+@import "Animal.kh"
+
+@implementation Animal
+{
+  @member void init(int age, int poid, int faim)
+    {
+      [self.age] = age;
+      [self.poid] = poid;
+      [self.faim] = faim;
+    }
+  @member void	init()
+    {
+      [self.age] = 1;
+      [self.poid] = 5;
+      [self.faim] = 1;
+    }
+  @virtual @member void	crier()
+    {
+      printf("Je suis fouu..!");
+    }
+}
+
+@implementation Singe
+{
+  @member void	init(int age, int poid, int faim)
+    {
+      [super init];
+    }
+  @virtual @member void	crier()
+    {
+      printf("Je suis un singe hihihihanhi !");
+    }
+}
+
+@implementation Cochon
+{
+  @virtual @member void	crier()
+    {
+      printf("Je suis un cochon rRonRonRron !");
+    }
+}
+
+@implementation Nourriture
+{
+  @member init(int qte)
+    {
+      [self.qte] = qte;
+    }
+  @member approvisionner(int);
+  @member servirNourriture(int);
+}
+
+int	main()
+{
+  [Nourriture stock];
+  [Nourriture init];
+  return (0);
+}

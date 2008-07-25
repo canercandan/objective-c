@@ -1,0 +1,2362 @@
+<project>
+	<block>
+		<__ARRAY_ENTRY __KEY="0">
+			<__FILE__ __VALUE="./kc_Nourriture.h" />
+			<name __VALUE="Nourriture" />
+			<type __VALUE="__TYPE__" />
+			<etype __VALUE="declaration" />
+			<ctype>
+				<pctx __REFERENCE="project.block" />
+				<type __VALUE="__COMPOSED__" />
+				<identifier __VALUE="_kc_interface_Nourriture" />
+				<infoType>
+					<__ARRAY_ENTRY __KEY="typedef" __VALUE="storageClassSpecifier" />
+				</infoType>
+				<specifier __VALUE="struct" />
+				<list>
+					<__ARRAY_ENTRY __KEY="0">
+						<type __VALUE="__VARIABLE__" />
+						<etype __VALUE="declaration" />
+						<ctype>
+							<pctx __REFERENCE="project.block" />
+							<pointer>
+								<__ARRAY_ENTRY __KEY="0">
+									<level __VALUE="*" />
+								</__ARRAY_ENTRY>
+							</pointer>
+							<identifier __VALUE="void" />
+						</ctype>
+						<name __VALUE="vt" />
+					</__ARRAY_ENTRY>
+				</list>
+			</ctype>
+		</__ARRAY_ENTRY>
+		<__ARRAY_ENTRY __KEY="1">
+			<type __VALUE="__TYPE__" />
+			<etype __VALUE="declaration" />
+			<ctype>
+				<pctx __REFERENCE="project.block" />
+				<type __VALUE="__COMPOSED__" />
+				<identifier __VALUE="_kc_implementation_Nourriture" />
+				<specifier __VALUE="struct" />
+				<list />
+			</ctype>
+			<__FILE__ __VALUE="./kc_Nourriture.h" />
+		</__ARRAY_ENTRY>
+		<__ARRAY_ENTRY __KEY="2">
+			<type __VALUE="__VARIABLE__" />
+			<etype __VALUE="declaration" />
+			<name __VALUE="_kc_vtable_Nourriture" />
+			<ctype>
+				<pctx __REFERENCE="project.block" />
+				<type __VALUE="__COMPOSED__" />
+				<identifier __VALUE="_kc_implementation_Nourriture" />
+				<specifier __VALUE="struct" />
+			</ctype>
+			<init>
+				<block />
+				<etype __VALUE="init" />
+			</init>
+			<__FILE__ __VALUE="./kc_Nourriture.c" />
+		</__ARRAY_ENTRY>
+		<__ARRAY_ENTRY __KEY="3">
+			<__LINE__ __VALUE="4" />
+			<ctype>
+				<pctx __REFERENCE="project.block" />
+				<type __VALUE="__PRIMARY__" />
+				<identifier __VALUE="void" />
+			</ctype>
+			<type __VALUE="__PROTOTYPE__" />
+			<etype __VALUE="declaration" />
+			<name __VALUE="_ZN10Nourriture4initEv10Nourriturei" />
+			<list>
+				<__ARRAY_ENTRY __KEY="1">
+					<type __VALUE="__VARIABLE__" />
+					<etype __VALUE="declaration" />
+					<name __VALUE="self" />
+					<ctype>
+						<pctx __REFERENCE="project.block" />
+						<type __VALUE="__COMPOSED__" />
+						<identifier __VALUE="Nourriture" />
+						<pointer>
+							<__ARRAY_ENTRY __KEY="0">
+								<level __VALUE="*" />
+							</__ARRAY_ENTRY>
+						</pointer>
+					</ctype>
+				</__ARRAY_ENTRY>
+				<__ARRAY_ENTRY __KEY="0">
+					<ctype>
+						<pctx __REFERENCE="project.block" />
+						<type __VALUE="__PRIMARY__" />
+						<identifier __VALUE="int" />
+						<sign __VALUE="signed" />
+					</ctype>
+					<type __VALUE="__VARIABLE__" />
+					<etype __VALUE="declaration" />
+					<name __VALUE="qte" />
+					<oname __VALUE="qte" />
+				</__ARRAY_ENTRY>
+			</list>
+			<oname __VALUE="init" />
+			<link __REFERENCE="project.block[&quot;4&quot;]" />
+			<__FILE__ __VALUE="./kc_Nourriture.h" />
+		</__ARRAY_ENTRY>
+		<__ARRAY_ENTRY __KEY="4">
+			<type __VALUE="__PROTOTYPE__" />
+			<name __VALUE="_ZN10Nourriture3newEvi" />
+			<ctype>
+				<pctx __REFERENCE="project.block" />
+				<type __VALUE="__PRIMARY__" />
+				<identifier __VALUE="void" />
+			</ctype>
+			<etype __VALUE="declaration" />
+			<list>
+				<__ARRAY_ENTRY __KEY="0">
+					<ctype>
+						<pctx __REFERENCE="project.block" />
+						<type __VALUE="__PRIMARY__" />
+						<identifier __VALUE="int" />
+						<sign __VALUE="signed" />
+					</ctype>
+					<type __VALUE="__VARIABLE__" />
+					<etype __VALUE="declaration" />
+					<name __VALUE="qte" />
+					<oname __VALUE="qte" />
+				</__ARRAY_ENTRY>
+			</list>
+			<oname __VALUE="new" />
+			<link __REFERENCE="project.block[&quot;3&quot;]" />
+		</__ARRAY_ENTRY>
+		<__ARRAY_ENTRY __KEY="5">
+			<__LINE__ __VALUE="5" />
+			<ctype>
+				<pctx __REFERENCE="project.block" />
+				<type __VALUE="__PRIMARY__" />
+				<identifier __VALUE="void" />
+			</ctype>
+			<type __VALUE="__PROTOTYPE__" />
+			<etype __VALUE="declaration" />
+			<name __VALUE="_ZN10Nourriture14approvisionnerEv10Nourriturei" />
+			<list>
+				<__ARRAY_ENTRY __KEY="1">
+					<type __VALUE="__VARIABLE__" />
+					<etype __VALUE="declaration" />
+					<name __VALUE="self" />
+					<ctype>
+						<pctx __REFERENCE="project.block" />
+						<type __VALUE="__COMPOSED__" />
+						<identifier __VALUE="Nourriture" />
+						<pointer>
+							<__ARRAY_ENTRY __KEY="0">
+								<level __VALUE="*" />
+							</__ARRAY_ENTRY>
+						</pointer>
+					</ctype>
+				</__ARRAY_ENTRY>
+				<__ARRAY_ENTRY __KEY="0">
+					<ctype>
+						<pctx __REFERENCE="project.block" />
+						<type __VALUE="__PRIMARY__" />
+						<identifier __VALUE="int" />
+						<sign __VALUE="signed" />
+					</ctype>
+					<type __VALUE="__VARIABLE__" />
+					<etype __VALUE="declaration" />
+				</__ARRAY_ENTRY>
+			</list>
+			<oname __VALUE="approvisionner" />
+			<__FILE__ __VALUE="./kc_Nourriture.h" />
+		</__ARRAY_ENTRY>
+		<__ARRAY_ENTRY __KEY="6">
+			<__LINE__ __VALUE="6" />
+			<ctype>
+				<pctx __REFERENCE="project.block" />
+				<type __VALUE="__PRIMARY__" />
+				<identifier __VALUE="void" />
+			</ctype>
+			<type __VALUE="__PROTOTYPE__" />
+			<etype __VALUE="declaration" />
+			<name __VALUE="_ZN10Nourriture16servirNourritureEv10Nourriturei" />
+			<list>
+				<__ARRAY_ENTRY __KEY="1">
+					<type __VALUE="__VARIABLE__" />
+					<etype __VALUE="declaration" />
+					<name __VALUE="self" />
+					<ctype>
+						<pctx __REFERENCE="project.block" />
+						<type __VALUE="__COMPOSED__" />
+						<identifier __VALUE="Nourriture" />
+						<pointer>
+							<__ARRAY_ENTRY __KEY="0">
+								<level __VALUE="*" />
+							</__ARRAY_ENTRY>
+						</pointer>
+					</ctype>
+				</__ARRAY_ENTRY>
+				<__ARRAY_ENTRY __KEY="0">
+					<ctype>
+						<pctx __REFERENCE="project.block" />
+						<type __VALUE="__PRIMARY__" />
+						<identifier __VALUE="int" />
+						<sign __VALUE="signed" />
+					</ctype>
+					<type __VALUE="__VARIABLE__" />
+					<etype __VALUE="declaration" />
+				</__ARRAY_ENTRY>
+			</list>
+			<oname __VALUE="servirNourriture" />
+			<__FILE__ __VALUE="./kc_Nourriture.h" />
+		</__ARRAY_ENTRY>
+		<__ARRAY_ENTRY __KEY="7">
+			<__LINE__ __VALUE="8" />
+			<ctype>
+				<pctx __REFERENCE="project.block" />
+				<type __VALUE="__PRIMARY__" />
+				<identifier __VALUE="int" />
+				<sign __VALUE="signed" />
+			</ctype>
+			<type __VALUE="__VARIABLE__" />
+			<etype __VALUE="declaration" />
+			<name __VALUE="_ZN10Nourriture3qteEi" />
+			<oname __VALUE="qte" />
+			<__FILE__ __VALUE="./kc_Nourriture.h_variable" />
+		</__ARRAY_ENTRY>
+		<__ARRAY_ENTRY __KEY="8">
+			<type __VALUE="__PROTOTYPE__" />
+			<name __VALUE="_ZN10Nourriture5cleanEv10Nourriture" />
+			<ctype>
+				<pctx __REFERENCE="project.block" />
+				<type __VALUE="__PRIMARY__" />
+				<identifier __VALUE="void" />
+			</ctype>
+			<etype __VALUE="declaration" />
+			<list>
+				<__ARRAY_ENTRY __KEY="0">
+					<type __VALUE="__VARIABLE__" />
+					<etype __VALUE="declaration" />
+					<name __VALUE="self" />
+					<ctype>
+						<pctx __REFERENCE="project.block" />
+						<type __VALUE="__COMPOSED__" />
+						<identifier __VALUE="Nourriture" />
+						<pointer>
+							<__ARRAY_ENTRY __KEY="0">
+								<level __VALUE="*" />
+							</__ARRAY_ENTRY>
+						</pointer>
+					</ctype>
+				</__ARRAY_ENTRY>
+			</list>
+			<oname __VALUE="clean" />
+		</__ARRAY_ENTRY>
+		<__ARRAY_ENTRY __KEY="9">
+			<type __VALUE="__PROTOTYPE__" />
+			<name __VALUE="_ZN10Nourriture6deleteEv10Nourriture" />
+			<ctype>
+				<pctx __REFERENCE="project.block" />
+				<type __VALUE="__PRIMARY__" />
+				<identifier __VALUE="void" />
+			</ctype>
+			<etype __VALUE="declaration" />
+			<list>
+				<__ARRAY_ENTRY __KEY="0">
+					<type __VALUE="__VARIABLE__" />
+					<etype __VALUE="declaration" />
+					<name __VALUE="self" />
+					<ctype>
+						<pctx __REFERENCE="project.block" />
+						<type __VALUE="__COMPOSED__" />
+						<identifier __VALUE="Nourriture" />
+						<pointer>
+							<__ARRAY_ENTRY __KEY="0">
+								<level __VALUE="*" />
+							</__ARRAY_ENTRY>
+						</pointer>
+					</ctype>
+				</__ARRAY_ENTRY>
+			</list>
+			<oname __VALUE="delete" />
+		</__ARRAY_ENTRY>
+		<__ARRAY_ENTRY __KEY="10">
+			<__FILE__ __VALUE="./kc_Animal.h" />
+			<name __VALUE="Animal" />
+			<type __VALUE="__TYPE__" />
+			<etype __VALUE="declaration" />
+			<ctype>
+				<pctx __REFERENCE="project.block" />
+				<type __VALUE="__COMPOSED__" />
+				<identifier __VALUE="_kc_interface_Animal" />
+				<infoType>
+					<__ARRAY_ENTRY __KEY="typedef" __VALUE="storageClassSpecifier" />
+				</infoType>
+				<specifier __VALUE="struct" />
+				<list>
+					<__ARRAY_ENTRY __KEY="0">
+						<type __VALUE="__VARIABLE__" />
+						<etype __VALUE="declaration" />
+						<ctype>
+							<pctx __REFERENCE="project.block" />
+							<pointer>
+								<__ARRAY_ENTRY __KEY="0">
+									<level __VALUE="*" />
+								</__ARRAY_ENTRY>
+							</pointer>
+							<identifier __VALUE="void" />
+						</ctype>
+						<name __VALUE="vt" />
+					</__ARRAY_ENTRY>
+				</list>
+			</ctype>
+		</__ARRAY_ENTRY>
+		<__ARRAY_ENTRY __KEY="11">
+			<type __VALUE="__TYPE__" />
+			<etype __VALUE="declaration" />
+			<ctype>
+				<pctx __REFERENCE="project.block" />
+				<type __VALUE="__COMPOSED__" />
+				<identifier __VALUE="_kc_implementation_Animal" />
+				<specifier __VALUE="struct" />
+				<list>
+					<__ARRAY_ENTRY __KEY="0">
+						<__LINE__ __VALUE="15" />
+						<ctype>
+							<pctx __REFERENCE="project.block" />
+							<type __VALUE="__PRIMARY__" />
+							<identifier __VALUE="void" />
+						</ctype>
+						<type __VALUE="__PROTOTYPE__" />
+						<etype __VALUE="declaration" />
+						<name __VALUE="_ZN6Animal5crierEv6Animal" />
+						<list>
+							<__ARRAY_ENTRY __KEY="0">
+								<type __VALUE="__VARIABLE__" />
+								<etype __VALUE="declaration" />
+								<name __VALUE="self" />
+								<ctype>
+									<pctx __REFERENCE="project.block" />
+									<type __VALUE="__COMPOSED__" />
+									<identifier __VALUE="Animal" />
+									<pointer>
+										<__ARRAY_ENTRY __KEY="0">
+											<level __VALUE="*" />
+										</__ARRAY_ENTRY>
+									</pointer>
+								</ctype>
+							</__ARRAY_ENTRY>
+						</list>
+						<oname __VALUE="crier" />
+						<__FILE__ __VALUE="./kc_Animal.h" />
+						<pfname>
+							<__ARRAY_ENTRY __KEY="0">
+								<function>
+									<name __VALUE="_ZN6Animal5crierEv6Animal" />
+								</function>
+							</__ARRAY_ENTRY>
+						</pfname>
+					</__ARRAY_ENTRY>
+				</list>
+			</ctype>
+			<__FILE__ __VALUE="./kc_Animal.h" />
+		</__ARRAY_ENTRY>
+		<__ARRAY_ENTRY __KEY="12">
+			<type __VALUE="__VARIABLE__" />
+			<etype __VALUE="declaration" />
+			<name __VALUE="_kc_vtable_Animal" />
+			<ctype>
+				<pctx __REFERENCE="project.block" />
+				<type __VALUE="__COMPOSED__" />
+				<identifier __VALUE="_kc_implementation_Animal" />
+				<specifier __VALUE="struct" />
+			</ctype>
+			<init>
+				<block>
+					<__ARRAY_ENTRY __KEY="0">
+						<init>
+							<type __VALUE="primary_expression" />
+							<value __VALUE="_ZN6Animal5crierEv6Animal" />
+							<operator __VALUE="id" />
+							<otype __VALUE="terminal" />
+							<etype __VALUE="expression" />
+						</init>
+					</__ARRAY_ENTRY>
+				</block>
+				<etype __VALUE="init" />
+			</init>
+			<__FILE__ __VALUE="./kc_Animal.c" />
+		</__ARRAY_ENTRY>
+		<__ARRAY_ENTRY __KEY="13">
+			<__LINE__ __VALUE="14" />
+			<ctype>
+				<pctx __REFERENCE="project.block" />
+				<type __VALUE="__PRIMARY__" />
+				<identifier __VALUE="void" />
+			</ctype>
+			<type __VALUE="__PROTOTYPE__" />
+			<etype __VALUE="declaration" />
+			<name __VALUE="_ZN6Animal4initEv6Animal" />
+			<list>
+				<__ARRAY_ENTRY __KEY="0">
+					<type __VALUE="__VARIABLE__" />
+					<etype __VALUE="declaration" />
+					<name __VALUE="self" />
+					<ctype>
+						<pctx __REFERENCE="project.block" />
+						<type __VALUE="__COMPOSED__" />
+						<identifier __VALUE="Animal" />
+						<pointer>
+							<__ARRAY_ENTRY __KEY="0">
+								<level __VALUE="*" />
+							</__ARRAY_ENTRY>
+						</pointer>
+					</ctype>
+				</__ARRAY_ENTRY>
+			</list>
+			<oname __VALUE="init" />
+			<link __REFERENCE="project.block[&quot;14&quot;]" />
+			<__FILE__ __VALUE="./kc_Animal.h" />
+		</__ARRAY_ENTRY>
+		<__ARRAY_ENTRY __KEY="14">
+			<type __VALUE="__PROTOTYPE__" />
+			<name __VALUE="_ZN6Animal3newEv" />
+			<ctype>
+				<pctx __REFERENCE="project.block" />
+				<type __VALUE="__PRIMARY__" />
+				<identifier __VALUE="void" />
+			</ctype>
+			<etype __VALUE="declaration" />
+			<list />
+			<oname __VALUE="new" />
+			<link __REFERENCE="project.block[&quot;13&quot;]" />
+		</__ARRAY_ENTRY>
+		<__ARRAY_ENTRY __KEY="15">
+			<__LINE__ __VALUE="15" />
+			<ctype>
+				<pctx __REFERENCE="project.block" />
+				<type __VALUE="__PRIMARY__" />
+				<identifier __VALUE="void" />
+			</ctype>
+			<type __VALUE="__PROTOTYPE__" />
+			<etype __VALUE="declaration" />
+			<name __VALUE="_ZN6Animal5crierEv6Animal" />
+			<list>
+				<__ARRAY_ENTRY __KEY="0">
+					<type __VALUE="__VARIABLE__" />
+					<etype __VALUE="declaration" />
+					<name __VALUE="self" />
+					<ctype>
+						<pctx __REFERENCE="project.block" />
+						<type __VALUE="__COMPOSED__" />
+						<identifier __VALUE="Animal" />
+						<pointer>
+							<__ARRAY_ENTRY __KEY="0">
+								<level __VALUE="*" />
+							</__ARRAY_ENTRY>
+						</pointer>
+					</ctype>
+				</__ARRAY_ENTRY>
+			</list>
+			<oname __VALUE="crier" />
+			<__FILE__ __VALUE="./kc_Animal.h" />
+		</__ARRAY_ENTRY>
+		<__ARRAY_ENTRY __KEY="16">
+			<__LINE__ __VALUE="17" />
+			<ctype>
+				<pctx __REFERENCE="project.block" />
+				<type __VALUE="__PRIMARY__" />
+				<identifier __VALUE="int" />
+				<sign __VALUE="signed" />
+			</ctype>
+			<type __VALUE="__VARIABLE__" />
+			<etype __VALUE="declaration" />
+			<name __VALUE="_ZN6Animal3ageEi" />
+			<oname __VALUE="age" />
+			<__FILE__ __VALUE="./kc_Animal.h_variable" />
+		</__ARRAY_ENTRY>
+		<__ARRAY_ENTRY __KEY="17">
+			<__LINE__ __VALUE="18" />
+			<ctype>
+				<pctx __REFERENCE="project.block" />
+				<type __VALUE="__PRIMARY__" />
+				<identifier __VALUE="int" />
+				<sign __VALUE="signed" />
+			</ctype>
+			<type __VALUE="__VARIABLE__" />
+			<etype __VALUE="declaration" />
+			<name __VALUE="_ZN6Animal4poidEi" />
+			<oname __VALUE="poid" />
+			<__FILE__ __VALUE="./kc_Animal.h_variable" />
+		</__ARRAY_ENTRY>
+		<__ARRAY_ENTRY __KEY="18">
+			<__LINE__ __VALUE="19" />
+			<ctype>
+				<pctx __REFERENCE="project.block" />
+				<type __VALUE="__PRIMARY__" />
+				<identifier __VALUE="int" />
+				<sign __VALUE="signed" />
+			</ctype>
+			<type __VALUE="__VARIABLE__" />
+			<etype __VALUE="declaration" />
+			<name __VALUE="_ZN6Animal4faimEi" />
+			<oname __VALUE="faim" />
+			<__FILE__ __VALUE="./kc_Animal.h_variable" />
+		</__ARRAY_ENTRY>
+		<__ARRAY_ENTRY __KEY="19">
+			<type __VALUE="__PROTOTYPE__" />
+			<name __VALUE="_ZN6Animal5cleanEv6Animal" />
+			<ctype>
+				<pctx __REFERENCE="project.block" />
+				<type __VALUE="__PRIMARY__" />
+				<identifier __VALUE="void" />
+			</ctype>
+			<etype __VALUE="declaration" />
+			<list>
+				<__ARRAY_ENTRY __KEY="0">
+					<type __VALUE="__VARIABLE__" />
+					<etype __VALUE="declaration" />
+					<name __VALUE="self" />
+					<ctype>
+						<pctx __REFERENCE="project.block" />
+						<type __VALUE="__COMPOSED__" />
+						<identifier __VALUE="Animal" />
+						<pointer>
+							<__ARRAY_ENTRY __KEY="0">
+								<level __VALUE="*" />
+							</__ARRAY_ENTRY>
+						</pointer>
+					</ctype>
+				</__ARRAY_ENTRY>
+			</list>
+			<oname __VALUE="clean" />
+		</__ARRAY_ENTRY>
+		<__ARRAY_ENTRY __KEY="20">
+			<type __VALUE="__PROTOTYPE__" />
+			<name __VALUE="_ZN6Animal6deleteEv6Animal" />
+			<ctype>
+				<pctx __REFERENCE="project.block" />
+				<type __VALUE="__PRIMARY__" />
+				<identifier __VALUE="void" />
+			</ctype>
+			<etype __VALUE="declaration" />
+			<list>
+				<__ARRAY_ENTRY __KEY="0">
+					<type __VALUE="__VARIABLE__" />
+					<etype __VALUE="declaration" />
+					<name __VALUE="self" />
+					<ctype>
+						<pctx __REFERENCE="project.block" />
+						<type __VALUE="__COMPOSED__" />
+						<identifier __VALUE="Animal" />
+						<pointer>
+							<__ARRAY_ENTRY __KEY="0">
+								<level __VALUE="*" />
+							</__ARRAY_ENTRY>
+						</pointer>
+					</ctype>
+				</__ARRAY_ENTRY>
+			</list>
+			<oname __VALUE="delete" />
+		</__ARRAY_ENTRY>
+		<__ARRAY_ENTRY __KEY="21">
+			<__FILE__ __VALUE="./kc_Singe.h" />
+			<name __VALUE="Singe" />
+			<type __VALUE="__TYPE__" />
+			<etype __VALUE="declaration" />
+			<ctype>
+				<pctx __REFERENCE="project.block" />
+				<type __VALUE="__COMPOSED__" />
+				<identifier __VALUE="_kc_interface_Singe" />
+				<infoType>
+					<__ARRAY_ENTRY __KEY="typedef" __VALUE="storageClassSpecifier" />
+				</infoType>
+				<specifier __VALUE="struct" />
+				<list>
+					<__ARRAY_ENTRY __KEY="0">
+						<type __VALUE="__VARIABLE__" />
+						<etype __VALUE="declaration" />
+						<ctype>
+							<pctx __REFERENCE="project.block" />
+							<pointer>
+								<__ARRAY_ENTRY __KEY="0">
+									<level __VALUE="*" />
+								</__ARRAY_ENTRY>
+							</pointer>
+							<identifier __VALUE="void" />
+						</ctype>
+						<name __VALUE="vt" />
+					</__ARRAY_ENTRY>
+				</list>
+			</ctype>
+		</__ARRAY_ENTRY>
+		<__ARRAY_ENTRY __KEY="22">
+			<type __VALUE="__TYPE__" />
+			<etype __VALUE="declaration" />
+			<ctype>
+				<pctx __REFERENCE="project.block" />
+				<type __VALUE="__COMPOSED__" />
+				<identifier __VALUE="_kc_implementation_Singe" />
+				<specifier __VALUE="struct" />
+				<list>
+					<__ARRAY_ENTRY __KEY="0">
+						<__LINE__ __VALUE="15" />
+						<ctype>
+							<pctx __REFERENCE="project.block" />
+							<type __VALUE="__PRIMARY__" />
+							<identifier __VALUE="void" />
+						</ctype>
+						<type __VALUE="__PROTOTYPE__" />
+						<etype __VALUE="declaration" />
+						<name __VALUE="_ZN6Animal5crierEv6Animal" />
+						<list>
+							<__ARRAY_ENTRY __KEY="0">
+								<type __VALUE="__VARIABLE__" />
+								<etype __VALUE="declaration" />
+								<name __VALUE="self" />
+								<ctype>
+									<pctx __REFERENCE="project.block" />
+									<type __VALUE="__COMPOSED__" />
+									<identifier __VALUE="Animal" />
+									<pointer>
+										<__ARRAY_ENTRY __KEY="0">
+											<level __VALUE="*" />
+										</__ARRAY_ENTRY>
+									</pointer>
+								</ctype>
+							</__ARRAY_ENTRY>
+						</list>
+						<oname __VALUE="crier" />
+						<__FILE__ __VALUE="./kc_Animal.h" />
+						<pfname>
+							<__ARRAY_ENTRY __KEY="0">
+								<function>
+									<name __VALUE="_ZN6Animal5crierEv6Animal" />
+								</function>
+							</__ARRAY_ENTRY>
+						</pfname>
+					</__ARRAY_ENTRY>
+				</list>
+			</ctype>
+			<__FILE__ __VALUE="./kc_Singe.h" />
+		</__ARRAY_ENTRY>
+		<__ARRAY_ENTRY __KEY="23">
+			<type __VALUE="__VARIABLE__" />
+			<etype __VALUE="declaration" />
+			<name __VALUE="_kc_vtable_Singe" />
+			<ctype>
+				<pctx __REFERENCE="project.block" />
+				<type __VALUE="__COMPOSED__" />
+				<identifier __VALUE="_kc_implementation_Singe" />
+				<specifier __VALUE="struct" />
+			</ctype>
+			<init>
+				<block>
+					<__ARRAY_ENTRY __KEY="0">
+						<init>
+							<type __VALUE="primary_expression" />
+							<value __VALUE="_ZN5Singe5crierEv5Singe" />
+							<operator __VALUE="id" />
+							<otype __VALUE="terminal" />
+							<etype __VALUE="expression" />
+						</init>
+					</__ARRAY_ENTRY>
+				</block>
+				<etype __VALUE="init" />
+			</init>
+			<__FILE__ __VALUE="./kc_Singe.c" />
+		</__ARRAY_ENTRY>
+		<__ARRAY_ENTRY __KEY="24">
+			<__LINE__ __VALUE="24" />
+			<ctype>
+				<pctx __REFERENCE="project.block" />
+				<type __VALUE="__PRIMARY__" />
+				<identifier __VALUE="void" />
+			</ctype>
+			<type __VALUE="__PROTOTYPE__" />
+			<etype __VALUE="declaration" />
+			<name __VALUE="_ZN5Singe4initEv5Singeiii" />
+			<list>
+				<__ARRAY_ENTRY __KEY="3">
+					<type __VALUE="__VARIABLE__" />
+					<etype __VALUE="declaration" />
+					<name __VALUE="self" />
+					<ctype>
+						<pctx __REFERENCE="project.block" />
+						<type __VALUE="__COMPOSED__" />
+						<identifier __VALUE="Singe" />
+						<pointer>
+							<__ARRAY_ENTRY __KEY="0">
+								<level __VALUE="*" />
+							</__ARRAY_ENTRY>
+						</pointer>
+					</ctype>
+				</__ARRAY_ENTRY>
+				<__ARRAY_ENTRY __KEY="0">
+					<ctype>
+						<pctx __REFERENCE="project.block" />
+						<type __VALUE="__PRIMARY__" />
+						<identifier __VALUE="int" />
+						<sign __VALUE="signed" />
+					</ctype>
+					<type __VALUE="__VARIABLE__" />
+					<etype __VALUE="declaration" />
+					<name __VALUE="age" />
+					<oname __VALUE="age" />
+				</__ARRAY_ENTRY>
+				<__ARRAY_ENTRY __KEY="1">
+					<ctype>
+						<pctx __REFERENCE="project.block" />
+						<type __VALUE="__PRIMARY__" />
+						<identifier __VALUE="int" />
+						<sign __VALUE="signed" />
+					</ctype>
+					<type __VALUE="__VARIABLE__" />
+					<etype __VALUE="declaration" />
+					<name __VALUE="poid" />
+					<oname __VALUE="poid" />
+				</__ARRAY_ENTRY>
+				<__ARRAY_ENTRY __KEY="2">
+					<ctype>
+						<pctx __REFERENCE="project.block" />
+						<type __VALUE="__PRIMARY__" />
+						<identifier __VALUE="int" />
+						<sign __VALUE="signed" />
+					</ctype>
+					<type __VALUE="__VARIABLE__" />
+					<etype __VALUE="declaration" />
+					<name __VALUE="faim" />
+					<oname __VALUE="faim" />
+				</__ARRAY_ENTRY>
+			</list>
+			<oname __VALUE="init" />
+			<link __REFERENCE="project.block[&quot;25&quot;]" />
+			<__FILE__ __VALUE="./kc_Singe.h" />
+		</__ARRAY_ENTRY>
+		<__ARRAY_ENTRY __KEY="25">
+			<type __VALUE="__PROTOTYPE__" />
+			<name __VALUE="_ZN5Singe3newEviii" />
+			<ctype>
+				<pctx __REFERENCE="project.block" />
+				<type __VALUE="__PRIMARY__" />
+				<identifier __VALUE="void" />
+			</ctype>
+			<etype __VALUE="declaration" />
+			<list>
+				<__ARRAY_ENTRY __KEY="0">
+					<ctype>
+						<pctx __REFERENCE="project.block" />
+						<type __VALUE="__PRIMARY__" />
+						<identifier __VALUE="int" />
+						<sign __VALUE="signed" />
+					</ctype>
+					<type __VALUE="__VARIABLE__" />
+					<etype __VALUE="declaration" />
+					<name __VALUE="age" />
+					<oname __VALUE="age" />
+				</__ARRAY_ENTRY>
+				<__ARRAY_ENTRY __KEY="1">
+					<ctype>
+						<pctx __REFERENCE="project.block" />
+						<type __VALUE="__PRIMARY__" />
+						<identifier __VALUE="int" />
+						<sign __VALUE="signed" />
+					</ctype>
+					<type __VALUE="__VARIABLE__" />
+					<etype __VALUE="declaration" />
+					<name __VALUE="poid" />
+					<oname __VALUE="poid" />
+				</__ARRAY_ENTRY>
+				<__ARRAY_ENTRY __KEY="2">
+					<ctype>
+						<pctx __REFERENCE="project.block" />
+						<type __VALUE="__PRIMARY__" />
+						<identifier __VALUE="int" />
+						<sign __VALUE="signed" />
+					</ctype>
+					<type __VALUE="__VARIABLE__" />
+					<etype __VALUE="declaration" />
+					<name __VALUE="faim" />
+					<oname __VALUE="faim" />
+				</__ARRAY_ENTRY>
+			</list>
+			<oname __VALUE="new" />
+			<link __REFERENCE="project.block[&quot;24&quot;]" />
+		</__ARRAY_ENTRY>
+		<__ARRAY_ENTRY __KEY="26">
+			<__LINE__ __VALUE="25" />
+			<ctype>
+				<pctx __REFERENCE="project.block" />
+				<type __VALUE="__PRIMARY__" />
+				<identifier __VALUE="void" />
+			</ctype>
+			<type __VALUE="__PROTOTYPE__" />
+			<etype __VALUE="declaration" />
+			<name __VALUE="_ZN5Singe5crierEv5Singe" />
+			<list>
+				<__ARRAY_ENTRY __KEY="0">
+					<type __VALUE="__VARIABLE__" />
+					<etype __VALUE="declaration" />
+					<name __VALUE="self" />
+					<ctype>
+						<pctx __REFERENCE="project.block" />
+						<type __VALUE="__COMPOSED__" />
+						<identifier __VALUE="Singe" />
+						<pointer>
+							<__ARRAY_ENTRY __KEY="0">
+								<level __VALUE="*" />
+							</__ARRAY_ENTRY>
+						</pointer>
+					</ctype>
+				</__ARRAY_ENTRY>
+			</list>
+			<oname __VALUE="crier" />
+			<__FILE__ __VALUE="./kc_Singe.h" />
+		</__ARRAY_ENTRY>
+		<__ARRAY_ENTRY __KEY="27">
+			<type __VALUE="__PROTOTYPE__" />
+			<name __VALUE="_ZN5Singe5cleanEv5Singe" />
+			<ctype>
+				<pctx __REFERENCE="project.block" />
+				<type __VALUE="__PRIMARY__" />
+				<identifier __VALUE="void" />
+			</ctype>
+			<etype __VALUE="declaration" />
+			<list>
+				<__ARRAY_ENTRY __KEY="0">
+					<type __VALUE="__VARIABLE__" />
+					<etype __VALUE="declaration" />
+					<name __VALUE="self" />
+					<ctype>
+						<pctx __REFERENCE="project.block" />
+						<type __VALUE="__COMPOSED__" />
+						<identifier __VALUE="Singe" />
+						<pointer>
+							<__ARRAY_ENTRY __KEY="0">
+								<level __VALUE="*" />
+							</__ARRAY_ENTRY>
+						</pointer>
+					</ctype>
+				</__ARRAY_ENTRY>
+			</list>
+			<oname __VALUE="clean" />
+		</__ARRAY_ENTRY>
+		<__ARRAY_ENTRY __KEY="28">
+			<type __VALUE="__PROTOTYPE__" />
+			<name __VALUE="_ZN5Singe6deleteEv5Singe" />
+			<ctype>
+				<pctx __REFERENCE="project.block" />
+				<type __VALUE="__PRIMARY__" />
+				<identifier __VALUE="void" />
+			</ctype>
+			<etype __VALUE="declaration" />
+			<list>
+				<__ARRAY_ENTRY __KEY="0">
+					<type __VALUE="__VARIABLE__" />
+					<etype __VALUE="declaration" />
+					<name __VALUE="self" />
+					<ctype>
+						<pctx __REFERENCE="project.block" />
+						<type __VALUE="__COMPOSED__" />
+						<identifier __VALUE="Singe" />
+						<pointer>
+							<__ARRAY_ENTRY __KEY="0">
+								<level __VALUE="*" />
+							</__ARRAY_ENTRY>
+						</pointer>
+					</ctype>
+				</__ARRAY_ENTRY>
+			</list>
+			<oname __VALUE="delete" />
+		</__ARRAY_ENTRY>
+		<__ARRAY_ENTRY __KEY="29">
+			<__FILE__ __VALUE="./kc_Cochon.h" />
+			<name __VALUE="Cochon" />
+			<type __VALUE="__TYPE__" />
+			<etype __VALUE="declaration" />
+			<ctype>
+				<pctx __REFERENCE="project.block" />
+				<type __VALUE="__COMPOSED__" />
+				<identifier __VALUE="_kc_interface_Cochon" />
+				<infoType>
+					<__ARRAY_ENTRY __KEY="typedef" __VALUE="storageClassSpecifier" />
+				</infoType>
+				<specifier __VALUE="struct" />
+				<list>
+					<__ARRAY_ENTRY __KEY="0">
+						<type __VALUE="__VARIABLE__" />
+						<etype __VALUE="declaration" />
+						<ctype>
+							<pctx __REFERENCE="project.block" />
+							<pointer>
+								<__ARRAY_ENTRY __KEY="0">
+									<level __VALUE="*" />
+								</__ARRAY_ENTRY>
+							</pointer>
+							<identifier __VALUE="void" />
+						</ctype>
+						<name __VALUE="vt" />
+					</__ARRAY_ENTRY>
+				</list>
+			</ctype>
+		</__ARRAY_ENTRY>
+		<__ARRAY_ENTRY __KEY="30">
+			<type __VALUE="__TYPE__" />
+			<etype __VALUE="declaration" />
+			<ctype>
+				<pctx __REFERENCE="project.block" />
+				<type __VALUE="__COMPOSED__" />
+				<identifier __VALUE="_kc_implementation_Cochon" />
+				<specifier __VALUE="struct" />
+				<list>
+					<__ARRAY_ENTRY __KEY="0">
+						<__LINE__ __VALUE="15" />
+						<ctype>
+							<pctx __REFERENCE="project.block" />
+							<type __VALUE="__PRIMARY__" />
+							<identifier __VALUE="void" />
+						</ctype>
+						<type __VALUE="__PROTOTYPE__" />
+						<etype __VALUE="declaration" />
+						<name __VALUE="_ZN6Animal5crierEv6Animal" />
+						<list>
+							<__ARRAY_ENTRY __KEY="0">
+								<type __VALUE="__VARIABLE__" />
+								<etype __VALUE="declaration" />
+								<name __VALUE="self" />
+								<ctype>
+									<pctx __REFERENCE="project.block" />
+									<type __VALUE="__COMPOSED__" />
+									<identifier __VALUE="Animal" />
+									<pointer>
+										<__ARRAY_ENTRY __KEY="0">
+											<level __VALUE="*" />
+										</__ARRAY_ENTRY>
+									</pointer>
+								</ctype>
+							</__ARRAY_ENTRY>
+						</list>
+						<oname __VALUE="crier" />
+						<__FILE__ __VALUE="./kc_Animal.h" />
+						<pfname>
+							<__ARRAY_ENTRY __KEY="0">
+								<function>
+									<name __VALUE="_ZN6Animal5crierEv6Animal" />
+								</function>
+							</__ARRAY_ENTRY>
+						</pfname>
+					</__ARRAY_ENTRY>
+				</list>
+			</ctype>
+			<__FILE__ __VALUE="./kc_Cochon.h" />
+		</__ARRAY_ENTRY>
+		<__ARRAY_ENTRY __KEY="31">
+			<type __VALUE="__VARIABLE__" />
+			<etype __VALUE="declaration" />
+			<name __VALUE="_kc_vtable_Cochon" />
+			<ctype>
+				<pctx __REFERENCE="project.block" />
+				<type __VALUE="__COMPOSED__" />
+				<identifier __VALUE="_kc_implementation_Cochon" />
+				<specifier __VALUE="struct" />
+			</ctype>
+			<init>
+				<block>
+					<__ARRAY_ENTRY __KEY="0">
+						<init>
+							<type __VALUE="primary_expression" />
+							<value __VALUE="_ZN6Cochon5crierEv6Cochon" />
+							<operator __VALUE="id" />
+							<otype __VALUE="terminal" />
+							<etype __VALUE="expression" />
+						</init>
+					</__ARRAY_ENTRY>
+				</block>
+				<etype __VALUE="init" />
+			</init>
+			<__FILE__ __VALUE="./kc_Cochon.c" />
+		</__ARRAY_ENTRY>
+		<__ARRAY_ENTRY __KEY="32">
+			<__LINE__ __VALUE="30" />
+			<ctype>
+				<pctx __REFERENCE="project.block" />
+				<type __VALUE="__PRIMARY__" />
+				<identifier __VALUE="void" />
+			</ctype>
+			<type __VALUE="__PROTOTYPE__" />
+			<etype __VALUE="declaration" />
+			<name __VALUE="_ZN6Cochon5crierEv6Cochon" />
+			<list>
+				<__ARRAY_ENTRY __KEY="0">
+					<type __VALUE="__VARIABLE__" />
+					<etype __VALUE="declaration" />
+					<name __VALUE="self" />
+					<ctype>
+						<pctx __REFERENCE="project.block" />
+						<type __VALUE="__COMPOSED__" />
+						<identifier __VALUE="Cochon" />
+						<pointer>
+							<__ARRAY_ENTRY __KEY="0">
+								<level __VALUE="*" />
+							</__ARRAY_ENTRY>
+						</pointer>
+					</ctype>
+				</__ARRAY_ENTRY>
+			</list>
+			<oname __VALUE="crier" />
+			<__FILE__ __VALUE="./kc_Cochon.h" />
+		</__ARRAY_ENTRY>
+		<__ARRAY_ENTRY __KEY="33">
+			<type __VALUE="__PROTOTYPE__" />
+			<name __VALUE="_ZN6Cochon4initEv6Cochon" />
+			<ctype>
+				<pctx __REFERENCE="project.block" />
+				<type __VALUE="__PRIMARY__" />
+				<identifier __VALUE="void" />
+			</ctype>
+			<etype __VALUE="declaration" />
+			<list>
+				<__ARRAY_ENTRY __KEY="0">
+					<type __VALUE="__VARIABLE__" />
+					<etype __VALUE="declaration" />
+					<name __VALUE="self" />
+					<ctype>
+						<pctx __REFERENCE="project.block" />
+						<type __VALUE="__COMPOSED__" />
+						<identifier __VALUE="Cochon" />
+						<pointer>
+							<__ARRAY_ENTRY __KEY="0">
+								<level __VALUE="*" />
+							</__ARRAY_ENTRY>
+						</pointer>
+					</ctype>
+				</__ARRAY_ENTRY>
+			</list>
+			<oname __VALUE="init" />
+			<__FILE__ __VALUE="./kc_Cochon.h" />
+			<link __REFERENCE="project.block[&quot;34&quot;]" />
+		</__ARRAY_ENTRY>
+		<__ARRAY_ENTRY __KEY="34">
+			<type __VALUE="__PROTOTYPE__" />
+			<name __VALUE="_ZN6Cochon3newEv" />
+			<ctype>
+				<pctx __REFERENCE="project.block" />
+				<type __VALUE="__PRIMARY__" />
+				<identifier __VALUE="void" />
+			</ctype>
+			<etype __VALUE="declaration" />
+			<list />
+			<oname __VALUE="new" />
+			<link __REFERENCE="project.block[&quot;33&quot;]" />
+		</__ARRAY_ENTRY>
+		<__ARRAY_ENTRY __KEY="35">
+			<type __VALUE="__PROTOTYPE__" />
+			<name __VALUE="_ZN6Cochon5cleanEv6Cochon" />
+			<ctype>
+				<pctx __REFERENCE="project.block" />
+				<type __VALUE="__PRIMARY__" />
+				<identifier __VALUE="void" />
+			</ctype>
+			<etype __VALUE="declaration" />
+			<list>
+				<__ARRAY_ENTRY __KEY="0">
+					<type __VALUE="__VARIABLE__" />
+					<etype __VALUE="declaration" />
+					<name __VALUE="self" />
+					<ctype>
+						<pctx __REFERENCE="project.block" />
+						<type __VALUE="__COMPOSED__" />
+						<identifier __VALUE="Cochon" />
+						<pointer>
+							<__ARRAY_ENTRY __KEY="0">
+								<level __VALUE="*" />
+							</__ARRAY_ENTRY>
+						</pointer>
+					</ctype>
+				</__ARRAY_ENTRY>
+			</list>
+			<oname __VALUE="clean" />
+			<__FILE__ __VALUE="./kc_Cochon.h" />
+		</__ARRAY_ENTRY>
+		<__ARRAY_ENTRY __KEY="36">
+			<type __VALUE="__PROTOTYPE__" />
+			<name __VALUE="_ZN6Cochon6deleteEv6Cochon" />
+			<ctype>
+				<pctx __REFERENCE="project.block" />
+				<type __VALUE="__PRIMARY__" />
+				<identifier __VALUE="void" />
+			</ctype>
+			<etype __VALUE="declaration" />
+			<list>
+				<__ARRAY_ENTRY __KEY="0">
+					<type __VALUE="__VARIABLE__" />
+					<etype __VALUE="declaration" />
+					<name __VALUE="self" />
+					<ctype>
+						<pctx __REFERENCE="project.block" />
+						<type __VALUE="__COMPOSED__" />
+						<identifier __VALUE="Cochon" />
+						<pointer>
+							<__ARRAY_ENTRY __KEY="0">
+								<level __VALUE="*" />
+							</__ARRAY_ENTRY>
+						</pointer>
+					</ctype>
+				</__ARRAY_ENTRY>
+			</list>
+			<oname __VALUE="delete" />
+		</__ARRAY_ENTRY>
+		<__ARRAY_ENTRY __KEY="37">
+			<__LINE__ __VALUE="5" />
+			<ctype>
+				<pctx __REFERENCE="project.block" />
+				<type __VALUE="__PRIMARY__" />
+				<identifier __VALUE="void" />
+			</ctype>
+			<type __VALUE="__FUNCTION__" />
+			<etype __VALUE="declaration" />
+			<name __VALUE="_ZN6Animal4initEv6Animaliii" />
+			<list>
+				<__ARRAY_ENTRY __KEY="3">
+					<type __VALUE="__VARIABLE__" />
+					<etype __VALUE="declaration" />
+					<name __VALUE="self" />
+					<ctype>
+						<pctx __REFERENCE="project.block[&quot;37&quot;].block" />
+						<type __VALUE="__COMPOSED__" />
+						<identifier __VALUE="Animal" />
+						<pointer>
+							<__ARRAY_ENTRY __KEY="0">
+								<level __VALUE="*" />
+							</__ARRAY_ENTRY>
+						</pointer>
+					</ctype>
+				</__ARRAY_ENTRY>
+				<__ARRAY_ENTRY __KEY="0">
+					<ctype>
+						<pctx __REFERENCE="project.block" />
+						<type __VALUE="__PRIMARY__" />
+						<identifier __VALUE="int" />
+						<sign __VALUE="signed" />
+					</ctype>
+					<type __VALUE="__VARIABLE__" />
+					<etype __VALUE="declaration" />
+					<name __VALUE="age" />
+					<oname __VALUE="age" />
+				</__ARRAY_ENTRY>
+				<__ARRAY_ENTRY __KEY="1">
+					<ctype>
+						<pctx __REFERENCE="project.block" />
+						<type __VALUE="__PRIMARY__" />
+						<identifier __VALUE="int" />
+						<sign __VALUE="signed" />
+					</ctype>
+					<type __VALUE="__VARIABLE__" />
+					<etype __VALUE="declaration" />
+					<name __VALUE="poid" />
+					<oname __VALUE="poid" />
+				</__ARRAY_ENTRY>
+				<__ARRAY_ENTRY __KEY="2">
+					<ctype>
+						<pctx __REFERENCE="project.block" />
+						<type __VALUE="__PRIMARY__" />
+						<identifier __VALUE="int" />
+						<sign __VALUE="signed" />
+					</ctype>
+					<type __VALUE="__VARIABLE__" />
+					<etype __VALUE="declaration" />
+					<name __VALUE="faim" />
+					<oname __VALUE="faim" />
+				</__ARRAY_ENTRY>
+			</list>
+			<oname __VALUE="init" />
+			<otype __VALUE="rootblock" />
+			<block>
+				<__ARRAY_ENTRY __KEY="0">
+					<left>
+						<type __VALUE="deref_expression" />
+						<left>
+							<type __VALUE="primary_expression" />
+							<value __VALUE="self" />
+							<operator __VALUE="id" />
+							<otype __VALUE="terminal" />
+						</left>
+						<otype __VALUE="likebinary" />
+						<etype __VALUE="expression" />
+						<right>
+							<type __VALUE="primary_expression" />
+							<value __VALUE="_ZN6Animal3ageEi" />
+							<operator __VALUE="id" />
+							<otype __VALUE="terminal" />
+						</right>
+						<operator __VALUE="-&gt;" />
+					</left>
+					<operator __VALUE="=" />
+					<right>
+						<type __VALUE="primary_expression" />
+						<value __VALUE="age" />
+						<operator __VALUE="id" />
+						<otype __VALUE="terminal" />
+					</right>
+					<type __VALUE="assignement_expression" />
+					<otype __VALUE="binary" />
+					<etype __VALUE="expression" />
+					<__LINE__ __VALUE="7" />
+				</__ARRAY_ENTRY>
+				<__ARRAY_ENTRY __KEY="1">
+					<left>
+						<type __VALUE="deref_expression" />
+						<left>
+							<type __VALUE="primary_expression" />
+							<value __VALUE="self" />
+							<operator __VALUE="id" />
+							<otype __VALUE="terminal" />
+						</left>
+						<otype __VALUE="likebinary" />
+						<etype __VALUE="expression" />
+						<right>
+							<type __VALUE="primary_expression" />
+							<value __VALUE="_ZN6Animal4poidEi" />
+							<operator __VALUE="id" />
+							<otype __VALUE="terminal" />
+						</right>
+						<operator __VALUE="-&gt;" />
+					</left>
+					<operator __VALUE="=" />
+					<right>
+						<type __VALUE="primary_expression" />
+						<value __VALUE="poid" />
+						<operator __VALUE="id" />
+						<otype __VALUE="terminal" />
+					</right>
+					<type __VALUE="assignement_expression" />
+					<otype __VALUE="binary" />
+					<etype __VALUE="expression" />
+					<__LINE__ __VALUE="8" />
+				</__ARRAY_ENTRY>
+				<__ARRAY_ENTRY __KEY="2">
+					<left>
+						<type __VALUE="deref_expression" />
+						<left>
+							<type __VALUE="primary_expression" />
+							<value __VALUE="self" />
+							<operator __VALUE="id" />
+							<otype __VALUE="terminal" />
+						</left>
+						<otype __VALUE="likebinary" />
+						<etype __VALUE="expression" />
+						<right>
+							<type __VALUE="primary_expression" />
+							<value __VALUE="_ZN6Animal4faimEi" />
+							<operator __VALUE="id" />
+							<otype __VALUE="terminal" />
+						</right>
+						<operator __VALUE="-&gt;" />
+					</left>
+					<operator __VALUE="=" />
+					<right>
+						<type __VALUE="primary_expression" />
+						<value __VALUE="faim" />
+						<operator __VALUE="id" />
+						<otype __VALUE="terminal" />
+					</right>
+					<type __VALUE="assignement_expression" />
+					<otype __VALUE="binary" />
+					<etype __VALUE="expression" />
+					<__LINE__ __VALUE="9" />
+				</__ARRAY_ENTRY>
+				<__ARRAY_ENTRY __KEY="3">
+					<left>
+						<type __VALUE="deref_expression" />
+						<otype __VALUE="likebinary" />
+						<operator __VALUE="-&gt;" />
+						<left>
+							<type __VALUE="primary_expression" />
+							<value __VALUE="self" />
+							<operator __VALUE="id" />
+							<otype __VALUE="terminal" />
+						</left>
+						<right>
+							<type __VALUE="primary_expression" />
+							<value __VALUE="vt" />
+							<operator __VALUE="id" />
+							<otype __VALUE="terminal" />
+						</right>
+					</left>
+					<operator __VALUE="=" />
+					<right>
+						<type __VALUE="cast_expression" />
+						<left>
+							<ctype>
+								<pctx __REFERENCE="project.block[&quot;41&quot;].block" />
+								<pointer>
+									<__ARRAY_ENTRY __KEY="0">
+										<level __VALUE="*" />
+									</__ARRAY_ENTRY>
+								</pointer>
+								<type __VALUE="__PRIMARY__" />
+								<identifier __VALUE="void" />
+							</ctype>
+							<otype __VALUE="typecast" />
+							<type __VALUE="type_cast_expression" />
+							<operator __VALUE="()" />
+						</left>
+						<otype __VALUE="cast" />
+						<right>
+							<operator __VALUE="&amp;" />
+							<left>
+								<type __VALUE="primary_expression" />
+								<value __VALUE="_kc_vtable_Animal" />
+								<operator __VALUE="id" />
+								<otype __VALUE="terminal" />
+							</left>
+							<type __VALUE="unary_expression" />
+							<otype __VALUE="unary" />
+						</right>
+					</right>
+					<type __VALUE="assignement_expression" />
+					<otype __VALUE="binary" />
+					<etype __VALUE="expression" />
+				</__ARRAY_ENTRY>
+				<pctx __REFERENCE="project.block" />
+			</block>
+			<link __REFERENCE="project.block[&quot;38&quot;]" />
+			<__FILE__ __VALUE="./kc_Animal.c" />
+		</__ARRAY_ENTRY>
+		<__ARRAY_ENTRY __KEY="38">
+			<type __VALUE="__FUNCTION__" />
+			<name __VALUE="_ZN6Animal3newEviii" />
+			<ctype>
+				<pctx __REFERENCE="project.block[&quot;37&quot;].block" />
+				<type __VALUE="__PRIMARY__" />
+				<identifier __VALUE="void" />
+			</ctype>
+			<etype __VALUE="declaration" />
+			<list>
+				<__ARRAY_ENTRY __KEY="0">
+					<ctype>
+						<pctx __REFERENCE="project.block" />
+						<type __VALUE="__PRIMARY__" />
+						<identifier __VALUE="int" />
+						<sign __VALUE="signed" />
+					</ctype>
+					<type __VALUE="__VARIABLE__" />
+					<etype __VALUE="declaration" />
+					<name __VALUE="age" />
+					<oname __VALUE="age" />
+				</__ARRAY_ENTRY>
+				<__ARRAY_ENTRY __KEY="1">
+					<ctype>
+						<pctx __REFERENCE="project.block" />
+						<type __VALUE="__PRIMARY__" />
+						<identifier __VALUE="int" />
+						<sign __VALUE="signed" />
+					</ctype>
+					<type __VALUE="__VARIABLE__" />
+					<etype __VALUE="declaration" />
+					<name __VALUE="poid" />
+					<oname __VALUE="poid" />
+				</__ARRAY_ENTRY>
+				<__ARRAY_ENTRY __KEY="2">
+					<ctype>
+						<pctx __REFERENCE="project.block" />
+						<type __VALUE="__PRIMARY__" />
+						<identifier __VALUE="int" />
+						<sign __VALUE="signed" />
+					</ctype>
+					<type __VALUE="__VARIABLE__" />
+					<etype __VALUE="declaration" />
+					<name __VALUE="faim" />
+					<oname __VALUE="faim" />
+				</__ARRAY_ENTRY>
+			</list>
+			<oname __VALUE="new" />
+			<link __REFERENCE="project.block[&quot;37&quot;]" />
+		</__ARRAY_ENTRY>
+		<__ARRAY_ENTRY __KEY="39">
+			<__LINE__ __VALUE="11" />
+			<ctype>
+				<pctx __REFERENCE="project.block[&quot;37&quot;].block" />
+				<type __VALUE="__PRIMARY__" />
+				<identifier __VALUE="void" />
+			</ctype>
+			<type __VALUE="__FUNCTION__" />
+			<etype __VALUE="declaration" />
+			<name __VALUE="_ZN6Animal4initEv6Animal" />
+			<list>
+				<__ARRAY_ENTRY __KEY="0">
+					<type __VALUE="__VARIABLE__" />
+					<etype __VALUE="declaration" />
+					<name __VALUE="self" />
+					<ctype>
+						<pctx __REFERENCE="project.block[&quot;39&quot;].block" />
+						<type __VALUE="__COMPOSED__" />
+						<identifier __VALUE="Animal" />
+						<pointer>
+							<__ARRAY_ENTRY __KEY="0">
+								<level __VALUE="*" />
+							</__ARRAY_ENTRY>
+						</pointer>
+					</ctype>
+				</__ARRAY_ENTRY>
+			</list>
+			<oname __VALUE="init" />
+			<otype __VALUE="rootblock" />
+			<block>
+				<__ARRAY_ENTRY __KEY="0">
+					<left>
+						<type __VALUE="deref_expression" />
+						<left>
+							<type __VALUE="primary_expression" />
+							<value __VALUE="self" />
+							<operator __VALUE="id" />
+							<otype __VALUE="terminal" />
+						</left>
+						<otype __VALUE="likebinary" />
+						<etype __VALUE="expression" />
+						<right>
+							<type __VALUE="primary_expression" />
+							<value __VALUE="_ZN6Animal3ageEi" />
+							<operator __VALUE="id" />
+							<otype __VALUE="terminal" />
+						</right>
+						<operator __VALUE="-&gt;" />
+					</left>
+					<operator __VALUE="=" />
+					<right>
+						<type __VALUE="primary_expression" />
+						<value __VALUE="1" />
+						<ctype>
+							<identifier __VALUE="int" />
+						</ctype>
+						<operator __VALUE="literal" />
+						<otype __VALUE="terminal" />
+					</right>
+					<type __VALUE="assignement_expression" />
+					<otype __VALUE="binary" />
+					<etype __VALUE="expression" />
+					<__LINE__ __VALUE="13" />
+				</__ARRAY_ENTRY>
+				<__ARRAY_ENTRY __KEY="1">
+					<left>
+						<type __VALUE="deref_expression" />
+						<left>
+							<type __VALUE="primary_expression" />
+							<value __VALUE="self" />
+							<operator __VALUE="id" />
+							<otype __VALUE="terminal" />
+						</left>
+						<otype __VALUE="likebinary" />
+						<etype __VALUE="expression" />
+						<right>
+							<type __VALUE="primary_expression" />
+							<value __VALUE="_ZN6Animal4poidEi" />
+							<operator __VALUE="id" />
+							<otype __VALUE="terminal" />
+						</right>
+						<operator __VALUE="-&gt;" />
+					</left>
+					<operator __VALUE="=" />
+					<right>
+						<type __VALUE="primary_expression" />
+						<value __VALUE="5" />
+						<ctype>
+							<identifier __VALUE="int" />
+						</ctype>
+						<operator __VALUE="literal" />
+						<otype __VALUE="terminal" />
+					</right>
+					<type __VALUE="assignement_expression" />
+					<otype __VALUE="binary" />
+					<etype __VALUE="expression" />
+					<__LINE__ __VALUE="14" />
+				</__ARRAY_ENTRY>
+				<__ARRAY_ENTRY __KEY="2">
+					<left>
+						<type __VALUE="deref_expression" />
+						<left>
+							<type __VALUE="primary_expression" />
+							<value __VALUE="self" />
+							<operator __VALUE="id" />
+							<otype __VALUE="terminal" />
+						</left>
+						<otype __VALUE="likebinary" />
+						<etype __VALUE="expression" />
+						<right>
+							<type __VALUE="primary_expression" />
+							<value __VALUE="_ZN6Animal4faimEi" />
+							<operator __VALUE="id" />
+							<otype __VALUE="terminal" />
+						</right>
+						<operator __VALUE="-&gt;" />
+					</left>
+					<operator __VALUE="=" />
+					<right>
+						<type __VALUE="primary_expression" />
+						<value __VALUE="1" />
+						<ctype>
+							<identifier __VALUE="int" />
+						</ctype>
+						<operator __VALUE="literal" />
+						<otype __VALUE="terminal" />
+					</right>
+					<type __VALUE="assignement_expression" />
+					<otype __VALUE="binary" />
+					<etype __VALUE="expression" />
+					<__LINE__ __VALUE="15" />
+				</__ARRAY_ENTRY>
+				<__ARRAY_ENTRY __KEY="3">
+					<left>
+						<type __VALUE="deref_expression" />
+						<otype __VALUE="likebinary" />
+						<operator __VALUE="-&gt;" />
+						<left>
+							<type __VALUE="primary_expression" />
+							<value __VALUE="self" />
+							<operator __VALUE="id" />
+							<otype __VALUE="terminal" />
+						</left>
+						<right>
+							<type __VALUE="primary_expression" />
+							<value __VALUE="vt" />
+							<operator __VALUE="id" />
+							<otype __VALUE="terminal" />
+						</right>
+					</left>
+					<operator __VALUE="=" />
+					<right>
+						<type __VALUE="cast_expression" />
+						<left>
+							<ctype>
+								<pctx __REFERENCE="project.block[&quot;41&quot;].block" />
+								<pointer>
+									<__ARRAY_ENTRY __KEY="0">
+										<level __VALUE="*" />
+									</__ARRAY_ENTRY>
+								</pointer>
+								<type __VALUE="__PRIMARY__" />
+								<identifier __VALUE="void" />
+							</ctype>
+							<otype __VALUE="typecast" />
+							<type __VALUE="type_cast_expression" />
+							<operator __VALUE="()" />
+						</left>
+						<otype __VALUE="cast" />
+						<right>
+							<operator __VALUE="&amp;" />
+							<left>
+								<type __VALUE="primary_expression" />
+								<value __VALUE="_kc_vtable_Animal" />
+								<operator __VALUE="id" />
+								<otype __VALUE="terminal" />
+							</left>
+							<type __VALUE="unary_expression" />
+							<otype __VALUE="unary" />
+						</right>
+					</right>
+					<type __VALUE="assignement_expression" />
+					<otype __VALUE="binary" />
+					<etype __VALUE="expression" />
+				</__ARRAY_ENTRY>
+				<pctx __REFERENCE="project.block[&quot;37&quot;].block" />
+			</block>
+			<link __REFERENCE="project.block[&quot;40&quot;]" />
+			<__FILE__ __VALUE="./kc_Animal.c" />
+		</__ARRAY_ENTRY>
+		<__ARRAY_ENTRY __KEY="40">
+			<type __VALUE="__FUNCTION__" />
+			<name __VALUE="_ZN6Animal3newEv" />
+			<ctype>
+				<pctx __REFERENCE="project.block[&quot;39&quot;].block" />
+				<type __VALUE="__PRIMARY__" />
+				<identifier __VALUE="void" />
+			</ctype>
+			<etype __VALUE="declaration" />
+			<list />
+			<oname __VALUE="new" />
+			<link __REFERENCE="project.block[&quot;39&quot;]" />
+		</__ARRAY_ENTRY>
+		<__ARRAY_ENTRY __KEY="41">
+			<__LINE__ __VALUE="17" />
+			<ctype>
+				<pctx __REFERENCE="project.block[&quot;39&quot;].block" />
+				<type __VALUE="__PRIMARY__" />
+				<identifier __VALUE="void" />
+			</ctype>
+			<type __VALUE="__FUNCTION__" />
+			<etype __VALUE="declaration" />
+			<name __VALUE="_ZN6Animal5crierEv6Animal" />
+			<list>
+				<__ARRAY_ENTRY __KEY="0">
+					<type __VALUE="__VARIABLE__" />
+					<etype __VALUE="declaration" />
+					<name __VALUE="self" />
+					<ctype>
+						<pctx __REFERENCE="project.block[&quot;41&quot;].block" />
+						<type __VALUE="__COMPOSED__" />
+						<identifier __VALUE="Animal" />
+						<pointer>
+							<__ARRAY_ENTRY __KEY="0">
+								<level __VALUE="*" />
+							</__ARRAY_ENTRY>
+						</pointer>
+					</ctype>
+				</__ARRAY_ENTRY>
+			</list>
+			<oname __VALUE="crier" />
+			<otype __VALUE="rootblock" />
+			<block>
+				<__ARRAY_ENTRY __KEY="0">
+					<left>
+						<type __VALUE="primary_expression" />
+						<value __VALUE="printf" />
+						<operator __VALUE="id" />
+						<otype __VALUE="terminal" />
+					</left>
+					<type __VALUE="call_expression" />
+					<otype __VALUE="call" />
+					<operator __VALUE="()" />
+					<list>
+						<__ARRAY_ENTRY __KEY="0">
+							<type __VALUE="primary_expression" />
+							<value __VALUE="&quot;Je suis fouu..!&quot;" />
+							<ctype>
+								<infoType>
+									<__ARRAY_ENTRY __KEY="const" __VALUE="typeQualifier" />
+								</infoType>
+								<identifier __VALUE="char" />
+								<pointer>
+									<__ARRAY_ENTRY __KEY="0">
+										<level __VALUE="*" />
+									</__ARRAY_ENTRY>
+								</pointer>
+							</ctype>
+							<operator __VALUE="literal" />
+							<otype __VALUE="terminal" />
+						</__ARRAY_ENTRY>
+					</list>
+					<etype __VALUE="expression" />
+					<__LINE__ __VALUE="19" />
+				</__ARRAY_ENTRY>
+				<pctx __REFERENCE="project.block[&quot;39&quot;].block" />
+			</block>
+			<__FILE__ __VALUE="./kc_Animal.c" />
+		</__ARRAY_ENTRY>
+		<__ARRAY_ENTRY __KEY="42">
+			<type __VALUE="__FUNCTION__" />
+			<name __VALUE="_ZN6Animal5cleanEv6Animal" />
+			<ctype>
+				<pctx __REFERENCE="project.block[&quot;41&quot;].block" />
+				<type __VALUE="__PRIMARY__" />
+				<identifier __VALUE="void" />
+			</ctype>
+			<etype __VALUE="declaration" />
+			<list>
+				<__ARRAY_ENTRY __KEY="0">
+					<type __VALUE="__VARIABLE__" />
+					<etype __VALUE="declaration" />
+					<name __VALUE="self" />
+					<ctype>
+						<pctx __REFERENCE="project.block[&quot;41&quot;].block" />
+						<type __VALUE="__COMPOSED__" />
+						<identifier __VALUE="Animal" />
+						<pointer>
+							<__ARRAY_ENTRY __KEY="0">
+								<level __VALUE="*" />
+							</__ARRAY_ENTRY>
+						</pointer>
+					</ctype>
+				</__ARRAY_ENTRY>
+			</list>
+			<oname __VALUE="clean" />
+		</__ARRAY_ENTRY>
+		<__ARRAY_ENTRY __KEY="43">
+			<type __VALUE="__FUNCTION__" />
+			<name __VALUE="_ZN6Animal6deleteEv6Animal" />
+			<ctype>
+				<pctx __REFERENCE="project.block[&quot;41&quot;].block" />
+				<type __VALUE="__PRIMARY__" />
+				<identifier __VALUE="void" />
+			</ctype>
+			<etype __VALUE="declaration" />
+			<list>
+				<__ARRAY_ENTRY __KEY="0">
+					<type __VALUE="__VARIABLE__" />
+					<etype __VALUE="declaration" />
+					<name __VALUE="self" />
+					<ctype>
+						<pctx __REFERENCE="project.block[&quot;41&quot;].block" />
+						<type __VALUE="__COMPOSED__" />
+						<identifier __VALUE="Animal" />
+						<pointer>
+							<__ARRAY_ENTRY __KEY="0">
+								<level __VALUE="*" />
+							</__ARRAY_ENTRY>
+						</pointer>
+					</ctype>
+				</__ARRAY_ENTRY>
+			</list>
+			<oname __VALUE="delete" />
+		</__ARRAY_ENTRY>
+		<__ARRAY_ENTRY __KEY="44">
+			<__LINE__ __VALUE="25" />
+			<ctype>
+				<pctx __REFERENCE="project.block[&quot;41&quot;].block" />
+				<type __VALUE="__PRIMARY__" />
+				<identifier __VALUE="void" />
+			</ctype>
+			<type __VALUE="__FUNCTION__" />
+			<etype __VALUE="declaration" />
+			<name __VALUE="_ZN5Singe4initEv5Singeiii" />
+			<list>
+				<__ARRAY_ENTRY __KEY="3">
+					<type __VALUE="__VARIABLE__" />
+					<etype __VALUE="declaration" />
+					<name __VALUE="self" />
+					<ctype>
+						<pctx __REFERENCE="project.block[&quot;44&quot;].block" />
+						<type __VALUE="__COMPOSED__" />
+						<identifier __VALUE="Singe" />
+						<pointer>
+							<__ARRAY_ENTRY __KEY="0">
+								<level __VALUE="*" />
+							</__ARRAY_ENTRY>
+						</pointer>
+					</ctype>
+				</__ARRAY_ENTRY>
+				<__ARRAY_ENTRY __KEY="0">
+					<ctype>
+						<pctx __REFERENCE="project.block[&quot;41&quot;].block" />
+						<type __VALUE="__PRIMARY__" />
+						<identifier __VALUE="int" />
+						<sign __VALUE="signed" />
+					</ctype>
+					<type __VALUE="__VARIABLE__" />
+					<etype __VALUE="declaration" />
+					<name __VALUE="age" />
+					<oname __VALUE="age" />
+				</__ARRAY_ENTRY>
+				<__ARRAY_ENTRY __KEY="1">
+					<ctype>
+						<pctx __REFERENCE="project.block[&quot;41&quot;].block" />
+						<type __VALUE="__PRIMARY__" />
+						<identifier __VALUE="int" />
+						<sign __VALUE="signed" />
+					</ctype>
+					<type __VALUE="__VARIABLE__" />
+					<etype __VALUE="declaration" />
+					<name __VALUE="poid" />
+					<oname __VALUE="poid" />
+				</__ARRAY_ENTRY>
+				<__ARRAY_ENTRY __KEY="2">
+					<ctype>
+						<pctx __REFERENCE="project.block[&quot;41&quot;].block" />
+						<type __VALUE="__PRIMARY__" />
+						<identifier __VALUE="int" />
+						<sign __VALUE="signed" />
+					</ctype>
+					<type __VALUE="__VARIABLE__" />
+					<etype __VALUE="declaration" />
+					<name __VALUE="faim" />
+					<oname __VALUE="faim" />
+				</__ARRAY_ENTRY>
+			</list>
+			<oname __VALUE="init" />
+			<otype __VALUE="rootblock" />
+			<block>
+				<__ARRAY_ENTRY __KEY="0">
+					<type __VALUE="call_expression" />
+					<left>
+						<type __VALUE="primary_expression" />
+						<value __VALUE="_ZN6Animal4initEv6Animal" />
+						<operator __VALUE="id" />
+						<otype __VALUE="terminal" />
+						<etype __VALUE="expression" />
+					</left>
+					<otype __VALUE="call" />
+					<operator __VALUE="()" />
+					<list>
+						<__ARRAY_ENTRY __KEY="0">
+							<type __VALUE="primary_expression" />
+							<value __VALUE="self" />
+							<operator __VALUE="id" />
+							<otype __VALUE="terminal" />
+						</__ARRAY_ENTRY>
+					</list>
+					<etype __VALUE="expression" />
+					<__LINE__ __VALUE="27" />
+				</__ARRAY_ENTRY>
+				<__ARRAY_ENTRY __KEY="1">
+					<left>
+						<type __VALUE="deref_expression" />
+						<otype __VALUE="likebinary" />
+						<operator __VALUE="-&gt;" />
+						<left>
+							<type __VALUE="primary_expression" />
+							<value __VALUE="self" />
+							<operator __VALUE="id" />
+							<otype __VALUE="terminal" />
+						</left>
+						<right>
+							<type __VALUE="primary_expression" />
+							<value __VALUE="vt" />
+							<operator __VALUE="id" />
+							<otype __VALUE="terminal" />
+						</right>
+					</left>
+					<operator __VALUE="=" />
+					<right>
+						<type __VALUE="cast_expression" />
+						<left>
+							<ctype>
+								<pctx __REFERENCE="project.block[&quot;46&quot;].block" />
+								<pointer>
+									<__ARRAY_ENTRY __KEY="0">
+										<level __VALUE="*" />
+									</__ARRAY_ENTRY>
+								</pointer>
+								<type __VALUE="__PRIMARY__" />
+								<identifier __VALUE="void" />
+							</ctype>
+							<otype __VALUE="typecast" />
+							<type __VALUE="type_cast_expression" />
+							<operator __VALUE="()" />
+						</left>
+						<otype __VALUE="cast" />
+						<right>
+							<operator __VALUE="&amp;" />
+							<left>
+								<type __VALUE="primary_expression" />
+								<value __VALUE="_kc_vtable_Singe" />
+								<operator __VALUE="id" />
+								<otype __VALUE="terminal" />
+							</left>
+							<type __VALUE="unary_expression" />
+							<otype __VALUE="unary" />
+						</right>
+					</right>
+					<type __VALUE="assignement_expression" />
+					<otype __VALUE="binary" />
+					<etype __VALUE="expression" />
+				</__ARRAY_ENTRY>
+				<pctx __REFERENCE="project.block[&quot;41&quot;].block" />
+			</block>
+			<link __REFERENCE="project.block[&quot;45&quot;]" />
+			<__FILE__ __VALUE="./kc_Singe.c" />
+		</__ARRAY_ENTRY>
+		<__ARRAY_ENTRY __KEY="45">
+			<type __VALUE="__FUNCTION__" />
+			<name __VALUE="_ZN5Singe3newEviii" />
+			<ctype>
+				<pctx __REFERENCE="project.block[&quot;44&quot;].block" />
+				<type __VALUE="__PRIMARY__" />
+				<identifier __VALUE="void" />
+			</ctype>
+			<etype __VALUE="declaration" />
+			<list>
+				<__ARRAY_ENTRY __KEY="0">
+					<ctype>
+						<pctx __REFERENCE="project.block[&quot;41&quot;].block" />
+						<type __VALUE="__PRIMARY__" />
+						<identifier __VALUE="int" />
+						<sign __VALUE="signed" />
+					</ctype>
+					<type __VALUE="__VARIABLE__" />
+					<etype __VALUE="declaration" />
+					<name __VALUE="age" />
+					<oname __VALUE="age" />
+				</__ARRAY_ENTRY>
+				<__ARRAY_ENTRY __KEY="1">
+					<ctype>
+						<pctx __REFERENCE="project.block[&quot;41&quot;].block" />
+						<type __VALUE="__PRIMARY__" />
+						<identifier __VALUE="int" />
+						<sign __VALUE="signed" />
+					</ctype>
+					<type __VALUE="__VARIABLE__" />
+					<etype __VALUE="declaration" />
+					<name __VALUE="poid" />
+					<oname __VALUE="poid" />
+				</__ARRAY_ENTRY>
+				<__ARRAY_ENTRY __KEY="2">
+					<ctype>
+						<pctx __REFERENCE="project.block[&quot;41&quot;].block" />
+						<type __VALUE="__PRIMARY__" />
+						<identifier __VALUE="int" />
+						<sign __VALUE="signed" />
+					</ctype>
+					<type __VALUE="__VARIABLE__" />
+					<etype __VALUE="declaration" />
+					<name __VALUE="faim" />
+					<oname __VALUE="faim" />
+				</__ARRAY_ENTRY>
+			</list>
+			<oname __VALUE="new" />
+			<link __REFERENCE="project.block[&quot;44&quot;]" />
+		</__ARRAY_ENTRY>
+		<__ARRAY_ENTRY __KEY="46">
+			<__LINE__ __VALUE="29" />
+			<ctype>
+				<pctx __REFERENCE="project.block[&quot;44&quot;].block" />
+				<type __VALUE="__PRIMARY__" />
+				<identifier __VALUE="void" />
+			</ctype>
+			<type __VALUE="__FUNCTION__" />
+			<etype __VALUE="declaration" />
+			<name __VALUE="_ZN5Singe5crierEv5Singe" />
+			<list>
+				<__ARRAY_ENTRY __KEY="0">
+					<type __VALUE="__VARIABLE__" />
+					<etype __VALUE="declaration" />
+					<name __VALUE="self" />
+					<ctype>
+						<pctx __REFERENCE="project.block[&quot;46&quot;].block" />
+						<type __VALUE="__COMPOSED__" />
+						<identifier __VALUE="Singe" />
+						<pointer>
+							<__ARRAY_ENTRY __KEY="0">
+								<level __VALUE="*" />
+							</__ARRAY_ENTRY>
+						</pointer>
+					</ctype>
+				</__ARRAY_ENTRY>
+			</list>
+			<oname __VALUE="crier" />
+			<otype __VALUE="rootblock" />
+			<block>
+				<__ARRAY_ENTRY __KEY="0">
+					<left>
+						<type __VALUE="primary_expression" />
+						<value __VALUE="printf" />
+						<operator __VALUE="id" />
+						<otype __VALUE="terminal" />
+					</left>
+					<type __VALUE="call_expression" />
+					<otype __VALUE="call" />
+					<operator __VALUE="()" />
+					<list>
+						<__ARRAY_ENTRY __KEY="0">
+							<type __VALUE="primary_expression" />
+							<value __VALUE="&quot;Je suis un singe hihihihanhi !&quot;" />
+							<ctype>
+								<infoType>
+									<__ARRAY_ENTRY __KEY="const" __VALUE="typeQualifier" />
+								</infoType>
+								<identifier __VALUE="char" />
+								<pointer>
+									<__ARRAY_ENTRY __KEY="0">
+										<level __VALUE="*" />
+									</__ARRAY_ENTRY>
+								</pointer>
+							</ctype>
+							<operator __VALUE="literal" />
+							<otype __VALUE="terminal" />
+						</__ARRAY_ENTRY>
+					</list>
+					<etype __VALUE="expression" />
+					<__LINE__ __VALUE="31" />
+				</__ARRAY_ENTRY>
+				<pctx __REFERENCE="project.block[&quot;44&quot;].block" />
+			</block>
+			<__FILE__ __VALUE="./kc_Singe.c" />
+		</__ARRAY_ENTRY>
+		<__ARRAY_ENTRY __KEY="47">
+			<type __VALUE="__FUNCTION__" />
+			<name __VALUE="_ZN5Singe5cleanEv5Singe" />
+			<ctype>
+				<pctx __REFERENCE="project.block[&quot;46&quot;].block" />
+				<type __VALUE="__PRIMARY__" />
+				<identifier __VALUE="void" />
+			</ctype>
+			<etype __VALUE="declaration" />
+			<list>
+				<__ARRAY_ENTRY __KEY="0">
+					<type __VALUE="__VARIABLE__" />
+					<etype __VALUE="declaration" />
+					<name __VALUE="self" />
+					<ctype>
+						<pctx __REFERENCE="project.block[&quot;46&quot;].block" />
+						<type __VALUE="__COMPOSED__" />
+						<identifier __VALUE="Singe" />
+						<pointer>
+							<__ARRAY_ENTRY __KEY="0">
+								<level __VALUE="*" />
+							</__ARRAY_ENTRY>
+						</pointer>
+					</ctype>
+				</__ARRAY_ENTRY>
+			</list>
+			<oname __VALUE="clean" />
+		</__ARRAY_ENTRY>
+		<__ARRAY_ENTRY __KEY="48">
+			<type __VALUE="__FUNCTION__" />
+			<name __VALUE="_ZN5Singe6deleteEv5Singe" />
+			<ctype>
+				<pctx __REFERENCE="project.block[&quot;46&quot;].block" />
+				<type __VALUE="__PRIMARY__" />
+				<identifier __VALUE="void" />
+			</ctype>
+			<etype __VALUE="declaration" />
+			<list>
+				<__ARRAY_ENTRY __KEY="0">
+					<type __VALUE="__VARIABLE__" />
+					<etype __VALUE="declaration" />
+					<name __VALUE="self" />
+					<ctype>
+						<pctx __REFERENCE="project.block[&quot;46&quot;].block" />
+						<type __VALUE="__COMPOSED__" />
+						<identifier __VALUE="Singe" />
+						<pointer>
+							<__ARRAY_ENTRY __KEY="0">
+								<level __VALUE="*" />
+							</__ARRAY_ENTRY>
+						</pointer>
+					</ctype>
+				</__ARRAY_ENTRY>
+			</list>
+			<oname __VALUE="delete" />
+		</__ARRAY_ENTRY>
+		<__ARRAY_ENTRY __KEY="49">
+			<__LINE__ __VALUE="37" />
+			<ctype>
+				<pctx __REFERENCE="project.block[&quot;46&quot;].block" />
+				<type __VALUE="__PRIMARY__" />
+				<identifier __VALUE="void" />
+			</ctype>
+			<type __VALUE="__FUNCTION__" />
+			<etype __VALUE="declaration" />
+			<name __VALUE="_ZN6Cochon5crierEv6Cochon" />
+			<list>
+				<__ARRAY_ENTRY __KEY="0">
+					<type __VALUE="__VARIABLE__" />
+					<etype __VALUE="declaration" />
+					<name __VALUE="self" />
+					<ctype>
+						<pctx __REFERENCE="project.block[&quot;49&quot;].block" />
+						<type __VALUE="__COMPOSED__" />
+						<identifier __VALUE="Cochon" />
+						<pointer>
+							<__ARRAY_ENTRY __KEY="0">
+								<level __VALUE="*" />
+							</__ARRAY_ENTRY>
+						</pointer>
+					</ctype>
+				</__ARRAY_ENTRY>
+			</list>
+			<oname __VALUE="crier" />
+			<otype __VALUE="rootblock" />
+			<block>
+				<__ARRAY_ENTRY __KEY="0">
+					<left>
+						<type __VALUE="primary_expression" />
+						<value __VALUE="printf" />
+						<operator __VALUE="id" />
+						<otype __VALUE="terminal" />
+					</left>
+					<type __VALUE="call_expression" />
+					<otype __VALUE="call" />
+					<operator __VALUE="()" />
+					<list>
+						<__ARRAY_ENTRY __KEY="0">
+							<type __VALUE="primary_expression" />
+							<value __VALUE="&quot;Je suis un cochon rRonRonRron !&quot;" />
+							<ctype>
+								<infoType>
+									<__ARRAY_ENTRY __KEY="const" __VALUE="typeQualifier" />
+								</infoType>
+								<identifier __VALUE="char" />
+								<pointer>
+									<__ARRAY_ENTRY __KEY="0">
+										<level __VALUE="*" />
+									</__ARRAY_ENTRY>
+								</pointer>
+							</ctype>
+							<operator __VALUE="literal" />
+							<otype __VALUE="terminal" />
+						</__ARRAY_ENTRY>
+					</list>
+					<etype __VALUE="expression" />
+					<__LINE__ __VALUE="39" />
+				</__ARRAY_ENTRY>
+				<pctx __REFERENCE="project.block[&quot;46&quot;].block" />
+			</block>
+			<__FILE__ __VALUE="./kc_Cochon.c" />
+		</__ARRAY_ENTRY>
+		<__ARRAY_ENTRY __KEY="50">
+			<type __VALUE="__FUNCTION__" />
+			<name __VALUE="_ZN6Cochon4initEv6Cochon" />
+			<ctype>
+				<pctx __REFERENCE="project.block[&quot;49&quot;].block" />
+				<type __VALUE="__PRIMARY__" />
+				<identifier __VALUE="void" />
+			</ctype>
+			<etype __VALUE="declaration" />
+			<list>
+				<__ARRAY_ENTRY __KEY="0">
+					<type __VALUE="__VARIABLE__" />
+					<etype __VALUE="declaration" />
+					<name __VALUE="self" />
+					<ctype>
+						<pctx __REFERENCE="project.block[&quot;49&quot;].block" />
+						<type __VALUE="__COMPOSED__" />
+						<identifier __VALUE="Cochon" />
+						<pointer>
+							<__ARRAY_ENTRY __KEY="0">
+								<level __VALUE="*" />
+							</__ARRAY_ENTRY>
+						</pointer>
+					</ctype>
+				</__ARRAY_ENTRY>
+			</list>
+			<oname __VALUE="init" />
+			<__FILE__ __VALUE="./kc_Cochon.c" />
+			<link __REFERENCE="project.block[&quot;51&quot;]" />
+			<block>
+				<__ARRAY_ENTRY __KEY="0">
+					<left>
+						<type __VALUE="deref_expression" />
+						<otype __VALUE="likebinary" />
+						<operator __VALUE="-&gt;" />
+						<left>
+							<type __VALUE="primary_expression" />
+							<value __VALUE="self" />
+							<operator __VALUE="id" />
+							<otype __VALUE="terminal" />
+						</left>
+						<right>
+							<type __VALUE="primary_expression" />
+							<value __VALUE="vt" />
+							<operator __VALUE="id" />
+							<otype __VALUE="terminal" />
+						</right>
+					</left>
+					<operator __VALUE="=" />
+					<right>
+						<type __VALUE="cast_expression" />
+						<left>
+							<ctype>
+								<pctx __REFERENCE="project.block[&quot;49&quot;].block" />
+								<pointer>
+									<__ARRAY_ENTRY __KEY="0">
+										<level __VALUE="*" />
+									</__ARRAY_ENTRY>
+								</pointer>
+								<type __VALUE="__PRIMARY__" />
+								<identifier __VALUE="void" />
+							</ctype>
+							<otype __VALUE="typecast" />
+							<type __VALUE="type_cast_expression" />
+							<operator __VALUE="()" />
+						</left>
+						<otype __VALUE="cast" />
+						<right>
+							<operator __VALUE="&amp;" />
+							<left>
+								<type __VALUE="primary_expression" />
+								<value __VALUE="_kc_vtable_Cochon" />
+								<operator __VALUE="id" />
+								<otype __VALUE="terminal" />
+							</left>
+							<type __VALUE="unary_expression" />
+							<otype __VALUE="unary" />
+						</right>
+					</right>
+					<type __VALUE="assignement_expression" />
+					<otype __VALUE="binary" />
+					<etype __VALUE="expression" />
+				</__ARRAY_ENTRY>
+			</block>
+		</__ARRAY_ENTRY>
+		<__ARRAY_ENTRY __KEY="51">
+			<type __VALUE="__FUNCTION__" />
+			<name __VALUE="_ZN6Cochon3newEv" />
+			<ctype>
+				<pctx __REFERENCE="project.block[&quot;49&quot;].block" />
+				<type __VALUE="__PRIMARY__" />
+				<identifier __VALUE="void" />
+			</ctype>
+			<etype __VALUE="declaration" />
+			<list />
+			<oname __VALUE="new" />
+			<link __REFERENCE="project.block[&quot;50&quot;]" />
+		</__ARRAY_ENTRY>
+		<__ARRAY_ENTRY __KEY="52">
+			<type __VALUE="__FUNCTION__" />
+			<name __VALUE="_ZN6Cochon5cleanEv6Cochon" />
+			<ctype>
+				<pctx __REFERENCE="project.block[&quot;49&quot;].block" />
+				<type __VALUE="__PRIMARY__" />
+				<identifier __VALUE="void" />
+			</ctype>
+			<etype __VALUE="declaration" />
+			<list>
+				<__ARRAY_ENTRY __KEY="0">
+					<type __VALUE="__VARIABLE__" />
+					<etype __VALUE="declaration" />
+					<name __VALUE="self" />
+					<ctype>
+						<pctx __REFERENCE="project.block[&quot;49&quot;].block" />
+						<type __VALUE="__COMPOSED__" />
+						<identifier __VALUE="Cochon" />
+						<pointer>
+							<__ARRAY_ENTRY __KEY="0">
+								<level __VALUE="*" />
+							</__ARRAY_ENTRY>
+						</pointer>
+					</ctype>
+				</__ARRAY_ENTRY>
+			</list>
+			<oname __VALUE="clean" />
+			<__FILE__ __VALUE="./kc_Cochon.c" />
+			<block />
+		</__ARRAY_ENTRY>
+		<__ARRAY_ENTRY __KEY="53">
+			<type __VALUE="__FUNCTION__" />
+			<name __VALUE="_ZN6Cochon6deleteEv6Cochon" />
+			<ctype>
+				<pctx __REFERENCE="project.block[&quot;49&quot;].block" />
+				<type __VALUE="__PRIMARY__" />
+				<identifier __VALUE="void" />
+			</ctype>
+			<etype __VALUE="declaration" />
+			<list>
+				<__ARRAY_ENTRY __KEY="0">
+					<type __VALUE="__VARIABLE__" />
+					<etype __VALUE="declaration" />
+					<name __VALUE="self" />
+					<ctype>
+						<pctx __REFERENCE="project.block[&quot;49&quot;].block" />
+						<type __VALUE="__COMPOSED__" />
+						<identifier __VALUE="Cochon" />
+						<pointer>
+							<__ARRAY_ENTRY __KEY="0">
+								<level __VALUE="*" />
+							</__ARRAY_ENTRY>
+						</pointer>
+					</ctype>
+				</__ARRAY_ENTRY>
+			</list>
+			<oname __VALUE="delete" />
+		</__ARRAY_ENTRY>
+		<pctx />
+		<types>
+			<__ARRAY_ENTRY __KEY="Nourriture" __REFERENCE="project.block[&quot;0&quot;]" />
+			<__ARRAY_ENTRY __KEY="Animal" __REFERENCE="project.block[&quot;10&quot;]" />
+			<__ARRAY_ENTRY __KEY="Singe" __REFERENCE="project.block[&quot;21&quot;]" />
+			<__ARRAY_ENTRY __KEY="Cochon" __REFERENCE="project.block[&quot;29&quot;]" />
+		</types>
+		<structs>
+			<__ARRAY_ENTRY __KEY="_kc_implementation_Nourriture" __REFERENCE="project.block[&quot;1&quot;]" />
+			<__ARRAY_ENTRY __KEY="_kc_implementation_Animal" __REFERENCE="project.block[&quot;11&quot;]" />
+			<__ARRAY_ENTRY __KEY="_kc_implementation_Singe" __REFERENCE="project.block[&quot;22&quot;]" />
+			<__ARRAY_ENTRY __KEY="_kc_implementation_Cochon" __REFERENCE="project.block[&quot;30&quot;]" />
+		</structs>
+		<variables>
+			<__ARRAY_ENTRY __KEY="_kc_vtable_Nourriture" __REFERENCE="project.block[&quot;2&quot;]" />
+			<__ARRAY_ENTRY __KEY="_ZN10Nourriture3qteEi" __REFERENCE="project.block[&quot;7&quot;]" />
+			<__ARRAY_ENTRY __KEY="_kc_vtable_Animal" __REFERENCE="project.block[&quot;12&quot;]" />
+			<__ARRAY_ENTRY __KEY="_ZN6Animal3ageEi" __REFERENCE="project.block[&quot;16&quot;]" />
+			<__ARRAY_ENTRY __KEY="_ZN6Animal4poidEi" __REFERENCE="project.block[&quot;17&quot;]" />
+			<__ARRAY_ENTRY __KEY="_ZN6Animal4faimEi" __REFERENCE="project.block[&quot;18&quot;]" />
+			<__ARRAY_ENTRY __KEY="_kc_vtable_Singe" __REFERENCE="project.block[&quot;23&quot;]" />
+			<__ARRAY_ENTRY __KEY="_kc_vtable_Cochon" __REFERENCE="project.block[&quot;31&quot;]" />
+		</variables>
+		<prototypes>
+			<__ARRAY_ENTRY __KEY="_ZN10Nourriture4initEv10Nourriturei" __REFERENCE="project.block[&quot;3&quot;]" />
+			<__ARRAY_ENTRY __KEY="_ZN10Nourriture14approvisionnerEv10Nourriturei" __REFERENCE="project.block[&quot;5&quot;]" />
+			<__ARRAY_ENTRY __KEY="_ZN10Nourriture16servirNourritureEv10Nourriturei" __REFERENCE="project.block[&quot;6&quot;]" />
+			<__ARRAY_ENTRY __KEY="_ZN6Animal4initEv6Animal" __REFERENCE="project.block[&quot;13&quot;]" />
+			<__ARRAY_ENTRY __KEY="_ZN6Animal5crierEv" __REFERENCE="project.block[&quot;15&quot;]" />
+			<__ARRAY_ENTRY __KEY="_ZN5Singe4initEv5Singeiii" __REFERENCE="project.block[&quot;24&quot;]" />
+			<__ARRAY_ENTRY __KEY="_ZN5Singe5crierEv" __REFERENCE="project.block[&quot;26&quot;]" />
+			<__ARRAY_ENTRY __KEY="_ZN6Cochon5crierEv" __REFERENCE="project.block[&quot;32&quot;]" />
+			<__ARRAY_ENTRY __KEY="_ZN6Cochon5cleanEv6Cochon" __REFERENCE="project.block[&quot;35&quot;]" />
+		</prototypes>
+		<functions>
+			<__ARRAY_ENTRY __KEY="_ZN6Animal4initEv6Animaliii" __REFERENCE="project.block[&quot;37&quot;]" />
+			<__ARRAY_ENTRY __KEY="_ZN6Animal4initEv6Animal" __REFERENCE="project.block[&quot;39&quot;]" />
+			<__ARRAY_ENTRY __KEY="_ZN6Animal5crierEv6Animal" __REFERENCE="project.block[&quot;41&quot;]" />
+			<__ARRAY_ENTRY __KEY="_ZN5Singe4initEv5Singeiii" __REFERENCE="project.block[&quot;44&quot;]" />
+			<__ARRAY_ENTRY __KEY="_ZN5Singe5crierEv5Singe" __REFERENCE="project.block[&quot;46&quot;]" />
+			<__ARRAY_ENTRY __KEY="_ZN6Cochon5crierEv6Cochon" __REFERENCE="project.block[&quot;49&quot;]" />
+			<__ARRAY_ENTRY __KEY="_ZN6Cochon5cleanEv6Cochon" __REFERENCE="project.block[&quot;52&quot;]" />
+		</functions>
+	</block>
+	<gl_pctx __REFERENCE="project.block[&quot;49&quot;].block" />
+	<kooc>
+		<modules />
+		<classes>
+			<__ARRAY_ENTRY __KEY="Nourriture">
+				<__ARRAY_ENTRY __KEY="0" __REFERENCE="project.block[&quot;4&quot;]" />
+				<__ARRAY_ENTRY __KEY="1" __REFERENCE="project.block[&quot;3&quot;]" />
+				<__ARRAY_ENTRY __KEY="2" __REFERENCE="project.block[&quot;5&quot;]" />
+				<__ARRAY_ENTRY __KEY="3" __REFERENCE="project.block[&quot;6&quot;]" />
+				<__ARRAY_ENTRY __KEY="4" __REFERENCE="project.block[&quot;7&quot;]" />
+				<__ARRAY_ENTRY __KEY="5" __REFERENCE="project.block[&quot;8&quot;]" />
+				<__ARRAY_ENTRY __KEY="6" __REFERENCE="project.block[&quot;9&quot;]" />
+				<nameH __VALUE="kc_Nourriture.h" />
+				<nameC __VALUE="kc_Nourriture.c" />
+				<parent />
+			</__ARRAY_ENTRY>
+			<__ARRAY_ENTRY __KEY="Animal">
+				<__ARRAY_ENTRY __KEY="0" __REFERENCE="project.block[&quot;14&quot;]" />
+				<__ARRAY_ENTRY __KEY="1" __REFERENCE="project.block[&quot;13&quot;]" />
+				<__ARRAY_ENTRY __KEY="2" __REFERENCE="project.block[&quot;15&quot;]" />
+				<__ARRAY_ENTRY __KEY="3" __REFERENCE="project.block[&quot;16&quot;]" />
+				<__ARRAY_ENTRY __KEY="4" __REFERENCE="project.block[&quot;17&quot;]" />
+				<__ARRAY_ENTRY __KEY="5" __REFERENCE="project.block[&quot;18&quot;]" />
+				<__ARRAY_ENTRY __KEY="6" __REFERENCE="project.block[&quot;19&quot;]" />
+				<__ARRAY_ENTRY __KEY="7" __REFERENCE="project.block[&quot;20&quot;]" />
+				<nameH __VALUE="kc_Animal.h" />
+				<nameC __VALUE="kc_Animal.c" />
+				<parent />
+			</__ARRAY_ENTRY>
+			<__ARRAY_ENTRY __KEY="Singe">
+				<__ARRAY_ENTRY __KEY="0" __REFERENCE="project.block[&quot;25&quot;]" />
+				<__ARRAY_ENTRY __KEY="1" __REFERENCE="project.block[&quot;24&quot;]" />
+				<__ARRAY_ENTRY __KEY="2" __REFERENCE="project.block[&quot;26&quot;]" />
+				<__ARRAY_ENTRY __KEY="3" __REFERENCE="project.block[&quot;27&quot;]" />
+				<__ARRAY_ENTRY __KEY="4" __REFERENCE="project.block[&quot;28&quot;]" />
+				<nameH __VALUE="kc_Singe.h" />
+				<nameC __VALUE="kc_Singe.c" />
+				<parent __VALUE="Animal" />
+			</__ARRAY_ENTRY>
+			<__ARRAY_ENTRY __KEY="Cochon">
+				<__ARRAY_ENTRY __KEY="0" __REFERENCE="project.block[&quot;32&quot;]" />
+				<__ARRAY_ENTRY __KEY="1" __REFERENCE="project.block[&quot;33&quot;]" />
+				<__ARRAY_ENTRY __KEY="2" __REFERENCE="project.block[&quot;34&quot;]" />
+				<__ARRAY_ENTRY __KEY="3" __REFERENCE="project.block[&quot;35&quot;]" />
+				<__ARRAY_ENTRY __KEY="4" __REFERENCE="project.block[&quot;36&quot;]" />
+				<nameH __VALUE="kc_Cochon.h" />
+				<nameC __VALUE="kc_Cochon.c" />
+				<parent __VALUE="Animal" />
+			</__ARRAY_ENTRY>
+		</classes>
+		<implementations>
+			<__ARRAY_ENTRY __KEY="Animal">
+				<__ARRAY_ENTRY __KEY="0" __REFERENCE="project.block[&quot;37&quot;]" />
+				<__ARRAY_ENTRY __KEY="1" __REFERENCE="project.block[&quot;38&quot;]" />
+				<__ARRAY_ENTRY __KEY="2" __REFERENCE="project.block[&quot;39&quot;]" />
+				<__ARRAY_ENTRY __KEY="3" __REFERENCE="project.block[&quot;40&quot;]" />
+				<__ARRAY_ENTRY __KEY="4" __REFERENCE="project.block[&quot;41&quot;]" />
+				<__ARRAY_ENTRY __KEY="5" __REFERENCE="project.block[&quot;42&quot;]" />
+				<__ARRAY_ENTRY __KEY="6" __REFERENCE="project.block[&quot;43&quot;]" />
+			</__ARRAY_ENTRY>
+			<__ARRAY_ENTRY __KEY="Singe">
+				<__ARRAY_ENTRY __KEY="0" __REFERENCE="project.block[&quot;44&quot;]" />
+				<__ARRAY_ENTRY __KEY="1" __REFERENCE="project.block[&quot;45&quot;]" />
+				<__ARRAY_ENTRY __KEY="2" __REFERENCE="project.block[&quot;46&quot;]" />
+				<__ARRAY_ENTRY __KEY="3" __REFERENCE="project.block[&quot;47&quot;]" />
+				<__ARRAY_ENTRY __KEY="4" __REFERENCE="project.block[&quot;48&quot;]" />
+			</__ARRAY_ENTRY>
+			<__ARRAY_ENTRY __KEY="Cochon">
+				<__ARRAY_ENTRY __KEY="0" __REFERENCE="project.block[&quot;49&quot;]" />
+				<__ARRAY_ENTRY __KEY="1" __REFERENCE="project.block[&quot;50&quot;]" />
+				<__ARRAY_ENTRY __KEY="2" __REFERENCE="project.block[&quot;51&quot;]" />
+				<__ARRAY_ENTRY __KEY="3" __REFERENCE="project.block[&quot;52&quot;]" />
+				<__ARRAY_ENTRY __KEY="4" __REFERENCE="project.block[&quot;53&quot;]" />
+			</__ARRAY_ENTRY>
+		</implementations>
+		<mangle>
+			<__ARRAY_ENTRY __KEY="0" __VALUE="Nourriture" />
+		</mangle>
+	</kooc>
+</project>

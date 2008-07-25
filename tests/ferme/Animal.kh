@@ -1,0 +1,31 @@
+@class Nourriture
+{
+  @member {
+    void	init(int qte);
+    void	approvisionner(int);
+    void	servirNourriture(int);
+  }
+  int qte;
+}
+
+@class Animal
+{
+  @member {
+    void		init();
+    @virtual void	crier();
+  }
+  int	age;
+  int	poid;
+  int	faim;
+}
+
+@class Singe : Animal
+{
+  @member void	init(int age, int poid, int faim);
+  @virtual @member void crier();
+}
+
+@class Cochon : Animal
+{
+  @virtual @member void crier();
+}
