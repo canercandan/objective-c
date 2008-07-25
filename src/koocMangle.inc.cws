@@ -2,8 +2,6 @@
  * @file koocMangle.inc.cws
  * @brief Kooc Mangle file
  * @note @ref develop @ref contrib @ref tools
- * @todo fonction mangle generique (i do it soon !!!)
- * @bug Temp mangling
  */
 
 declare function	koocMangle(theType : node);
