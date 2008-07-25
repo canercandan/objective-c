@@ -1,12 +1,9 @@
 
-typedef int	Entier;
-
 @module		Test
 {
   int		a = 42;
   char		a = 42;
   int		b;
-  Entier	lol;
 
 
   void		cool(int j);
