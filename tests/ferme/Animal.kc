@@ -34,6 +34,12 @@
 
 @implementation Cochon
 {
+  @member void	init(int age, int poid, int faim)
+    {
+      [self.age] = age;
+      [self.poid] = poid;
+      [self.faim] = faim;
+    }
   @virtual @member void	crier()
     {
       printf("Je suis un cochon rRonRonRron !");
@@ -66,6 +72,11 @@
 int	main()
 {
   Nourriture stock;
-  [stock init :100];
+  [&stock init :100];
+  Animal *ferme[100];
+
+  ferme[0] = [Animal new];
+  ferme[1] = [Cochon new :2 :15 :3];
+  ferme[2] = [Singe new :2 :15 :3];
   return (0);
 }

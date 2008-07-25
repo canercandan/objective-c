@@ -72,7 +72,6 @@ function	existModule(name : value)
     if (key(info) == name)
       return (1);
   }
-//  traceLine("error - module " + name + " doesn't exist.");
   return (0);
 }
 
@@ -93,7 +92,6 @@ function	existClass(name : value)
     if (key(info) == name)
       return (1);
   }
-//  traceLine("error - module " + name + " doesn't exist.");
   return (0);
 }
 

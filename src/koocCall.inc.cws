@@ -233,14 +233,20 @@ function	isAnInstance(key : value, type : node)
 
 function	checkSelf(expr : node, module_name, val, type_name, nb_arg : node)
 {
-// traceObject(expr#parent#parent#parent, 3);
- //if (expr#parent#parent#parent.type == "__FUNCTION__"
-   // 	|| expr#parent#parent.type == "__FUNCTION__")
-  //{
     local variable = "";
     if (nb_arg == 0)
     {
-      variable = existVar(this.kooc.mangle#back, val, type_name);
+      local mod = this.kooc.mangle#back;
+      while (existVariable(this.kooc.classes[mod]))// &&
+      	     //this.kooc.classes[mod].parent != "")
+      {
+        traceLine("le mod = " + mod);
+        variable = existVar(mod, val, type_name);
+	if (variable != 0)
+	   break;
+	mod = this.kooc.classes[mod].parent;
+        traceLine("le new mod = " + mod);
+      }
       if (variable == 0)
       {
 	traceLine("error - variable " + val + " doesn't exist.");
@@ -272,6 +278,4 @@ function	checkSelf(expr : node, module_name, val, type_name, nb_arg : node)
       }
     return variable;
     }
-//   }
-//   return 0;
 }
