@@ -8,12 +8,6 @@
  * @par #koocImplementation
  * rule @implementation
  *
- * @par #addImplementation
- * add an implementation if a module whit the same name exist
- *
- * @todo @member { functions }
- * @bug generateString what the fuck Cedric!!! fixed by the
- * function prettyPrintExistFile 42
  */
 
 /**

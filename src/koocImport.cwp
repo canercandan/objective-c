@@ -12,9 +12,6 @@
  * @par checkModule(module : value, kc : value)
  * check if the module exist
  *
- * @bug les defines ne sont pas copier du .kh au .h
- * il faut accepter les #... lors de explicitCopy@n
- * Repare : mais stocke dans le .c au lieu du .h
  */
 
 /**
